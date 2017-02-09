@@ -1,0 +1,5 @@
+/*C2*/SET SCHEMA PUBLIC
+drop table ttasks
+drop table tcategories
+drop table tusers
+DISCONNECT
