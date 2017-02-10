@@ -1,6 +1,11 @@
 package uo.sdi.associations;
 
+import static org.junit.Assert.*;
+
+import java.util.Set;
+
 import org.junit.*;
+
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.model.*;
 
@@ -11,33 +16,33 @@ public class OrganizeTest {
 	
 	@Before
 	public void setUp() throws BusinessException {
-		cliente = new Cliente("dni-cliente", "nombre", "apellidos");
-		vehiculo = new Vehiculo("1234 GJI", "seat", "ibiza");
-		Association.Poseer.link(cliente, vehiculo);
+		user = new User("user de prueba");
+		category = new Category("category de prueba");
+		Association.Organize.link(user, category);
 	}
 	
 	@Test
-	public void testPoseerAdd() throws BusinessException {
-		assertTrue( cliente.getVehiculos().contains( vehiculo ));
-		assertTrue( vehiculo.getCliente() == cliente );
+	public void testOrganizeAdd() throws BusinessException {
+		assertTrue( user.getCategories().contains( category ));
+		assertTrue( category.getUser() == user );
 	}
 
 	@Test
-	public void testPoseerRemove() throws BusinessException {
-		Association.Poseer.unlink(cliente, vehiculo);
+	public void testOrganizeRemove() throws BusinessException {
+		Association.Organize.unlink(user, category);
 
-		assertTrue( ! cliente.getVehiculos().contains( vehiculo ));
-		assertTrue( vehiculo.getCliente() == null );
+		assertTrue( ! user.getCategories().contains( category ));
+		assertTrue( category.getUser() == null );
 	}
 
 	@Test
 	public void testSafeReturn() throws BusinessException {
-		Set<Vehiculo> vehiculos = cliente.getVehiculos();
-		vehiculos.remove( vehiculo );
+		Set<Category> categories = user.getCategories();
+		categories.remove( category );
 
-		assertTrue( vehiculos.size() == 0 );
+		assertTrue( categories.size() == 0 );
 		assertTrue( "Se debe retornar copia de la coleccion o hacerla de solo lectura", 
-			cliente.getVehiculos().size() == 1
+			user.getCategories().size() == 1
 		);
 	}
 }

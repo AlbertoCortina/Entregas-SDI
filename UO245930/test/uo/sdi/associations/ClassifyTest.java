@@ -1,6 +1,11 @@
 package uo.sdi.associations;
 
+import static org.junit.Assert.*;
+
+import java.util.Set;
+
 import org.junit.*;
+
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.model.*;
 
@@ -11,33 +16,33 @@ public class ClassifyTest {
 	
 	@Before
 	public void setUp() throws BusinessException {
-		cliente = new Cliente("dni-cliente", "nombre", "apellidos");
-		vehiculo = new Vehiculo("1234 GJI", "seat", "ibiza");
-		Association.Poseer.link(cliente, vehiculo);
+		category = new Category("category de prueba");
+		task = new Task("task de prueba", null);
+		Association.Classify.link(category, task);
 	}
 	
 	@Test
-	public void testPoseerAdd() throws BusinessException {
-		assertTrue( cliente.getVehiculos().contains( vehiculo ));
-		assertTrue( vehiculo.getCliente() == cliente );
+	public void testClassifyAdd() throws BusinessException {
+		assertTrue( category.getTasks().contains( task ));
+		assertTrue( task.getCategory() == category );
 	}
 
 	@Test
 	public void testPoseerRemove() throws BusinessException {
-		Association.Poseer.unlink(cliente, vehiculo);
+		Association.Classify.unlink(category, task);
 
-		assertTrue( ! cliente.getVehiculos().contains( vehiculo ));
-		assertTrue( vehiculo.getCliente() == null );
+		assertTrue( ! category.getTasks().contains( task ));
+		assertTrue( task.getCategory() == null );
 	}
 
 	@Test
 	public void testSafeReturn() throws BusinessException {
-		Set<Vehiculo> vehiculos = cliente.getVehiculos();
-		vehiculos.remove( vehiculo );
+		Set<Task> tasks = category.getTasks();
+		tasks.remove( task );
 
-		assertTrue( vehiculos.size() == 0 );
+		assertTrue( tasks.size() == 0 );
 		assertTrue( "Se debe retornar copia de la coleccion o hacerla de solo lectura", 
-			cliente.getVehiculos().size() == 1
+			category.getTasks().size() == 1
 		);
 	}
 }

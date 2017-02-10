@@ -17,12 +17,12 @@ public class Association {
     
     public static class Classify {
 	
-	public static void link (Task task, Category category) {
+	public static void link (Category category, Task task) {
 	    task._setCategory(category);
 	    category._getTasks().add(task);
 	}
 	
-	public static void unlink (Task task, Category category) {
+	public static void unlink (Category category, Task task) {
 	    category._getTasks().remove(task);
 	    task._setCategory(null);
 	}	
