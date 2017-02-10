@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import alb.util.log.Log;
 import uo.sdi.acciones.*;
-import uo.sdi.dto.User;
-import uo.sdi.persistence.PersistenceException;
+import uo.sdi.model.User;
+import uo.sdi.persistence.exception.PersistenceException;
 
 public class Controlador extends javax.servlet.http.HttpServlet {
 	
@@ -85,7 +85,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		if (sesion.getAttribute("user")==null)
 			return "ANONIMO";
 		else
-			if (((User)sesion.getAttribute("user")).getIsAdmin())
+			if (((User)sesion.getAttribute("user")).isAdmin())
 				return "ADMIN";
 			else
 				return "USUARIO";

@@ -4,109 +4,45 @@ import java.util.List;
 
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
+import uo.sdi.business.impl.category.command.CreateCategoryCommand;
+import uo.sdi.business.impl.category.command.DeleteCategoryCommand;
+import uo.sdi.business.impl.category.command.DuplicateCategoryCommand;
+import uo.sdi.business.impl.category.command.UpdateCategoryCommand;
 import uo.sdi.business.impl.command.Command;
 import uo.sdi.business.impl.command.CommandExecutor;
-import uo.sdi.business.impl.task.command.CreateCategoryCommand;
 import uo.sdi.business.impl.task.command.CreateTaskCommand;
-import uo.sdi.business.impl.task.command.DeleteCategoryCommand;
-import uo.sdi.business.impl.task.command.DuplicateCategoryCommand;
+import uo.sdi.business.impl.task.command.DeleteTaskCommand;
+import uo.sdi.business.impl.task.command.FindTaskByIdCommand;
 import uo.sdi.business.impl.task.command.MarkTaskAsFinishedCommand;
-import uo.sdi.business.impl.task.command.UpdateCategoryCommand;
 import uo.sdi.business.impl.task.command.UpdateTaskCommand;
-import uo.sdi.dto.Category;
-import uo.sdi.dto.Task;
-import uo.sdi.persistence.Persistence;
+import uo.sdi.model.*;
+import uo.sdi.persistence.util.Jpa;
 
 public class TaskServiceImpl implements TaskService {
 
 	@Override
-	public Long createCategory(Category category) throws BusinessException {
-		return new CommandExecutor<Long>().execute( 
-			new CreateCategoryCommand( category )
-		);
+	public void createTask(Task task) throws BusinessException {
+		new CommandExecutor<Void>().execute(new CreateTaskCommand(task));
 	}
 
 	@Override
-	public Long duplicateCategory(Long id) throws BusinessException {
-		return new CommandExecutor<Long>().execute( 
-				new DuplicateCategoryCommand( id )
-			);
-	}
-
-	@Override
-	public void updateCategory(Category category) throws BusinessException {
-		new CommandExecutor<Void>().execute( 
-				new UpdateCategoryCommand( category )
-			);
-	}
-
-	@Override
-	public void deleteCategory(Long catId) throws BusinessException {
-		new CommandExecutor<Void>().execute( 
-				new DeleteCategoryCommand( catId )
-			);
-	}
-
-	@Override
-	public Category findCategoryById(final Long id) throws BusinessException {
-		return new CommandExecutor<Category>().execute( new Command<Category>() {
-			@Override public Category execute() throws BusinessException {
-				
-				return Persistence.getCategoryDao().findById(id);
-			}
-		});
-	}
-
-	@Override
-	public List<Category> findCategoriesByUserId(final Long id) throws BusinessException {
-		return new CommandExecutor<List<Category>>().execute( new Command<List<Category>>() {
-			@Override public List<Category> execute() throws BusinessException {
-				
-				return Persistence.getCategoryDao().findByUserId(id);
-			}
-		});
-	}
-
-	@Override
-	public Long createTask(Task task) throws BusinessException {
-		return new CommandExecutor<Long>().execute( 
-				new CreateTaskCommand( task )
-			);
-	}
-
-	@Override
-	public void deleteTask(final Long id) throws BusinessException {
-		new CommandExecutor<Void>().execute( new Command<Void>() {
-			@Override
-			public Void execute() throws BusinessException {
-				Persistence.getTaskDao().delete(id);
-				return null;
-			}
-		}); 
+	public void deleteTask(Long id) throws BusinessException {
+		new CommandExecutor<Void>().execute(new DeleteTaskCommand(id));
 	}
 
 	@Override
 	public void markTaskAsFinished(Long id) throws BusinessException {
-		new CommandExecutor<Void>().execute( 
-				new MarkTaskAsFinishedCommand( id )
-			);
+		new CommandExecutor<Void>().execute(new MarkTaskAsFinishedCommand(id));
 	}
 
 	@Override
 	public void updateTask(Task task) throws BusinessException {
-		new CommandExecutor<Void>().execute( 
-				new UpdateTaskCommand( task )
-			);
+		new CommandExecutor<Void>().execute(new UpdateTaskCommand(task));
 	}
 
 	@Override
-	public Task findTaskById(final Long id) throws BusinessException {
-		return new CommandExecutor<Task>().execute( new Command<Task>() {
-			@Override public Task execute() throws BusinessException {
-				
-				return Persistence.getTaskDao().findById(id);
-			}
-		});
+	public Task findTaskById(Long id) throws BusinessException {
+		return new CommandExecutor<Task>().execute(new FindTaskByIdCommand(id));
 	}
 
 	@Override
@@ -168,5 +104,4 @@ public class TaskServiceImpl implements TaskService {
 			}
 		});
 	}
-
 }

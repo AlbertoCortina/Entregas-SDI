@@ -4,9 +4,8 @@ import alb.util.date.DateUtil;
 import uo.sdi.business.exception.BusinessCheck;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.command.Command;
-import uo.sdi.dto.Task;
-import uo.sdi.persistence.Persistence;
-import uo.sdi.persistence.TaskDao;
+import uo.sdi.model.Task;
+import uo.sdi.persistence.util.Jpa;
 
 public class MarkTaskAsFinishedCommand implements Command<Void> {
 
@@ -18,14 +17,11 @@ public class MarkTaskAsFinishedCommand implements Command<Void> {
 
 	@Override
 	public Void execute() throws BusinessException {
-		TaskDao tDao = Persistence.getTaskDao();
-		
-		Task t = tDao.findById(id);
+		Task t = Jpa.getManager().find(Task.class, id);
 		BusinessCheck.isNotNull(t, "The task does not exist");
 		
 		t.setFinished( DateUtil.today() );
-		tDao.update( t );
+		Jpa.getManager().merge(t);
 		return null;
 	}
-
 }

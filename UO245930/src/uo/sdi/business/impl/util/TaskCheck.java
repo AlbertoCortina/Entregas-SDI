@@ -2,33 +2,31 @@ package uo.sdi.business.impl.util;
 
 import uo.sdi.business.exception.BusinessCheck;
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.dto.Category;
-import uo.sdi.dto.Task;
-import uo.sdi.dto.User;
-import uo.sdi.dto.types.UserStatus;
-import uo.sdi.persistence.Persistence;
+import uo.sdi.model.*;
+import uo.sdi.model.types.UserStatus;
+import uo.sdi.persistence.util.Jpa;
 
 public class TaskCheck {
 
 	public static void categoryExists(Task task) throws BusinessException {
-		Category c = Persistence.getCategoryDao().findById( task.getCategoryId());
-		BusinessCheck.isNotNull( c, "The category of the task does not exist");
+		Category c = Jpa.getManager().find(Category.class, task.getCategory().getId());
+		BusinessCheck.isNotNull(c, "The category of the task does not exist");
 	}
 
 	public static void userExists(Task task) throws BusinessException {
-		User u = Persistence.getUserDao().findById( task.getUserId());
-		BusinessCheck.isNotNull( u, "The user of the task does not exist");
+		User u = Jpa.getManager().find(User.class, task.getUser().getId());
+		BusinessCheck.isNotNull(u, "The user of the task does not exist");
 	}
 
 	public static void userIsNotDisabled(Task task) throws BusinessException {
-		User u = Persistence.getUserDao().findById( task.getUserId());
-		BusinessCheck.isTrue( u.getStatus().equals( UserStatus.ENABLED), 
+		User u = Jpa.getManager().find(User.class, task.getUser().getId());
+		BusinessCheck.isTrue( u.getStatus().equals(UserStatus.ENABLED), 
 				"The user of the task is disabled");
 	}
 
 	public static void userIsNotAdmin(Task task) throws BusinessException {
-		User u = Persistence.getUserDao().findById( task.getUserId());
-		BusinessCheck.isFalse( u.getIsAdmin(), 
+		User u = Jpa.getManager().find(User.class, task.getUser().getId());
+		BusinessCheck.isFalse( u.isAdmin(), 
 				"The user of the task cannot be an admin");
 	}
 
@@ -41,5 +39,4 @@ public class TaskCheck {
 		BusinessCheck.isTrue( ! "".equals( task.getTitle() ), 
 				"The title of the task is cannot be empty");
 	}
-
 }

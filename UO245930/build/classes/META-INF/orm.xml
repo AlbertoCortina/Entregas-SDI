@@ -64,16 +64,12 @@
 	</named-query>
 
 	<!-- Category queries -->
-	<named-query name="Category.findById">
-		<query>Select c From Category c Where c.id = ?1</query>
-	</named-query>
-	
 	<named-query name="Category.findAll">
 		<query>Select c From Category c</query>
 	</named-query>
 	
 	<named-query name="Category.findByUserId">
-		<query>Select c From Category c Where c.user.id = ?!</query>
+		<query>Select c From Category c Where c.user.id = ?1</query>
 	</named-query>
 	
 	<named-query name="Category.findByUserIdAndName">

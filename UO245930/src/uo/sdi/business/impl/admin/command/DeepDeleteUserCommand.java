@@ -1,31 +1,30 @@
 package uo.sdi.business.impl.admin.command;
 
+import uo.sdi.business.exception.BusinessCheck;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.command.Command;
-import uo.sdi.persistence.CategoryDao;
-import uo.sdi.persistence.Persistence;
-import uo.sdi.persistence.TaskDao;
-import uo.sdi.persistence.UserDao;
+import uo.sdi.model.User;
+import uo.sdi.persistence.*;
+import uo.sdi.persistence.util.Jpa;
 
 public class DeepDeleteUserCommand implements Command<Void> {
 
-	private Long userId;
+	private Long id;
 
 	public DeepDeleteUserCommand(Long id) {
-		this.userId = id;
+		this.id = id;
 	}
 
 	@Override
 	public Void execute() throws BusinessException {
-		TaskDao tDao = Persistence.getTaskDao();
-		CategoryDao cDao = Persistence.getCategoryDao();
-		UserDao uDao = Persistence.getUserDao();
-
-		tDao.deleteAllFromUserId( userId );
-		cDao.deleteAllFromUserId( userId );
-		uDao.delete( userId );
+		//Comprobamos que  exista el usuario
+		User user = Jpa.getManager().find(User.class, id);
+		BusinessCheck.isNotNull(user, "User does not exist");
+		
+		TaskFinder.deleteByUserId(id);
+		CategoryFinder.deleteByUserId(id);
+		Jpa.getManager().remove(user);
 		
 		return null;
 	}
-
 }

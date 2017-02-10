@@ -1,26 +1,30 @@
 package uo.sdi.business.impl.command;
 
+import javax.persistence.*;
+
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.persistence.PersistenceException;
-import uo.sdi.persistence.Persistence;
-import uo.sdi.persistence.Transaction;
+import uo.sdi.persistence.util.Jpa;
 
 public class CommandExecutor<T> {
 	
 	public T execute(Command<T> cmd) throws BusinessException {
-		Transaction trx = Persistence.newTransaction();
-		trx.begin();
-		try {
+		EntityManager entityManager = Jpa.createEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
 
-			T res = cmd.execute();
-			trx.commit();
-			
-			return res;
-		}
-		catch(PersistenceException | BusinessException ex) {
-			trx.rollback();
-			throw ex;
+		try {
+		    T object = cmd.execute();
+
+		    entityTransaction.commit();
+		    return object;
+
+		} catch (PersistenceException | BusinessException e) {
+		    if (entityTransaction.isActive())
+		    	entityTransaction.rollback();
+		    throw e;
+		} finally {
+		    if (entityManager.isOpen())
+		    	entityManager.close();
 		}
 	}
-
 }

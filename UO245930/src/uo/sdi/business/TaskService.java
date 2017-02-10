@@ -1,21 +1,12 @@
 package uo.sdi.business;
 
 import java.util.List;
-
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.dto.Category;
-import uo.sdi.dto.Task;
+import uo.sdi.model.Task;
 
-public interface TaskService {
+public interface TaskService {	
 
-	public Long createCategory(Category category) throws BusinessException;
-	public Long duplicateCategory(Long id) throws BusinessException;
-	public void updateCategory(Category category) throws BusinessException;
-	public void deleteCategory(Long id) throws BusinessException;
-	public Category findCategoryById(Long id) throws BusinessException;
-	public List<Category> findCategoriesByUserId(Long id) throws BusinessException;
-
-	public Long createTask(Task task) throws BusinessException;
+	public void createTask(Task task) throws BusinessException;
 	public void deleteTask(Long id) throws BusinessException;
 	public void markTaskAsFinished(Long id) throws BusinessException;
 	public void updateTask(Task task) throws BusinessException;

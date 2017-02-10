@@ -3,10 +3,9 @@ package uo.sdi.business.impl.admin.command;
 import uo.sdi.business.exception.BusinessCheck;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.command.Command;
-import uo.sdi.dto.User;
-import uo.sdi.dto.types.UserStatus;
-import uo.sdi.persistence.Persistence;
-import uo.sdi.persistence.UserDao;
+import uo.sdi.model.User;
+import uo.sdi.model.types.UserStatus;
+import uo.sdi.persistence.util.Jpa;
 
 public class EnableUserCommand implements Command<Void> {
 
@@ -18,15 +17,13 @@ public class EnableUserCommand implements Command<Void> {
 
 	@Override
 	public Void execute() throws BusinessException {
-		UserDao uDao = Persistence.getUserDao();
+		//Comprobamos que el usuario exista
+		User user = Jpa.getManager().find(User.class, id);
+		BusinessCheck.isNotNull(user, "User does not exist");
 		
-		User user = uDao.findById(id);
-		BusinessCheck.isNotNull( user, "User does not exist" );
-		
-		user.setStatus( UserStatus.ENABLED );
-		uDao.update( user );
+		user.setStatus(UserStatus.ENABLED);
+		Jpa.getManager().merge(user);		
 
 		return null;
 	}
-
 }

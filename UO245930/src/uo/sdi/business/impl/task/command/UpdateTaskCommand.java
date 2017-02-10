@@ -4,9 +4,8 @@ import uo.sdi.business.exception.BusinessCheck;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.command.Command;
 import uo.sdi.business.impl.util.TaskCheck;
-import uo.sdi.dto.Task;
-import uo.sdi.persistence.Persistence;
-import uo.sdi.persistence.TaskDao;
+import uo.sdi.model.Task;
+import uo.sdi.persistence.util.Jpa;
 
 public class UpdateTaskCommand implements Command<Void> {
 
@@ -20,18 +19,17 @@ public class UpdateTaskCommand implements Command<Void> {
 	public Void execute() throws BusinessException {
 		TaskCheck.titleIsNotNull(task);
 		TaskCheck.titleIsNotEmpty(task);
-		if ( task.getCategoryId() != null) {
+		if ( task.getCategory().getId() != null) {
 			TaskCheck.categoryExists( task );
 		}
 		
-		TaskDao tDao = Persistence.getTaskDao();
-		
-		Task previous = tDao.findById( task.getId() );
+		Task previous = Jpa.getManager().find(Task.class, task);
+		BusinessCheck.isNotNull(previous, "Task does not exist");
 		checktaskAlreadyExist(previous);
 		checkUserNotChanged(previous);
 		
 		task.setCreated( previous.getCreated() ); // change ignored
-		tDao.update( task );
+		Jpa.getManager().merge(task);
 		return null;
 	}
 
@@ -40,9 +38,7 @@ public class UpdateTaskCommand implements Command<Void> {
 	}
 
 	private void checkUserNotChanged(Task previous) throws BusinessException {
-		BusinessCheck.isTrue( task.getUserId().equals( previous.getUserId()),
-			"A task cannot be changed to other user"
-		);
+		BusinessCheck.isTrue( task.getUser().getId().equals( previous.getUser().getId()),
+			"A task cannot be changed to other user");
 	}
-
 }

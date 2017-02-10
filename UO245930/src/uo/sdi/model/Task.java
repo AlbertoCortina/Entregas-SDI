@@ -81,19 +81,19 @@ public class Task {
     }
     
     public User getUser () {
-	return user;
+    	return user;
     }
     
     protected void _setUser (User user) {
-	this.user = user;
+    	this.user = user;
     }
     
     public Category getCategory () {
-	return category;
+    	return category;
     }
     
     protected void _setCategory (Category category) {
-	this.category = category;
+    	this.category = category;
     }
 
     @Override
@@ -104,32 +104,32 @@ public class Task {
 
     @Override
     public int hashCode () {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + ((created == null) ? 0 : created.hashCode());
-	result = prime * result + ((title == null) ? 0 : title.hashCode());
-	return result;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((created == null) ? 0 : created.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		return result;
     }
 
     @Override
     public boolean equals (Object obj) {
-	if (this == obj)
-	    return true;
-	if (obj == null)
-	    return false;
-	if (getClass() != obj.getClass())
-	    return false;
-	Task other = (Task) obj;
-	if (created == null) {
-	    if (other.created != null)
-		return false;
-	} else if (!created.equals(other.created))
-	    return false;
-	if (title == null) {
-	    if (other.title != null)
-		return false;
-	} else if (!title.equals(other.title))
-	    return false;
-	return true;
+		if (this == obj)
+		    return true;
+		if (obj == null)
+		    return false;
+		if (getClass() != obj.getClass())
+		    return false;
+		Task other = (Task) obj;
+		if (created == null) {
+		    if (other.created != null)
+			return false;
+		} else if (!created.equals(other.created))
+		    return false;
+		if (title == null) {
+		    if (other.title != null)
+			return false;
+		} else if (!title.equals(other.title))
+		    return false;
+		return true;
     }    
 }

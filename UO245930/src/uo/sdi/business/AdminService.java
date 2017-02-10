@@ -3,7 +3,7 @@ package uo.sdi.business;
 import java.util.List;
 
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.dto.User;
+import uo.sdi.model.User;
 
 public interface AdminService {
 
