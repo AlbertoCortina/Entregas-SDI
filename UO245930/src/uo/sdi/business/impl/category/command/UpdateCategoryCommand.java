@@ -17,29 +17,30 @@ public class UpdateCategoryCommand implements Command<Void> {
 
 	@Override
 	public Void execute() throws BusinessException {
-		Category previous = Jpa.getManager().find(Category.class, category.getId());
-		
-		checkCategoryExists( previous );
-		CategoryCheck.nameIsNotNull( category );
-		CategoryCheck.nameIsNotEmpty( category );
-		if ( nameIsChanged(previous, category) ) {
-			CategoryCheck.isUniqueName( category );
+		Category previous = Jpa.getManager().find(Category.class,
+				category.getId());
+
+		checkCategoryExists(previous);
+		CategoryCheck.nameIsNotNull(category);
+		CategoryCheck.nameIsNotEmpty(category);
+		if (nameIsChanged(previous, category)) {
+			CategoryCheck.isUniqueName(category);
 		}
-		checkUserIsNotChanged( previous, category);
-		
+		checkUserIsNotChanged(previous, category);
+
 		Jpa.getManager().merge(previous);
 		return null;
 	}
 
-	private void checkUserIsNotChanged(Category previous, Category current) throws BusinessException {
+	private void checkUserIsNotChanged(Category previous, Category current)
+			throws BusinessException {
 		BusinessCheck.isTrue(
-			previous.getUser().getId().equals(current.getUser().getId()),
-			"A category cannot be changed to other user"
-		);
+				previous.getUser().getId().equals(current.getUser().getId()),
+				"A category cannot be changed to other user");
 	}
 
 	private boolean nameIsChanged(Category previous, Category current) {
-		return ! previous.getName().equals( current.getName() );
+		return !previous.getName().equals(current.getName());
 	}
 
 	private void checkCategoryExists(Category c) throws BusinessException {

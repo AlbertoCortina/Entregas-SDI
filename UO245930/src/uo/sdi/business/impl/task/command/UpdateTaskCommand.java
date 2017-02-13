@@ -19,26 +19,27 @@ public class UpdateTaskCommand implements Command<Void> {
 	public Void execute() throws BusinessException {
 		TaskCheck.titleIsNotNull(task);
 		TaskCheck.titleIsNotEmpty(task);
-		if ( task.getCategory().getId() != null) {
-			TaskCheck.categoryExists( task );
+		if (task.getCategory().getId() != null) {
+			TaskCheck.categoryExists(task);
 		}
-		
+
 		Task previous = Jpa.getManager().find(Task.class, task);
 		BusinessCheck.isNotNull(previous, "Task does not exist");
 		checktaskAlreadyExist(previous);
 		checkUserNotChanged(previous);
-		
-		task.setCreated( previous.getCreated() ); // change ignored
+
+		task.setCreated(previous.getCreated()); // change ignored
 		Jpa.getManager().merge(task);
 		return null;
 	}
 
 	private void checktaskAlreadyExist(Task previous) throws BusinessException {
-		BusinessCheck.isNotNull( previous, "The task does not exist");
+		BusinessCheck.isNotNull(previous, "The task does not exist");
 	}
 
 	private void checkUserNotChanged(Task previous) throws BusinessException {
-		BusinessCheck.isTrue( task.getUser().getId().equals( previous.getUser().getId()),
-			"A task cannot be changed to other user");
+		BusinessCheck.isTrue(
+				task.getUser().getId().equals(previous.getUser().getId()),
+				"A task cannot be changed to other user");
 	}
 }

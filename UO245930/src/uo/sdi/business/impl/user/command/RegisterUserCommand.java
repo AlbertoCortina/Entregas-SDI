@@ -10,21 +10,21 @@ public class RegisterUserCommand implements Command<Void> {
 
 	private User user;
 
-	public RegisterUserCommand (User user) {
+	public RegisterUserCommand(User user) {
 		this.user = user;
 	}
 
 	@Override
-	public Void execute () throws BusinessException {
+	public Void execute() throws BusinessException {
 		UserCheck.isNotAdmin(user);
-		UserCheck.isValidEmailSyntax(user); 
+		UserCheck.isValidEmailSyntax(user);
 		UserCheck.minLoginLength(user);
 		UserCheck.minPasswordLength(user);
 		UserCheck.notRepeatedLogin(user);
-		//Falta mirar bien la contraseña
-		
+		// Falta mirar bien la contraseña
+
 		Jpa.getManager().persist(user);
-		
+
 		return null;
 	}
 }

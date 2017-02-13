@@ -19,8 +19,8 @@ public class MarkTaskAsFinishedCommand implements Command<Void> {
 	public Void execute() throws BusinessException {
 		Task t = Jpa.getManager().find(Task.class, id);
 		BusinessCheck.isNotNull(t, "The task does not exist");
-		
-		t.setFinished( DateUtil.today() );
+
+		t.setFinished(DateUtil.today());
 		Jpa.getManager().merge(t);
 		return null;
 	}

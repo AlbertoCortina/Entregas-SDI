@@ -9,14 +9,14 @@ public class FindByLoginAndPasswordCommand implements Command<User> {
 
 	private String login;
 	private String password;
-	
-	public FindByLoginAndPasswordCommand (String login, String password) {
+
+	public FindByLoginAndPasswordCommand(String login, String password) {
 		this.login = login;
 		this.password = password;
 	}
-	
+
 	@Override
-	public User execute () throws BusinessException {
+	public User execute() throws BusinessException {
 		return UserFinder.findByLoginAndPassword(login, password);
 	}
 }

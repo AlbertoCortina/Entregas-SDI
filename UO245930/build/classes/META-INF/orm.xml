@@ -1,64 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<entity-mappings 
-	xmlns="http://java.sun.com/xml/ns/persistence/orm" 
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
-  	version="2.0">
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+	version="2.0">
 
-	<!-- User queries --> 	
+	<!-- User queries -->
 	<named-query name="User.findAll">
 		<query>Select u From User u</query>
 	</named-query>
-	
+
 	<named-query name="User.findByLogin">
 		<query>Select u From User u Where u.login = ?1</query>
 	</named-query>
-	
+
 	<named-query name="User.findByLoginAndPassword">
 		<query>Select u From User u Where u.login = ?1 And u.password = ?2</query>
 	</named-query>
-	
+
 	<!-- Task queries -->
 	<named-query name="Task.deleteByUserId">
 		<query></query>
 	</named-query>
-	
+
 	<named-query name="Task.deleteByCategoryId">
 		<query></query>
 	</named-query>
-	
+
 	<named-query name="Task.findById">
 		<query>Select t From Task t Where t.id = ?1</query>
 	</named-query>
-	
+
 	<named-query name="Task.findAll">
 		<query>Select t From Task t</query>
 	</named-query>
-	
+
 	<named-query name="Task.findByUserId">
 		<query>Select t From Task t Where t.user.id = ?1</query>
 	</named-query>
-	
+
 	<named-query name="Task.findInboxUserId">
 		<query></query>
 	</named-query>
-	
+
 	<named-query name="Task.findTodayUserId">
 		<query></query>
 	</named-query>
-	
+
 	<named-query name="Task.findWeekUserId">
 		<query></query>
 	</named-query>
-	
+
 	<named-query name="Task.findUnfinishedByCategoryId">
 		<query></query>
 	</named-query>
-	
+
 	<named-query name="Task.findFinishedByCategoryId">
 		<query></query>
 	</named-query>
-	
+
 	<named-query name="Task.findFinishedInboxByUserId">
 		<query></query>
 	</named-query>
@@ -67,17 +66,17 @@
 	<named-query name="Category.findAll">
 		<query>Select c From Category c</query>
 	</named-query>
-	
+
 	<named-query name="Category.findByUserId">
 		<query>Select c From Category c Where c.user.id = ?1</query>
 	</named-query>
-	
+
 	<named-query name="Category.findByUserIdAndName">
 		<query>Select c From Category c Where c.user.id = ?1 And c.name = ?2</query>
 	</named-query>
-	
+
 	<named-query name="Category.deleteByUserId">
-		<query>Select c From Category c Where c.user.id = ?1</query>
+		<query></query>
 	</named-query>
 
 </entity-mappings>

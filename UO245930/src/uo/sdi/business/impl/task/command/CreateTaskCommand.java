@@ -11,26 +11,26 @@ public class CreateTaskCommand implements Command<Void> {
 
 	private Task task;
 
-	public CreateTaskCommand (Task task) {
+	public CreateTaskCommand(Task task) {
 		this.task = task;
 	}
 
 	@Override
-	public Void execute () throws BusinessException {
-		TaskCheck.userExists( task );
-		TaskCheck.userIsNotDisabled( task );
-		TaskCheck.userIsNotAdmin( task );
-		TaskCheck.titleIsNotNull( task );
-		TaskCheck.titleIsNotEmpty( task );
+	public Void execute() throws BusinessException {
+		TaskCheck.userExists(task);
+		TaskCheck.userIsNotDisabled(task);
+		TaskCheck.userIsNotAdmin(task);
+		TaskCheck.titleIsNotNull(task);
+		TaskCheck.titleIsNotEmpty(task);
 		if (task.getCategory().getId() != null) {
-			TaskCheck.categoryExists( task );
+			TaskCheck.categoryExists(task);
 		}
-		
-		task.setCreated( DateUtil.today() );
-		task.setFinished( null );
-		
+
+		task.setCreated(DateUtil.today());
+		task.setFinished(null);
+
 		Jpa.getManager().persist(task);
-		
+
 		return null;
 	}
 }

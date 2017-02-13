@@ -21,7 +21,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findLoggableUser(String login, String password) throws BusinessException {
-		return new CommandExecutor<User>().execute(new FindLoggableUSerCommand<User>(login, password));
+	public User findLoggableUser(String login, String password)
+			throws BusinessException {
+		return new CommandExecutor<User>()
+				.execute(new FindLoggableUSerCommand<User>(login, password));
 	}
 }

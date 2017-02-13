@@ -1,5 +1,5 @@
 package uo.sdi.model.types;
 
-public enum UserStatus {    
-    ENABLED, DISADLED
+public enum UserStatus {
+	ENABLED, DISADLED
 }

@@ -12,7 +12,7 @@ import uo.sdi.business.impl.command.CommandExecutor;
 import uo.sdi.model.User;
 
 public class AdminServiceImpl implements AdminService {
-	
+
 	@Override
 	public void deepDeleteUser(Long id) throws BusinessException {
 		new CommandExecutor<Void>().execute(new DeepDeleteUserCommand(id));
@@ -30,7 +30,8 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<User> findAllUsers() throws BusinessException {
-		return new CommandExecutor<List<User>>().execute(new FindAllUsersCommand());
+		return new CommandExecutor<List<User>>()
+				.execute(new FindAllUsersCommand());
 	}
 
 	@Override

@@ -17,13 +17,13 @@ public class DeleteCategoryCommand implements Command<Void> {
 
 	@Override
 	public Void execute() throws BusinessException {
-		//Comprobamos que exista la categoría
+		// Comprobamos que exista la categoría
 		Category c = Jpa.getManager().find(Category.class, catId);
 		BusinessCheck.isNotNull(c, "Category does not exist");
-		
+
 		TaskFinder.deleteByCategoryId(catId);
 		Jpa.getManager().remove(catId);
-		
+
 		return null;
 	}
 }

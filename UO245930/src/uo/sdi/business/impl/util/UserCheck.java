@@ -9,7 +9,7 @@ import uo.sdi.persistence.UserFinder;
 public class UserCheck {
 
 	public static void isNotAdmin(User user) throws BusinessException {
-		String check = "A new admin cannot be registered"; 
+		String check = "A new admin cannot be registered";
 		BusinessCheck.isFalse(user.isAdmin(), check);
 	}
 
@@ -27,18 +27,19 @@ public class UserCheck {
 		String check = "The password must be at least 8 chars long";
 		BusinessCheck.isTrue(user.getPassword().length() >= 8, check);
 	}
-	
-//	public static boolean isValidPassword(User user) throws BusinessException {
-//		String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}"
-//				+ "\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])"
-//				+ "|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-//		
-//        return Pattern.compile(ePattern)
-//        		.matcher(user.getPassword())
-//        		.matches();
-//        
-//        //Mirar forma de enviar mensaje de error
-//	}
+
+	// public static boolean isValidPassword(User user) throws BusinessException
+	// {
+	// String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}"
+	// + "\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])"
+	// + "|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+	//
+	// return Pattern.compile(ePattern)
+	// .matcher(user.getPassword())
+	// .matches();
+	//
+	// //Mirar forma de enviar mensaje de error
+	// }
 
 	public static void notRepeatedLogin(User user) throws BusinessException {
 		User u = UserFinder.findByLogin(user.getLogin());
@@ -49,9 +50,7 @@ public class UserCheck {
 		String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}"
 				+ "\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])"
 				+ "|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-		
-        return Pattern.compile(ePattern)
-        		.matcher(email)
-        		.matches();
-    }
+
+		return Pattern.compile(ePattern).matcher(email).matches();
+	}
 }

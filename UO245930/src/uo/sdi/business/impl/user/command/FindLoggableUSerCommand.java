@@ -11,17 +11,16 @@ public class FindLoggableUSerCommand<T> implements Command<User> {
 	private String login;
 	private String password;
 
-	public FindLoggableUSerCommand (String login, String password) {
+	public FindLoggableUSerCommand(String login, String password) {
 		this.login = login;
 		this.password = password;
 	}
 
 	@Override
-	public User execute () throws BusinessException {		
+	public User execute() throws BusinessException {
 		User user = UserFinder.findByLoginAndPassword(login, password);
-		
-		return (user != null && user.getStatus().equals(UserStatus.ENABLED))
-				? user
+
+		return (user != null && user.getStatus().equals(UserStatus.ENABLED)) ? user
 				: null;
 	}
 }

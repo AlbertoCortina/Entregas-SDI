@@ -13,25 +13,25 @@ public class RealizarRegistroAction implements Accion {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
-		User user = new User ();
+		User user = new User();
 		user.setEmail(request.getParameter("email"));
 		user.setIsAdmin(false);
 		user.setLogin(request.getParameter("login"));
 		user.setPassword(request.getParameter("password"));
 		user.setStatus(UserStatus.ENABLED);
-		
+
 		String passwordRepetida = request.getParameter("passwordRepetida");
-		if (passwordRepetida == null || !passwordRepetida.equals(user.getPassword())){
-			//Error
+		if (passwordRepetida == null
+				|| !passwordRepetida.equals(user.getPassword())) {
+			// Error
 			request.setAttribute("Error", "Password no coincide");
 			return "ERROR";
-		}
-		else{
+		} else {
 			try {
 				Services.getUserService().registerUser(user);
 				return "EXITO";
-			} catch(BusinessException e) {
-				//Error
+			} catch (BusinessException e) {
+				// Error
 				e.getMessage();
 			}
 		}

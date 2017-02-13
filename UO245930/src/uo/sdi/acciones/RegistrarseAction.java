@@ -3,7 +3,7 @@ package uo.sdi.acciones;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class RegistrarseAction implements Accion {	
+public class RegistrarseAction implements Accion {
 
 	@Override
 	public String execute(HttpServletRequest request,

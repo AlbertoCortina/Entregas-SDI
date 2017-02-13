@@ -22,9 +22,9 @@ public class CreateCategoryCommand implements Command<Void> {
 		CategoryCheck.isValidUser(category);
 		CategoryCheck.isUniqueName(category);
 		CategoryCheck.isNotForAdminUser(category);
-		
+
 		Jpa.getManager().persist(category);
-		
+
 		return null;
 	}
 }

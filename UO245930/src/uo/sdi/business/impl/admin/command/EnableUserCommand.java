@@ -9,20 +9,20 @@ import uo.sdi.persistence.util.Jpa;
 
 public class EnableUserCommand implements Command<Void> {
 
-	private Long id;
+	private Long userId;
 
 	public EnableUserCommand(Long id) {
-		this.id = id;
+		this.userId = id;
 	}
 
 	@Override
 	public Void execute() throws BusinessException {
-		//Comprobamos que el usuario exista
-		User user = Jpa.getManager().find(User.class, id);
+		// Comprobamos que el usuario exista
+		User user = Jpa.getManager().find(User.class, userId);
 		BusinessCheck.isNotNull(user, "User does not exist");
-		
+
 		user.setStatus(UserStatus.ENABLED);
-		Jpa.getManager().merge(user);		
+		Jpa.getManager().merge(user);
 
 		return null;
 	}

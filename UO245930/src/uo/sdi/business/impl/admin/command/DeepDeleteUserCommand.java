@@ -17,14 +17,14 @@ public class DeepDeleteUserCommand implements Command<Void> {
 
 	@Override
 	public Void execute() throws BusinessException {
-		//Comprobamos que  exista el usuario
+		// Comprobamos que exista el usuario
 		User user = Jpa.getManager().find(User.class, id);
 		BusinessCheck.isNotNull(user, "User does not exist");
-		
+
 		TaskFinder.deleteByUserId(id);
 		CategoryFinder.deleteByUserId(id);
 		Jpa.getManager().remove(user);
-		
+
 		return null;
 	}
 }
