@@ -6,12 +6,12 @@ import uo.sdi.model.User;
 import uo.sdi.model.types.UserStatus;
 import uo.sdi.persistence.UserFinder;
 
-public class FindLoggableUSerCommand<T> implements Command<User> {
+public class FindLoggableUserCommand<T> implements Command<User> {
 
 	private String login;
 	private String password;
 
-	public FindLoggableUSerCommand(String login, String password) {
+	public FindLoggableUserCommand(String login, String password) {
 		this.login = login;
 		this.password = password;
 	}
@@ -19,7 +19,7 @@ public class FindLoggableUSerCommand<T> implements Command<User> {
 	@Override
 	public User execute() throws BusinessException {
 		User user = UserFinder.findByLoginAndPassword(login, password);
-
+		
 		return (user != null && user.getStatus().equals(UserStatus.ENABLED)) ? user
 				: null;
 	}

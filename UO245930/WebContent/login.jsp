@@ -14,14 +14,12 @@
 		<table align="center">
 			<tr>
 				<td align="right">Usuario</td>
-				<td><input type="text" name="nombreUsuario" align="left"
-					size="15"></td>				
+				<td><input type="text" name="nombreUsuario" align="left" required size="15"></td>				
 			</tr>
 			
 			<tr>
 				<td align="right">Contraseña</td>
-				<td><input type="password" name="password" align="left"
-					size="15"></td>
+				<td><input type="password" name="password" align="left" required size="15"></td>
 			</tr>
 			
 			<tr>
@@ -29,8 +27,7 @@
 			</tr>
 		</table>
 	</form>
-	<a id="listarCategorias_link_id" href="listarCategorias">Lista de
-		categorias</a>
+	<a id="registrarUsuario_link_id" href="registrarse">Registrarse</a>
 	<%@ include file="pieDePagina.jsp"%>
 </body>
 </html>

@@ -21,8 +21,8 @@ public class RegisterUserCommand implements Command<Void> {
 		UserCheck.minLoginLength(user);
 		UserCheck.minPasswordLength(user);
 		UserCheck.notRepeatedLogin(user);
-		// Falta mirar bien la contraseña
-
+		UserCheck.hasNumbersAndLettersPassword(user);
+		
 		Jpa.getManager().persist(user);
 
 		return null;

@@ -60,6 +60,6 @@ public class UpdateUserDetailsCommand implements Command<Void> {
 	}
 
 	private boolean isAdminNotChanged(User previous, User current) {
-		return previous.isAdmin() == current.isAdmin();
+		return previous.getIsAdmin() == current.getIsAdmin();
 	}
 }

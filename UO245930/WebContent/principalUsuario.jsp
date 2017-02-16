@@ -7,12 +7,10 @@
 <title>TaskManager - Página principal del usuario</title>
 </head>
 <body>
-
-	<ul>
-		<li>
-			<a href="tareas">Lista de tareas</a>
-		</li>
-	</ul>
+	
+	<center>
+		<h1>Entrada principal usuario</h1>
+	</center>
 	
 	<i>Iniciaste sesión el <fmt:formatDate
 			pattern="dd-MM-yyyy' a las 'HH:mm"
@@ -21,6 +19,8 @@
 	</i>
 	<br />
 	<br />
+	
+	<h1>Información del usuario</h1>
 	<jsp:useBean id="user" class="uo.sdi.model.User" scope="session" />
 	<table>
 		<tr>
@@ -49,6 +49,15 @@
 		</tr>
 	</table>
 	<br />
+	
+	<h1>Listados</h1>
+	<ul>
+		<li>
+			<a href="tareas">Lista de tareas</a>
+		</li>
+	</ul>
+	
+	<h1>Otras opciones</h1>
 	<a id="cerrarSesion_link_id" href="cerrarSesion">Cerrar sesión</a>
 
 	<%@ include file="pieDePagina.jsp"%>

@@ -18,7 +18,7 @@ public class RealizarRegistroAction implements Accion {
 
 		User user = new User(request.getParameter("login"));
 		user.setEmail(request.getParameter("email"));
-		user.setAdmin(false);
+		user.setIsAdmin(false);
 		user.setPassword(request.getParameter("password"));
 		user.setStatus(UserStatus.ENABLED);
 
@@ -26,16 +26,17 @@ public class RealizarRegistroAction implements Accion {
 
 		if (passwordRepetida == null
 				|| !passwordRepetida.equals(user.getPassword())) {
-			// Error
-			request.setAttribute("Error", "Password no coincide");
-			resultado = "ERROR";
+			request.setAttribute("mensajeParaElUsuario", "Password no coincide");
+			resultado = "FRACASO";
 		} else {
 			try {
 				Services.getUserService().registerUser(user);
+				request.setAttribute("mensajeParaElUsuario",
+						"Registro realizado con éxito. Inicie sesión para entrar");
 				resultado = "EXITO";
 			} catch (BusinessException e) {
-				// Error
-				resultado = e.getMessage();
+				request.setAttribute("mensajeParaElUsuario", e.getMessage());
+				resultado = "FRACASO";
 			}
 		}
 		return resultado;

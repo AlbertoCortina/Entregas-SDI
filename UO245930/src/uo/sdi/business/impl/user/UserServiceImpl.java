@@ -3,7 +3,7 @@ package uo.sdi.business.impl.user;
 import uo.sdi.business.UserService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.command.CommandExecutor;
-import uo.sdi.business.impl.user.command.FindLoggableUSerCommand;
+import uo.sdi.business.impl.user.command.FindLoggableUserCommand;
 import uo.sdi.business.impl.user.command.RegisterUserCommand;
 import uo.sdi.business.impl.user.command.UpdateUserDetailsCommand;
 import uo.sdi.model.User;
@@ -24,6 +24,6 @@ public class UserServiceImpl implements UserService {
 	public User findLoggableUser(String login, String password)
 			throws BusinessException {
 		return new CommandExecutor<User>()
-				.execute(new FindLoggableUSerCommand<User>(login, password));
+				.execute(new FindLoggableUserCommand<User>(login, password));
 	}
 }

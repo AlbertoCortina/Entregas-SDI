@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import uo.sdi.business.CategoryService;
+import uo.sdi.business.Services;
 import uo.sdi.business.exception.BusinessCheck;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.model.Category;
@@ -22,11 +24,9 @@ public class ListarCategoriasAction implements Accion {
 		String resultado = "EXITO";
 
 		List<Category> listaCategorias;
-
+		CategoryService categoryService = Services.getCategoryService();
 		try {
-			listaCategorias = CategoryFinder.findByUserId(EXAMPLE_USER_ID);
-			BusinessCheck.isNotNull(listaCategorias,
-					"Algo ha ocurrido obteniendo lista de categorías");
+			listaCategorias = categoryService.findCategoriesByUserId(EXAMPLE_USER_ID);
 			request.setAttribute("listaCategorias", listaCategorias);
 			Log.debug(
 					"Obtenida lista de categorías conteniendo [%d] categorías",

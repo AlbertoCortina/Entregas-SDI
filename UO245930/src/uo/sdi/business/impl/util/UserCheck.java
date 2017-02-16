@@ -10,7 +10,7 @@ public class UserCheck {
 
 	public static void isNotAdmin(User user) throws BusinessException {
 		String check = "A new admin cannot be registered";
-		BusinessCheck.isFalse(user.isAdmin(), check);
+		BusinessCheck.isFalse(user.getIsAdmin(), check);
 	}
 
 	public static void isValidEmailSyntax(User user) throws BusinessException {
@@ -28,18 +28,15 @@ public class UserCheck {
 		BusinessCheck.isTrue(user.getPassword().length() >= 8, check);
 	}
 
-	// public static boolean isValidPassword(User user) throws BusinessException
-	// {
-	// String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}"
-	// + "\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])"
-	// + "|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-	//
-	// return Pattern.compile(ePattern)
-	// .matcher(user.getPassword())
-	// .matches();
-	//
-	// //Mirar forma de enviar mensaje de error
-	// }
+	public static void hasNumbersAndLettersPassword(User user) throws BusinessException {
+		String check = "The password must contain numbers and letter";
+		String ePattern = "[0-9a-zA-ZñÑ]*[0-9a-zA-ZñÑ]*";
+	
+	 
+	 BusinessCheck.isTrue(Pattern.compile(ePattern)
+			 .matcher(user.getPassword())
+			 .matches(), check);	 
+	}
 
 	public static void notRepeatedLogin(User user) throws BusinessException {
 		User u = UserFinder.findByLogin(user.getLogin());

@@ -47,6 +47,6 @@ public class CategoryCheck {
 	public static void isNotForAdminUser(Category category)
 			throws BusinessException {
 		User u = Jpa.getManager().find(User.class, category.getUser().getId());
-		BusinessCheck.isFalse(u.isAdmin(), "An admin cannot have categories");
+		BusinessCheck.isFalse(u.getIsAdmin(), "An admin cannot have categories");
 	}
 }

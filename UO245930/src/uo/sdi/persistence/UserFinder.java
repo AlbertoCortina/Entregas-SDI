@@ -30,14 +30,16 @@ public class UserFinder {
 	}
 
 	public static User findByLogin(String login) {
-		return Jpa.getManager().createNamedQuery("User.finByLogin", User.class)
-				.setParameter(1, login).getSingleResult();
+		List<User> users = Jpa.getManager().createNamedQuery("User.findByLogin", User.class)
+				.setParameter(1, login).getResultList();
+		return users.isEmpty() ? null : users.get(0);
 	}
 
 	public static User findByLoginAndPassword(String login, String password) {
-		return Jpa.getManager()
+		List<User> users = Jpa.getManager()
 				.createNamedQuery("User.findByLoginAndPassword", User.class)
 				.setParameter(1, login).setParameter(2, password)
-				.getSingleResult();
+				.getResultList();
+		return users.isEmpty() ? null : users.get(0);
 	}
 }

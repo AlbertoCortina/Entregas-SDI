@@ -27,7 +27,7 @@ public class TaskCheck {
 
 	public static void userIsNotAdmin(Task task) throws BusinessException {
 		User u = Jpa.getManager().find(User.class, task.getUser().getId());
-		BusinessCheck.isFalse(u.isAdmin(),
+		BusinessCheck.isFalse(u.getIsAdmin(),
 				"The user of the task cannot be an admin");
 	}
 

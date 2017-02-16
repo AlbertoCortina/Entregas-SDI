@@ -85,6 +85,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 
 			Log.error("Se ha producido alguna excepción no manejada [%s]",
 					e.getMessage());
+			Log.error(e);
 			request.setAttribute("mensajeParaElUsuario",
 					"Error irrecuperable: contacte con el responsable de la aplicación");
 			jspSiguiente = "/login.jsp";
@@ -100,13 +101,13 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		HttpSession sesion = req.getSession();
 		if (sesion.getAttribute("user") == null)
 			return "ANONIMO";
-		else if (((User) sesion.getAttribute("user")).isAdmin())
+		else if (((User) sesion.getAttribute("user")).getIsAdmin())
 			return "ADMIN";
 		else
 			return "USUARIO";
 	}
 
-	// Obtiene un objeto accion en funci�n de la opci�n
+	// Obtiene un objeto accion en funcion de la opcion
 	// enviada desde el navegador
 	private Accion buscarObjetoAccionParaAccionNavegador(String rol,
 			String opcion) {
@@ -157,16 +158,18 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		Map<String, String> resultadoYJSP = new HashMap<String, String>();
 
 		// Mapa de navegación de anónimo
+		resultadoYJSP = new HashMap<String, String>(); 
 		resultadoYJSP.put("FRACASO", "/login.jsp");
-		opcionResultadoYJSP.put("validarse", resultadoYJSP);
-		resultadoYJSP = new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listarCategorias.jsp");
-		resultadoYJSP.put("FRACASO", "/login.jsp");
-		opcionResultadoYJSP.put("listarCategorias", resultadoYJSP);
+		opcionResultadoYJSP.put("validarse", resultadoYJSP);		
 
 		resultadoYJSP = new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/registrarse.jsp");
 		opcionResultadoYJSP.put("registrarse", resultadoYJSP);
+		
+		resultadoYJSP = new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/login.jsp");
+		resultadoYJSP.put("FRACASO", "/registrarse.jsp");
+		opcionResultadoYJSP.put("realizarRegistro", resultadoYJSP);
 
 		mapaDeNavegacion.put("ANONIMO", opcionResultadoYJSP);
 
@@ -175,6 +178,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP = new HashMap<String, String>();
 
 		// Mapa de navegación de usuarios normales
+		resultadoYJSP = new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/principalUsuario.jsp");
 		opcionResultadoYJSP.put("validarse", resultadoYJSP);
 		
