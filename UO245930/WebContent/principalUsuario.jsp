@@ -7,6 +7,13 @@
 <title>TaskManager - Página principal del usuario</title>
 </head>
 <body>
+
+	<ul>
+		<li>
+			<a href="tareas">Lista de tareas</a>
+		</li>
+	</ul>
+	
 	<i>Iniciaste sesión el <fmt:formatDate
 			pattern="dd-MM-yyyy' a las 'HH:mm"
 			value="${sessionScope.fechaInicioSesion}" /> (usuario número

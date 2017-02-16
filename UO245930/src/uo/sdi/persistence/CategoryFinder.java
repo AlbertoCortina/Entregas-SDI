@@ -21,8 +21,8 @@ public class CategoryFinder {
 	// }
 
 	public static void deleteByUserId(Long userId) {
-		Jpa.getManager().createNamedQuery("Category.deleteByUserId",
-				Category.class);
+		Category aux = Jpa.getManager().find(Category.class, userId);
+		Jpa.getManager().remove(aux);
 	}
 
 	// public static Category findById (Long id) {
@@ -46,6 +46,6 @@ public class CategoryFinder {
 				.getManager()
 				.createNamedQuery("Category.findByUserIdAndName",
 						Category.class).setParameter(1, userId)
-				.setParameter(2, name).getSingleResult();
+				.setParameter(3, name).getSingleResult();
 	}
 }

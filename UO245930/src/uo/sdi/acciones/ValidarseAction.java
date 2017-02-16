@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import uo.sdi.business.Services;
 import uo.sdi.business.UserService;
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.dto.User;
+import uo.sdi.model.User;
 import alb.util.log.Log;
 
 public class ValidarseAction implements Accion {
@@ -18,15 +18,15 @@ public class ValidarseAction implements Accion {
 
 		String resultado = "EXITO";
 		String nombreUsuario = request.getParameter("nombreUsuario");
+		String contraseña = request.getParameter("password");
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") == null) {
 			UserService userService = Services.getUserService();
 			User userByLogin = null;
 			try {
-				userByLogin = userService.findLoggableUser(nombreUsuario,
-						nombreUsuario + "123");
+				userByLogin = userService.findLoggableUser(nombreUsuario, contraseña);
 			} catch (BusinessException b) {
-				session.invalidate();
+				session.invalidate();				
 				Log.debug(
 						"Algo ha ocurrido intentando iniciar sesión [%s]: %s",
 						nombreUsuario, b.getMessage());
@@ -68,5 +68,4 @@ public class ValidarseAction implements Accion {
 	public String toString() {
 		return getClass().getName();
 	}
-
 }

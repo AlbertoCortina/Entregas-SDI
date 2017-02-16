@@ -5,10 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import uo.sdi.business.Services;
-import uo.sdi.business.TaskService;
+import uo.sdi.business.exception.BusinessCheck;
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.dto.Category;
+import uo.sdi.model.Category;
+import uo.sdi.persistence.CategoryFinder;
 import alb.util.log.Log;
 
 public class ListarCategoriasAction implements Accion {
@@ -24,9 +24,9 @@ public class ListarCategoriasAction implements Accion {
 		List<Category> listaCategorias;
 
 		try {
-			TaskService taskService = Services.getTaskService();
-			listaCategorias = taskService
-					.findCategoriesByUserId(EXAMPLE_USER_ID);
+			listaCategorias = CategoryFinder.findByUserId(EXAMPLE_USER_ID);
+			BusinessCheck.isNotNull(listaCategorias,
+					"Algo ha ocurrido obteniendo lista de categorías");
 			request.setAttribute("listaCategorias", listaCategorias);
 			Log.debug(
 					"Obtenida lista de categorías conteniendo [%d] categorías",
@@ -43,5 +43,4 @@ public class ListarCategoriasAction implements Accion {
 	public String toString() {
 		return getClass().getName();
 	}
-
 }

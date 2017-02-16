@@ -20,5 +20,4 @@ public class CerrarSesionAction implements Accion {
 	public String toString() {
 		return getClass().getName();
 	}
-
 }

@@ -1,16 +1,17 @@
 package uo.sdi.persistence.util;
 
-import java.io.IOException;
-import javax.persistence.*;
-import javax.xml.parsers.*;
-import org.w3c.dom.*;
-import org.xml.sax.SAXException;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 public class Jpa {
 
 	private static EntityManagerFactory emf = null;
-	private static ThreadLocal<EntityManager> emThread = new ThreadLocal<EntityManager>();
-
+	private static ThreadLocal<EntityManager> emThread = 
+		new ThreadLocal<EntityManager>();
+	
 	public static EntityManager createEntityManager() {
 		EntityManager entityManager = getEmf().createEntityManager();
 		emThread.set(entityManager);
@@ -22,31 +23,21 @@ public class Jpa {
 	}
 
 	private static EntityManagerFactory getEmf() {
-		if (emf == null) {
-			String persistenceUnitName = loadPersistentUnitName();
-			emf = Persistence.createEntityManagerFactory(persistenceUnitName);
+		if (emf == null){
+			emf = jndiFind("java:/ForumJpaFactory");
 		}
 		return emf;
 	}
 
-	private static String loadPersistentUnitName() {
+	private static EntityManagerFactory jndiFind(String name) {
+		Context ctx;
 		try {
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document doc = db.parse(Jpa.class
-					.getResourceAsStream("/META-INF/persistence.xml"));
-
-			doc.getDocumentElement().normalize();
-			NodeList nl = doc.getElementsByTagName("persistence-unit");
-
-			return ((Element) nl.item(0)).getAttribute("name");
-
-		} catch (ParserConfigurationException e1) {
-			throw new RuntimeException(e1);
-		} catch (SAXException e1) {
-			throw new RuntimeException(e1);
-		} catch (IOException e1) {
-			throw new RuntimeException(e1);
-		}
-		}
+			ctx = new InitialContext();
+			
+			return (EntityManagerFactory) ctx.lookup(name);
+			
+		} catch (NamingException e) {
+			throw new RuntimeException(e);
+		}		
 	}
+}

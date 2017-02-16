@@ -8,8 +8,6 @@ public class RegistrarseAction implements Accion {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
-		// TODO Auto-generated method stub
 		return "EXITO";
 	}
-
 }

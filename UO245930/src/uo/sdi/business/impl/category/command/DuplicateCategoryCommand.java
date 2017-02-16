@@ -7,7 +7,7 @@ import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.command.Command;
 import uo.sdi.model.*;
 import uo.sdi.dto.types.UserStatus;
-import uo.sdi.dto.util.Cloner;
+import uo.sdi.persistence.util.Cloner;
 import uo.sdi.persistence.util.Jpa;
 
 public class DuplicateCategoryCommand implements Command<Void> {
