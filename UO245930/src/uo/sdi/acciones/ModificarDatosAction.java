@@ -16,26 +16,28 @@ public class ModificarDatosAction implements Accion {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
 
-//		String resultado = "EXITO";
-//
-//		String nuevoEmail = request.getParameter("email");
-//		HttpSession session = request.getSession();
-//		User user = ((User) session.getAttribute("user"));
-//		User userClone = Cloner.clone(user);
-//		userClone.setEmail(nuevoEmail);
-//		try {
-//			UserService userService = Services.getUserService();
-//			userService.updateUserDetails(userClone);
-//			Log.debug("Modificado email de [%s] con el valor [%s]",
-//					userClone.getLogin(), nuevoEmail);
-//			session.setAttribute("user", userClone);
-//		} catch (BusinessException b) {
-//			Log.debug(
-//					"Algo ha ocurrido actualizando el email de [%s] a [%s]: %s",
-//					user.getLogin(), nuevoEmail, b.getMessage());
-//			resultado = "FRACASO";
-//		}
-		return null;
+		String resultado = "EXITO";
+
+		String nuevoEmail = request.getParameter("email");
+		HttpSession session = request.getSession();
+		User user = ((User) session.getAttribute("user"));
+		String emailViejo = user.getEmail();
+		try {			
+			user.setEmail(nuevoEmail);
+			UserService userService = Services.getUserService();
+			userService.updateUserDetails(user);
+			Log.debug("Modificado email de [%s] con el valor [%s]",
+					user.getLogin(), nuevoEmail);
+			
+		} catch (BusinessException b) {
+			user.setEmail(emailViejo);
+			Log.debug(
+					"Algo ha ocurrido actualizando el email de [%s] a [%s]: %s",
+					user.getLogin(), nuevoEmail, b.getMessage());
+			resultado = "FRACASO";
+		}
+		session.setAttribute("user", user);
+		return resultado;
 	}
 
 	@Override

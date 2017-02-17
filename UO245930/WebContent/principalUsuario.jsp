@@ -29,11 +29,13 @@
 		</tr>
 		<tr>
 			<td>Email:</td>
-			<td id="email"><form action="modificarDatos" method="POST">
+			<td id="email">
+				<form action="modificarDatos" method="POST">
 					<input type="text" name="email" size="15"
 						value="<jsp:getProperty property="email" name="user"/>"> <input
 						type="submit" value="Modificar">
-				</form></td>
+				</form>
+			</td>
 		</tr>
 		<tr>
 			<td>Es administrador:</td>
