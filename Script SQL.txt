@@ -1,0 +1,19 @@
+Insert Into TUsers(email, isadmin, login, password, status) Values ('usuario1@mail.com', false, 'usuario1', 'usuario1123', 'ENABLED')
+Insert Into TUsers(email, isadmin, login, password, status) Values ('usuario2@mail.com', false, 'usuario2', 'usuario2123', 'ENABLED')
+Insert Into TUsers(email, isadmin, login, password, status) Values ('usuario3@mail.com', false, 'usuario3', 'usuario3123', 'ENABLED')
+Insert Into TUsers(email, isadmin, login, password, status) Values ('administrador1@system.gtd',true, 'administrador1', 'administrador1123', 'ENABLED')
+
+Insert Into TCategories(name, user_id) Values ('Categoria de prueba', 6)
+Insert Into TTasks(comments, created, finished, planned, title, category_id, user_id) Values ('Comentario de prueba para el usuario1', '2017-02-19', null, '2017-01-01','Tarea1 de prueba para el usuario1', null, 6)
+Insert Into TTasks(comments, created, finished, planned, title, category_id, user_id) Values ('Comentario de prueba para el usuario1', '2017-02-19', null, '2017-06-30','Tarea2 de prueba para el usuario1', null, 6)
+Insert Into TTasks(comments, created, finished, planned, title, category_id, user_id) Values ('Comentario de prueba para el usuario1', '2017-02-19', null, '2017-02-14','Tarea3 de prueba para el usuario1', 8, 6)
+
+Insert Into TCategories(name, user_id) Values ('Categoria de prueba', 7)
+Insert Into TTasks(comments, created, finished, planned, title, category_id, user_id) Values ('Comentario de prueba para el usuario2', '2017-02-19', null, '2017-01-01','Tarea1 de prueba para el usuario2', null, 7)
+Insert Into TTasks(comments, created, finished, planned, title, category_id, user_id) Values ('Comentario de prueba para el usuario2', '2017-02-19', null, '2017-06-30','Tarea2 de prueba para el usuario2', null, 7)
+Insert Into TTasks(comments, created, finished, planned, title, category_id, user_id) Values ('Comentario de prueba para el usuario2', '2017-02-19', null, '2017-02-14','Tarea3 de prueba para el usuario2', 9, 7)
+
+Insert Into TCategories(name, user_id) Values ('Categoria de prueba', 8)
+Insert Into TTasks(comments, created, finished, planned, title, category_id, user_id) Values ('Comentario de prueba para el usuario3', '2017-02-19', null, '2017-01-01','Tarea1 de prueba para el usuario3', null, 8)
+Insert Into TTasks(comments, created, finished, planned, title, category_id, user_id) Values ('Comentario de prueba para el usuario3', '2017-02-19', null, '2017-06-30','Tarea2 de prueba para el usuario3', null, 8)
+Insert Into TTasks(comments, created, finished, planned, title, category_id, user_id) Values ('Comentario de prueba para el usuario3', '2017-02-19', null, '2017-02-14','Tarea3 de prueba para el usuario3', 10, 8)

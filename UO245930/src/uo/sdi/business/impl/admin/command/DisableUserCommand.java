@@ -21,7 +21,7 @@ public class DisableUserCommand implements Command<Void> {
 		User user = Jpa.getManager().find(User.class, userId);
 		BusinessCheck.isNotNull(user, "User does not exist");
 
-		user.setStatus(UserStatus.DISADLED);
+		user.setStatus(UserStatus.DISABLED);
 		Jpa.getManager().merge(user);
 
 		return null;

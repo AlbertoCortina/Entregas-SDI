@@ -19,6 +19,7 @@ public class DeleteTaskCommand implements Command<Void> {
 		Task t = Jpa.getManager().find(Task.class, id);
 		BusinessCheck.isNotNull(t, "Task does not exist");
 
+		Jpa.getManager().remove(t);
 		return null;
 	}
 }

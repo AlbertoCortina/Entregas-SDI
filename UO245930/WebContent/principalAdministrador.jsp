@@ -4,11 +4,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-	<title>TaskManager - Página principal del usuario</title>
+<title>TaskManager - Página principal del administrador</title>
 </head>
-<body>	
+<body>
+	
 	<center>
-		<h1>Entrada principal usuario</h1>
+		<h1>Entrada principal administrador</h1>
 	</center>
 	
 	<i>Iniciaste sesión el <fmt:formatDate
@@ -19,7 +20,7 @@
 	<br />
 	<br />
 	
-	<h1>Información del usuario</h1>
+	<h1>Información del administrador</h1>
 	<jsp:useBean id="user" class="uo.sdi.model.User" scope="session" />
 	<table>
 		<tr>
@@ -54,7 +55,7 @@
 	<h1>Listados</h1>
 	<ul>
 		<li>
-			<a href="tareas">Lista de tareas</a>
+			<a href="listarUsuarios">Lista de usuarios registrados</a>
 		</li>
 	</ul>
 	

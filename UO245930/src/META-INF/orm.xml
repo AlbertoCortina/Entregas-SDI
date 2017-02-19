@@ -19,16 +19,12 @@
 
 	<!-- Task queries -->
 	<named-query name="Task.deleteByUserId">
-		<query>Select t From Task t</query>
+		<query>Select t From Task t Where t.user.id = ?1</query>
 	</named-query>
 
 	<named-query name="Task.deleteByCategoryId">
-		<query>Select t From Task t</query>
-	</named-query>
-
-	<named-query name="Task.findById">
-		<query>Select t From Task t Where t.id = ?1</query>
-	</named-query>
+		<query>Select t From Task t Where t.category.id = ?1</query>
+	</named-query>	
 
 	<named-query name="Task.findAll">
 		<query>Select t From Task t</query>
@@ -39,7 +35,7 @@
 	</named-query>
 
 	<named-query name="Task.findInboxUserId">
-		<query>Select t From Task t</query>
+		<query>Select t From Task t Where t.user.id = ?1 And t.finished = null And t.category.id = null</query>
 	</named-query>
 
 	<named-query name="Task.findTodayUserId">
@@ -51,7 +47,7 @@
 	</named-query>
 
 	<named-query name="Task.findUnfinishedByCategoryId">
-		<query>Select t From Task t</query>
+		<query>Select t From Task t Where t.category.id = ?1 And </query>
 	</named-query>
 
 	<named-query name="Task.findFinishedByCategoryId">
@@ -63,6 +59,10 @@
 	</named-query>
 
 	<!-- Category queries -->
+	<named-query name="Category.deleteByUserId">
+		<query>Select c From Category c Where c.user.id = ?1</query>
+	</named-query>
+	
 	<named-query name="Category.findAll">
 		<query>Select c From Category c</query>
 	</named-query>
@@ -73,10 +73,6 @@
 
 	<named-query name="Category.findByUserIdAndName">
 		<query>Select c From Category c Where c.user.id = ?1 And c.name = ?2</query>
-	</named-query>
-
-	<named-query name="Category.deleteByUserId">
-		<query>Select t From Task t</query>
 	</named-query>
 
 </entity-mappings>

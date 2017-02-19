@@ -10,6 +10,10 @@ public interface TaskService {
 
 	public void deleteTask(Long id) throws BusinessException;
 
+	public void deleteTaskByUserid(Long userId) throws BusinessException;
+	
+	public void deleteTaskByCategoryId(Long categoryId) throws BusinessException;
+	
 	public void markTaskAsFinished(Long id) throws BusinessException;
 
 	public void updateTask(Task task) throws BusinessException;

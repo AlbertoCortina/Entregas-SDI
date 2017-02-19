@@ -7,31 +7,16 @@ import uo.sdi.persistence.util.Jpa;
 
 public class UserFinder {
 
-	// public static void insert (User user) {
-	// Jpa.getManager().persist(user);
-	// }
-	//
-	// public static void update (User user) {
-	// Jpa.getManager().merge(user);
-	// }
-	//
-	// public static void delete (User user) {
-	// User aux = findById(user.getId());
-	// Jpa.getManager().remove(aux);
-	// }
-	//
-	// public static User findById (Long id) {
-	// return Jpa.getManager().find(User.class, id);
-	// }
-
 	public static List<User> findAll() {
 		return Jpa.getManager().createNamedQuery("User.findAll", User.class)
 				.getResultList();
 	}
 
 	public static User findByLogin(String login) {
-		List<User> users = Jpa.getManager().createNamedQuery("User.findByLogin", User.class)
+		List<User> users = Jpa.getManager()
+				.createNamedQuery("User.findByLogin", User.class)
 				.setParameter(1, login).getResultList();
+
 		return users.isEmpty() ? null : users.get(0);
 	}
 

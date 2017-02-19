@@ -7,41 +7,31 @@ import uo.sdi.persistence.util.Jpa;
 
 public class TaskFinder {
 
-	// public static void insert (Task task) {
-	// Jpa.getManager().persist(task);
-	// }
-	//
-	// public static void update (Task task) {
-	// Jpa.getManager().merge(task);
-	// }
-	//
-	// public static void delete (Task task) {
-	// Task aux = findById(task.getId());
-	// Jpa.getManager().remove(aux);
-	// }
-
 	public static void deleteByUserId(Long userId) {
-
+		Jpa.createEntityManager().createNamedQuery("Task.deleteByUserId")
+				.setParameter(1, userId);
 	}
 
 	public static void deleteByCategoryId(Long categoryId) {
-
+		Jpa.createEntityManager().createNamedQuery("Task.deleteByCategoryId")
+				.setParameter(1, categoryId);
 	}
 
-	// public static Task findyById (Long id) {
-	// return Jpa.getManager().find(Task.class, id);
-	// }
-
 	public static List<Task> findAll() {
-		return null;
+		return Jpa.getManager().createNamedQuery("Task.findAll", Task.class)
+				.getResultList();
 	}
 
 	public static List<Task> findByUserId(Long userId) {
-		return null;
+		return Jpa.getManager()
+				.createNamedQuery("Task.findByUserId", Task.class)
+				.getResultList();
 	}
 
 	public static List<Task> findInboxByUserId(Long userId) {
-		return null;
+		return Jpa.getManager()
+				.createNamedQuery("Task.findInboxUserId", Task.class)
+				.setParameter(1, userId).getResultList();
 	}
 
 	public static List<Task> findTodayByUserId(Long userId) {

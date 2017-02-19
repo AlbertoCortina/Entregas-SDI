@@ -17,6 +17,6 @@ public class FindInboxTasksByUserId implements Command<List<Task>> {
 
 	@Override
 	public List<Task> execute() throws BusinessException {
-		return TaskFinder.findFinishedInboxByUserId(id);
+		return TaskFinder.findInboxByUserId(id);
 	}
 }

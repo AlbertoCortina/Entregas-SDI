@@ -22,6 +22,7 @@ public class CreateTaskCommand implements Command<Void> {
 		TaskCheck.userIsNotAdmin(task);
 		TaskCheck.titleIsNotNull(task);
 		TaskCheck.titleIsNotEmpty(task);
+		
 		if (task.getCategory().getId() != null) {
 			TaskCheck.categoryExists(task);
 		}

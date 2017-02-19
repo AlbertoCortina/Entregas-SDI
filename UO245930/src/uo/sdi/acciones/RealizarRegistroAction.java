@@ -3,6 +3,7 @@ package uo.sdi.acciones;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import alb.util.log.Log;
 import uo.sdi.business.Services;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.model.User;
@@ -27,6 +28,7 @@ public class RealizarRegistroAction implements Accion {
 		if (passwordRepetida == null
 				|| !passwordRepetida.equals(user.getPassword())) {
 			request.setAttribute("mensajeParaElUsuario", "Password no coincide");
+			Log.debug("Las contraseñas no coinciden");
 			resultado = "FRACASO";
 		} else {
 			try {
