@@ -10,13 +10,13 @@
 	<center>
 		<h1>Entrada principal usuario</h1>
 	</center>
-	
+	<hr>
+	<br>
 	<i>Iniciaste sesión el <fmt:formatDate
 			pattern="dd-MM-yyyy' a las 'HH:mm"
 			value="${sessionScope.fechaInicioSesion}" /> (usuario número
 		${contador})
 	</i>
-	<br />
 	<br />
 	
 	<h1>Información del usuario</h1>
@@ -52,11 +52,11 @@
 	<br />
 	
 	<h1>Listados</h1>
-	<ul>
-		<li>
-			<a href="tareas">Lista de tareas</a>
-		</li>
-	</ul>
+		<ul>
+			<li><a href="listarTareasInbox">Listado de tareas Hoy</a></li>
+			<li><a href="listarTareasHoy">Listado de tareas Inbox</a></li>
+			<li><a href="listarCategorias?id=<jsp:getProperty property="id" name="user"/>">Listado de categorias</a></li>	
+		</ul>		
 	
 	<h1>Otras opciones</h1>
 	<a id="cerrarSesion_link_id" href="cerrarSesion">Cerrar sesión</a>

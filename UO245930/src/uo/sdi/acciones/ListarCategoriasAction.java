@@ -15,18 +15,18 @@ import alb.util.log.Log;
 
 public class ListarCategoriasAction implements Accion {
 
-	private static final long EXAMPLE_USER_ID = 1;
+	
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
 
 		String resultado = "EXITO";
-
+		Long id = Long.valueOf(request.getParameter("id"));
 		List<Category> listaCategorias;
 		CategoryService categoryService = Services.getCategoryService();
 		try {
-			listaCategorias = categoryService.findCategoriesByUserId(EXAMPLE_USER_ID);
+			listaCategorias = categoryService.findCategoriesByUserId(id);
 			request.setAttribute("listaCategorias", listaCategorias);
 			Log.debug(
 					"Obtenida lista de categorías conteniendo [%d] categorías",

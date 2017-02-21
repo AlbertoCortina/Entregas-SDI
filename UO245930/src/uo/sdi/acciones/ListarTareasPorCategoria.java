@@ -3,21 +3,13 @@ package uo.sdi.acciones;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CerrarSesionAction implements Accion {
+public class ListarTareasPorCategoria implements Accion {
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
-
-		String resultado = "EXITO";
-
-		request.getSession().invalidate();
-
-		return resultado;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	@Override
-	public String toString() {
-		return getClass().getName();
-	}
 }

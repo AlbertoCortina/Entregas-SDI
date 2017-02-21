@@ -1,6 +1,7 @@
 package uo.sdi.business.impl.task;
 
 import java.util.List;
+
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.command.CommandExecutor;
@@ -81,5 +82,18 @@ public class TaskServiceImpl implements TaskService {
 			throws BusinessException {
 		return new CommandExecutor<List<Task>>()
 				.execute(new FindFinishedInboxTasksByUserId(id));
+	}
+
+	@Override
+	public void deleteTaskByUserid(Long userId) throws BusinessException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteTaskByCategoryId(Long categoryId)
+			throws BusinessException {
+		// TODO Auto-generated method stub
+		
 	}
 }

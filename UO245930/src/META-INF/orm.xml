@@ -47,7 +47,7 @@
 	</named-query>
 
 	<named-query name="Task.findUnfinishedByCategoryId">
-		<query>Select t From Task t Where t.category.id = ?1 And </query>
+		<query>Select t From Task t Where t.category.id = ?1 </query>
 	</named-query>
 
 	<named-query name="Task.findFinishedByCategoryId">

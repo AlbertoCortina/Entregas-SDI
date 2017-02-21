@@ -10,21 +10,36 @@
 	</head>
 	<body>
 		<h1>Listado de tareas</h1>
-		<table>
+		<hr>
+		<br>
+		
+		<form action="añadirTarea" method="post">
+			<input type="button" value="Añadir tarea">
+		</form>
+		<br>
+		<br>
+		<table border="1" align="center">
 			<tr>
 				<th>Titulo</th>
-				<th>Creada</th>
+				<th>Comentarios</th>
+				<th>Fecha creación</th>
+				<th></th>
 			</tr>
-			<c:forEach items= "${requestScope.tasks}" var="task">
-				<tr>
-					<td>${pageScope.task.title}</td>
+			<c:forEach items= "${requestScope.tasks}" var="task" varStatus="i">
+				<tr id="item_${i.index}">
+					<td>${task.title}</td>
+					<td>${task.comments}</td>
 					<td>
-						<fmt:formatDate value="${pageScope.task.created}" type="date"/>
+						<fmt:formatDate value="${task.created}" type="date"/>
+					</td>
+					<td>
+						<a href="editarTarea">Editar tarea</a>
+					</td>
+					<td>
+						<a href="finalizarTarea">Finalizar</a>
 					</td>
 				</tr>
 			</c:forEach>
-		</table>
-			
-		
+		</table>		
 	</body>
 </html>

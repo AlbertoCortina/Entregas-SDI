@@ -4,22 +4,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<title>TaskManager - Página principal del administrador</title>
+	<title>TaskManager - Página principal del administrador</title>
 </head>
 <body>
 	
 	<center>
 		<h1>Entrada principal administrador</h1>
 	</center>
-	
+	<hr>
+	<br>
 	<i>Iniciaste sesión el <fmt:formatDate
 			pattern="dd-MM-yyyy' a las 'HH:mm"
-			value="${sessionScope.fechaInicioSesion}" /> (usuario número
-		${contador})
+			value="${sessionScope.fechaInicioSesion}" /> (usuario número ${contador})
 	</i>
-	<br />
-	<br />
-	
+	<br>	
 	<h1>Información del administrador</h1>
 	<jsp:useBean id="user" class="uo.sdi.model.User" scope="session" />
 	<table>

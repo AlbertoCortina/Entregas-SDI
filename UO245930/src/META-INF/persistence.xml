@@ -6,9 +6,7 @@
 
 	<persistence-unit name="taskmanager" transaction-type="RESOURCE_LOCAL">
 		<non-jta-data-source>java:jboss/datasources/NotaneitorDS</non-jta-data-source>
-		<class>uo.sdi.model.User</class>
-		<class>uo.sdi.model.Task</class>
-		<class>uo.sdi.model.Category</class>
+		
 		<properties>
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
