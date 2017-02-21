@@ -8,47 +8,26 @@
 		<title>TaskManager - Listado de usuarios</title>
 	</head>
 	<body>
-		<h1>Listado de Usuarios</h1>
-		
-		<!-- <form action="filtrar" method="post">
-			<fieldset>
-				<legend>Ordenar por:</legend>
-				<label>
-					<input type="radio" name="ordenado">Ordenar por login				
-				</label>
-				
-				<label>
-					<input type="radio" name="ordenado">Ordenar por email				
-				</label>
-				
-				<label>
-					<input type="radio" name="ordenado">Ordenar por status				
-				</label>
-			</fieldset>
-		</form>	 -->	
-		
-		<table border="1">
+		<center>
+			<h1>Lista de usuarios registrados</h1>
+		</center>
+		<hr>
+		<br>
+		<table border="1" align="center">
 			<tr>
 				<th>Id</th>			
 				<th>Login</th>
 				<th>Email</th>
 				<th>IsAdmin</th>
-				<th>Status</th>
-				<th>Habilitar/Deshabilitar</th>				
+				<th>Status</th>						
 			</tr>
-			<c:forEach items= "${listaUsuarios}" var="user">
-				<tr>					
-					<td><c:out value="${user.id}"/></td>				
+			<c:forEach items="${listaUsuarios}" var="user" varStatus="i">
+				<tr id="item_${i.index}">					
+					<td>"${user.id}"</td>				
 					<td>${user.login}</td>
 					<td>${user.email}</td>
 					<td>${user.isAdmin}</td>					
-					<td><c:out value="${user.status}"/></td>	
-					<td>	
-						<!--  <form action="habilitar/deshabilitar">
-							<input type="button" value="Habilitar/Deshabilitar"/>
-						</form>	-->
-						<a id="habilitar/Deshabilitar_link_id" href="cambiarEstado?id=${user.id}">Habilitar/Deshabilitar</a>				
-					</td>				
+					<td><a id="habilitar/Deshabilitar_link_id" href="cambiarEstado?id=${user.id}&status=${user.status}">${user.status}</a></td>
 				</tr>
 			</c:forEach>
 		</table>		

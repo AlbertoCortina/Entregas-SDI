@@ -14,16 +14,16 @@
 		<table align="center">
 			<tr>
 				<td align="right">Usuario</td>
-				<td><input id="input_nombreUsuario" type="text" name="nombreUsuario" align="left" required size="15"></td>				
+				<td><input type="text" name="nombreUsuario" align="left" required size="15"></td>				
 			</tr>
 			
 			<tr>
 				<td align="right">Contraseña</td>
-				<td><input id="input_password" type="password" name="password" align="left" required size="15"></td>
+				<td><input type="password" name="password" align="left" required size="15"></td>
 			</tr>
 			
 			<tr>
-				<td><input id="login_submit" type="submit" value="Enviar" /></td>
+				<td><input type="submit" value="Enviar" /></td>
 			</tr>
 		</table>
 	</form>

@@ -145,12 +145,16 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		Map<String, Accion> mapaRegistrado = new HashMap<String, Accion>();
 		mapaRegistrado.put("modificarDatos", new ModificarDatosAction());
 		mapaRegistrado.put("listarTareas", new ListarTareasAction());
+		mapaRegistrado.put("listarCategorias", new ListarCategoriasAction());
+		mapaRegistrado.put("añadirCategoria", new AñadirCategoriaAction());
+		mapaRegistrado.put("cerrarSesion", new CerrarSesionAction());
 		mapaDeAcciones.put("USUARIO", mapaRegistrado);
 		
 		Map<String, Accion> mapaAdministrador = new HashMap<String, Accion>();
 		mapaAdministrador.put("modificarDatos", new ModificarDatosAction());
 		mapaAdministrador.put("listarUsuarios", new ListarUsuariosAction());
 		mapaAdministrador.put("cambiarEstado", new CambiarEstadoUsuarioAction());
+		mapaAdministrador.put("cerrarSesion", new CerrarSesionAction());
 		mapaDeAcciones.put("ADMIN", mapaAdministrador);
 	}
 
@@ -191,6 +195,20 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("EXITO", "/principalUsuario.jsp");
 		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp");
 		opcionResultadoYJSP.put("modificarDatos", resultadoYJSP);
+		
+		resultadoYJSP = new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listarCategorias.jsp");
+		opcionResultadoYJSP.put("listarCategorias", resultadoYJSP);
+		
+		
+		resultadoYJSP = new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listarCategorias.jsp");
+		resultadoYJSP.put("FRACASO", "/listarCategorias.jsp");
+		opcionResultadoYJSP.put("añadirCategoria", resultadoYJSP);
+		
+		resultadoYJSP = new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/login.jsp");
+		opcionResultadoYJSP.put("cerrarSesion", resultadoYJSP);
 
 		mapaDeNavegacion.put("USUARIO", opcionResultadoYJSP);
 
@@ -216,7 +234,12 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP = new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/listarUsuarios.jsp");
 		resultadoYJSP.put("FRACASO", "/listarUsuarios.jsp");
-		opcionResultadoYJSP.put("cambiarEstado", resultadoYJSP);		
+		opcionResultadoYJSP.put("cambiarEstado", resultadoYJSP);
+		
+		resultadoYJSP = new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/login.jsp");
+		opcionResultadoYJSP.put("cerrarSesion", resultadoYJSP);
+		
 		mapaDeNavegacion.put("ADMIN", opcionResultadoYJSP);
 	}
 
