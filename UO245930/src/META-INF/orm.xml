@@ -47,7 +47,11 @@
 	</named-query>
 
 	<named-query name="Task.findUnfinishedByCategoryId">
+<<<<<<< HEAD
 		<query>Select t From Task t Where t.category.id = ?1 </query>
+=======
+		<query>Select t From Task t Where t.category.id = ?1 And t.finished IS NULL</query>
+>>>>>>> refs/remotes/origin/master
 	</named-query>
 
 	<named-query name="Task.findFinishedByCategoryId">
