@@ -21,8 +21,8 @@ import uo.sdi.model.*;
 public class TaskServiceImpl implements TaskService {
 
 	@Override
-	public void createTask(Task task) throws BusinessException {
-		new CommandExecutor<Void>().execute(new CreateTaskCommand(task));
+	public void createTask(String nombre, Long id) throws BusinessException {
+		new CommandExecutor<Void>().execute(new CreateTaskCommand(nombre, id));
 	}
 
 	@Override

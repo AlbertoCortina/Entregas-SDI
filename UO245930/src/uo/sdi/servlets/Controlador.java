@@ -143,11 +143,16 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaDeAcciones.put("ANONIMO", mapaPublico);
 
 		Map<String, Accion> mapaRegistrado = new HashMap<String, Accion>();
-		mapaRegistrado.put("modificarDatos", new ModificarDatosAction());
-		mapaRegistrado.put("listarTareas", new ListarTareasAction());
+		mapaRegistrado.put("modificarDatos", new ModificarDatosAction());		
 		mapaRegistrado.put("listarCategorias", new ListarCategoriasAction());
 		mapaRegistrado.put("añadirCategoria", new AñadirCategoriaAction());
+		mapaRegistrado.put("listarTareasInbox", new ListarTareasInboxAction());
+		mapaRegistrado.put("listarTareasHoy", new ListaTareasHoyAction());
 		mapaRegistrado.put("cerrarSesion", new CerrarSesionAction());
+		mapaRegistrado.put("finalizarTareaInbox", new FinalizarTareaInboxAction());
+		mapaRegistrado.put("finalizarTareaHoy", new FinalizarTareaHoyAction());
+		mapaRegistrado.put("añadirTareaInbox", new AñadirTareaAction());
+		mapaRegistrado.put("añadirTareaHoy", new AñadirTareaAction());
 		mapaDeAcciones.put("USUARIO", mapaRegistrado);
 		
 		Map<String, Accion> mapaAdministrador = new HashMap<String, Accion>();
@@ -198,13 +203,42 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		
 		resultadoYJSP = new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/listarCategorias.jsp");
-		opcionResultadoYJSP.put("listarCategorias", resultadoYJSP);
-		
+		opcionResultadoYJSP.put("listarCategorias", resultadoYJSP);		
 		
 		resultadoYJSP = new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/listarCategorias.jsp");
 		resultadoYJSP.put("FRACASO", "/listarCategorias.jsp");
 		opcionResultadoYJSP.put("añadirCategoria", resultadoYJSP);
+		
+		resultadoYJSP = new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listarTareasInbox.jsp");
+		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp");
+		opcionResultadoYJSP.put("listarTareasInbox", resultadoYJSP);
+		
+		resultadoYJSP = new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listarTareasHoy.jsp");
+		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp");
+		opcionResultadoYJSP.put("listarTareasHoy", resultadoYJSP);		
+		
+		resultadoYJSP = new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listarTareasInbox");
+		resultadoYJSP.put("FRACASO", "/listarTareasInbox");
+		opcionResultadoYJSP.put("añadirTareaInbox", resultadoYJSP);
+		
+		resultadoYJSP = new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listarTareasHoy");
+		resultadoYJSP.put("FRACASO", "/listarTareasHoy");
+		opcionResultadoYJSP.put("añadirTareaHoy", resultadoYJSP);
+		
+		resultadoYJSP = new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listarTareasInbox");
+		resultadoYJSP.put("FRACASO", "/listarTareasInbox");
+		opcionResultadoYJSP.put("finalizarTareaInbox", resultadoYJSP);
+		
+		resultadoYJSP = new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listarTareasHoy");
+		resultadoYJSP.put("FRACASO", "/listarTareasHoy");
+		opcionResultadoYJSP.put("finalizarTareaHoy", resultadoYJSP);
 		
 		resultadoYJSP = new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/login.jsp");

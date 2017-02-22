@@ -10,15 +10,20 @@
 	</head>
 	<body>
 		<center>
-			<h1>Listado de tareas</h1>
+			<h1>Listado de tareas Inbox</h1>
 		</center>	
 		<hr>
 		<br>		
-		<form action="añadirTarea" method="post">
-			<input type="button" value="Añadir tarea">
+		<form action="añadirTareaHoy" method="post">
+			<table>
+				<tr>
+					<td><input type="hidden" name="checkBox" value="${checkBox}"></td>
+					<td>Nombre de la tarea:</td>
+					<td><input type="text" name="nombreTarea" required></td>
+					<td><input type="submit" value="Añadir tarea"></td>
+				</tr>			
+			</table>			
 		</form>
-		<br>
-		<br>
 		
 		<jsp:useBean id="today" class="java.util.Date" scope="page" />		
 		
@@ -53,7 +58,14 @@
 						<a href="editarTarea">Editar tarea</a>
 					</td>
 					<td>
-						<a href="finalizarTarea">Finalizar</a>
+						<c:choose>
+							<c:when test="${task.finished == null}">
+								<a href="finalizarTareaInbox?id=${task.id}&checkBox=${checkBox}">Finalizar</a>
+							</c:when>
+							<c:otherwise>								
+								<p>Finalizada</p>
+							</c:otherwise>
+						</c:choose>					
 					</td>
 				</tr>
 			</c:forEach>

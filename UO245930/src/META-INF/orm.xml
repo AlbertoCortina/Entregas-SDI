@@ -35,11 +35,28 @@
 	</named-query>
 
 	<named-query name="Task.findInboxUserId">
-		<query>Select t From Task t Where t.user.id = ?1 And t.finished = null And t.category.id = null</query>
+		<query>Select t From Task t 
+		Where t.user.id = ?1 And 
+			t.finished is null And 
+			t.category.id is null
+		Order by t.planned asc</query>
+	</named-query>
+	
+	<named-query name="Task.findFinishedInboxByUserId">
+		<query>Select t From Task t 
+		Where t.user.id = ?1 And 
+			t.finished is not null And 
+			t.category.id is null
+		Order by t.planned desc</query>
 	</named-query>
 
 	<named-query name="Task.findTodayUserId">
-		<query>Select t From Task t</query>
+		<query><![CDATA[Select t From Task t
+						Where t.user.id = ?1 And
+							t.planned <= CURRENT_DATE And
+							t.finished is null
+						Order by  t.category.name, t.planned asc]]>
+		</query>
 	</named-query>
 
 	<named-query name="Task.findWeekUserId">
@@ -52,11 +69,7 @@
 
 	<named-query name="Task.findFinishedByCategoryId">
 		<query>Select t From Task t</query>
-	</named-query>
-
-	<named-query name="Task.findFinishedInboxByUserId">
-		<query>Select t From Task t</query>
-	</named-query>
+	</named-query>	
 
 	<!-- Category queries -->
 	<named-query name="Category.deleteByUserId">

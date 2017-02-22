@@ -10,22 +10,28 @@
 	</head>
 	<body>
 		<center>
-			<h1>Listado de tareas</h1>
+			<h1>Listado de tareas Hoy</h1>
 		</center>	
 		<hr>
 		<br>		
-		<form action="añadirTarea" method="post">
-			<input type="button" value="Añadir tarea">
+		<form action="añadirTareaHoy" method="post">
+			<table>
+				<tr>
+					<td><input type="hidden" name="checkBox" value="${checkBox}"></td>
+					<td>Nombre de la tarea:</td>
+					<td><input type="text" name="nombreTarea" required></td>
+					<td><input type="submit" value="Añadir tarea"></td>
+				</tr>			
+			</table>			
 		</form>
-		<br>
-		<br>
-		
+				
 		<jsp:useBean id="today" class="java.util.Date" scope="page" />		
 		
 		<table border="1" align="center">
 			<tr>
 				<th>Titulo</th>
 				<th>Comentarios</th>
+				<th>Categoria</th>
 				<th>Fecha creación</th>
 				<th>Fecha planeada</th>
 				<th>Fecha finalizada</th>
@@ -37,10 +43,11 @@
 				<tr id="item_${i.index}">
 					<td>${task.title}</td>
 					<td>${task.comments}</td>
+					<td>${task.category.name}</td>					
 					<td>${task.created}</td>									
 					<td>
 						<c:choose>
-							<c:when test="${task.planned != null && task.planned < today && task.finished == null}">
+							<c:when test="${task.planned != null && task.planned < today}">
 								<p style="color:red;">${task.planned}</p>
 							</c:when>
 							<c:otherwise>								
@@ -53,7 +60,14 @@
 						<a href="editarTarea">Editar tarea</a>
 					</td>
 					<td>
-						<a href="finalizarTarea">Finalizar</a>
+						<c:choose>
+							<c:when test="${task.finished == null}">
+								<a href="finalizarTareaHoy?id=${task.id}&checkBox=${checkBox}">Finalizar</a>
+							</c:when>
+							<c:otherwise>								
+								<p>Finalizada</p>
+							</c:otherwise>
+						</c:choose>					
 					</td>
 				</tr>
 			</c:forEach>

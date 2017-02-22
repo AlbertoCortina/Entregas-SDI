@@ -7,24 +7,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
+import uo.sdi.business.exception.BusinessException;
 import uo.sdi.model.Task;
 import uo.sdi.model.User;
-import uo.sdi.persistence.TaskFinder;
 
-public class ListarTareasAction implements Accion {
+public class ListaTareasHoyAction implements Accion {
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
 		
 		String resultado = "EXITO";
-		
-		User user = (User) request.getAttribute("user");
-		List<Task> listaTareas = null;
+		User user = (User) request.getSession().getAttribute("user");
 		TaskService taskService = Services.getTaskService();
-//		listaTareas = taskService.;
-		request.setAttribute("listaTareas", listaTareas);
+		try {
+			List<Task> tareasHoy = taskService.findTodayTasksByUserId(user.getId());
+			request.setAttribute("tasks", tareasHoy);
+		} catch(BusinessException e) {
+			
+		}
 		
-		return resultado;
+		return resultado;		
 	}
 }
