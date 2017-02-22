@@ -7,15 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import uo.sdi.business.CategoryService;
 import uo.sdi.business.Services;
-import uo.sdi.business.exception.BusinessCheck;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.model.Category;
-import uo.sdi.persistence.CategoryFinder;
 import alb.util.log.Log;
 
 public class ListarCategoriasAction implements Accion {
-
-	
 
 	@Override
 	public String execute(HttpServletRequest request,

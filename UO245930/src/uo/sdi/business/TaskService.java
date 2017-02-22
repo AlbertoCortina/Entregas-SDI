@@ -6,7 +6,7 @@ import uo.sdi.model.Task;
 
 public interface TaskService {
 
-	public void createTask(Task task) throws BusinessException;
+	public void createTask(String nombre, Long id) throws BusinessException;
 
 	public void deleteTask(Long id) throws BusinessException;
 

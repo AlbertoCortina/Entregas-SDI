@@ -1,0 +1,594 @@
+/*C3*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C2*/SET SCHEMA PUBLIC
+DELETE FROM TTASKS WHERE ID=69
+INSERT INTO TTASKS VALUES(69,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-02','2017-02-11','2017-02-10','Task 0 for category @Office',NULL,1)
+COMMIT
+DELETE FROM TTASKS WHERE ID=68
+INSERT INTO TTASKS VALUES(68,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-02',NULL,NULL,'Task 8 for category @Office',NULL,1)
+COMMIT
+/*C4*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C2*/DELETE FROM TTASKS WHERE ID=68
+INSERT INTO TTASKS VALUES(68,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-02',NULL,'2017-02-11','Task 8 for category @Office',NULL,1)
+COMMIT
+/*C5*/SET SCHEMA PUBLIC
+DELETE FROM TTASKS WHERE ID=68
+COMMIT
+DISCONNECT
+/*C6*/SET SCHEMA PUBLIC
+DELETE FROM TTASKS WHERE ID=71
+INSERT INTO TTASKS VALUES(71,'Comentario de prueba para el usuario1','2017-02-19','2017-02-22','2017-01-01','Tarea1 de prueba para el usuario1',NULL,6)
+COMMIT
+DISCONNECT
+/*C2*/alter table ttasks alter column created TIMESTAMP
+DELETE FROM TTASKS WHERE ID=1
+DELETE FROM TTASKS WHERE ID=2
+DELETE FROM TTASKS WHERE ID=3
+DELETE FROM TTASKS WHERE ID=4
+DELETE FROM TTASKS WHERE ID=5
+DELETE FROM TTASKS WHERE ID=6
+DELETE FROM TTASKS WHERE ID=7
+DELETE FROM TTASKS WHERE ID=8
+DELETE FROM TTASKS WHERE ID=9
+DELETE FROM TTASKS WHERE ID=10
+DELETE FROM TTASKS WHERE ID=11
+DELETE FROM TTASKS WHERE ID=12
+DELETE FROM TTASKS WHERE ID=13
+DELETE FROM TTASKS WHERE ID=14
+DELETE FROM TTASKS WHERE ID=15
+DELETE FROM TTASKS WHERE ID=16
+DELETE FROM TTASKS WHERE ID=17
+DELETE FROM TTASKS WHERE ID=18
+DELETE FROM TTASKS WHERE ID=19
+DELETE FROM TTASKS WHERE ID=20
+DELETE FROM TTASKS WHERE ID=21
+DELETE FROM TTASKS WHERE ID=22
+DELETE FROM TTASKS WHERE ID=23
+DELETE FROM TTASKS WHERE ID=24
+DELETE FROM TTASKS WHERE ID=25
+DELETE FROM TTASKS WHERE ID=26
+DELETE FROM TTASKS WHERE ID=27
+DELETE FROM TTASKS WHERE ID=28
+DELETE FROM TTASKS WHERE ID=29
+DELETE FROM TTASKS WHERE ID=30
+DELETE FROM TTASKS WHERE ID=31
+DELETE FROM TTASKS WHERE ID=32
+DELETE FROM TTASKS WHERE ID=33
+DELETE FROM TTASKS WHERE ID=34
+DELETE FROM TTASKS WHERE ID=35
+DELETE FROM TTASKS WHERE ID=36
+DELETE FROM TTASKS WHERE ID=37
+DELETE FROM TTASKS WHERE ID=38
+DELETE FROM TTASKS WHERE ID=39
+DELETE FROM TTASKS WHERE ID=40
+DELETE FROM TTASKS WHERE ID=41
+DELETE FROM TTASKS WHERE ID=42
+DELETE FROM TTASKS WHERE ID=43
+DELETE FROM TTASKS WHERE ID=44
+DELETE FROM TTASKS WHERE ID=45
+DELETE FROM TTASKS WHERE ID=46
+DELETE FROM TTASKS WHERE ID=47
+DELETE FROM TTASKS WHERE ID=48
+DELETE FROM TTASKS WHERE ID=49
+DELETE FROM TTASKS WHERE ID=50
+DELETE FROM TTASKS WHERE ID=51
+DELETE FROM TTASKS WHERE ID=52
+DELETE FROM TTASKS WHERE ID=53
+DELETE FROM TTASKS WHERE ID=54
+DELETE FROM TTASKS WHERE ID=55
+DELETE FROM TTASKS WHERE ID=56
+DELETE FROM TTASKS WHERE ID=57
+DELETE FROM TTASKS WHERE ID=58
+DELETE FROM TTASKS WHERE ID=59
+DELETE FROM TTASKS WHERE ID=60
+DELETE FROM TTASKS WHERE ID=61
+DELETE FROM TTASKS WHERE ID=62
+DELETE FROM TTASKS WHERE ID=63
+DELETE FROM TTASKS WHERE ID=64
+DELETE FROM TTASKS WHERE ID=65
+DELETE FROM TTASKS WHERE ID=66
+DELETE FROM TTASKS WHERE ID=67
+DELETE FROM TTASKS WHERE ID=69
+DELETE FROM TTASKS WHERE ID=71
+DELETE FROM TTASKS WHERE ID=72
+DELETE FROM TTASKS WHERE ID=73
+DELETE FROM TTASKS WHERE ID=74
+DELETE FROM TTASKS WHERE ID=75
+DELETE FROM TTASKS WHERE ID=76
+DELETE FROM TTASKS WHERE ID=77
+DELETE FROM TTASKS WHERE ID=78
+DELETE FROM TTASKS WHERE ID=79
+INSERT INTO TTASKS VALUES(1,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-03 00:00:00.000000','2017-02-11','2017-02-11','Task 0 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(2,NULL,'2017-02-04 00:00:00.000000',NULL,'2017-02-11','Task 6 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(3,NULL,'2017-02-05 00:00:00.000000',NULL,NULL,'Task 9 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(4,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-06 00:00:00.000000','2017-02-07','2017-02-07','Task 0 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(5,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-07 00:00:00.000000',NULL,'2017-02-05','Task 4 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(6,NULL,'2017-02-08 00:00:00.000000',NULL,'2017-02-03','Task 3 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(7,NULL,'2017-02-09 00:00:00.000000',NULL,'2017-02-10','Task 7 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(8,NULL,'2017-02-10 00:00:00.000000',NULL,'2017-02-02','Task 7 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(9,NULL,'2017-02-11 00:00:00.000000',NULL,NULL,'Task 9 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(10,NULL,'2017-02-12 00:00:00.000000','2017-02-05','2017-02-05','Task 1 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(11,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-13 00:00:00.000000',NULL,'2017-02-11','Task 4 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(12,NULL,'2017-02-14 00:00:00.000000',NULL,'2017-02-10','Task 5 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(13,NULL,'2017-02-15 00:00:00.000000',NULL,'2017-02-08','Task 6 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(14,NULL,'2017-02-16 00:00:00.000000',NULL,'2017-02-06','Task 5 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(15,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-17 00:00:00.000000',NULL,NULL,'Task 8 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(16,NULL,'2017-02-18 00:00:00.000000',NULL,'2017-02-08','Task 6 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(17,NULL,'2017-02-19 00:00:00.000000',NULL,'2017-02-04','Task 7 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(18,NULL,'2017-02-20 00:00:00.000000',NULL,'2017-02-10','Task 5 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(19,NULL,'2017-02-21 00:00:00.000000',NULL,'2017-02-10','Task 3 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(20,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000','2017-02-10','2017-02-10','Task 0 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(21,NULL,'2017-02-23 00:00:00.000000','2017-02-06','2017-02-05','Task 1 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(22,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-24 00:00:00.000000',NULL,'2017-02-11','Task 4 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(23,NULL,'2017-02-25 00:00:00.000000','2017-02-04','2017-02-03','Task 2 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(24,NULL,'2017-02-26 00:00:00.000000',NULL,NULL,'Task 9 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(25,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-27 00:00:00.000000',NULL,'2017-02-11','Task 4 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(26,NULL,'2017-02-28 00:00:00.000000',NULL,'2017-02-02','Task 3 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(27,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-01 00:00:00.000000',NULL,'2017-02-02','Task 4 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(28,NULL,'2017-03-02 00:00:00.000000','2017-02-04','2017-02-03','Task 2 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(29,NULL,'2017-03-03 00:00:00.000000',NULL,'2017-02-02','Task 5 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(30,NULL,'2017-03-04 00:00:00.000000',NULL,'2017-02-04','Task 6 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(31,NULL,'2017-03-05 00:00:00.000000',NULL,'2017-02-07','Task 7 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(32,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-06 00:00:00.000000','2017-02-10','2017-02-10','Task 0 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(33,NULL,'2017-03-07 00:00:00.000000',NULL,'2017-02-08','Task 6 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(34,NULL,'2017-03-08 00:00:00.000000',NULL,'2017-02-07','Task 7 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(35,NULL,'2017-03-09 00:00:00.000000','2017-02-06','2017-02-06','Task 2 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(36,NULL,'2017-03-10 00:00:00.000000','2017-02-08','2017-02-08','Task 1 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(37,NULL,'2017-03-11 00:00:00.000000','2017-02-06','2017-02-05','Task 2 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(38,NULL,'2017-03-12 00:00:00.000000','2017-02-04','2017-02-04','Task 2 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(39,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-13 00:00:00.000000',NULL,NULL,'Task 8 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(40,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-14 00:00:00.000000',NULL,NULL,'Task 8 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(41,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-15 00:00:00.000000','2017-02-10','2017-02-09','Task 0 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(42,NULL,'2017-03-16 00:00:00.000000',NULL,NULL,'Task 9 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(43,NULL,'2017-03-17 00:00:00.000000',NULL,'2017-02-05','Task 3 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(44,NULL,'2017-03-18 00:00:00.000000','2017-02-11','2017-02-11','Task 2 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(45,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-19 00:00:00.000000',NULL,'2017-02-06','Task 4 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(46,NULL,'2017-03-20 00:00:00.000000',NULL,'2017-02-09','Task 5 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(47,NULL,'2017-03-21 00:00:00.000000',NULL,'2017-02-11','Task 3 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(48,NULL,'2017-03-22 00:00:00.000000','2017-02-08','2017-02-07','Task 2 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(49,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-23 00:00:00.000000',NULL,'2017-02-03','Task 4 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(50,NULL,'2017-03-24 00:00:00.000000',NULL,'2017-02-10','Task 5 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(51,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-25 00:00:00.000000',NULL,NULL,'Task 8 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(52,NULL,'2017-03-26 00:00:00.000000','2017-02-11','2017-02-11','Task 1 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(53,NULL,'2017-03-27 00:00:00.000000',NULL,'2017-02-09','Task 5 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(54,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-28 00:00:00.000000',NULL,NULL,'Task 8 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(55,NULL,'2017-03-29 00:00:00.000000',NULL,'2017-02-05','Task 7 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(56,NULL,'2017-03-30 00:00:00.000000','2017-02-09','2017-02-09','Task 1 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(57,NULL,'2017-03-31 00:00:00.000000',NULL,NULL,'Task 9 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(58,NULL,'2017-04-01 00:00:00.000000',NULL,'2017-02-07','Task 7 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(59,NULL,'2017-04-02 00:00:00.000000','2017-02-03','2017-02-03','Task 1 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(60,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-04-03 00:00:00.000000','2017-02-06','2017-02-05','Task 0 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(61,NULL,'2017-04-04 00:00:00.000000',NULL,'2017-02-08','Task 3 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(62,NULL,'2017-04-05 00:00:00.000000',NULL,NULL,'Task 9 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(63,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-04-06 00:00:00.000000',NULL,NULL,'Task 8 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(64,NULL,'2017-04-07 00:00:00.000000',NULL,'2017-02-06','Task 6 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(65,NULL,'2017-04-08 00:00:00.000000',NULL,'2017-02-04','Task 3 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(66,NULL,'2017-04-09 00:00:00.000000',NULL,NULL,'Task 9 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(67,NULL,'2017-04-10 00:00:00.000000','2017-02-08','2017-02-08','Task 1 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(69,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-04-12 00:00:00.000000','2017-02-11','2017-02-10','Task 0 for category @Office',NULL,1)
+INSERT INTO TTASKS VALUES(71,'Comentario de prueba para el usuario1','2017-05-01 00:00:00.000000','2017-02-22','2017-01-01','Tarea1 de prueba para el usuario1',NULL,6)
+INSERT INTO TTASKS VALUES(72,'Comentario de prueba para el usuario1','2017-05-02 00:00:00.000000',NULL,'2017-06-30','Tarea2 de prueba para el usuario1',NULL,6)
+INSERT INTO TTASKS VALUES(73,'Comentario de prueba para el usuario1','2017-05-03 00:00:00.000000',NULL,'2017-02-14','Tarea3 de prueba para el usuario1',8,6)
+INSERT INTO TTASKS VALUES(74,'Comentario de prueba para el usuario2','2017-05-04 00:00:00.000000',NULL,'2017-01-01','Tarea1 de prueba para el usuario2',NULL,7)
+INSERT INTO TTASKS VALUES(75,'Comentario de prueba para el usuario2','2017-05-05 00:00:00.000000',NULL,'2017-06-30','Tarea2 de prueba para el usuario2',NULL,7)
+INSERT INTO TTASKS VALUES(76,'Comentario de prueba para el usuario2','2017-05-06 00:00:00.000000',NULL,'2017-02-14','Tarea3 de prueba para el usuario2',9,7)
+INSERT INTO TTASKS VALUES(77,'Comentario de prueba para el usuario3','2017-05-07 00:00:00.000000',NULL,'2017-01-01','Tarea1 de prueba para el usuario3',NULL,8)
+INSERT INTO TTASKS VALUES(78,'Comentario de prueba para el usuario3','2017-05-08 00:00:00.000000',NULL,'2017-06-30','Tarea2 de prueba para el usuario3',NULL,8)
+INSERT INTO TTASKS VALUES(79,'Comentario de prueba para el usuario3','2017-05-09 00:00:00.000000',NULL,'2017-02-14','Tarea3 de prueba para el usuario3',10,8)
+COMMIT
+DELETE FROM TTASKS WHERE ID=1
+DELETE FROM TTASKS WHERE ID=2
+DELETE FROM TTASKS WHERE ID=3
+DELETE FROM TTASKS WHERE ID=4
+DELETE FROM TTASKS WHERE ID=5
+DELETE FROM TTASKS WHERE ID=6
+DELETE FROM TTASKS WHERE ID=7
+DELETE FROM TTASKS WHERE ID=8
+DELETE FROM TTASKS WHERE ID=9
+DELETE FROM TTASKS WHERE ID=10
+DELETE FROM TTASKS WHERE ID=11
+DELETE FROM TTASKS WHERE ID=12
+DELETE FROM TTASKS WHERE ID=13
+DELETE FROM TTASKS WHERE ID=14
+DELETE FROM TTASKS WHERE ID=15
+DELETE FROM TTASKS WHERE ID=16
+DELETE FROM TTASKS WHERE ID=17
+DELETE FROM TTASKS WHERE ID=18
+DELETE FROM TTASKS WHERE ID=19
+DELETE FROM TTASKS WHERE ID=20
+DELETE FROM TTASKS WHERE ID=21
+DELETE FROM TTASKS WHERE ID=22
+DELETE FROM TTASKS WHERE ID=23
+DELETE FROM TTASKS WHERE ID=24
+DELETE FROM TTASKS WHERE ID=25
+DELETE FROM TTASKS WHERE ID=26
+DELETE FROM TTASKS WHERE ID=27
+DELETE FROM TTASKS WHERE ID=28
+DELETE FROM TTASKS WHERE ID=29
+DELETE FROM TTASKS WHERE ID=30
+DELETE FROM TTASKS WHERE ID=31
+DELETE FROM TTASKS WHERE ID=32
+DELETE FROM TTASKS WHERE ID=33
+DELETE FROM TTASKS WHERE ID=34
+DELETE FROM TTASKS WHERE ID=35
+DELETE FROM TTASKS WHERE ID=36
+DELETE FROM TTASKS WHERE ID=37
+DELETE FROM TTASKS WHERE ID=38
+DELETE FROM TTASKS WHERE ID=39
+DELETE FROM TTASKS WHERE ID=40
+DELETE FROM TTASKS WHERE ID=41
+DELETE FROM TTASKS WHERE ID=42
+DELETE FROM TTASKS WHERE ID=43
+DELETE FROM TTASKS WHERE ID=44
+DELETE FROM TTASKS WHERE ID=45
+DELETE FROM TTASKS WHERE ID=46
+DELETE FROM TTASKS WHERE ID=47
+DELETE FROM TTASKS WHERE ID=48
+DELETE FROM TTASKS WHERE ID=49
+DELETE FROM TTASKS WHERE ID=50
+DELETE FROM TTASKS WHERE ID=51
+DELETE FROM TTASKS WHERE ID=52
+DELETE FROM TTASKS WHERE ID=53
+DELETE FROM TTASKS WHERE ID=54
+DELETE FROM TTASKS WHERE ID=55
+DELETE FROM TTASKS WHERE ID=56
+DELETE FROM TTASKS WHERE ID=57
+DELETE FROM TTASKS WHERE ID=58
+DELETE FROM TTASKS WHERE ID=59
+DELETE FROM TTASKS WHERE ID=60
+DELETE FROM TTASKS WHERE ID=61
+DELETE FROM TTASKS WHERE ID=62
+DELETE FROM TTASKS WHERE ID=63
+DELETE FROM TTASKS WHERE ID=64
+DELETE FROM TTASKS WHERE ID=65
+DELETE FROM TTASKS WHERE ID=66
+DELETE FROM TTASKS WHERE ID=67
+DELETE FROM TTASKS WHERE ID=69
+DELETE FROM TTASKS WHERE ID=71
+DELETE FROM TTASKS WHERE ID=72
+DELETE FROM TTASKS WHERE ID=73
+DELETE FROM TTASKS WHERE ID=74
+DELETE FROM TTASKS WHERE ID=75
+DELETE FROM TTASKS WHERE ID=76
+DELETE FROM TTASKS WHERE ID=77
+DELETE FROM TTASKS WHERE ID=78
+DELETE FROM TTASKS WHERE ID=79
+INSERT INTO TTASKS VALUES(1,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000','2017-02-11','2017-02-11','Task 0 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(2,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-11','Task 6 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(3,NULL,'2017-02-22 00:00:00.000000',NULL,NULL,'Task 9 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(4,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000','2017-02-07','2017-02-07','Task 0 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(5,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000',NULL,'2017-02-05','Task 4 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(6,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-03','Task 3 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(7,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-10','Task 7 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(8,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-02','Task 7 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(9,NULL,'2017-02-22 00:00:00.000000',NULL,NULL,'Task 9 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(10,NULL,'2017-02-22 00:00:00.000000','2017-02-05','2017-02-05','Task 1 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(11,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000',NULL,'2017-02-11','Task 4 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(12,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-10','Task 5 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(13,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-08','Task 6 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(14,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-06','Task 5 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(15,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000',NULL,NULL,'Task 8 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(16,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-08','Task 6 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(17,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-04','Task 7 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(18,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-10','Task 5 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(19,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-10','Task 3 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(20,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000','2017-02-10','2017-02-10','Task 0 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(21,NULL,'2017-02-22 00:00:00.000000','2017-02-06','2017-02-05','Task 1 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(22,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000',NULL,'2017-02-11','Task 4 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(23,NULL,'2017-02-22 00:00:00.000000','2017-02-04','2017-02-03','Task 2 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(24,NULL,'2017-02-22 00:00:00.000000',NULL,NULL,'Task 9 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(25,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000',NULL,'2017-02-11','Task 4 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(26,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-02','Task 3 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(27,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000',NULL,'2017-02-02','Task 4 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(28,NULL,'2017-02-22 00:00:00.000000','2017-02-04','2017-02-03','Task 2 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(29,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-02','Task 5 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(30,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-04','Task 6 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(31,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-07','Task 7 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(32,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000','2017-02-10','2017-02-10','Task 0 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(33,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-08','Task 6 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(34,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-07','Task 7 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(35,NULL,'2017-02-22 00:00:00.000000','2017-02-06','2017-02-06','Task 2 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(36,NULL,'2017-02-22 00:00:00.000000','2017-02-08','2017-02-08','Task 1 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(37,NULL,'2017-02-22 00:00:00.000000','2017-02-06','2017-02-05','Task 2 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(38,NULL,'2017-02-22 00:00:00.000000','2017-02-04','2017-02-04','Task 2 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(39,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000',NULL,NULL,'Task 8 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(40,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000',NULL,NULL,'Task 8 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(41,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000','2017-02-10','2017-02-09','Task 0 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(42,NULL,'2017-02-22 00:00:00.000000',NULL,NULL,'Task 9 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(43,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-05','Task 3 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(44,NULL,'2017-02-22 00:00:00.000000','2017-02-11','2017-02-11','Task 2 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(45,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000',NULL,'2017-02-06','Task 4 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(46,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-09','Task 5 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(47,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-11','Task 3 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(48,NULL,'2017-02-22 00:00:00.000000','2017-02-08','2017-02-07','Task 2 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(49,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000',NULL,'2017-02-03','Task 4 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(50,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-10','Task 5 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(51,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000',NULL,NULL,'Task 8 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(52,NULL,'2017-02-22 00:00:00.000000','2017-02-11','2017-02-11','Task 1 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(53,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-09','Task 5 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(54,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000',NULL,NULL,'Task 8 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(55,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-05','Task 7 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(56,NULL,'2017-02-22 00:00:00.000000','2017-02-09','2017-02-09','Task 1 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(57,NULL,'2017-02-22 00:00:00.000000',NULL,NULL,'Task 9 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(58,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-07','Task 7 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(59,NULL,'2017-02-22 00:00:00.000000','2017-02-03','2017-02-03','Task 1 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(60,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000','2017-02-06','2017-02-05','Task 0 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(61,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-08','Task 3 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(62,NULL,'2017-02-22 00:00:00.000000',NULL,NULL,'Task 9 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(63,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000',NULL,NULL,'Task 8 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(64,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-06','Task 6 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(65,NULL,'2017-02-22 00:00:00.000000',NULL,'2017-02-04','Task 3 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(66,NULL,'2017-02-22 00:00:00.000000',NULL,NULL,'Task 9 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(67,NULL,'2017-02-22 00:00:00.000000','2017-02-08','2017-02-08','Task 1 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(69,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-22 00:00:00.000000','2017-02-11','2017-02-10','Task 0 for category @Office',NULL,1)
+INSERT INTO TTASKS VALUES(71,'Comentario de prueba para el usuario1','2017-02-22 00:00:00.000000','2017-02-22','2017-01-01','Tarea1 de prueba para el usuario1',NULL,6)
+INSERT INTO TTASKS VALUES(72,'Comentario de prueba para el usuario1','2017-02-22 00:00:00.000000',NULL,'2017-06-30','Tarea2 de prueba para el usuario1',NULL,6)
+INSERT INTO TTASKS VALUES(73,'Comentario de prueba para el usuario1','2017-02-22 00:00:00.000000',NULL,'2017-02-14','Tarea3 de prueba para el usuario1',8,6)
+INSERT INTO TTASKS VALUES(74,'Comentario de prueba para el usuario2','2017-02-22 00:00:00.000000',NULL,'2017-01-01','Tarea1 de prueba para el usuario2',NULL,7)
+INSERT INTO TTASKS VALUES(75,'Comentario de prueba para el usuario2','2017-02-22 00:00:00.000000',NULL,'2017-06-30','Tarea2 de prueba para el usuario2',NULL,7)
+INSERT INTO TTASKS VALUES(76,'Comentario de prueba para el usuario2','2017-02-22 00:00:00.000000',NULL,'2017-02-14','Tarea3 de prueba para el usuario2',9,7)
+INSERT INTO TTASKS VALUES(77,'Comentario de prueba para el usuario3','2017-02-22 00:00:00.000000',NULL,'2017-01-01','Tarea1 de prueba para el usuario3',NULL,8)
+INSERT INTO TTASKS VALUES(78,'Comentario de prueba para el usuario3','2017-02-22 00:00:00.000000',NULL,'2017-06-30','Tarea2 de prueba para el usuario3',NULL,8)
+INSERT INTO TTASKS VALUES(79,'Comentario de prueba para el usuario3','2017-02-22 00:00:00.000000',NULL,'2017-02-14','Tarea3 de prueba para el usuario3',10,8)
+COMMIT
+DELETE FROM TTASKS WHERE ID=1
+DELETE FROM TTASKS WHERE ID=2
+DELETE FROM TTASKS WHERE ID=3
+DELETE FROM TTASKS WHERE ID=4
+DELETE FROM TTASKS WHERE ID=5
+DELETE FROM TTASKS WHERE ID=6
+DELETE FROM TTASKS WHERE ID=7
+DELETE FROM TTASKS WHERE ID=8
+DELETE FROM TTASKS WHERE ID=9
+DELETE FROM TTASKS WHERE ID=10
+DELETE FROM TTASKS WHERE ID=11
+DELETE FROM TTASKS WHERE ID=12
+DELETE FROM TTASKS WHERE ID=13
+DELETE FROM TTASKS WHERE ID=14
+DELETE FROM TTASKS WHERE ID=15
+DELETE FROM TTASKS WHERE ID=16
+DELETE FROM TTASKS WHERE ID=17
+DELETE FROM TTASKS WHERE ID=18
+DELETE FROM TTASKS WHERE ID=19
+DELETE FROM TTASKS WHERE ID=20
+DELETE FROM TTASKS WHERE ID=21
+DELETE FROM TTASKS WHERE ID=22
+DELETE FROM TTASKS WHERE ID=23
+DELETE FROM TTASKS WHERE ID=24
+DELETE FROM TTASKS WHERE ID=25
+DELETE FROM TTASKS WHERE ID=26
+DELETE FROM TTASKS WHERE ID=27
+DELETE FROM TTASKS WHERE ID=28
+DELETE FROM TTASKS WHERE ID=29
+DELETE FROM TTASKS WHERE ID=30
+DELETE FROM TTASKS WHERE ID=31
+DELETE FROM TTASKS WHERE ID=32
+DELETE FROM TTASKS WHERE ID=33
+DELETE FROM TTASKS WHERE ID=34
+DELETE FROM TTASKS WHERE ID=35
+DELETE FROM TTASKS WHERE ID=36
+DELETE FROM TTASKS WHERE ID=37
+DELETE FROM TTASKS WHERE ID=38
+DELETE FROM TTASKS WHERE ID=39
+DELETE FROM TTASKS WHERE ID=40
+DELETE FROM TTASKS WHERE ID=41
+DELETE FROM TTASKS WHERE ID=42
+DELETE FROM TTASKS WHERE ID=43
+DELETE FROM TTASKS WHERE ID=44
+DELETE FROM TTASKS WHERE ID=45
+DELETE FROM TTASKS WHERE ID=46
+DELETE FROM TTASKS WHERE ID=47
+DELETE FROM TTASKS WHERE ID=48
+DELETE FROM TTASKS WHERE ID=49
+DELETE FROM TTASKS WHERE ID=50
+DELETE FROM TTASKS WHERE ID=51
+DELETE FROM TTASKS WHERE ID=52
+DELETE FROM TTASKS WHERE ID=53
+DELETE FROM TTASKS WHERE ID=54
+DELETE FROM TTASKS WHERE ID=55
+DELETE FROM TTASKS WHERE ID=56
+DELETE FROM TTASKS WHERE ID=57
+DELETE FROM TTASKS WHERE ID=58
+DELETE FROM TTASKS WHERE ID=59
+DELETE FROM TTASKS WHERE ID=60
+DELETE FROM TTASKS WHERE ID=61
+DELETE FROM TTASKS WHERE ID=62
+DELETE FROM TTASKS WHERE ID=63
+DELETE FROM TTASKS WHERE ID=64
+DELETE FROM TTASKS WHERE ID=65
+DELETE FROM TTASKS WHERE ID=66
+DELETE FROM TTASKS WHERE ID=67
+DELETE FROM TTASKS WHERE ID=69
+DELETE FROM TTASKS WHERE ID=71
+DELETE FROM TTASKS WHERE ID=72
+DELETE FROM TTASKS WHERE ID=73
+DELETE FROM TTASKS WHERE ID=74
+DELETE FROM TTASKS WHERE ID=75
+DELETE FROM TTASKS WHERE ID=76
+DELETE FROM TTASKS WHERE ID=77
+DELETE FROM TTASKS WHERE ID=78
+DELETE FROM TTASKS WHERE ID=79
+INSERT INTO TTASKS VALUES(1,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-23 00:00:00.000000','2017-02-11','2017-02-11','Task 0 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(2,NULL,'2017-02-24 00:00:00.000000',NULL,'2017-02-11','Task 6 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(3,NULL,'2017-02-25 00:00:00.000000',NULL,NULL,'Task 9 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(4,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-26 00:00:00.000000','2017-02-07','2017-02-07','Task 0 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(5,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-02-27 00:00:00.000000',NULL,'2017-02-05','Task 4 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(6,NULL,'2017-02-28 00:00:00.000000',NULL,'2017-02-03','Task 3 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(7,NULL,'2017-03-01 00:00:00.000000',NULL,'2017-02-10','Task 7 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(8,NULL,'2017-03-02 00:00:00.000000',NULL,'2017-02-02','Task 7 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(9,NULL,'2017-03-03 00:00:00.000000',NULL,NULL,'Task 9 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(10,NULL,'2017-03-04 00:00:00.000000','2017-02-05','2017-02-05','Task 1 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(11,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-05 00:00:00.000000',NULL,'2017-02-11','Task 4 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(12,NULL,'2017-03-06 00:00:00.000000',NULL,'2017-02-10','Task 5 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(13,NULL,'2017-03-07 00:00:00.000000',NULL,'2017-02-08','Task 6 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(14,NULL,'2017-03-08 00:00:00.000000',NULL,'2017-02-06','Task 5 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(15,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-09 00:00:00.000000',NULL,NULL,'Task 8 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(16,NULL,'2017-03-10 00:00:00.000000',NULL,'2017-02-08','Task 6 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(17,NULL,'2017-03-11 00:00:00.000000',NULL,'2017-02-04','Task 7 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(18,NULL,'2017-03-12 00:00:00.000000',NULL,'2017-02-10','Task 5 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(19,NULL,'2017-03-13 00:00:00.000000',NULL,'2017-02-10','Task 3 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(20,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-14 00:00:00.000000','2017-02-10','2017-02-10','Task 0 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(21,NULL,'2017-03-15 00:00:00.000000','2017-02-06','2017-02-05','Task 1 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(22,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-16 00:00:00.000000',NULL,'2017-02-11','Task 4 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(23,NULL,'2017-03-17 00:00:00.000000','2017-02-04','2017-02-03','Task 2 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(24,NULL,'2017-03-18 00:00:00.000000',NULL,NULL,'Task 9 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(25,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-19 00:00:00.000000',NULL,'2017-02-11','Task 4 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(26,NULL,'2017-03-20 00:00:00.000000',NULL,'2017-02-02','Task 3 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(27,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-21 00:00:00.000000',NULL,'2017-02-02','Task 4 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(28,NULL,'2017-03-22 00:00:00.000000','2017-02-04','2017-02-03','Task 2 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(29,NULL,'2017-03-23 00:00:00.000000',NULL,'2017-02-02','Task 5 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(30,NULL,'2017-03-24 00:00:00.000000',NULL,'2017-02-04','Task 6 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(31,NULL,'2017-03-25 00:00:00.000000',NULL,'2017-02-07','Task 7 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(32,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-03-26 00:00:00.000000','2017-02-10','2017-02-10','Task 0 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(33,NULL,'2017-03-27 00:00:00.000000',NULL,'2017-02-08','Task 6 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(34,NULL,'2017-03-28 00:00:00.000000',NULL,'2017-02-07','Task 7 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(35,NULL,'2017-03-29 00:00:00.000000','2017-02-06','2017-02-06','Task 2 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(36,NULL,'2017-03-30 00:00:00.000000','2017-02-08','2017-02-08','Task 1 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(37,NULL,'2017-03-31 00:00:00.000000','2017-02-06','2017-02-05','Task 2 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(38,NULL,'2017-04-01 00:00:00.000000','2017-02-04','2017-02-04','Task 2 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(39,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-04-02 00:00:00.000000',NULL,NULL,'Task 8 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(40,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-04-03 00:00:00.000000',NULL,NULL,'Task 8 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(41,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-04-04 00:00:00.000000','2017-02-10','2017-02-09','Task 0 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(42,NULL,'2017-04-05 00:00:00.000000',NULL,NULL,'Task 9 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(43,NULL,'2017-04-06 00:00:00.000000',NULL,'2017-02-05','Task 3 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(44,NULL,'2017-04-07 00:00:00.000000','2017-02-11','2017-02-11','Task 2 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(45,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-04-08 00:00:00.000000',NULL,'2017-02-06','Task 4 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(46,NULL,'2017-04-09 00:00:00.000000',NULL,'2017-02-09','Task 5 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(47,NULL,'2017-04-10 00:00:00.000000',NULL,'2017-02-11','Task 3 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(48,NULL,'2017-04-11 00:00:00.000000','2017-02-08','2017-02-07','Task 2 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(49,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-04-12 00:00:00.000000',NULL,'2017-02-03','Task 4 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(50,NULL,'2017-04-13 00:00:00.000000',NULL,'2017-02-10','Task 5 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(51,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-04-14 00:00:00.000000',NULL,NULL,'Task 8 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(52,NULL,'2017-04-15 00:00:00.000000','2017-02-11','2017-02-11','Task 1 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(53,NULL,'2017-04-16 00:00:00.000000',NULL,'2017-02-09','Task 5 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(54,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-04-17 00:00:00.000000',NULL,NULL,'Task 8 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(55,NULL,'2017-04-18 00:00:00.000000',NULL,'2017-02-05','Task 7 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(56,NULL,'2017-04-19 00:00:00.000000','2017-02-09','2017-02-09','Task 1 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(57,NULL,'2017-04-20 00:00:00.000000',NULL,NULL,'Task 9 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(58,NULL,'2017-04-21 00:00:00.000000',NULL,'2017-02-07','Task 7 for category Job projects',6,1)
+INSERT INTO TTASKS VALUES(59,NULL,'2017-04-22 00:00:00.000000','2017-02-03','2017-02-03','Task 1 for category @Office',2,1)
+INSERT INTO TTASKS VALUES(60,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-04-23 00:00:00.000000','2017-02-06','2017-02-05','Task 0 for category Errants',1,1)
+INSERT INTO TTASKS VALUES(61,NULL,'2017-04-24 00:00:00.000000',NULL,'2017-02-08','Task 3 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(62,NULL,'2017-04-25 00:00:00.000000',NULL,NULL,'Task 9 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(63,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-04-26 00:00:00.000000',NULL,NULL,'Task 8 for category Waiting event',4,1)
+INSERT INTO TTASKS VALUES(64,NULL,'2017-04-27 00:00:00.000000',NULL,'2017-02-06','Task 6 for category @Home',7,1)
+INSERT INTO TTASKS VALUES(65,NULL,'2017-04-28 00:00:00.000000',NULL,'2017-02-04','Task 3 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(66,NULL,'2017-04-29 00:00:00.000000',NULL,NULL,'Task 9 for category Calls',5,1)
+INSERT INTO TTASKS VALUES(67,NULL,'2017-04-30 00:00:00.000000','2017-02-08','2017-02-08','Task 1 for category Personal projects',3,1)
+INSERT INTO TTASKS VALUES(69,'Aenean vehicula mattis dui. Praesent vel risus sed tellus aliquet aliquam. Integer bibendum eros lorem, ut feugiat justo luctus eu. Praesent pharetra tincidunt scelerisque. ','2017-05-02 00:00:00.000000','2017-02-11','2017-02-10','Task 0 for category @Office',NULL,1)
+INSERT INTO TTASKS VALUES(71,'Comentario de prueba para el usuario1','2017-05-04 00:00:00.000000','2017-02-22','2017-01-01','Tarea1 de prueba para el usuario1',NULL,6)
+INSERT INTO TTASKS VALUES(72,'Comentario de prueba para el usuario1','2017-05-05 00:00:00.000000',NULL,'2017-06-30','Tarea2 de prueba para el usuario1',NULL,6)
+INSERT INTO TTASKS VALUES(73,'Comentario de prueba para el usuario1','2017-05-06 00:00:00.000000',NULL,'2017-02-14','Tarea3 de prueba para el usuario1',8,6)
+INSERT INTO TTASKS VALUES(74,'Comentario de prueba para el usuario2','2017-05-07 00:00:00.000000',NULL,'2017-01-01','Tarea1 de prueba para el usuario2',NULL,7)
+INSERT INTO TTASKS VALUES(75,'Comentario de prueba para el usuario2','2017-05-08 00:00:00.000000',NULL,'2017-06-30','Tarea2 de prueba para el usuario2',NULL,7)
+INSERT INTO TTASKS VALUES(76,'Comentario de prueba para el usuario2','2017-05-09 00:00:00.000000',NULL,'2017-02-14','Tarea3 de prueba para el usuario2',9,7)
+INSERT INTO TTASKS VALUES(77,'Comentario de prueba para el usuario3','2017-05-10 00:00:00.000000',NULL,'2017-01-01','Tarea1 de prueba para el usuario3',NULL,8)
+INSERT INTO TTASKS VALUES(78,'Comentario de prueba para el usuario3','2017-05-11 00:00:00.000000',NULL,'2017-06-30','Tarea2 de prueba para el usuario3',NULL,8)
+INSERT INTO TTASKS VALUES(79,'Comentario de prueba para el usuario3','2017-05-12 00:00:00.000000',NULL,'2017-02-14','Tarea3 de prueba para el usuario3',10,8)
+COMMIT
+alter table tcategories add column created timestamp
+DELETE FROM TCATEGORIES WHERE ID=1
+DELETE FROM TCATEGORIES WHERE ID=2
+DELETE FROM TCATEGORIES WHERE ID=3
+DELETE FROM TCATEGORIES WHERE ID=4
+DELETE FROM TCATEGORIES WHERE ID=5
+DELETE FROM TCATEGORIES WHERE ID=6
+DELETE FROM TCATEGORIES WHERE ID=7
+DELETE FROM TCATEGORIES WHERE ID=8
+DELETE FROM TCATEGORIES WHERE ID=9
+DELETE FROM TCATEGORIES WHERE ID=10
+INSERT INTO TCATEGORIES VALUES(1,'Errants',1,'2017-02-22 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(2,'@Office',1,'2017-02-22 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(3,'Personal projects',1,'2017-02-22 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(4,'Waiting event',1,'2017-02-22 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(5,'Calls',1,'2017-02-22 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(6,'Job projects',1,'2017-02-22 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(7,'@Home',1,'2017-02-22 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(8,'Categoria de prueba',6,'2017-02-22 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(9,'Categoria de prueba',7,'2017-02-22 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(10,'Categoria de prueba',8,'2017-02-22 00:00:00.000000')
+COMMIT
+DELETE FROM TCATEGORIES WHERE ID=1
+DELETE FROM TCATEGORIES WHERE ID=2
+DELETE FROM TCATEGORIES WHERE ID=3
+DELETE FROM TCATEGORIES WHERE ID=4
+DELETE FROM TCATEGORIES WHERE ID=5
+DELETE FROM TCATEGORIES WHERE ID=6
+DELETE FROM TCATEGORIES WHERE ID=7
+DELETE FROM TCATEGORIES WHERE ID=8
+DELETE FROM TCATEGORIES WHERE ID=9
+DELETE FROM TCATEGORIES WHERE ID=10
+INSERT INTO TCATEGORIES VALUES(1,'Errants',1,'2017-02-23 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(2,'@Office',1,'2017-02-24 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(3,'Personal projects',1,'2017-02-25 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(4,'Waiting event',1,'2017-02-26 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(5,'Calls',1,'2017-02-27 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(6,'Job projects',1,'2017-02-28 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(7,'@Home',1,'2017-03-01 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(8,'Categoria de prueba',6,'2017-03-02 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(9,'Categoria de prueba',7,'2017-03-03 00:00:00.000000')
+INSERT INTO TCATEGORIES VALUES(10,'Categoria de prueba',8,'2017-03-04 00:00:00.000000')
+COMMIT
+/*C7*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C8*/SET SCHEMA PUBLIC
+INSERT INTO TTASKS VALUES(80,NULL,'2017-02-22 20:52:38.358000',NULL,NULL,'asfksadlf',NULL,6)
+COMMIT
+INSERT INTO TTASKS VALUES(81,NULL,'2017-02-22 20:52:47.831000',NULL,NULL,'asdfasdffasdf',NULL,6)
+COMMIT
+DELETE FROM TTASKS WHERE ID=80
+INSERT INTO TTASKS VALUES(80,NULL,'2017-02-22 20:52:38.358000','2017-02-22',NULL,'asfksadlf',NULL,6)
+COMMIT
+DELETE FROM TTASKS WHERE ID=81
+INSERT INTO TTASKS VALUES(81,NULL,'2017-02-22 20:52:47.831000','2017-02-22',NULL,'asdfasdffasdf',NULL,6)
+COMMIT
+INSERT INTO TTASKS VALUES(82,NULL,'2017-02-22 20:56:07.584000',NULL,NULL,'lkjdsfldsa',NULL,6)
+COMMIT
+INSERT INTO TTASKS VALUES(83,NULL,'2017-02-22 20:56:17.930000',NULL,NULL,'sdf',NULL,6)
+COMMIT
+INSERT INTO TTASKS VALUES(84,NULL,'2017-02-22 20:59:25.099000',NULL,NULL,'fggfg',NULL,6)
+COMMIT
+DELETE FROM TTASKS WHERE ID=84
+INSERT INTO TTASKS VALUES(84,NULL,'2017-02-22 20:59:25.099000','2017-02-22',NULL,'fggfg',NULL,6)
+COMMIT
+DELETE FROM TTASKS WHERE ID=83
+INSERT INTO TTASKS VALUES(83,NULL,'2017-02-22 20:56:17.930000','2017-02-22',NULL,'sdf',NULL,6)
+COMMIT
+DELETE FROM TTASKS WHERE ID=82
+INSERT INTO TTASKS VALUES(82,NULL,'2017-02-22 20:56:07.584000','2017-02-22',NULL,'lkjdsfldsa',NULL,6)
+COMMIT
+INSERT INTO TTASKS VALUES(85,NULL,'2017-02-22 21:22:32.332000',NULL,NULL,'prueba',NULL,1)
+COMMIT
+INSERT INTO TTASKS VALUES(86,NULL,'2017-02-22 21:22:44.683000',NULL,NULL,'d',NULL,1)
+COMMIT
+INSERT INTO TTASKS VALUES(87,NULL,'2017-02-22 21:22:48.603000',NULL,NULL,'d',NULL,1)
+COMMIT
+DISCONNECT
+/*C9*/SET SCHEMA PUBLIC
+INSERT INTO TTASKS VALUES(88,NULL,'2017-02-22 21:25:38.793000',NULL,NULL,'as',NULL,1)
+COMMIT
+INSERT INTO TTASKS VALUES(89,NULL,'2017-02-22 21:29:02.559000',NULL,NULL,'as',NULL,1)
+COMMIT
+INSERT INTO TTASKS VALUES(90,NULL,'2017-02-22 21:29:09.990000',NULL,NULL,'sasasdf',NULL,1)
+COMMIT
+DISCONNECT
+/*C10*/SET SCHEMA PUBLIC
+DELETE FROM TTASKS WHERE ID=29
+INSERT INTO TTASKS VALUES(29,NULL,'2017-03-23 00:00:00.000000','2017-02-22','2017-02-02','Task 5 for category @Home',7,1)
+COMMIT
+DELETE FROM TTASKS WHERE ID=26
+INSERT INTO TTASKS VALUES(26,NULL,'2017-03-20 00:00:00.000000','2017-02-22','2017-02-02','Task 3 for category @Home',7,1)
+COMMIT
+DELETE FROM TTASKS WHERE ID=85
+INSERT INTO TTASKS VALUES(85,NULL,'2017-02-22 21:22:32.332000','2017-02-22',NULL,'prueba',NULL,1)
+COMMIT
+DELETE FROM TTASKS WHERE ID=86
+INSERT INTO TTASKS VALUES(86,NULL,'2017-02-22 21:22:44.683000','2017-02-22',NULL,'d',NULL,1)
+COMMIT
+DELETE FROM TTASKS WHERE ID=87
+INSERT INTO TTASKS VALUES(87,NULL,'2017-02-22 21:22:48.603000','2017-02-22',NULL,'d',NULL,1)
+COMMIT
+DELETE FROM TTASKS WHERE ID=88
+INSERT INTO TTASKS VALUES(88,NULL,'2017-02-22 21:25:38.793000','2017-02-22',NULL,'as',NULL,1)
+COMMIT

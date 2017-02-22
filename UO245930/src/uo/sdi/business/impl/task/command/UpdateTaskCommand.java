@@ -19,7 +19,7 @@ public class UpdateTaskCommand implements Command<Void> {
 	public Void execute() throws BusinessException {
 		TaskCheck.titleIsNotNull(task);
 		TaskCheck.titleIsNotEmpty(task);
-		if (task.getCategory().getId() != null) {
+		if (task.getCategory() != null) {
 			TaskCheck.categoryExists(task);
 		}
 
@@ -27,8 +27,7 @@ public class UpdateTaskCommand implements Command<Void> {
 		BusinessCheck.isNotNull(previous, "Task does not exist");
 		checktaskAlreadyExist(previous);
 		checkUserNotChanged(previous);
-
-		task.setCreated(previous.getCreated()); // change ignored
+		
 		Jpa.getManager().merge(task);
 		return null;
 	}

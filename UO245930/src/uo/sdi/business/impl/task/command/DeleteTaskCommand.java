@@ -15,9 +15,11 @@ public class DeleteTaskCommand implements Command<Void> {
 	}
 
 	@Override
-	public Void execute() throws BusinessException {
+	public Void execute() throws BusinessException {		
 		Task t = Jpa.getManager().find(Task.class, id);
 		BusinessCheck.isNotNull(t, "Task does not exist");
+		
+		t.desvincularTarea();
 
 		Jpa.getManager().remove(t);
 		return null;

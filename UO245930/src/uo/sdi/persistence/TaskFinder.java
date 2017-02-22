@@ -35,7 +35,9 @@ public class TaskFinder {
 	}
 
 	public static List<Task> findTodayByUserId(Long userId) {
-		return null;
+		return Jpa.getManager()
+				.createNamedQuery("Task.findTodayUserId", Task.class)
+				.setParameter(1, userId).getResultList();
 	}
 
 	public static List<Task> findWeekByUserId(Long userId) {
@@ -51,6 +53,7 @@ public class TaskFinder {
 	}
 
 	public static List<Task> findFinishedInboxByUserId(Long userId) {
-		return null;
+		return Jpa.getManager().createNamedQuery("Task.findFinishedInboxByUserId", Task.class)
+				.setParameter(1, userId).getResultList();
 	}
 }

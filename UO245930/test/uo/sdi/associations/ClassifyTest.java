@@ -17,7 +17,8 @@ public class ClassifyTest {
 	@Before
 	public void setUp() throws BusinessException {
 		category = new Category("category de prueba");
-		task = new Task("task de prueba", null);
+//		task = new Task("task de prueba", null);
+		task = null;
 		Association.Classify.link(category, task);
 	}
 	

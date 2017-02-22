@@ -1,7 +1,10 @@
 package uo.sdi.model;
 
 import java.util.Date;
+
 import javax.persistence.*;
+
+import alb.util.date.DateUtil;
 
 @Entity
 @Table(name = "TTasks")
@@ -14,8 +17,8 @@ public class Task {
 	private String title;
 	private String comments;
 
-	@Temporal(TemporalType.DATE)
-	private Date created;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created = DateUtil.now();
 
 	@Temporal(TemporalType.DATE)
 	private Date planned;
@@ -31,10 +34,10 @@ public class Task {
 
 	Task() {
 	}
-
-	public Task(String title, Date created) {
-		setTitle(title);
-	}
+	
+	public Task(User user) {
+		Association.Perform.link(user, this);
+	}	
 
 	public Long getId() {
 		return id;
@@ -44,7 +47,7 @@ public class Task {
 		return title;
 	}
 
-	private void setTitle(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
@@ -58,10 +61,6 @@ public class Task {
 
 	public Date getCreated() {
 		return created;
-	}
-
-	public void setCreated(Date created) {
-		this.created = created;
 	}
 
 	public Date getPlanned() {
@@ -95,12 +94,20 @@ public class Task {
 	protected void _setCategory(Category category) {
 		this.category = category;
 	}
+	
+	public void desvincularTarea () {
+		Association.Perform.unlink(user, this);
+		
+		if (category != null)
+			Association.Classify.unlink(category, this);
+	}
 
 	@Override
 	public String toString() {
-		return "Task [title=" + title + ", comments=" + comments + ", created="
-				+ created + ", planned=" + planned + ", finished=" + finished
-				+ "]";
+		return "Task [id=" + id + ", title=" + title + ", comments=" + comments
+				+ ", created=" + created + ", planned=" + planned
+				+ ", finished=" + finished + ", user=" + user + ", category="
+				+ category + "]";
 	}
 
 	@Override
@@ -108,7 +115,7 @@ public class Task {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((created == null) ? 0 : created.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -126,10 +133,10 @@ public class Task {
 				return false;
 		} else if (!created.equals(other.created))
 			return false;
-		if (title == null) {
-			if (other.title != null)
+		if (user == null) {
+			if (other.user != null)
 				return false;
-		} else if (!title.equals(other.title))
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}

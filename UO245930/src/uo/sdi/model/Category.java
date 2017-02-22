@@ -1,7 +1,10 @@
 package uo.sdi.model;
 
 import java.util.*;
+
 import javax.persistence.*;
+
+import alb.util.date.DateUtil;
 
 @Entity
 @Table(name = "TCategories")
@@ -12,6 +15,9 @@ public class Category {
 	private Long id;
 
 	private String name;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created = DateUtil.now();
 
 	@ManyToOne
 	private User user;
@@ -37,6 +43,10 @@ public class Category {
 	private void setName(String name) {
 		this.name = name;
 	}
+	
+	public Date getCreated() {
+		return created;
+	}	
 
 	public User getUser() {
 		return user;
@@ -56,14 +66,16 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [name=" + name + "]";
+		return "Category [id=" + id + ", name=" + name + ", created=" + created
+				+ ", user=" + user + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((created == null) ? 0 : created.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -76,10 +88,15 @@ public class Category {
 		if (getClass() != obj.getClass())
 			return false;
 		Category other = (Category) obj;
-		if (name == null) {
-			if (other.name != null)
+		if (created == null) {
+			if (other.created != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!created.equals(other.created))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}

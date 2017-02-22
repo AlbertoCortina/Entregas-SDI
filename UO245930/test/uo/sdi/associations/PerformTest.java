@@ -17,7 +17,8 @@ public class PerformTest {
 	@Before
 	public void setUp() throws BusinessException {
 		user = new User("user de prueba");
-		task = new Task("task de prueba", null);
+//		task = new Task("task de prueba", null);
+		task = null;
 		Association.Perform.link(user, task);
 	}
 	

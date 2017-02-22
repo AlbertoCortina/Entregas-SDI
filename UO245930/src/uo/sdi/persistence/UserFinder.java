@@ -27,4 +27,8 @@ public class UserFinder {
 				.getResultList();
 		return users.isEmpty() ? null : users.get(0);
 	}
+
+	public static User findById(Long id) {
+		return Jpa.getManager().find(User.class, id);
+	}
 }

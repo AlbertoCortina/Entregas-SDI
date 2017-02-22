@@ -1,0 +1,20 @@
+TAREAS INBOX
+- fecha finished == null
+- category = null
+- fecha planead mas antiguo a mas reciente
+- si esta retrasada planeada <= hoy -> rojo
+- boton/checkbox me permita ver tareas finalizadas (finished != null) y aparecen 
+primero recientes y que no esten en rojo
+
+TAREAS HOY
+- fecha planead <= hoy
+- las retrasdas muestran la fecha prevista
+- las retrasdas aparecen en rojo
+- se ordenan por categoria de usuario y fecha planeada (mas antigua a mas reciente)
+
+TAREAS POR CATEGORIA
+- se muestran todas
+- ordenadas de mas antiguo a mas reciente
+- en rojo si estan retradas
+- boton/checkbox me permita ver tareas finalizadas (finished != null) y aparecen 
+primero recientes y que no esten en rojo

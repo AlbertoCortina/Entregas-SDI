@@ -53,8 +53,20 @@
 	
 	<h1>Listados</h1>
 		<ul>
-			<li><a href="listarTareasInbox">Listado de tareas Hoy</a></li>
-			<li><a href="listarTareasHoy">Listado de tareas Inbox</a></li>
+			<li>
+				<form action="listarTareasInbox">
+					<table>
+						<tr>						
+							<td>Listado de tareas Inbox</td>							
+							<td><label><input name="checkBox" type="checkBox" value="mostrarFinalizadas" >Mostrar finalizadas</label></td>
+							<td><input type="submit" value="Ver tareas"></td>
+						</tr>
+					</table>					
+				</form>			
+			</li>
+					
+			<li><a href="listarTareasHoy">Listado de tareas Hoy</a></li>
+			
 			<li><a href="listarCategorias?id=<jsp:getProperty property="id" name="user"/>">Listado de categorias</a></li>	
 		</ul>		
 	
