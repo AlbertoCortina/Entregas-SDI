@@ -4,7 +4,7 @@
 <head>
 <title>TaskManager - Inicie sesión</title>
 <body>
-	<form action="validarse" method="post" name="validarse_form_name">
+	<form  id="form_validarse" action="validarse" method="post" name="validarse_form_name">
 
 		<center>
 			<h1>Inicie sesión</h1>
