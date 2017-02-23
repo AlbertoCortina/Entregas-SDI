@@ -65,9 +65,9 @@
 				</form>			
 			</li>
 					
-			<li><a href="listarTareasHoy">Listado de tareas Hoy</a></li>
+			<li><a id="listar_tareas_hoy_link" href="listarTareasHoy">Listado de tareas Hoy</a></li>
 			
-			<li><a href="listarCategorias?id=<jsp:getProperty property="id" name="user"/>">Listado de categorias</a></li>	
+			<li><a id="listar_categorias_link" href="listarCategorias?id=<jsp:getProperty property="id" name="user"/>">Listado de categorias</a></li>	
 		</ul>		
 	
 	<h1>Otras opciones</h1>

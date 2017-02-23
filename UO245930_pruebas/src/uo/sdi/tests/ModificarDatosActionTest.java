@@ -19,6 +19,7 @@ public class ModificarDatosActionTest {
     	user.setTextField("nombreUsuario", "john");
 		user.setTextField("password", "john123");
 		user.submit();
+		user.clickLink("");
     }
     
     private void loginWithAdmin(){
@@ -30,6 +31,16 @@ public class ModificarDatosActionTest {
     @Test
 	public void EXITOUsuarioModificarDatosTest() {
     	loginWithUsuario();
-    	
+    	user.setTextField("email", "john_j@mail.com");
+    	user.submit();
+    	user.assertTextInElement("email", "john_j@mail.com");
     }
+    
+    @Test
+   	public void EXITOAdminModificarDatosTest() {
+       	loginWithAdmin();
+       	user.setTextField("email", "admin_a@system.gtd");
+       	user.submit();
+       	user.assertTextInElement("email", "admin_a@system.gtd");
+       }
 }

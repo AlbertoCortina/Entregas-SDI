@@ -53,7 +53,7 @@
 	<h1>Listados</h1>
 	<ul>
 		<li>
-			<a href="listarUsuarios">Lista de usuarios registrados</a>
+			<a id="listar_usuarios_link" href="listarUsuarios">Lista de usuarios registrados</a>
 		</li>
 	</ul>
 	
