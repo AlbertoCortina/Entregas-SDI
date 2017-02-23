@@ -6,14 +6,11 @@ import uo.sdi.business.CategoryService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.category.command.CreateCategoryCommand;
 import uo.sdi.business.impl.category.command.DeleteCategoryCommand;
-import uo.sdi.business.impl.category.command.DuplicateCategoryCommand;
 import uo.sdi.business.impl.category.command.FindCategoryById;
 import uo.sdi.business.impl.category.command.FindCategoryByUserId;
 import uo.sdi.business.impl.category.command.UpdateCategoryCommand;
-import uo.sdi.business.impl.command.Command;
 import uo.sdi.business.impl.command.CommandExecutor;
 import uo.sdi.model.Category;
-import uo.sdi.persistence.util.Jpa;
 
 public class CategoryServiceImpl implements CategoryService {
 

@@ -19,10 +19,6 @@ public class ListarCategoriasActionTest {
 		user.setTextField("password", "john123");
 		user.submit();
     }
-    
-    private void loginWithUsuario(){
-    	
-    }
 	
 	@Test
 	public void test() {

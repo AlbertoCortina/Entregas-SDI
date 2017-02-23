@@ -19,7 +19,7 @@
 				<tr>
 					<td><input type="hidden" name="checkBox" value="${checkBox}"></td>
 					<td>Nombre de la tarea:</td>
-					<td><input type="text" name="nombreTarea" required></td>
+					<td><input type="text" name="nombreTarea"></td>
 					<td><input type="submit" value="Añadir tarea"></td>
 				</tr>			
 			</table>			

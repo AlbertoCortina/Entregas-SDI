@@ -14,22 +14,22 @@
 		<table align="center">
 			<tr>
 				<td align="right">Login: </td>
-				<td><input type="text" name="login" align="left" size="15" required></td>
+				<td><input type="text" name="login" align="left" size="15" ></td>
 			</tr>
 				
 			<tr>
 				<td align="right">Email: </td>
-				<td><input type="text" name="email" align="left" size="15" required></td>
+				<td><input type="text" name="email" align="left" size="15" ></td>
 			</tr>
 				
 			<tr>
 				<td align="right">Password: </td>
-				<td><input type="password" name="password" align="left" size="15" required></td>
+				<td><input type="password" name="password" align="left" size="15" ></td>
 			</tr>
 				
 			<tr>
 				<td align="right">Repetir password: </td>
-				<td><input type="password" name="passwordRepetida" align="left" size="15"required></td>
+				<td><input type="password" name="passwordRepetida" align="left" size="15"></td>
 			</tr>
 					
 			<tr>
