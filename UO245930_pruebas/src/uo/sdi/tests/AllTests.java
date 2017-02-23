@@ -10,6 +10,10 @@ import org.junit.runners.Suite.SuiteClasses;
 	RegistrarseActionTest.class,
 	RealizarRegistroActionTest.class,
 	ModificarDatosActionTest.class,
+	ListarUsuariosActionTest.class,
+	ListarCategoriasActionTest.class,
+	CerrarSesionActionTest.class,
+	AñadirCategoriaActionTest.class,
 	CerrarSesionActionTest.class
 })
 public class AllTests {

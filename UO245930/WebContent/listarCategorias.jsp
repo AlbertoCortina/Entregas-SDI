@@ -16,14 +16,14 @@
 		<table align="center">
 			<tr>
 				<td align="right">Nombre de la categoría: </td>
-				<td><input type="text" name="nombreCategoria" align="left" size="15" required></td>
+				<td><input type="text" name="nombreCategoria" align="left" size="15"></td>
 				<td><input type="submit" value="Añadir categoria"></td>
 			</tr>			
 		</table>		
 	</form>	
 	<br>
 	<br>
-	<table border="1" align="center">
+	<table id="categorias_table" border="1" align="center">
 		<tr>
 			<th>ID</th>
 			<th>Nombre</th>

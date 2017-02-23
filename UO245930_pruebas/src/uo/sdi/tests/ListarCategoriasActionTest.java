@@ -1,6 +1,5 @@
 package uo.sdi.tests;
 
-import static org.junit.Assert.*;
 import net.sourceforge.jwebunit.junit.WebTester;
 
 import org.junit.Before;
@@ -21,8 +20,10 @@ public class ListarCategoriasActionTest {
     }
 	
 	@Test
-	public void test() {
-		
+	public void ListarCategoriastest() {
+		user.assertLinkPresent("listar_categorias_link");
+		user.clickLink("listar_categorias_link");
+		user.assertTitleEquals("TaskManager - Listado de categorías");
 	}
 
 }

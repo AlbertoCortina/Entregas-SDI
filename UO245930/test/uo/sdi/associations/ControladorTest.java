@@ -1,12 +1,10 @@
 package uo.sdi.associations;
 
-import static org.junit.Assert.*;
 import net.sourceforge.jwebunit.junit.WebTester;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static net.sourceforge.jwebunit.junit.JWebUnit.*;
 
 public class ControladorTest {
     

@@ -13,7 +13,7 @@
 		</center>
 		<hr>
 		<br>
-		<table border="1" align="center">
+		<table id="lista_usuarios_table" border="1" align="center">
 			<tr>
 				<th>Id</th>			
 				<th>Login</th>
@@ -27,7 +27,7 @@
 					<td>${user.login}</td>
 					<td>${user.email}</td>
 					<td>${user.isAdmin}</td>					
-					<td><a id="habilitar/Deshabilitar_link_id" href="cambiarEstado?id=${user.id}&status=${user.status}">${user.status}</a></td>
+					<td><a id="habilitar/Deshabilitar_link_id_${user.login}" href="cambiarEstado?id=${user.id}&status=${user.status}">${user.status}</a></td>
 				</tr>
 			</c:forEach>
 		</table>		
