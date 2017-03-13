@@ -28,6 +28,8 @@ public interface TaskDao extends GenericDao<Task, Long> {
 	 */
 	int deleteAllFromCategory(Long catId);
 
+	int deleteAll();
+	
 	/**
 	 * @param userId
 	 * @return All not finished tasks in the user's inbox (without category)

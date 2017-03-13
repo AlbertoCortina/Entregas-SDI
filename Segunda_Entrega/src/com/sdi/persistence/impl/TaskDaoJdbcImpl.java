@@ -98,6 +98,11 @@ public class TaskDaoJdbcImpl implements TaskDao {
 	public int deleteAllFromCategory(Long catId) {
 		return jdbcTemplate.execute("TASK_DELETE_BY_CATEGORY_ID", catId);
 	}
+	
+	@Override
+	public int deleteAll() {
+		return jdbcTemplate.execute("TASK_DELETEALL");
+	}
 
 	@Override
 	public List<Task> findByUserId(Long userId) {

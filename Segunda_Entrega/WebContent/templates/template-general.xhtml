@@ -27,26 +27,36 @@
 					</tr>
 				</table>
 				<br/>
-			<ui:insert name="barraMenu">
+			
 				<p:menubar>
-					<p:menuitem value="#{msgs.tituloInicio}" action="notaneitor"></p:menuitem>
-					<p:submenu label="#{msgs.tituloOpciones}" icon="ui-icon-document">
-						<p:menuitem value="#{msgs.enlaceAlta}" action="alta" actionListener="#{controller.iniciaAlumno}"></p:menuitem>
-						<p:separator/>
-						<p:menuitem value="#{msgs.enlaceListado}" action="#{controller.listado}"></p:menuitem>
-					</p:submenu>
-					<p:submenu style="float:right" label="#{msgs.textoIdioma}" icon="ui-icon-document">
+					<ui:insert name="barraMenu_Home">					
+						<p:menuitem value="#{msgs.tituloInicio}" action="home" icon="ui-icon-home"></p:menuitem>
+					</ui:insert>
+					
+					<ui:insert name="barraMenu_Opciones"></ui:insert>					
+					
+					<ui:insert name="barraMenu_Usuario">
+						<f:facet name="options">
+							<div id="nombreUsuario" style="padding: 0.4em 0.3em;line-height: 16px;">Usuario: #{userSession.login}&nbsp;&nbsp;&nbsp;</div>
+						</f:facet>
+					</ui:insert>
+					
+					<p:submenu style="float:right" label="#{msgs.textoIdioma}" icon="ui-icon-flag">
 						<p:menuitem value="#{msgs.enlaceIdiomaES}" actionListener="#{settings.setSpanish}" update="@all" />
 						<p:menuitem value="#{msgs.enlaceIdiomaEN}" actionListener="#{settings.setEnglish}" update="@all" /> 
 					</p:submenu>
 				</p:menubar>
-			</ui:insert>			
+					
 		</h:form>
 		<br/>
+		
+		<ui:insert name="mensajes">
+			<p:messages id="mensajes" showDetail="true" globalOnly="true"/>
+		</ui:insert>
 
-		<ui:insert name="cuerpo">#{msgs.tituloDefectoCuerpo}</ui:insert>
-
-		<ui:insert name="pie">#{msgs.tituloPie}</ui:insert>
+		<ui:insert name="cuerpo">#{msgs.tituloDefectoCuerpo}</ui:insert>				
+		
+		<ui:insert name="pie"></ui:insert>
 
 	</h:body>
 <!--  </f:view>-->

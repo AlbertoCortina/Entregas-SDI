@@ -13,10 +13,24 @@
 	
 	<!-- Bean de User -->
 	<managed-bean>
-		<managed-bean-name>user</managed-bean-name>
+		<managed-bean-name>beanUser</managed-bean-name>
 		<managed-bean-class>com.sdi.presentation.BeanUser</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>	
+	
+	<!-- Bean de Login -->
+	<managed-bean>
+		<managed-bean-name>beanLogin</managed-bean-name>
+		<managed-bean-class>com.sdi.presentation.BeanLogin</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<!-- Bean de Admin-->
+	<managed-bean>
+		<managed-bean-name>beanAdmin</managed-bean-name>
+		<managed-bean-class>com.sdi.presentation.BeanAdmin</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 	
 	<!-- Bean de Settings -->
 	<!--  <managed-bean>
@@ -34,118 +48,53 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	
 	<!-- Mapa de navegación de login.xhtml -->
 	<navigation-rule>
 		<from-view-id>/login.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{user.loguearse}</from-action>
+			<from-action>#{beanLogin.loguearse}</from-action>
 			<from-outcome>EXITO_ADMIN</from-outcome>
 			<to-view-id>/principalAdministrador.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 		
 		<navigation-case>
-			<from-action>#{user.loguearse}</from-action>
+			<from-action>#{beanLogin.loguearse}</from-action>
 			<from-outcome>EXITO_NORMAL</from-outcome>
 			<to-view-id>/principalUsuario.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>		
 	</navigation-rule>
 	
 	<!-- Mapa de navegación de registro.xhtml -->
-	<!-- Mapa de navegación de index.html -->
+	
+	
+	<!-- Mapa de navegación de principalAdministrador.xhtml -->
 	<navigation-rule>
-		<from-view-id>/index.xhtml</from-view-id>
+		<from-view-id>/principalAdministrador.xhtml</from-view-id>
+		
+		<!--  <navigation-case>
+			<from-action>#{beanLogin.cerrarSesion}</from-action>
+			<from-outcome>EXITO</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>-->
+		
 		<navigation-case>
-			<from-action>#{controller.listado}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
+			<from-action>#{beanAdmin.listarUsuarios}</from-action>
+			<from-outcome>EXITO</from-outcome>
+			<to-view-id>/listadoUsuarios.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 		
 		<navigation-case>
-			<from-outcome>alta</from-outcome>
-			<to-view-id>/altaForm.xhtml</to-view-id>
+			<from-action>#{beanAdmin.listarUsuarios}</from-action>
+			<from-outcome>FALLO</from-outcome>
+			<to-view-id>/principalAdministrador.xhtml</to-view-id>
 		</navigation-case>
+		
 	</navigation-rule>
 	
-	<!-- Mapa de navegación de listado.xhtml -->
-	<navigation-rule>
-		<from-view-id>/listado.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{controller.baja(valumno)}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-		
-		<navigation-case>				
-			<from-outcome>editar</from-outcome>
-			<to-view-id>/editForm.xhtml</to-view-id>
-		</navigation-case>
-		
-		<navigation-case>
-			<from-action>#{controller.listado}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-		
-		<navigation-case>
-			<from-outcome>alta</from-outcome>
-			<to-view-id>/altaForm.xhtml</to-view-id>
-		</navigation-case>
-		
-		<navigation-case>
-			<from-outcome>notaneitor</from-outcome>
-			<to-view-id>/index.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
 	
-	<!-- Mapa de navegación de altaForm.xhtml -->
-	<navigation-rule>
-		<from-view-id>/altaForm.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{controller.salva}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-		
-		<navigation-case>
-			<from-action>#{controller.listado}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-		
-		<navigation-case>
-			<from-outcome>alta</from-outcome>
-			<to-view-id>/altaForm.xhtml</to-view-id>
-		</navigation-case>
-		
-		<navigation-case>
-			<from-outcome>notaneitor</from-outcome>
-			<to-view-id>/index.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	
-	<!-- Mapa de navegación de editForm.xhtml -->
-	<navigation-rule>
-		<from-view-id>/editForm.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{controller.salva}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-		
-		<navigation-case>
-			<from-action>#{controller.listado}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-		
-		<navigation-case>
-			<from-outcome>alta</from-outcome>
-			<to-view-id>/altaForm.xhtml</to-view-id>
-		</navigation-case>
-		
-		<navigation-case>
-			<from-outcome>notaneitor</from-outcome>
-			<to-view-id>/index.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
 </faces-config>

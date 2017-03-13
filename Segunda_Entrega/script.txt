@@ -1,0 +1,7 @@
+DELETE TTasks;
+DELETE FROM TCategories;
+DELETE FROM TUsers WHERE isAdmin = false;
+
+INSERT INTO TUsers (id, login, password, email,isAdmin, status) VALUES (2, 'user1', 'user1','user1@email.com', false, 'ENABLED');
+INSERT INTO TUsers (id, login, password, email,isAdmin, status) VALUES (3, 'user2', 'user2','user2@email.com', false, 'ENABLED');
+INSERT INTO TUsers (id, login, password, email,isAdmin, status) VALUES (4, 'user3', 'user3','user3@email.com', false, 'ENABLED');

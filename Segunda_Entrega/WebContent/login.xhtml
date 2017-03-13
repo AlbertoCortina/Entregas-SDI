@@ -9,36 +9,39 @@
 	<ui:define name="titulo">#{msgs.tituloLogin}</ui:define>
 	
 	<!-- BARRA MENU -->
-	<ui:define name="barraMenu"></ui:define>	
+	<ui:define name="barraMenu_Home"></ui:define>	
+	<ui:define name="barraMenu_Opciones"></ui:define>		
+	<ui:define name="barraMenu_Usuario"></ui:define>
 	
 	<!-- CUERPO -->
 	<ui:define name="cuerpo">
-		<h:form id="form-registro">
+		<h:form id="form-login">
 			<p:panel header="#{msgs.tituloOperacionLogin}">
 				<p:panelGrid id="Grid" columns="2" cellPadding="5">
 				  #{msgs.tituloUsuario}
 				  <h:panelGroup>
-					  <p:inputText value="#{user.user.login}"
+					  <p:inputText id="input-usuario"
+					  			   value="#{beanLogin.login}"
 					  			   required="true"
-					  			   requiredMessage="#{msgs.tituloFormLoginRequerido}"					  			   
-					  			   id="usuario">					  	
+					  			   requiredMessage="#{msgs.tituloFormLoginRequerido}">					  	
 					  </p:inputText>
-					  <p:message for="usuario"/>
+					  <p:message for="input-usuario"/>
 				  </h:panelGroup>			  		  
 				  
 				  #{msgs.tituloContraseña}
 				  <h:panelGroup>
-					  <p:password value="#{user.user.password}"
+					  <p:password  id="input-contraseña"
+					  			   value="#{beanLogin.contraseña}"
 					  			   required="true"
-					  			   requiredMessage="#{msgs.tituloFormContraseñaRequerida}"					  			   
-					  			   id="contraseña">					  	
+					  			   requiredMessage="#{msgs.tituloFormContraseñaRequerida}">					  	
 					  </p:password>
-					  <p:message for="contraseña"/>
+					  <p:message for="input-contraseña"/>
 				  </h:panelGroup>				   		 
 				
-				<h:panelGroup>
-					<p:commandButton value="#{msgs.tituloIniciarSesion}" action="#{user.loguearse}" update="Grid" process="@form"/>		  
-				</h:panelGroup>
+				<h:inputHidden/>			
+			
+				<p:commandButton id="botonIniciarSesion" value="#{msgs.tituloIniciarSesion}" action="#{beanLogin.loguearse}" update="Grid mensajes" process="@form"/>		  
+				
 				</p:panelGrid>
 			</p:panel>
 		</h:form>
@@ -47,7 +50,7 @@
 	<!-- PIE -->
 	<ui:define name="pie">
 		<p:separator />
-		<p:commandLink value="#{msgs.tituloEnlace}" action="/registro.xhtml"></p:commandLink>
+		<p:commandLink id="enlace" value="#{msgs.tituloEnlaceLogin}" action="/registro.xhtml?faces-redirect=true"></p:commandLink>
 		<p:separator />
 	</ui:define>	
 		

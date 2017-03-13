@@ -1,6 +1,7 @@
 package com.sdi.business;
 
 import com.sdi.business.impl.admin.AdminServiceImpl;
+import com.sdi.business.impl.category.CategoryServiceImpl;
 import com.sdi.business.impl.task.TaskServiceImpl;
 import com.sdi.business.impl.user.UserServiceImpl;
 
@@ -17,5 +18,8 @@ public class Services {
 	public static TaskService getTaskService() {
 		return new TaskServiceImpl();
 	}
-
+	
+	public static CategoryService getCategoryService() {
+		return new CategoryServiceImpl();
+	}
 }

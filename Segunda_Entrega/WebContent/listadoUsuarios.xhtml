@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-general-administrador.xhtml">
+
+	<!-- TÍTULO -->
+	<ui:define name="titulo">#{msgs.tituloListadoUsuarios}</ui:define>
+
+	<!-- BARRA DE MENÚ -->
+	<ui:define name="barraMenu_Opciones"></ui:define>
+	
+	<!-- CUERPO -->
+	<ui:define name="cuerpo">
+		<h:form>
+			<p:panel header="#{msgs.tituloListadoUsuarios}">
+				<p:dataTable id="tablalistado" var="user" value="#{beanAdmin.users}" border="1">
+					<p:column>
+						<f:facet name="header">Id</f:facet>#{user.id}</p:column>
+					
+					<p:column>
+						<f:facet name="header">Login</f:facet>#{user.login}</p:column>
+					
+					<p:column>
+						<f:facet name="header">Email</f:facet>#{user.email}</p:column>
+					
+					<p:column>
+						<f:facet name="header">Admin</f:facet>#{user.isAdmin}</p:column>
+					
+					<p:column>
+						<f:facet name="header">Status</f:facet>
+						<p:commandLink id="cambiarEstado" value="#{user.status}" action="#{beanAdmin.cambiarEstado(user)}" ajax="false" update="tablalistado mensajes"></p:commandLink>
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+	
+	<!-- MENSAJES -->
+	
+</ui:composition>

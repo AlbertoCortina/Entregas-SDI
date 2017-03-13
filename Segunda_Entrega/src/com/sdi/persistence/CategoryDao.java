@@ -9,6 +9,7 @@ public interface CategoryDao extends GenericDao<Category, Long> {
 
 	List<Category> findByUserId(Long userId);
 	int deleteAllFromUserId(Long userId);
+	int deleteAll();
 	Category findByUserIdAndName(Long userId, String name);
 
 }

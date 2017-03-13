@@ -1,60 +1,82 @@
 package com.sdi.presentation;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import alb.util.log.Log;
 
 import com.sdi.business.Services;
+import com.sdi.business.exception.BusinessException;
 import com.sdi.dto.User;
+import com.sdi.dto.types.UserStatus;
+import com.sdi.persistence.UserDao;
 
-@ManagedBean(name="user")
+/**
+ * Se encarga de:
+ * 	
+ * @author Alberto Cortina
+ *
+ */
+@ManagedBean(name="beanUser")
 @SessionScoped
-public class BeanUser {
+public class BeanUser {		
+	private Long id;
+
+	private String login;
+	private String email;		
+	private Boolean isAdmin = false;
+	private UserStatus status = UserStatus.ENABLED;
 	
-	private User user = new User();
-	private String contraseña;
-	
-	public String getContraseña() {
-		return contraseña;
+	public BeanUser(User user) {
+		this.id = user.getId();
+		this.login = user.getLogin();
+		this.email = user.getEmail();
+		this.email = user.getEmail();
+		this.isAdmin = user.getIsAdmin();
+		this.status = user.getStatus();
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
-	}
-	
-	public User getUser() {
-		return user;
+	public Long getId() {
+		return id;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}	
-	
-	public String loguearse() {
-		String resultado = "";		
-		try {
-			User u = Services.getUserService().findLoggableUser(user.getLogin(), user.getPassword());
-			
-			if(u.getIsAdmin()) {
-				Log.debug("Encontro un usuario, y es admin");
-				System.err.println("Usuario admin");
-				resultado = "EXITO_ADMIN";
-			}
-			else if (!u.getIsAdmin()){
-				Log.debug("Encontro un usuario, y no es un admin");
-				System.err.println("Usuario normal");
-				resultado = "EXITO_NORMAL";
-			}
-		} catch (Exception e) {
-			Log.debug("No se ha encontrado un usuario con el login y la contraseña especificadas");
-			resultado = "ERROR";
-		}
-		return resultado;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public UserStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(UserStatus status) {
+		this.status = status;
 	}
 	
-	public void registrar() {
-		String resultado = "EXITO";
-		System.out.println(user);
-	}
+	
 }

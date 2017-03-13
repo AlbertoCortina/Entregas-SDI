@@ -46,6 +46,11 @@ public class CategoryDaoJdbcImpl implements CategoryDao {
 	public int delete(Long id) {
 		return jdbcTemplate.execute("CATEGORY_DELETE", id);
 	}
+	
+	@Override
+	public int deleteAll() {
+		return jdbcTemplate.execute("CATEGORY_DELETEALL");
+	}
 
 	@Override
 	public Category findById(Long id) {

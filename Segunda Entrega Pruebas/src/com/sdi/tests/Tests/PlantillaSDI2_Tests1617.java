@@ -1,4 +1,5 @@
 package com.sdi.tests.Tests;
+
 import static org.junit.Assert.*;
 
 import java.io.File;
@@ -9,11 +10,22 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+
+import com.sdi.business.CategoryService;
+import com.sdi.business.Services;
+import com.sdi.business.TaskService;
+import com.sdi.business.UserService;
+import com.sdi.business.exception.BusinessException;
+import com.sdi.dto.Category;
+import com.sdi.dto.Task;
+import com.sdi.dto.User;
+import com.sdi.tests.utils.SeleniumUtils;
 
 //Ordenamos las pruebas por el nombre del método
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) 
@@ -34,10 +46,10 @@ public class PlantillaSDI2_Tests1617 {
 		FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
 		FirefoxProfile firefoxProfile = new FirefoxProfile();       
 		driver = new FirefoxDriver(ffBinary,firefoxProfile);
-		driver.get("http://localhost:8180/sdi2-n");
+		driver.get("http://localhost:8180/sdi2-37");
 		//Este código es para ejecutar con una versión instalada de Firex 46.0 
-		//driver = new FirefoxDriver();
-		//driver.get("http://localhost:8180/sdi2-n");			
+//		driver = new FirefoxDriver();
+//		driver.get("http://localhost:8180/sdi2-37");			
 	}
 	@After
 	public void end()
@@ -51,23 +63,119 @@ public class PlantillaSDI2_Tests1617 {
 	//PR01: Autentificar correctamente al administrador.
 	@Test
     public void prueba01() {
-		assertTrue(false);	
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "input-usuario", 10);
+		elementos.get(0).sendKeys("admin1");
+		
+		elementos = driver.findElements(By.id("form-login:input-contraseña"));
+		elementos.get(0).sendKeys("admin1");
+		
+		elementos = driver.findElements(By.id("form-login:botonIniciarSesion"));
+		elementos.get(0).click();
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: admin1", elementos.get(0).getText());	
     }
+	
 	//PR02: Fallo en la autenticación del administrador por introducir mal el login.
 	@Test
     public void prueba02() {
-		assertTrue(false);
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "input-usuario", 10);
+		elementos.get(0).sendKeys("loginmal");
+		
+		elementos = driver.findElements(By.id("form-login:input-contraseña"));
+		elementos.get(0).sendKeys("admin1");
+		
+		elementos = driver.findElements(By.id("form-login:botonIniciarSesion"));
+		elementos.get(0).click();
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
+		
+		assertEquals("Error login: Usuario o contraseña no válido", elementos.get(0).getText());		
     }
+	
 	//PR03: Fallo en la autenticación del administrador por introducir mal la password.
 	@Test
     public void prueba03() {
-		assertTrue(false);
-    }
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "input-usuario", 10);
+		elementos.get(0).sendKeys("admin1");
+		
+		elementos = driver.findElements(By.id("form-login:input-contraseña"));
+		elementos.get(0).sendKeys("passwordmal");
+		
+		elementos = driver.findElements(By.id("form-login:botonIniciarSesion"));
+		elementos.get(0).click();
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
+		
+		assertEquals("Error login: Usuario o contraseña no válido", elementos.get(0).getText());
+				
+	}
+	
 	//PR04: Probar que la base de datos contiene los datos insertados con conexión correcta a la base de datos.
 	@Test
     public void prueba04() {
-		assertTrue(false);
-    }
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "input-usuario", 10);
+		elementos.get(0).sendKeys("admin1");
+		
+		elementos = driver.findElements(By.id("form-login:input-contraseña"));
+		elementos.get(0).sendKeys("admin1");
+		
+		elementos = driver.findElements(By.id("form-login:botonIniciarSesion"));
+		elementos.get(0).click();
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
+		
+		assertEquals("Exito: Se han introducido de forma correcta los datos en la base de datos", elementos.get(0).getText());
+			
+		List<User> usuarios = null;		
+		UserService uService;
+		TaskService tService;
+		CategoryService cService;
+		try {
+			uService = Services.getUserService();
+			tService = Services.getTaskService();
+			cService = Services.getCategoryService();			
+			usuarios = uService.findAll();		
+		
+		for(int i = 1; i <= usuarios.size(); i++) {
+			if(i == 1) {
+				assertEquals("admin1", usuarios.get(i - 1).getLogin());
+			}
+			else {
+				assertEquals("user"+(i - 1), usuarios.get(i - 1).getLogin());
+				
+				assertEquals(3, cService.findCategoriesByUserId(usuarios.get(i - 1).getId()).size());
+				
+				assertEquals("categoria1", cService.findCategoriesByUserId(usuarios.get(i - 1).getId()).get(0).getName());		
+				assertEquals("categoria2", cService.findCategoriesByUserId(usuarios.get(i - 1).getId()).get(1).getName());
+				assertEquals("categoria3", cService.findCategoriesByUserId(usuarios.get(i - 1).getId()).get(2).getName());	
+				
+				assertEquals(30, tService.findByUserId(usuarios.get(i - 1).getId()).size());
+				assertEquals(20, tService.findTodayTasksByUserId(usuarios.get(i - 1).getId()).size());
+				assertEquals(30, tService.findWeekTasksByUserId(usuarios.get(i - 1).getId()).size());
+				assertEquals(20, tService.findInboxTasksByUserId(usuarios.get(i - 1).getId()).size());
+				
+				assertEquals(3, tService.findTasksByCategoryId(cService.findCategoriesByUserId(usuarios.get(i - 1).getId()).get(0).getId()).size());
+				assertEquals(3, tService.findTasksByCategoryId(cService.findCategoriesByUserId(usuarios.get(i - 1).getId()).get(1).getId()).size());
+				assertEquals(4, tService.findTasksByCategoryId(cService.findCategoriesByUserId(usuarios.get(i - 1).getId()).get(2).getId()).size());
+				
+				for (int k = 1; k <= 30; k++) {				
+					assertEquals("tarea"+k, tService.findByUserId(usuarios.get(i - 1).getId()).get(k - 1).getTitle());
+				}
+			}
+		}
+		
+		} catch (BusinessException e) {
+			
+		}
+		
+	}
+	
 	//PR05: Visualizar correctamente la lista de usuarios normales. 
 	@Test
     public void prueba05() {
@@ -212,7 +320,27 @@ public class PlantillaSDI2_Tests1617 {
 	//PR33: Salir de sesión desde cuenta de administrador.
 	@Test
     public void prueba33() {
-		assertTrue(false);
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "input-usuario", 10);
+		elementos.get(0).sendKeys("admin1");
+		
+		elementos = driver.findElements(By.id("form-login:input-contraseña"));
+		elementos.get(0).sendKeys("admin1");
+		
+		elementos = driver.findElements(By.id("form-login:botonIniciarSesion"));
+		elementos.get(0).click();
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: admin1", elementos.get(0).getText());
+		
+		elementos = driver.findElements(By.id("form-cabecera:botonCerrarSesion"));
+		elementos.get(0).click();
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "input-usuario", 10);
+		
+		SeleniumUtils.textoPresentePagina(driver, "Usuario");
+		SeleniumUtils.textoPresentePagina(driver, "Contraseña");	
+		
     }
 	//PR34: Salir de sesión desde cuenta de usuario normal.
 	@Test

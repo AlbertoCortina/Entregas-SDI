@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.jboss.security.auth.spi.Users;
+
 import com.sdi.dto.User;
 import com.sdi.dto.types.UserStatus;
 import com.sdi.persistence.UserDao;
@@ -56,10 +58,15 @@ public class UserDaoJdbcImpl implements UserDao {
 				dto.getId()
 			);
 	}
-
+		
 	@Override
 	public int delete(Long id) {
 		return jdbcTemplate.execute("USER_DELETE", id);
+	}
+	
+	@Override
+	public int deleteAll() {
+		return jdbcTemplate.execute("USER_DELETEALL");
 	}
 
 	@Override

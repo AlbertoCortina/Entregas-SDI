@@ -9,7 +9,8 @@
 	<ui:define name="titulo">#{msgs.tituloRegistro}</ui:define>
 	
 	<!-- BARRA MENU -->
-	<ui:define name="barraMenu"></ui:define>	
+	<ui:define name="barraMenu_Home"></ui:define>	
+	<ui:define name="barraMenu_Opciones"></ui:define>	
 	
 	<!-- CUERPO -->
 	<ui:define name="cuerpo">
@@ -18,57 +19,71 @@
 				<p:panelGrid id="Grid" columns="2" cellPadding="5">
 				  #{msgs.tituloUsuario}
 				  <h:panelGroup>
-					  <p:inputText value="#{user.user.login}"
+					  <p:inputText id="input-login"
+					  			   value="#{user.user.login}"
 					  			   required="true"
-					  			   requiredMessage="#{msgs.tituloUsuarioRequerido}"					  			   
-					  			   id="login">					  	
+					  			   requiredMessage="#{msgs.tituloUsuarioRequerido}">					  	
 					  </p:inputText>
-					  <p:message for="login"/>
+					  <p:message for="input-login"/>
 				  </h:panelGroup>
 				  
 				  #{msgs.tituloEmail}
 				  <h:panelGroup>
-					  <p:inputText value="#{user.user.email}"
+					  <p:inputText id="input-correo"
+					  			   value="#{user.user.email}"
 					  			   required="true"
 					  			   requiredMessage="#{msgs.tituloEmailRequerido}"
-					  			   validatorMessage="#{msgs.tituloEmailValido}"
-					  			   id="correo">
+					  			   validatorMessage="#{msgs.tituloEmailValido}">
 					  	<f:validateRegex pattern=".+@.+\.[a-z]+"/>
 					  </p:inputText>
-					  <p:message for="correo"/>
+					  <p:message for="input-correo"/>
 				  </h:panelGroup>		  
 				  
 				  #{msgs.tituloContraseña}
 				  <h:panelGroup>
-					  <p:password value="#{user.user.password}"
+					  <p:password  id="input-contraseña"
+					  			   value="#{user.user.password}"
 					  			   required="true"
 					  			   requiredMessage="#{msgs.tituloContraseñaRequerida}"
-					  			   validatorMessage="#{msgs.tituloContraseñaValida}"
-					  			   id="contraseña">
+					  			   validatorMessage="#{msgs.tituloContraseñaValida}">
 					  	<f:validateLength minimum="8"/>
+					  	<f:validateRegex pattern=""/>
 					  </p:password>
-					  <p:message for="contraseña"/>
+					  <p:message for="input-contraseña"/>
 				  </h:panelGroup>		  
 				  
 				  #{msgs.tituloRContraseña}
 				  <h:panelGroup>
-					  <p:password value="#{user.contraseña}"
+					  <p:password  id="input-rContraseña"
+					  			   value="#{user.contraseña}"
 					  			   required="true"
 					  			   requiredMessage="#{msgs.tituloContraseñaRequerida}"
-					  			   validatorMessage="#{msgs.tituloContraseñaValida}"
-					  			   id="rContraseña">
+					  			   validatorMessage="#{msgs.tituloContraseñaValida}">
 					  	<f:validateLength minimum="8"/>
+					  	<f:validateRegex pattern=""/>
 					  </p:password>
-					  <p:message for="rContraseña"/>
+					  <p:message for="input-rContraseña"/>
 				  </h:panelGroup> 		 
 				
-				<p:commandButton value="#{msgs.tituloRegistrar}" action="#{user.registrar}" update="Grid" process="@form"/>		  
+				<h:inputHidden/>
+				
+				<p:commandButton id="enlace" value="#{msgs.tituloRegistrar}" action="#{user.registrar}" update="Grid" process="@form"/>		  
+				
 				</p:panelGrid>
 			</p:panel>
 		</h:form>
 	</ui:define>	
 	
+	<!-- MENSAJES -->
+	<ui:define name="mensajes">
+		<p:messages id="mensajes" showDetail="true"/>
+	</ui:define>
+	
 	<!-- PIE -->
-	<ui:define name="pie"></ui:define>	
+	<ui:define name="pie">
+		<p:separator />
+		<p:commandLink id="enlace" value="#{msgs.tituloEnlaceRegistro}" action="/login.xhtml"></p:commandLink>
+		<p:separator />
+	</ui:define>	
 		
 </ui:composition>
