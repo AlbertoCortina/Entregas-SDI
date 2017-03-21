@@ -1,7 +1,0 @@
-TAREAS OPCIONALES:
-
-
-
----------------------------------------------------------------------------
-El fichero Script SQL solo funciona si lo utilizas partiendo de la base de datos que nos
-disteis en la sesión 3, ya que sino no coinciden los ids
