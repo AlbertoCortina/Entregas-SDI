@@ -23,22 +23,22 @@
 						<div id="id#{i+1}">#{user.id}</div>
 					</p:column>
 					
-					<p:column sortBy="#{user.login}">
+					<p:column id="login" sortBy="#{user.login}">
 						<f:facet name="header">#{msgs.tituloLogin}</f:facet>
 						<div id="login#{i+1}">#{user.login}</div>
 					</p:column>
 					
-					<p:column sortBy="#{user.email}">
+					<p:column id="email" sortBy="#{user.email}">
 						<f:facet name="header">#{msgs.tituloEmail}</f:facet>
 						<div id="email#{i+1}">#{user.email}</div>
 					</p:column>
 					
 					<p:column >
-						<f:facet  name="header">#{msgs.tituloIsAdmin}</f:facet>
+						<f:facet name="header">#{msgs.tituloIsAdmin}</f:facet>
 						<div id="isAdmin#{i+1}">#{user.isAdmin}</div>
 					</p:column>
 					
-					<p:column sortBy="#{user.status}">
+					<p:column id="status" sortBy="#{user.status}">
 						<f:facet name="header">#{msgs.tituloEstado}</f:facet>
 						<p:commandLink id="cambiarEstado" value="#{user.status}" action="#{beanAdmin.cambiarEstado(user)}" update="tablalistado mensajes"></p:commandLink>
 					</p:column>

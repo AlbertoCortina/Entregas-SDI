@@ -16,18 +16,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.interactions.Actions;
-
 import com.sdi.business.CategoryService;
 import com.sdi.business.Services;
 import com.sdi.business.TaskService;
 import com.sdi.business.UserService;
 import com.sdi.business.exception.BusinessException;
-import com.sdi.dto.Category;
-import com.sdi.dto.Task;
 import com.sdi.dto.User;
-import com.sdi.persistence.UserDao;
 import com.sdi.tests.utils.SeleniumUtils;
+import com.sdi.tests.utils.TestUtils;
 
 //Ordenamos las pruebas por el nombre del método
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) 
@@ -36,13 +32,11 @@ public class PlantillaSDI2_Tests1617 {
 	WebDriver driver; 
 	List<WebElement> elementos = null;
 	
-	public PlantillaSDI2_Tests1617()
-	{
+	public PlantillaSDI2_Tests1617() {
 	}
 
 	@Before
-	public void run()
-	{
+	public void run() {
 		//Este código es para ejecutar con la versión portale de Firefox 46.0
 		File pathToBinary = new File("S:\\firefox\\FirefoxPortable.exe");
 		FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
@@ -53,9 +47,9 @@ public class PlantillaSDI2_Tests1617 {
 //		driver = new FirefoxDriver();
 //		driver.get("http://localhost:8180/sdi2-37");			
 	}
+	
 	@After
-	public void end()
-	{
+	public void end() {
 		//Cerramos el navegador
 		//driver.quit();
 	}
@@ -64,15 +58,8 @@ public class PlantillaSDI2_Tests1617 {
 	//ADMINISTRADOR
 	//PR01: Autentificar correctamente al administrador.
 	@Test
-    public void prueba01() {
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login:input-usuario", 10);
-		elementos.get(0).sendKeys("admin1");
-		
-		elementos = driver.findElements(By.id("form-login:input-contraseña"));
-		elementos.get(0).sendKeys("admin1");
-		
-		elementos = driver.findElements(By.id("form-login:botonIniciarSesion"));
-		elementos.get(0).click();
+    public void prueba01() {		
+		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 		
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
 		
@@ -81,15 +68,8 @@ public class PlantillaSDI2_Tests1617 {
 	
 	//PR02: Fallo en la autenticación del administrador por introducir mal el login.
 	@Test
-    public void prueba02() {
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login:input-usuario", 10);
-		elementos.get(0).sendKeys("loginmal");
-		
-		elementos = driver.findElements(By.id("form-login:input-contraseña"));
-		elementos.get(0).sendKeys("admin1");
-		
-		elementos = driver.findElements(By.id("form-login:botonIniciarSesion"));
-		elementos.get(0).click();
+    public void prueba02() {		
+		TestUtils.iniciarSesion(driver, "loginmal", "admin1");
 		
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
 		
@@ -98,42 +78,23 @@ public class PlantillaSDI2_Tests1617 {
 	
 	//PR03: Fallo en la autenticación del administrador por introducir mal la password.
 	@Test
-    public void prueba03() {
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login:input-usuario", 10);
-		elementos.get(0).sendKeys("admin1");
-		
-		elementos = driver.findElements(By.id("form-login:input-contraseña"));
-		elementos.get(0).sendKeys("passwordmal");
-		
-		elementos = driver.findElements(By.id("form-login:botonIniciarSesion"));
-		elementos.get(0).click();
+    public void prueba03() {		
+		TestUtils.iniciarSesion(driver, "admin1", "passwordmal");
 		
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
 		
 		assertEquals("Error login: Usuario o contraseña no válido", elementos.get(0).getText());
-				
 	}
 	
 	//PR04: Probar que la base de datos contiene los datos insertados con conexión correcta a la base de datos.
 	@Test
     public void prueba04() {
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login:input-usuario", 10);
-		elementos.get(0).sendKeys("admin1");
-		
-		elementos = driver.findElements(By.id("form-login:input-contraseña"));
-		elementos.get(0).sendKeys("admin1");
-		
-		elementos = driver.findElements(By.id("form-login:botonIniciarSesion"));
-		elementos.get(0).click();
+		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 		
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
 		
-		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion1");
+		TestUtils.iniciarBaseDeDatos(driver);
 		
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
-		
-		assertEquals("Exito: Se han introducido de forma correcta los datos en la base de datos", elementos.get(0).getText());
-			
 		List<User> usuarios = null;		
 		UserService uService;
 		TaskService tService;
@@ -181,14 +142,7 @@ public class PlantillaSDI2_Tests1617 {
 	//PR05: Visualizar correctamente la lista de usuarios normales. 
 	@Test
     public void prueba05() {
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login:input-usuario", 10);
-		elementos.get(0).sendKeys("admin1");
-		
-		elementos = driver.findElements(By.id("form-login:input-contraseña"));
-		elementos.get(0).sendKeys("admin1");
-		
-		elementos = driver.findElements(By.id("form-login:botonIniciarSesion"));
-		elementos.get(0).click();
+		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 		
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
 		
@@ -218,52 +172,30 @@ public class PlantillaSDI2_Tests1617 {
 	
 	//PR06: Cambiar el estado de un usuario de ENABLED a DISABLED. Y tratar de entrar con el usuario que se desactivado.
 	@Test
-    public void prueba06() {
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login:input-usuario", 10);
-		elementos.get(0).sendKeys("admin1");
-		
-		elementos = driver.findElements(By.id("form-login:input-contraseña"));
-		elementos.get(0).sendKeys("admin1");
-		
-		elementos = driver.findElements(By.id("form-login:botonIniciarSesion"));
-		elementos.get(0).click();
+    public void prueba06() throws InterruptedException {
+		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 		
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
 		
 		assertEquals("Usuario: admin1", elementos.get(0).getText());
 		
-		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion1");
-		
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
-		
-		assertEquals("Exito: Se han introducido de forma correcta los datos en la base de datos", elementos.get(0).getText());
+		TestUtils.iniciarBaseDeDatos(driver);
 		
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion2");
 		
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);		
 		
-		elementos = driver.findElements(By.id("form-listado:tablalistado:0:cambiarEstado"));
-		
-		Actions action = new Actions(driver);		
-		action.moveToElement(elementos.get(0)).perform();		
-		action.click().perform();
+		//Cambiamos el estado al user1
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");		
 		
 		//ERROR AQUI PREGUNTAR PORQUE NO COJE EL MENSAJE YA CARGADO
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
 		
 //		assertEquals("Exito: Se ha actualizado el estado del usuario USER1 a DISABLED", elementos.get(0).getText());
 		
-		elementos = driver.findElements(By.id("form-cabecera:botonCerrarSesion"));		
-		elementos.get(0).click();
+		TestUtils.cerrarSesion(driver);
 		
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login:input-usuario", 10);
-		elementos.get(0).sendKeys("user1");
-		
-		elementos = driver.findElements(By.id("form-login:input-contraseña"));
-		elementos.get(0).sendKeys("user1");
-		
-		elementos = driver.findElements(By.id("form-login:botonIniciarSesion"));
-		elementos.get(0).click();
+		TestUtils.iniciarSesion(driver, "user1", "user1");
 		
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
 		
@@ -273,23 +205,100 @@ public class PlantillaSDI2_Tests1617 {
 	//PR07: Cambiar el estado de un usuario a DISABLED a ENABLED. Y Y tratar de entrar con el usuario que se ha activado.
 	@Test
     public void prueba07() {
-		assertTrue(false);
+		TestUtils.iniciarSesion(driver, "admin1", "admin1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: admin1", elementos.get(0).getText());
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion2");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);		
+		
+		//Cambiamos el estado al user1
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");	
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
+		
+//		assertEquals("Exito: Se ha actualizado el estado del usuario USER1 a ENABLED", elementos.get(0).getText());
+		
+		TestUtils.cerrarSesion(driver);
+		
+		TestUtils.iniciarSesion(driver, "user1", "user1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: user1", elementos.get(0).getText());
     }
+	
 	//PR08: Ordenar por Login
 	@Test
     public void prueba08() {
-		assertTrue(false);
+		TestUtils.iniciarSesion(driver, "admin1", "admin1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: admin1", elementos.get(0).getText());
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion2");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
+		
+		//Clicamos el header de login para ordenar ascendentemente
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:login");
+		
+		//FALTA COMPROBAR SI ESTÁN ORDENADOS
+		
+		//Clicamos el header de email para ordenar descendentemente
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:login");
+		
+		//FALTA COMPROBAR SI ESTÁN ORDENADOS
     }
+	
 	//PR09: Ordenar por Email
 	@Test
     public void prueba09() {
-		assertTrue(false);
+		TestUtils.iniciarSesion(driver, "admin1", "admin1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: admin1", elementos.get(0).getText());
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion2");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
+		
+		//Clicamos el header de email para ordenar ascendentemente
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:email");
+		
+		//FALTA COMPROBAR SI ESTÁN ORDENADOS
+		
+		//Clicamos el header de email para ordenar descendentemente
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:email");
     }
+	
 	//PR10: Ordenar por Status
 	@Test
     public void prueba10() {
-		assertTrue(false);
+		TestUtils.iniciarSesion(driver, "admin1", "admin1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: admin1", elementos.get(0).getText());
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion2");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
+		
+		//Clicamos el header de email para ordenar ascendentemente
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:status");
+		
+		//FALTA COMPROBAR SI ESTÁN ORDENADOS
+		
+		//Clicamos el header de email para ordenar descendentemente
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:status");
     }
+	
 	//PR11: Borrar  una cuenta de usuario normal y datos relacionados.
 	@Test
     public void prueba11() {
@@ -401,35 +410,39 @@ public class PlantillaSDI2_Tests1617 {
     public void prueba32() {
 		assertTrue(false);
     }
+	
 	//PR33: Salir de sesión desde cuenta de administrador.
 	@Test
     public void prueba33() {
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "input-usuario", 10);
-		elementos.get(0).sendKeys("admin1");
-		
-		elementos = driver.findElements(By.id("form-login:input-contraseña"));
-		elementos.get(0).sendKeys("admin1");
-		
-		elementos = driver.findElements(By.id("form-login:botonIniciarSesion"));
-		elementos.get(0).click();
+		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 		
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
 		
 		assertEquals("Usuario: admin1", elementos.get(0).getText());
 		
-		elementos = driver.findElements(By.id("form-cabecera:botonCerrarSesion"));
-		elementos.get(0).click();
+		TestUtils.cerrarSesion(driver);
 		
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "input-usuario", 10);
 		
 		SeleniumUtils.textoPresentePagina(driver, "Usuario");
-		SeleniumUtils.textoPresentePagina(driver, "Contraseña");	
-		
+		SeleniumUtils.textoPresentePagina(driver, "Contraseña");		
     }
+	
 	//PR34: Salir de sesión desde cuenta de usuario normal.
 	@Test
     public void prueba34() {
-		assertTrue(false);
+		TestUtils.iniciarSesion(driver, "user1", "user1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: user1", elementos.get(0).getText());
+		
+		TestUtils.cerrarSesion(driver);
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "input-usuario", 10);
+		
+		SeleniumUtils.textoPresentePagina(driver, "Usuario");
+		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
     }
 	//PR35: Cambio del idioma por defecto a un segundo idioma. (Probar algunas vistas)
 	@Test
@@ -451,14 +464,4 @@ public class PlantillaSDI2_Tests1617 {
     public void prueba38() {
 		assertTrue(false);
     }
-
-	
-
-
-
-	
-	
-
-
-    
 }

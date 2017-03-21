@@ -81,4 +81,15 @@
 		
 	</navigation-rule>	
 	
+	<!-- Mapa de navegación de User -->
+	<navigation-rule>
+		<from-view-id>/user/*</from-view-id>
+		
+		<navigation-case>
+			<from-action>#{beanLogin.cerrarSesion}</from-action>
+			<from-outcome>EXITO</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>	
+	</navigation-rule>
 </faces-config>
