@@ -2,12 +2,19 @@ package com.sdi.tests.utils;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
+import com.sdi.business.Services;
+import com.sdi.business.exception.BusinessException;
+import com.sdi.dto.User;
 
 public class TestUtils {
 	
@@ -70,5 +77,121 @@ public class TestUtils {
 		action.click().perform();
 	}
 	
+	/**
+	 * Método que nos ordena los usuarios (quitando el admin) por login
+	 * @param ascendentemente
+	 * @return
+	 */
+	public static List<String> ordenarPorLogin(boolean ascendentemente) {
+		List<String> usuariosOrdenados = new ArrayList<String>();
+		List<User> usuarios = null;
+		
+		try {
+			usuarios = Services.getUserService().findAll();
+			
+			if(ascendentemente) {
+				Collections.sort(usuarios, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						return ((User) o1).getLogin().compareTo(((User)o2).getLogin());
+					}
+				});
+			}
+			else {
+				Collections.sort(usuarios, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						return ((User) o2).getLogin().compareTo(((User)o1).getLogin());
+					}
+				});
+			}
+			
+			for(User u: usuarios) {
+				if(!u.getLogin().startsWith("admin1"))
+					usuariosOrdenados.add(u.getLogin());
+			}
+			
+		} catch (BusinessException e) { }	
+		
+		return usuariosOrdenados;
+	}
+	
+	/**
+	 * Método que nos ordena los usuarios (quitando el admin) por email
+	 * @param ascendentemente
+	 * @return
+	 */
+	public static List<String> ordenarPorEmail(boolean ascendentemente) {
+		List<String> usuariosOrdenados = new ArrayList<String>();
+		List<User> usuarios = null;
+		
+		try {
+			usuarios = Services.getUserService().findAll();
+			
+			if(ascendentemente) {
+				Collections.sort(usuarios, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						return ((User) o1).getLogin().compareTo(((User)o2).getLogin());
+					}
+				});
+			}
+			else {
+				Collections.sort(usuarios, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						return ((User) o2).getLogin().compareTo(((User)o1).getLogin());
+					}
+				});
+			}
+			
+			for(User u: usuarios) {
+				if(!u.getLogin().startsWith("admin"))
+					usuariosOrdenados.add(u.getEmail());
+			}
+			
+		} catch (BusinessException e) { }	
+		
+		return usuariosOrdenados;
+	}
+	
+	/**
+	 * Método que nos ordena los usuarios (quitando el admin) por status
+	 * @param ascendentemente
+	 * @return
+	 */
+	public static List<String> ordenarPorStatus(boolean ascendentemente) {
+		List<String> usuariosOrdenados = new ArrayList<String>();
+		List<User> usuarios = null;
+		
+		try {
+			usuarios = Services.getUserService().findAll();
+			
+			if(ascendentemente) {
+				Collections.sort(usuarios, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						return ((User) o1).getStatus().compareTo(((User)o2).getStatus());
+					}
+				});
+			}
+			else {
+				Collections.sort(usuarios, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						return ((User) o2).getStatus().compareTo(((User)o1).getStatus());
+					}
+				});
+			}
+			
+			for(User u: usuarios) {
+				if(!u.getLogin().startsWith("admin"))
+					usuariosOrdenados.add(String.valueOf(u.getStatus()));
+			}
+			
+		} catch (BusinessException e) { }	
+		
+		return usuariosOrdenados;
+	}
 	
 }
