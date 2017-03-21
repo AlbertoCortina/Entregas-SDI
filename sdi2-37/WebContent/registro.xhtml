@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-general.xhtml">
+
+	<!-- TITULO -->
+	<ui:define name="titulo">#{msgs.tituloRegistro}</ui:define>
+
+	<!-- MENSAJES -->
+
+	<!-- CUERPO -->
+	<ui:define name="cuerpo">
+		<h:form id="form-registro">
+			<p:panel header="#{msgs.tituloOperacionRegistro}">
+				<p:panelGrid id="Grid" columns="2" cellPadding="5">
+				  #{msgs.tituloUsuario}
+				  <h:panelGroup>
+						<p:inputText id="input-login" value="#{beanRegistro.login}"
+							required="true" requiredMessage="#{msgs.tituloUsuarioRequerido}"
+							validatorMessage="#{msgs.tituloUsuarioValido}"
+							validator="#{beanRegistro.validarLogin}">
+						</p:inputText>
+						<p:message for="input-login" />
+					</h:panelGroup>
+				  
+				  #{msgs.tituloEmail}
+				  <h:panelGroup>
+						<p:inputText id="input-correo" value="#{beanRegistro.email}"
+							required="true" requiredMessage="#{msgs.tituloEmailRequerido}"
+							validatorMessage="#{msgs.tituloEmailValido}">
+							<f:validateRegex pattern=".+@.+\.[a-z]+" />
+						</p:inputText>
+						<p:message for="input-correo" />
+					</h:panelGroup>		  
+				  
+				  #{msgs.tituloContraseña}
+				  <h:panelGroup>
+						<p:password id="input-password" value="#{beanRegistro.password}"
+							required="true"
+							requiredMessage="#{msgs.tituloContraseñaRequerida}"
+							validatorMessage="#{msgs.tituloContraseñaValida}">
+							<f:validateLength minimum="8" />
+							<f:validateRegex pattern="(.*[0-9][a-zA-Z].*)|(.*[a-zA-Z][0-9].*)" />
+						</p:password>
+						<p:message for="input-password" />
+					</h:panelGroup>		  
+				  
+				  #{msgs.tituloRContraseña}
+				  <h:panelGroup>
+						<p:password id="input-rPassword" value="#{beanRegistro.password2}"
+							required="true"
+							requiredMessage="#{msgs.tituloContraseñaRequerida}"
+							validatorMessage="#{msgs.tituloContraseñasIguales}"
+							>							
+						</p:password>
+						<p:message for="input-rPassword" />
+					</h:panelGroup>
+
+					<h:inputHidden />
+
+					<p:commandButton id="enlace" value="#{msgs.tituloRegistrar}"
+						action="#{beanRegistro.registrar}" update="Grid" process="@form" />
+
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+	<!-- PIE -->
+	<ui:define name="pie">
+		<p:separator />
+		<p:commandButton id="enlace" value="#{msgs.tituloEnlaceRegistro}"
+			action="/login.xhtml?faces-redirect=true" icon="ui-icon-arrowreturnthick-1-w"></p:commandButton>
+		<p:separator />
+	</ui:define>
+
+</ui:composition>

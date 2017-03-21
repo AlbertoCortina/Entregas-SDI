@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-general-administrador.xhtml">
+
+	<!-- TÍTULO -->
+	<ui:define name="titulo">#{msgs.tituloListadoUsuarios}</ui:define>
+
+	<!-- BARRA DE MENÚ -->
+	<ui:define name="barraMenu_Opciones"></ui:define>
+	
+	<!-- MENSAJES -->
+	
+	<!-- CUERPO -->
+	<ui:define name="cuerpo">
+		<h:form id="form-listado">
+			<p:panel header="#{msgs.tituloListadoUsuarios}">
+				<p:dataTable id="tablalistado" rowIndexVar="i" var="user" value="#{beanAdmin.users}" border="1">
+					<p:column>
+						<f:facet name="header">#{msgs.tituloId}</f:facet>
+						<div id="id#{i+1}">#{user.id}</div>
+					</p:column>
+					
+					<p:column sortBy="#{user.login}">
+						<f:facet name="header">#{msgs.tituloLogin}</f:facet>
+						<div id="login#{i+1}">#{user.login}</div>
+					</p:column>
+					
+					<p:column sortBy="#{user.email}">
+						<f:facet name="header">#{msgs.tituloEmail}</f:facet>
+						<div id="email#{i+1}">#{user.email}</div>
+					</p:column>
+					
+					<p:column >
+						<f:facet  name="header">#{msgs.tituloIsAdmin}</f:facet>
+						<div id="isAdmin#{i+1}">#{user.isAdmin}</div>
+					</p:column>
+					
+					<p:column sortBy="#{user.status}">
+						<f:facet name="header">#{msgs.tituloEstado}</f:facet>
+						<p:commandLink id="cambiarEstado" value="#{user.status}" action="#{beanAdmin.cambiarEstado(user)}" update="tablalistado mensajes"></p:commandLink>
+					</p:column>
+					
+					<p:column>
+					    <p:commandButton value="#{msgs.tituloEliminar}" actionListener="#{beanAdmin.eliminarUsuario(user)}" update="tablalistado mensajes">
+					        <p:confirm header="#{msgs.tituloConfirmacion}" message="#{msgs.tituloMensaje} #{user.login}?" icon="ui-icon-alert" />
+					    </p:commandButton>
+					 
+					    <p:confirmDialog global="true" showEffect="fade">
+					        <p:commandButton value="#{msgs.tituloSi}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					        <p:commandButton value="#{msgs.tituloNo}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					    </p:confirmDialog>	
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>	
+</ui:composition>

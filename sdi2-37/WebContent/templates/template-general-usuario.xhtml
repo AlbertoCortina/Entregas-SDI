@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+<!--  <f:view locale="#{settings.locale}">-->
+	<h:head>
+		<title>#{msgs.tituloHead}</title>
+	</h:head>
+	<h:body>
+		<h:form id="form-cabecera">			
+				<center>
+					<h1>#{msgs.tituloAplicacion1}</h1>
+					<!--  <br /> <br /> -->
+					<h2>#{msgs.tituloAplicacion2}</h2>
+				</center>
+				<!-- <br /> -->
+				<table border="5" align="center">
+					<tr>
+						<th class="title">
+							<ui:insert name="titulo">#{msgs.tituloDefectoCabecera}</ui:insert>
+						</th>
+					</tr>
+				</table>
+				<br/>
+			
+				<p:menubar>										
+					<p:menuitem value="#{msgs.tituloInicio}" action="/admin/principalAdministrador.xhtml?faces-redirect=true" icon="ui-icon-home"></p:menuitem>
+										
+					<ui:insert name="barraMenu_Opciones"></ui:insert>					
+					
+					<ui:insert name="barraMenu_Usuario">
+						<f:facet name="options">
+							<div id="nombreUsuario" style="display:inline; padding-right: 0.7em;">#{msgs.tituloUsuario}: #{userSession.login}</div>
+							<div style="display:inline; padding-right: 0.7em;"><p:commandButton id="botonCerrarSesion"  action="#{beanLogin.cerrarSesion}" icon="ui-icon-power"/></div>
+						</f:facet>
+					</ui:insert>
+					
+					<p:submenu style="float:right" label="#{msgs.textoIdioma}" icon="ui-icon-flag">
+						<p:menuitem value="#{msgs.enlaceIdiomaES}" actionListener="#{settings.setSpanish}" update="@all" />
+						<p:menuitem value="#{msgs.enlaceIdiomaEN}" actionListener="#{settings.setEnglish}" update="@all" />
+					</p:submenu>
+				</p:menubar>					
+		</h:form>		
+
+		<ui:insert name="mensajes">
+			<!--<p:growl id="mensajes" showDetail="true" globalOnly="true" sticky="true"/>-->
+			<p:messages id="mensajes" showDetail="true" globalOnly="true"/>
+		</ui:insert>
+		
+		<ui:insert name="cuerpo">#{msgs.tituloDefectoCuerpo}</ui:insert>					
+
+	</h:body>
+<!--  </f:view>-->
+</html>
