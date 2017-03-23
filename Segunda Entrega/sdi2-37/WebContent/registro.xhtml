@@ -50,10 +50,10 @@
 				  #{msgs.tituloRContraseña}
 				  <h:panelGroup>
 						<p:password id="input-rPassword" value="#{beanRegistro.password2}"
-							required="true"
-							requiredMessage="#{msgs.tituloContraseñaRequerida}"
-							validatorMessage="#{msgs.tituloContraseñasIguales}"
-							>							
+							required="true"	validator="#{beanRegistro.coincidenPasswords}"
+							requiredMessage="#{msgs.tituloContraseñaRequerida}"	
+							validatorMessage="#{msgs.tituloContraseñasIguales}">
+							<f:attribute name="password" value="form-registro:input-password" />
 						</p:password>
 						<p:message for="input-rPassword" />
 					</h:panelGroup>

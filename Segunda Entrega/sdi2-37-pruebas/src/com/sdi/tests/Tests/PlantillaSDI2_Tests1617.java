@@ -3,8 +3,6 @@ package com.sdi.tests.Tests;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.junit.After;
@@ -18,6 +16,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.sdi.business.CategoryService;
 import com.sdi.business.Services;
@@ -35,6 +35,8 @@ public class PlantillaSDI2_Tests1617 {
 	WebDriver driver; 
 	List<WebElement> elementos = null;
 	
+	WebDriverWait wait;
+	
 	public PlantillaSDI2_Tests1617() {
 	}
 
@@ -46,6 +48,7 @@ public class PlantillaSDI2_Tests1617 {
 		FirefoxProfile firefoxProfile = new FirefoxProfile();       
 		driver = new FirefoxDriver(ffBinary,firefoxProfile);
 		driver.get("http://localhost:8180/sdi2-37");
+		wait = new WebDriverWait(driver, 5);
 		//Este código es para ejecutar con una versión instalada de Firex 46.0 
 //		driver = new FirefoxDriver();
 //		driver.get("http://localhost:8180/sdi2-37");		
@@ -54,7 +57,7 @@ public class PlantillaSDI2_Tests1617 {
 	@After
 	public void end() {
 		//Cerramos el navegador
-		//driver.quit();
+		driver.quit();
 	}
 
 	//PRUEBAS
@@ -210,6 +213,8 @@ public class PlantillaSDI2_Tests1617 {
 		
 		assertEquals("Usuario: admin1", elementos.get(0).getText());
 		
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-cabecera:opcion2")));
+		
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion2");
 		
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);		
@@ -239,6 +244,9 @@ public class PlantillaSDI2_Tests1617 {
 		
 		assertEquals("Usuario: admin1", elementos.get(0).getText());
 		
+		
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-cabecera:opcion2")));
+		
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion2");
 		
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
@@ -250,6 +258,7 @@ public class PlantillaSDI2_Tests1617 {
 		int numUsuarios = usuariosOrdenados.size();
 		
 		for (int i = 1; i < numUsuarios; i++) {
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login"+i)));
 			elementos = driver.findElements(By.id("login"+i));
 			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i - 1));
 		}
@@ -276,6 +285,8 @@ public class PlantillaSDI2_Tests1617 {
 		
 		assertEquals("Usuario: admin1", elementos.get(0).getText());
 		
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-cabecera:opcion2")));
+		
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion2");
 		
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
@@ -290,7 +301,8 @@ public class PlantillaSDI2_Tests1617 {
 //			System.out.println(s);
 //		}
 		
-		for (int i = 1; i < numUsuarios; i++) {
+		for (int i = 1; i <= numUsuarios; i++) {
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("email"+i)));
 			elementos = driver.findElements(By.id("email"+i));
 			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i - 1));
 		}
@@ -302,7 +314,7 @@ public class PlantillaSDI2_Tests1617 {
 		
 		usuariosOrdenados = TestUtils.ordenarPorEmail(false);	
 		
-		for (int i = 1; i < numUsuarios; i++) {
+		for (int i = 1; i <= numUsuarios; i++) {
 			elementos = driver.findElements(By.id("email"+i));
 			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i - 1));
 		}
@@ -317,6 +329,8 @@ public class PlantillaSDI2_Tests1617 {
 		
 		assertEquals("Usuario: admin1", elementos.get(0).getText());
 		
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-cabecera:opcion2")));
+		
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion2");
 		
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
@@ -324,15 +338,19 @@ public class PlantillaSDI2_Tests1617 {
 		//Cambiamos el estado al user1
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");	
 		
-		Thread.sleep(40);
 		
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("form-listado:tablalistado:status")) );
+
 		//Clicamos el header de email para ordenar ascendentemente
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:status");
+		
+		Thread.sleep(40);
 		
 		List<String> usuariosOrdenados = TestUtils.ordenarPorStatus(true);
 		int numUsuarios = usuariosOrdenados.size();			
 		
 		for (int i = 0; i < numUsuarios - 1; i++) {
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:"+i+":cambiarEstado")) );
 			elementos = driver.findElements(By.id("form-listado:tablalistado:"+i+":cambiarEstado"));
 			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i));
 		}
@@ -340,13 +358,13 @@ public class PlantillaSDI2_Tests1617 {
 		//Clicamos el header de email para ordenar descendentemente
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:status");
 		
-		Thread.sleep(40);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
 		
 		usuariosOrdenados = TestUtils.ordenarPorStatus(false);	
 		
-		for (int i = 1; i < numUsuarios; i++) {
-			elementos = driver.findElements(By.id("email"+i));
-			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i - 1));
+		for (int i = 0; i < numUsuarios; i++) {
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+i+":cambiarEstado"));
+			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i));
 		}
 		
 		//Cambiamos el estado al user1
@@ -361,7 +379,37 @@ public class PlantillaSDI2_Tests1617 {
 	//PR12: Crear una cuenta de usuario normal con datos válidos.
 	@Test
     public void prueba12() {
-		assertTrue(false);
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 10);
+		
+		TestUtils.clicarElemento(driver, "enlace");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro:enlace", 10);
+		
+		//Mandamos todos los datos al registro
+		elementos = driver.findElements(By.id("form-registro:input-login"));
+		elementos.get(0).sendKeys("user11");
+		elementos = driver.findElements(By.id("form-registro:input-correo"));
+		elementos.get(0).sendKeys("user11@email.com");
+		elementos = driver.findElements(By.id("form-registro:input-password"));
+		elementos.get(0).sendKeys("user11user");
+		elementos = driver.findElements(By.id("form-registro:input-rPassword"));
+		elementos.get(0).sendKeys("user11user");
+		
+		TestUtils.clicarElemento(driver, "form-registro:enlace");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
+		
+		//Confirmamos sale el mensaje de confirmación de registro
+		assertEquals(elementos.get(0).getText(), "Exito en el registro: Se ha registrado correctamente, inicie sesión para acceder");
+		
+		//Eliminamos el usuario creado para que no pueda interferir con futuras pruebas
+		TestUtils.iniciarSesion(driver, "admin1", "admin1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro:enlace", 10);
+
+		
+		
+		
     }
 	//PR13: Crear una cuenta de usuario normal con login repetido.
 	@Test
