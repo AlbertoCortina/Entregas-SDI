@@ -203,7 +203,7 @@ public class PlantillaSDI2_Tests1617 {
 	
 	//PR07: Cambiar el estado de un usuario a DISABLED a ENABLED. Y Y tratar de entrar con el usuario que se ha activado.
 	@Test
-    public void prueba07() {
+    public void prueba07() throws InterruptedException {
 		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 		
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
@@ -215,7 +215,7 @@ public class PlantillaSDI2_Tests1617 {
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);		
 		
 		//Cambiamos el estado al user1
-		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");	
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");		
 		
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
 		
@@ -246,6 +246,8 @@ public class PlantillaSDI2_Tests1617 {
 		//Clicamos el header de login para ordenar ascendentemente
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:login");
 		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
+		
 		List<String> usuariosOrdenados = TestUtils.ordenarPorLogin(true);
 		int numUsuarios = usuariosOrdenados.size();
 		
@@ -257,7 +259,7 @@ public class PlantillaSDI2_Tests1617 {
 		//Clicamos el header de email para ordenar descendentemente
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:login");
 		
-		Thread.sleep(40);		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
 		
 		usuariosOrdenados = TestUtils.ordenarPorLogin(false);	
 		
@@ -282,13 +284,11 @@ public class PlantillaSDI2_Tests1617 {
 		
 		//Clicamos el header de email para ordenar ascendentemente
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:email");
+
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
 		
 		List<String> usuariosOrdenados = TestUtils.ordenarPorEmail(true);
-		int numUsuarios = usuariosOrdenados.size();		
-		
-//		for(String s: usuariosOrdenados) {
-//			System.out.println(s);
-//		}
+		int numUsuarios = usuariosOrdenados.size();			
 		
 		for (int i = 1; i < numUsuarios; i++) {
 			elementos = driver.findElements(By.id("email"+i));
@@ -297,8 +297,8 @@ public class PlantillaSDI2_Tests1617 {
 		
 		//Clicamos el header de email para ordenar descendentemente
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:email");
-		
-		Thread.sleep(40);
+
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
 		
 		usuariosOrdenados = TestUtils.ordenarPorEmail(false);	
 		
@@ -317,52 +317,113 @@ public class PlantillaSDI2_Tests1617 {
 		
 		assertEquals("Usuario: admin1", elementos.get(0).getText());
 		
+		TestUtils.iniciarBaseDeDatos(driver);
+
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
+		
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion2");
 		
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
 		
 		//Cambiamos el estado al user1
-		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");	
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");			
+	
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
 		
-		Thread.sleep(40);
+		//Cambiamos el estado al user2
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:1:cambiarEstado");			
+
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
 		
-		//Clicamos el header de email para ordenar ascendentemente
+		//Cambiamos el estado al user3
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:2:cambiarEstado");	
+	
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		//Clicamos el header de status para ordenar ascendentemente
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:status");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
 		
 		List<String> usuariosOrdenados = TestUtils.ordenarPorStatus(true);
 		int numUsuarios = usuariosOrdenados.size();			
-		
-		for (int i = 0; i < numUsuarios - 1; i++) {
+				
+		for (int i = 0; i < numUsuarios - 1; i++) {			
 			elementos = driver.findElements(By.id("form-listado:tablalistado:"+i+":cambiarEstado"));
 			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i));
 		}
 		
-		//Clicamos el header de email para ordenar descendentemente
+		//Clicamos el header de status para ordenar descendentemente
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:status");
-		
-		Thread.sleep(40);
+	
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
 		
 		usuariosOrdenados = TestUtils.ordenarPorStatus(false);	
 		
-		for (int i = 1; i < numUsuarios; i++) {
-			elementos = driver.findElements(By.id("email"+i));
-			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i - 1));
+		for (int i = 0; i < numUsuarios; i++) {
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+i+":cambiarEstado"));
+			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i));
 		}
+	
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
 		
 		//Cambiamos el estado al user1
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");	
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		//Cambiamos el estado al user2
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");			
+
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		//Cambiamos el estado al user3
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");	
+	
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
     }
 	
 	//PR11: Borrar  una cuenta de usuario normal y datos relacionados.
 	@Test
-    public void prueba11() {
-		assertTrue(false);
+    public void prueba11() throws InterruptedException {
+		TestUtils.iniciarSesion(driver, "admin1", "admin1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: admin1", elementos.get(0).getText());
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion2");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:1:eliminar");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:9:confirmacion");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
+		
+//		Thread.sleep(200);
+//		
+//		SeleniumUtils.textoNoPresentePagina(driver, "user2");
+		
+		TestUtils.cerrarSesion(driver);
+				
+		TestUtils.iniciarSesion(driver, "user2", "user2");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
+		
+		assertEquals("Error login: Usuario o contraseña no válido", elementos.get(0).getText());	
+			
     }
+	
 	//PR12: Crear una cuenta de usuario normal con datos válidos.
 	@Test
-    public void prueba12() {
+    public void prueba12() {	
 		assertTrue(false);
     }
+	
 	//PR13: Crear una cuenta de usuario normal con login repetido.
 	@Test
     public void prueba13() {

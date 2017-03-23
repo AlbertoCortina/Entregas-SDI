@@ -75,7 +75,7 @@
 		
 		<navigation-case>
 			<from-action>#{beanAdmin.listarUsuarios}</from-action>
-			<from-outcome>FALLO</from-outcome>
+			<from-outcome>ERROR</from-outcome>
 			<to-view-id>/admin/principalAdministrador.xhtml</to-view-id>
 		</navigation-case>
 		
@@ -91,5 +91,19 @@
 			<to-view-id>/login.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>	
+		
+		<navigation-case>
+			<from-action>#{beanTareas.listarTareasInbox}</from-action>
+			<from-outcome>EXITO</from-outcome>
+			<to-view-id>/user/listadoTareas.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>	
+		
+		<navigation-case>
+			<from-action>#{beanTareas.listarTareasInbox}</from-action>
+			<from-outcome>ERROR</from-outcome>
+			<to-view-id>/user/principalUsuario.xhtml</to-view-id>
+		</navigation-case>
+		
 	</navigation-rule>
 </faces-config>

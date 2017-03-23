@@ -44,12 +44,12 @@
 					</p:column>
 					
 					<p:column>
-					    <p:commandButton value="#{msgs.tituloEliminar}" actionListener="#{beanAdmin.eliminarUsuario(user)}" update="tablalistado mensajes">
+					    <p:commandButton id="eliminar" value="#{msgs.tituloEliminar}" actionListener="#{beanAdmin.eliminarUsuario(user)}" update="tablalistado mensajes">
 					        <p:confirm header="#{msgs.tituloConfirmacion}" message="#{msgs.tituloMensaje} #{user.login}?" icon="ui-icon-alert" />
 					    </p:commandButton>
 					 
 					    <p:confirmDialog global="true" showEffect="fade">
-					        <p:commandButton value="#{msgs.tituloSi}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					        <p:commandButton id="confirmacion" value="#{msgs.tituloSi}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 					        <p:commandButton value="#{msgs.tituloNo}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 					    </p:confirmDialog>	
 					</p:column>

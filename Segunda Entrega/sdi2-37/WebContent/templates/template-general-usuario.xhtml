@@ -29,9 +29,13 @@
 				<br/>
 			
 				<p:menubar>										
-					<p:menuitem value="#{msgs.tituloInicio}" action="/admin/principalAdministrador.xhtml?faces-redirect=true" icon="ui-icon-home"></p:menuitem>
+					<p:menuitem value="#{msgs.tituloInicio}" action="/user/principalUsuario.xhtml?faces-redirect=true" icon="ui-icon-home"></p:menuitem>
 										
-					<ui:insert name="barraMenu_Opciones"></ui:insert>					
+					<ui:insert name="barraMenu_Opciones">
+						<p:submenu id="submenuOpciones" label="#{msgs.tituloListas}" icon="ui-icon-gear">							
+							<p:menuitem id="listaInbox" value="#{msgs.tituloListaInbox}" action="#{beanTareas.listarTareasInbox}"/>			
+						</p:submenu>
+					</ui:insert>					
 					
 					<ui:insert name="barraMenu_Usuario">
 						<f:facet name="options">

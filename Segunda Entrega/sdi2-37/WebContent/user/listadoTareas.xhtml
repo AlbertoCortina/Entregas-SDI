@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-general-usuario.xhtml">
+
+	<!-- TÍTULO -->
+	<ui:define name="titulo">#{msgs.tituloListadoTareas}</ui:define>
+
+	<!-- BARRA DE MENÚ -->
+	<!--  <ui:define name="barraMenu_Opciones"></ui:define>-->
+
+	<!-- MENSAJES -->
+
+	<!-- CUERPO -->
+	<ui:define name="cuerpo">
+		<h:form id="form-listado">
+			<p:panel header="#{msgs.tituloListadoTareas}">
+				<p:dataTable id="tablalistado" rowIndexVar="i" var="tarea"
+					value="#{beanTareas.tareas}" border="1" rows="8" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+					<p:column id="titulo" filterBy="#{tarea.title}">
+						<f:facet name="header">#{msgs.tituloTarea}</f:facet>
+						<div id="title#{i+1}">#{tarea.title}</div>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">#{msgs.tituloComentario}</f:facet>
+						<div id="comentario#{i+1}">#{tarea.comments}</div>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">#{msgs.tituloFechaCreacion}</f:facet>
+						<h:outputText id="fCreacion#{i+1}" value="#{tarea.created}">
+							
+						</h:outputText>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">#{msgs.tituloFechaFinalizada}</f:facet>
+						<h:outputText id="fFinalizada#{i+1}" value="#{tarea.finished}">
+
+						</h:outputText>
+					</p:column>
+
+					<p:column id="planeada" sortBy="#{tarea.planned}">
+						<f:facet name="header">#{msgs.tituloFechaPlaneada}</f:facet>
+						<h:outputText id="fPlaneada#{i+1}" value="#{tarea.planned}">
+							<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+						</h:outputText>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">#{msgs.tituloCategoria}</f:facet>
+						<div id="categoria#{i+1}">#{tarea.categoryId}</div>
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

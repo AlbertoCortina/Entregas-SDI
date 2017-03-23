@@ -94,7 +94,7 @@ public class BeanAdmin {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fallo: ", "Ha habido algún problema cargando la lista de usuarios"));
 			FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 			Log.debug("La carga de la lista de usuarios falló");
-			resultado = "FALLO";
+			resultado = "ERROR";
 		}
 		return resultado;
 	}
