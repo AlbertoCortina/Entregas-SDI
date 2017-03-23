@@ -4,6 +4,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
@@ -100,6 +101,27 @@ public class BeanRegistro {
 			Log.debug("Ha ocurrido un error buscando el usuario");			
 		}
 	}
+	
+	
+	public void coincidenPasswords(FacesContext c, UIComponent ui, Object o) throws ValidatorException {
+		
+		String field1Id = (String) ui.getAttributes().get("password");
+		
+		UIInput textInput = (UIInput) c.getViewRoot().findComponent(field1Id);
+		
+		if (textInput == null)
+	        throw new IllegalArgumentException(String.format("Unable to find component with id %s",field1Id));
+		
+		String pass = (String) textInput.getValue();
+		
+		if(!pass.equals((String) o)){
+			Log.debug("Contraseñas no coinciden");
+			throw new ValidatorException(new FacesMessage("Contraseñas no coinciden"));
+		}
+		
+		Log.debug("Contraseñas coinciden");
+	}
+	
 	
 //	public void validarContraseña(FacesContext c, UIComponent ui, Object passwordConfirmation) throws ValidatorException {
 //		
