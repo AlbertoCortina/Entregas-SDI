@@ -35,7 +35,7 @@ public class PlantillaSDI2_Tests1617 {
 	
 	List<WebElement> elementos = null;
 	static WebDriver driver = getDriver(); 	
-	static WebDriverWait wait = new WebDriverWait(driver, 5);
+	static WebDriverWait wait = new WebDriverWait(driver, 10);
 	String URL = "http://localhost:8180/sdi2-37";
 	
 	public PlantillaSDI2_Tests1617() {
@@ -437,11 +437,11 @@ public class PlantillaSDI2_Tests1617 {
 		
 		TestUtils.clicarElemento(driver, "form-registro:enlace");
 		
-		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("mensajes")));
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("mensajes"), "Exito"));
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
 		
 		//Confirmamos sale el mensaje de confirmación de registro
-		assertEquals(elementos.get(0).getText(), "Exito en el registro: Se ha registrado correctamente, inicie sesión para acceder");
+		assertEquals("Exito en el registro: Se ha registrado correctamente, inicie sesión para acceder", elementos.get(0).getText());
 	
 		TestUtils.iniciarSesion(driver, "user11", "user11user");
 		
@@ -452,18 +452,92 @@ public class PlantillaSDI2_Tests1617 {
 	
 	//PR13: Crear una cuenta de usuario normal con login repetido.
 	@Test
-    public void prueba13() {
-		assertTrue(false);
+    public void prueba13() throws InterruptedException {
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 10);
+
+		TestUtils.clicarElemento(driver, "enlace");
+
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro:enlace", 10);
+
+		// Mandamos todos los datos al registro
+		elementos = driver.findElements(By.id("form-registro:input-login"));
+		elementos.get(0).sendKeys("user1");
+		
+		elementos = driver.findElements(By.id("form-registro:input-correo"));
+		elementos.get(0).sendKeys("user1@email.com");
+		
+		elementos = driver.findElements(By.id("form-registro:input-password"));
+		elementos.get(0).sendKeys("user1user");
+		
+		elementos = driver.findElements(By.id("form-registro:input-rPassword"));
+		elementos.get(0).sendKeys("user1user");
+
+		TestUtils.clicarElemento(driver, "form-registro:enlace");
+
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:j_idt15"), "Escoja"));
+		elementos = driver.findElements(By.id("form-registro:j_idt15"));
+		
+		assertEquals("Escoja otro usuario, el que ha seleccionado ya está en uso", elementos.get(0).getText());
     }
+	
 	//PR14: Crear una cuenta de usuario normal con Email incorrecto.
 	@Test
-    public void prueba14() {
-		assertTrue(false);
+    public void prueba14() throws InterruptedException {
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 10);
+		
+		TestUtils.clicarElemento(driver, "enlace");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro:enlace", 10);
+		
+		//Mandamos todos los datos al registro
+		elementos = driver.findElements(By.id("form-registro:input-login"));
+		elementos.get(0).sendKeys("user11");
+		
+		elementos = driver.findElements(By.id("form-registro:input-correo"));
+		elementos.get(0).sendKeys("user11");
+		
+		elementos = driver.findElements(By.id("form-registro:input-password"));
+		elementos.get(0).sendKeys("user11user");
+		
+		elementos = driver.findElements(By.id("form-registro:input-rPassword"));
+		elementos.get(0).sendKeys("user11user");
+		
+		TestUtils.clicarElemento(driver, "form-registro:enlace");
+		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:j_idt18"), "EMAIL"));
+		elementos = driver.findElements(By.id("form-registro:j_idt18"));
+		
+		assertEquals("El campo EMAIL no es válido", elementos.get(0).getText());
     }
+	
 	//PR15: Crear una cuenta de usuario normal con Password incorrecta.
 	@Test
-    public void prueba15() {
-		assertTrue(false);
+    public void prueba15() throws InterruptedException {
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 10);
+		
+		TestUtils.clicarElemento(driver, "enlace");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro:enlace", 10);
+		
+		//Mandamos todos los datos al registro
+		elementos = driver.findElements(By.id("form-registro:input-login"));
+		elementos.get(0).sendKeys("user11");
+		
+		elementos = driver.findElements(By.id("form-registro:input-correo"));
+		elementos.get(0).sendKeys("user11@email.com");
+		
+		elementos = driver.findElements(By.id("form-registro:input-password"));
+		elementos.get(0).sendKeys("u");
+		
+		elementos = driver.findElements(By.id("form-registro:input-rPassword"));
+		elementos.get(0).sendKeys("user11");
+		
+		TestUtils.clicarElemento(driver, "form-registro:enlace");		
+		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:j_idt21"), "CONTRASEÑA"));
+		elementos = driver.findElements(By.id("form-registro:j_idt21"));
+		
+		assertEquals(elementos.get(0).getText(), "El campo CONTRASEÑA no es válido (debe contener números y letras y tener 8 caracteres mínimo)");
     }
 	
 	//USUARIO
@@ -596,7 +670,7 @@ public class PlantillaSDI2_Tests1617 {
 		int numTarea = 0;
 		int j = 2;
 		for(int i = 1; i <= inboxTask.size(); i++) {	
-			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:"+(i - 1)+":title")));
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-listado:tablalistado:"+(i - 1)+":title"), "2"));
 			elementos = driver.findElements(By.id("form-listado:tablalistado:"+(i - 1)+":title"));
 			assertEquals(elementos.get(0).getText(), inboxTask.get(i - 1));			
 			

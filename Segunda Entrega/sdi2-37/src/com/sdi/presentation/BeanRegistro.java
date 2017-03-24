@@ -122,6 +122,7 @@ public class BeanRegistro {
 			
 		if (pass == null) {
 			Log.debug("Fallo en la validación de contraseña");
+			return;
 		}
 		
 		if(!pass.equals((String) o)){ 
