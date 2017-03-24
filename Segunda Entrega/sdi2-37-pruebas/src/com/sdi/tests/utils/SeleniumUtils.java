@@ -24,8 +24,10 @@ public class SeleniumUtils {
 			WebElement hoverElement = driver.findElement(By.id(submenu));
 			builder.moveToElement(hoverElement).perform();		
 			//Pinchamos la opcion opcionclick
-			By locator = By.id(opcionclick);
-			driver.findElement(locator).click();			
+			List<WebElement> elementos = EsperaCargaPagina(driver, "id", opcionclick, 40);
+//			By locator = By.id(opcionclick);
+//			driver.findElement(locator).click();	
+			elementos.get(0).click();
 		}
 
 		static public void textoPresentePagina(WebDriver driver, String texto)

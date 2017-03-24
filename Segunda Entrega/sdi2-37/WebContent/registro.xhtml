@@ -30,7 +30,8 @@
 						<p:inputText id="input-correo" value="#{beanRegistro.email}"
 							required="true" requiredMessage="#{msgs.tituloEmailRequerido}"
 							validatorMessage="#{msgs.tituloEmailValido}">
-							<f:validateRegex pattern=".+@.+\.[a-z]+" />
+							<f:validateRegex
+								pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$" />
 						</p:inputText>
 						<p:message for="input-correo" />
 					</h:panelGroup>		  
@@ -42,7 +43,8 @@
 							requiredMessage="#{msgs.tituloContraseñaRequerida}"
 							validatorMessage="#{msgs.tituloContraseñaValida}">
 							<f:validateLength minimum="8" />
-							<f:validateRegex pattern="(.*[0-9][a-zA-Z].*)|(.*[a-zA-Z][0-9].*)" />
+							<f:validateRegex
+								pattern="(.*[0-9][a-zA-Z].*)|(.*[a-zA-Z][0-9].*)" />
 						</p:password>
 						<p:message for="input-password" />
 					</h:panelGroup>		  
@@ -50,10 +52,11 @@
 				  #{msgs.tituloRContraseña}
 				  <h:panelGroup>
 						<p:password id="input-rPassword" value="#{beanRegistro.password2}"
-							required="true"	validator="#{beanRegistro.coincidenPasswords}"
-							requiredMessage="#{msgs.tituloContraseñaRequerida}"	
-							validatorMessage="#{msgs.tituloContraseñasIguales}">
-							<f:attribute name="password" value="form-registro:input-password" />
+							required="true"
+							requiredMessage="#{msgs.tituloContraseñaRequerida}"
+							validatorMessage="#{msgs.tituloContraseñasIguales}"
+							validator="#{beanRegistro.validarPasswords}">
+							<f:attribute name="password" value="form-registro:input-password"></f:attribute>
 						</p:password>
 						<p:message for="input-rPassword" />
 					</h:panelGroup>
@@ -61,7 +64,8 @@
 					<h:inputHidden />
 
 					<p:commandButton id="enlace" value="#{msgs.tituloRegistrar}"
-						action="#{beanRegistro.registrar}" update="Grid" process="@form" />
+						action="#{beanRegistro.registrar}" update="Grid mensajes"
+						process="@form" />
 
 				</p:panelGrid>
 			</p:panel>
@@ -72,7 +76,8 @@
 	<ui:define name="pie">
 		<p:separator />
 		<p:commandButton id="enlace" value="#{msgs.tituloEnlaceRegistro}"
-			action="/login.xhtml?faces-redirect=true" icon="ui-icon-arrowreturnthick-1-w"></p:commandButton>
+			action="/login.xhtml?faces-redirect=true"
+			icon="ui-icon-arrowreturnthick-1-w"></p:commandButton>
 		<p:separator />
 	</ui:define>
 

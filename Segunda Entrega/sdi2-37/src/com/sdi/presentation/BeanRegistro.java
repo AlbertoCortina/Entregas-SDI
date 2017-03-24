@@ -61,7 +61,14 @@ public class BeanRegistro {
 		String resultado = "";
 		try {
 			UserService uService = Services.getUserService();
-			User u = new User(login, email, password);
+			System.out.println(login);
+			System.out.println(email);
+			System.out.println(password);
+			User u = new User();
+			u.setLogin(login);
+			u.setEmail(email);
+			u.setPassword(password);
+			System.out.println(u);
 			uService.registerUser(u);
 			resultado = "EXITO";
 			Log.debug("Registro correcto");
@@ -102,38 +109,27 @@ public class BeanRegistro {
 		}
 	}
 	
-	
-	public void coincidenPasswords(FacesContext c, UIComponent ui, Object o) throws ValidatorException {
-		
-		String field1Id = (String) ui.getAttributes().get("password");
-		
-		UIInput textInput = (UIInput) c.getViewRoot().findComponent(field1Id);
-		
-		if (textInput == null)
-	        throw new IllegalArgumentException(String.format("Unable to find component with id %s",field1Id));
-		
-		String pass = (String) textInput.getValue();
-		
-		if(!pass.equals((String) o)){
-			Log.debug("Contraseñas no coinciden");
-			throw new ValidatorException(new FacesMessage("Contraseñas no coinciden"));
+	public void validarPasswords(FacesContext c, UIComponent ui, Object o) throws ValidatorException { 
+
+		String password = (String) ui.getAttributes().get("password"); 
+		UIInput textInput = (UIInput) c.getViewRoot().findComponent(password); 
+
+		if (textInput == null) {
+			throw new IllegalArgumentException(String.format("No se encuentra el componente %s", password)); 
+		}			
+			
+		String pass = (String) textInput.getValue(); 
+			
+		if (pass == null) {
+			Log.debug("Fallo en la validación de contraseña");
 		}
 		
-		Log.debug("Contraseñas coinciden");
-	}
-	
-	
-//	public void validarContraseña(FacesContext c, UIComponent ui, Object passwordConfirmation) throws ValidatorException {
-//		
-//		Password inputTextPassword = (Password)c.getViewRoot().findComponent("form-registro:input-password");
-//		String password = (String)(inputTextPassword.getSubmittedValue() != null?
-//				inputTextPassword.getSubmittedValue()
-//				: inputTextPassword.getValue());
-//		
-//		if(!password.equals(passwordConfirmation)) {
-//			Log.debug("Contraseñas distintas");
-//			throw new ValidatorException(new FacesMessage("contraseñas distintas"));
-//		}	
-//		Log.debug("Contraseñas iguales");
-//	}
+		if(!pass.equals((String) o)){ 
+				Log.debug("Contraseñas no coinciden"); 		 
+				throw new ValidatorException(new FacesMessage("Contraseñas no coinciden")); 
+		} 
+		
+		Log.debug("Contraseñas coinciden"); 
+		 
+	} 
 }

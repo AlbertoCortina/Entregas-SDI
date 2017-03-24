@@ -2,6 +2,8 @@ package com.sdi.tests.utils;
 
 import static org.junit.Assert.assertEquals;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,6 +16,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.sdi.business.Services;
 import com.sdi.business.exception.BusinessException;
+import com.sdi.dto.Task;
 import com.sdi.dto.User;
 
 public class TestUtils {
@@ -194,4 +197,85 @@ public class TestUtils {
 		return usuariosOrdenados;
 	}
 	
+	/**
+	 * Método que nos ordena los usuarios (quitando el admin) por status
+	 * @param ascendentemente
+	 * @return
+	 */
+	public static List<String> ordenarTareasInboxFechaPlaneada(boolean ascendentemente) {
+		List<String> tareasOrdenados = new ArrayList<String>();
+		List<Task> tasks = null;
+		List<User> usuarios = null;
+		Long id = 0L;
+		DateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+		
+		try {
+			usuarios = Services.getUserService().findAll();
+			
+			for(User u: usuarios) {
+				if(u.getLogin().equals("user1")){
+					id = u.getId();
+				}
+			}
+			
+			tasks = Services.getTaskService().findInboxTasksByUserId(id);
+			
+			if(ascendentemente) {
+				Collections.sort(tasks, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						return ((Task) o1).getPlanned().compareTo(((Task)o2).getPlanned());
+					}
+				});
+			}
+			else {
+				Collections.sort(tasks, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						return ((Task) o2).getPlanned().compareTo(((Task)o1).getPlanned());
+					}
+				});
+			}		
+			
+			for (Task t: tasks) {
+				tareasOrdenados.add(formateador.format(t.getPlanned()));
+			}
+			
+		} catch (BusinessException e) { }	
+		
+		return tareasOrdenados;
+	}
+	
+	/**
+	 * Método que filtrar las tareas por el nombre según una cadena que indica el usuario
+	 * @param driver
+	 * @param cadena
+	 * @return
+	 */
+	public static List<String> filtrarTareas(WebDriver driver, String cadena) {
+		List<String> tareasFiltradas = new ArrayList<String>();
+		List<Task> tasks = null;
+		List<User> usuarios = null;
+		Long id = 0L;
+		
+		try {
+			usuarios = Services.getUserService().findAll();
+			
+			for(User u: usuarios) {
+				if(u.getLogin().equals("user1")){
+					id = u.getId();
+				}
+			}
+			
+			tasks = Services.getTaskService().findInboxTasksByUserId(id);
+			
+			for (Task t: tasks){
+				if(t.getTitle().contains(cadena)) {
+					tareasFiltradas.add(t.getTitle());
+				}
+			}
+		} catch (BusinessException e) { }
+		
+		return tareasFiltradas;
+	}
 }

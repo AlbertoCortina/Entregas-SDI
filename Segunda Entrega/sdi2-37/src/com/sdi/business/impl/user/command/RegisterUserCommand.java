@@ -17,7 +17,7 @@ public class RegisterUserCommand implements Command<Long> {
 	@Override
 	public Long execute() throws BusinessException {
 		UserCheck.isNotAdmin( user );
-		UserCheck.isValidEmailSyntax( user ); 
+//		UserCheck.isValidEmailSyntax( user ); 
 		UserCheck.minLoginLength( user );
 		UserCheck.minPasswordLength( user );
 		UserCheck.notRepeatedLogin( user );

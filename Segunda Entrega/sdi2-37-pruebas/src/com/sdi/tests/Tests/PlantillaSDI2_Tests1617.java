@@ -3,11 +3,10 @@ package com.sdi.tests.Tests;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -18,6 +17,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.sdi.business.CategoryService;
 import com.sdi.business.Services;
@@ -31,30 +32,36 @@ import com.sdi.tests.utils.TestUtils;
 //Ordenamos las pruebas por el nombre del método
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) 
 public class PlantillaSDI2_Tests1617 {
-
-	WebDriver driver; 
+	
 	List<WebElement> elementos = null;
+	static WebDriver driver = getDriver(); 	
+	static WebDriverWait wait = new WebDriverWait(driver, 5);
+	String URL = "http://localhost:8180/sdi2-37";
 	
 	public PlantillaSDI2_Tests1617() {
+		
 	}
 
-	@Before
-	public void run() {
-		//Este código es para ejecutar con la versión portale de Firefox 46.0
+	public static WebDriver getDriver() {
 		File pathToBinary = new File("S:\\firefox\\FirefoxPortable.exe");
 		FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-		FirefoxProfile firefoxProfile = new FirefoxProfile();       
-		driver = new FirefoxDriver(ffBinary,firefoxProfile);
-		driver.get("http://localhost:8180/sdi2-37");
-		//Este código es para ejecutar con una versión instalada de Firex 46.0 
-//		driver = new FirefoxDriver();
-//		driver.get("http://localhost:8180/sdi2-37");		
+		FirefoxProfile firefoxProfile = new FirefoxProfile();
+		return new FirefoxDriver(ffBinary,firefoxProfile);
+	}
+	
+	@Before
+	public void setUp(){
+		driver.navigate().to(URL);
 	}
 	
 	@After
-	public void end() {
-		//Cerramos el navegador
-		//driver.quit();
+	public void tearDown(){
+		driver.manage().deleteAllCookies();
+	}
+	
+	@AfterClass
+	public static void end() {
+//		driver.quit(); 
 	}
 
 	//PRUEBAS
@@ -157,13 +164,13 @@ public class PlantillaSDI2_Tests1617 {
 			int numUsuarios = Services.getUserService().findAll().size();
 		
 			for (int i = 1; i < numUsuarios; i++) {
-				elementos = driver.findElements(By.id("login"+i));
+				elementos = driver.findElements(By.id("form-listado:tablalistado:"+(i-1)+":login"));
 				assertEquals("user"+i, elementos.get(0).getText());
 				
-				elementos = driver.findElements(By.id("email"+i));
+				elementos = driver.findElements(By.id("form-listado:tablalistado:"+(i-1)+":email"));
 				assertEquals("user"+i+"@email.com", elementos.get(0).getText());
 				
-				elementos = driver.findElements(By.id("isAdmin"+i));
+				elementos = driver.findElements(By.id("form-listado:tablalistado:"+(i-1)+":isAdmin"));
 				assertEquals("false", elementos.get(0).getText());				
 			}
 		} catch (BusinessException e) { }		
@@ -176,7 +183,7 @@ public class PlantillaSDI2_Tests1617 {
 		
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
 		
-		assertEquals("Usuario: admin1", elementos.get(0).getText());
+		assertEquals("Usuario: admin1", elementos.get(0).getText());		
 		
 		TestUtils.iniciarBaseDeDatos(driver);
 		
@@ -185,12 +192,10 @@ public class PlantillaSDI2_Tests1617 {
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);		
 		
 		//Cambiamos el estado al user1
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:0:cambiarEstado")));
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");		
 		
-		//ERROR AQUI PREGUNTAR PORQUE NO COJE EL MENSAJE YA CARGADO
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
-		
-//		assertEquals("Exito: Se ha actualizado el estado del usuario USER1 a DISABLED", elementos.get(0).getText());
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
 		
 		TestUtils.cerrarSesion(driver);
 		
@@ -215,11 +220,10 @@ public class PlantillaSDI2_Tests1617 {
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);		
 		
 		//Cambiamos el estado al user1
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:0:cambiarEstado")));
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");		
 		
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
-		
-//		assertEquals("Exito: Se ha actualizado el estado del usuario USER1 a ENABLED", elementos.get(0).getText());
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
 		
 		TestUtils.cerrarSesion(driver);
 		
@@ -244,7 +248,8 @@ public class PlantillaSDI2_Tests1617 {
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
 		
 		//Clicamos el header de login para ordenar ascendentemente
-		TestUtils.clicarElemento(driver, "form-listado:tablalistado:login");
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:loginH")));
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:loginH");
 		
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
 		
@@ -252,19 +257,24 @@ public class PlantillaSDI2_Tests1617 {
 		int numUsuarios = usuariosOrdenados.size();
 		
 		for (int i = 1; i < numUsuarios; i++) {
-			elementos = driver.findElements(By.id("login"+i));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:"+(i-1)+":login")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+(i-1)+":login"));
 			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i - 1));
 		}
 		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
+		
 		//Clicamos el header de email para ordenar descendentemente
-		TestUtils.clicarElemento(driver, "form-listado:tablalistado:login");
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:loginH")));
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:loginH");
 		
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
 		
 		usuariosOrdenados = TestUtils.ordenarPorLogin(false);	
 		
 		for (int i = 1; i < numUsuarios; i++) {
-			elementos = driver.findElements(By.id("login"+i));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:"+(i-1)+":login")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+(i-1)+":login"));
 			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i - 1));
 		}	
     }
@@ -283,7 +293,8 @@ public class PlantillaSDI2_Tests1617 {
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
 		
 		//Clicamos el header de email para ordenar ascendentemente
-		TestUtils.clicarElemento(driver, "form-listado:tablalistado:email");
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:emailH")));
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:emailH");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
 		
@@ -291,19 +302,24 @@ public class PlantillaSDI2_Tests1617 {
 		int numUsuarios = usuariosOrdenados.size();			
 		
 		for (int i = 1; i < numUsuarios; i++) {
-			elementos = driver.findElements(By.id("email"+i));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:"+(i-1)+":email")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+(i-1)+":email"));
 			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i - 1));
 		}
 		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
+		
 		//Clicamos el header de email para ordenar descendentemente
-		TestUtils.clicarElemento(driver, "form-listado:tablalistado:email");
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:emailH")));
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:emailH");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
 		
 		usuariosOrdenados = TestUtils.ordenarPorEmail(false);	
 		
 		for (int i = 1; i < numUsuarios; i++) {
-			elementos = driver.findElements(By.id("email"+i));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:"+(i-1)+":email")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+(i-1)+":email"));
 			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i - 1));
 		}
     }
@@ -323,64 +339,46 @@ public class PlantillaSDI2_Tests1617 {
 		
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion2");
 		
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);		
 		
 		//Cambiamos el estado al user1
-		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");			
-	
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:0:cambiarEstado")));
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");		
 		
-		//Cambiamos el estado al user2
-		TestUtils.clicarElemento(driver, "form-listado:tablalistado:1:cambiarEstado");			
-
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
-		
-		//Cambiamos el estado al user3
-		TestUtils.clicarElemento(driver, "form-listado:tablalistado:2:cambiarEstado");	
-	
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
-		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);		
+					
 		//Clicamos el header de status para ordenar ascendentemente
-		TestUtils.clicarElemento(driver, "form-listado:tablalistado:status");
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:statusH")));
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:statusH");
 		
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
 		
 		List<String> usuariosOrdenados = TestUtils.ordenarPorStatus(true);
 		int numUsuarios = usuariosOrdenados.size();			
 				
-		for (int i = 0; i < numUsuarios - 1; i++) {			
+		for (int i = 0; i < numUsuarios - 1; i++) {		
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:"+i+":cambiarEstado")));
 			elementos = driver.findElements(By.id("form-listado:tablalistado:"+i+":cambiarEstado"));
 			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i));
 		}
 		
 		//Clicamos el header de status para ordenar descendentemente
-		TestUtils.clicarElemento(driver, "form-listado:tablalistado:status");
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:statusH")));
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:statusH");
 	
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
 		
 		usuariosOrdenados = TestUtils.ordenarPorStatus(false);	
 		
 		for (int i = 0; i < numUsuarios; i++) {
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:"+i+":cambiarEstado")));
 			elementos = driver.findElements(By.id("form-listado:tablalistado:"+i+":cambiarEstado"));
 			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i));
-		}
-	
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		}		
 		
 		//Cambiamos el estado al user1
-		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");	
-		
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
-		
-		//Cambiamos el estado al user2
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:0:cambiarEstado")));
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");			
-
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
-		
-		//Cambiamos el estado al user3
-		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:cambiarEstado");	
-	
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
     }
 	
 	//PR11: Borrar  una cuenta de usuario normal y datos relacionados.
@@ -396,18 +394,16 @@ public class PlantillaSDI2_Tests1617 {
 		
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
 		
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:1:eliminar")));
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:1:eliminar");
 		
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
 		
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:9:confirmacion")));
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:9:confirmacion");
 		
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
-		
-//		Thread.sleep(200);
-//		
-//		SeleniumUtils.textoNoPresentePagina(driver, "user2");
-		
+			
 		TestUtils.cerrarSesion(driver);
 				
 		TestUtils.iniciarSesion(driver, "user2", "user2");
@@ -415,14 +411,44 @@ public class PlantillaSDI2_Tests1617 {
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
 		
 		assertEquals("Error login: Usuario o contraseña no válido", elementos.get(0).getText());	
-			
-    }
+	}
 	
 	//PR12: Crear una cuenta de usuario normal con datos válidos.
 	@Test
     public void prueba12() {	
-		assertTrue(false);
-    }
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 10);
+		
+		TestUtils.clicarElemento(driver, "enlace");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro:enlace", 10);
+		
+		//Mandamos todos los datos al registro
+		elementos = driver.findElements(By.id("form-registro:input-login"));
+		elementos.get(0).sendKeys("user11");
+		
+		elementos = driver.findElements(By.id("form-registro:input-correo"));
+		elementos.get(0).sendKeys("user11@email.com");
+		
+		elementos = driver.findElements(By.id("form-registro:input-password"));
+		elementos.get(0).sendKeys("user11user");
+		
+		elementos = driver.findElements(By.id("form-registro:input-rPassword"));
+		elementos.get(0).sendKeys("user11user");
+		
+		TestUtils.clicarElemento(driver, "form-registro:enlace");
+		
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("mensajes")));
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
+		
+		//Confirmamos sale el mensaje de confirmación de registro
+		assertEquals(elementos.get(0).getText(), "Exito en el registro: Se ha registrado correctamente, inicie sesión para acceder");
+	
+		TestUtils.iniciarSesion(driver, "user11", "user11user");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: user11", elementos.get(0).getText());	
+	}
 	
 	//PR13: Crear una cuenta de usuario normal con login repetido.
 	@Test
@@ -439,22 +465,152 @@ public class PlantillaSDI2_Tests1617 {
     public void prueba15() {
 		assertTrue(false);
     }
+	
 	//USUARIO
 	//PR16: Comprobar que en Inbox sólo aparecen listadas las tareas sin categoría y que son las que tienen que. Usar paginación navegando por las tres páginas.
 	@Test
     public void prueba16() {
-		assertTrue(false);
+		TestUtils.iniciarSesion(driver, "user1", "user1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: user1", elementos.get(0).getText());
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:listaInbox");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+				
+		List<String> inboxTask = null;			
+		inboxTask = TestUtils.ordenarTareasInboxFechaPlaneada(true);		
+		
+		int numTarea = 0;
+		int j = 2;
+		for(int i = 1; i <= inboxTask.size(); i++) {	
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:"+(i - 1)+":fPlaneada")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+(i - 1)+":fPlaneada"));
+			assertEquals(elementos.get(0).getText(), inboxTask.get(i - 1));
+			
+			numTarea++;
+			
+			if(numTarea % 8 == 0) {				
+				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")));
+				driver.findElement(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+			}
+		}	
     }
+	
 	//PR17: Funcionamiento correcto de la ordenación por fecha planeada.
 	@Test
     public void prueba17() {
-		assertTrue(false);
+		TestUtils.iniciarSesion(driver, "user1", "user1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: user1", elementos.get(0).getText());
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:listaInbox");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+				
+		//Clicamos el header de fecha planeada para ordenar ascendentemente
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:planeadaH")));
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:planeadaH");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		List<String> inboxTask = null;			
+		inboxTask = TestUtils.ordenarTareasInboxFechaPlaneada(true);		
+		
+		int numTarea = 0;
+		int j = 2;
+		for(int i = 1; i <= inboxTask.size(); i++) {	
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:"+(i - 1)+":fPlaneada")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+(i - 1)+":fPlaneada"));
+			assertEquals(elementos.get(0).getText(), inboxTask.get(i - 1));			
+			
+			numTarea++;
+			
+			if(numTarea % 8 == 0) {				
+				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")));
+				driver.findElement(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+			}
+		}	
+		
+		//Volvemos al principio
+		driver.findElement(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[2]")).click();
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		//Clicamos el header de fecha planeada para ordenar descendentemente	
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:planeadaH")));
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:planeadaH");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		inboxTask = TestUtils.ordenarTareasInboxFechaPlaneada(false);
+				
+		numTarea = 0;
+		j = 2;
+		for(int i = 1; i <= inboxTask.size(); i++) {	
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:"+(i - 1)+":fPlaneada")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+(i - 1)+":fPlaneada"));
+			assertEquals(elementos.get(0).getText(), inboxTask.get(i - 1));
+			
+			numTarea++;
+			
+			if(numTarea % 8 == 0) {				
+				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")));
+				driver.findElement(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+			}
+		}	
     }
+	
 	//PR18: Funcionamiento correcto del filtrado.
 	@Test
     public void prueba18() {
-		assertTrue(false);
+		TestUtils.iniciarSesion(driver, "user1", "user1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: user1", elementos.get(0).getText());
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:listaInbox");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		//Filtramos por la cadena "tarea"
+		elementos = driver.findElements(By.id("form-listado:tablalistado:tituloH:filter"));
+		elementos.get(0).sendKeys("2");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);
+		
+		List<String> inboxTask = null;			
+		inboxTask = TestUtils.filtrarTareas(driver,"2");		
+		
+		int numTarea = 0;
+		int j = 2;
+		for(int i = 1; i <= inboxTask.size(); i++) {	
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:"+(i - 1)+":title")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+(i - 1)+":title"));
+			assertEquals(elementos.get(0).getText(), inboxTask.get(i - 1));			
+			
+			numTarea++;
+			
+			if(numTarea % 8 == 0) {				
+				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")));
+				driver.findElement(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+			}
+		}
     }
+	
 	//PR19: Funcionamiento correcto de la ordenación por categoría.
 	@Test
     public void prueba19() {

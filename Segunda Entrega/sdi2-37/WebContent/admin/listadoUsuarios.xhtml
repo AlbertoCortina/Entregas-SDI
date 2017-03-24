@@ -17,28 +17,28 @@
 	<ui:define name="cuerpo">
 		<h:form id="form-listado">
 			<p:panel header="#{msgs.tituloListadoUsuarios}">
-				<p:dataTable id="tablalistado" rowIndexVar="i" var="user" value="#{beanAdmin.users}" border="1">
+				<p:dataTable id="tablalistado" var="user" value="#{beanAdmin.users}" border="1">
 					<p:column>
 						<f:facet name="header">#{msgs.tituloId}</f:facet>
-						<div id="id#{i+1}">#{user.id}</div>
+						<h:outputText id="id" value="#{user.id}"/>					
 					</p:column>
 					
-					<p:column id="login" sortBy="#{user.login}">
+					<p:column id="loginH" sortBy="#{user.login}">
 						<f:facet name="header">#{msgs.tituloLogin}</f:facet>
-						<div id="login#{i+1}">#{user.login}</div>
+						<h:outputText id="login" value="#{user.login}"/>						
 					</p:column>
 					
-					<p:column id="email" sortBy="#{user.email}">
-						<f:facet name="header">#{msgs.tituloEmail}</f:facet>
-						<div id="email#{i+1}">#{user.email}</div>
+					<p:column id="emailH" sortBy="#{user.email}">
+						<f:facet name="header">#{msgs.tituloEmail}</f:facet>						
+						<h:outputText id="email" value="#{user.email}"/>
 					</p:column>
 					
 					<p:column >
-						<f:facet name="header">#{msgs.tituloIsAdmin}</f:facet>
-						<div id="isAdmin#{i+1}">#{user.isAdmin}</div>
+						<f:facet name="header">#{msgs.tituloIsAdmin}</f:facet>						
+						<h:outputText id="isAdmin" value="#{user.isAdmin}"/>
 					</p:column>
 					
-					<p:column id="status" sortBy="#{user.status}">
+					<p:column id="statusH" sortBy="#{user.status}">
 						<f:facet name="header">#{msgs.tituloEstado}</f:facet>
 						<p:commandLink id="cambiarEstado" value="#{user.status}" action="#{beanAdmin.cambiarEstado(user)}" update="tablalistado mensajes"></p:commandLink>
 					</p:column>

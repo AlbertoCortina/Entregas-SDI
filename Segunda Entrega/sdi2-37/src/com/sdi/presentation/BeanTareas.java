@@ -2,12 +2,15 @@ package com.sdi.presentation;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+
+import alb.util.date.DateUtil;
 
 import com.sdi.business.Services;
 import com.sdi.business.exception.BusinessException;
@@ -19,13 +22,31 @@ import com.sdi.dto.User;
 public class BeanTareas {
 
 	private List<Task> tareas = null;
+	private List<Task> filtradas = null;
+	private Date fechaHoy = DateUtil.today();
 
 	public List<Task> getTareas() {
 		return tareas;
 	}
 
-	public void setTareas(List<Task> tareas) {
-		this.tareas = tareas;
+	public void setTareas(List<Task> filtradas) {
+		this.filtradas = filtradas;
+	}
+	
+	public List<Task> getFiltradas() {
+		return filtradas;
+	}
+
+	public void setFiltradas(List<Task> filtradas) {
+		this.filtradas = filtradas;
+	}
+	
+	public Date getFechaHoy() {
+		return fechaHoy;
+	}
+
+	public void setFechaHoy(Date fechaHoy) {
+		this.fechaHoy = fechaHoy;
 	}
 	
 	public String listarTareasInbox() {
@@ -36,8 +57,8 @@ public class BeanTareas {
 			
 			
 			tareas = Services.getTaskService().findInboxTasksByUserId(u.getId());
-			
-			Collections.sort(tareas, new Comparator<Object>() {
+			filtradas = tareas;
+			Collections.sort(filtradas, new Comparator<Object>() {
 				@Override
 				public int compare(Object o1, Object o2) {
 					return ((Task) o1).getPlanned().compareTo(((Task)o2).getPlanned());
