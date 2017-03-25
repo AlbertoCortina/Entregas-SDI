@@ -95,12 +95,38 @@
 		<navigation-case>
 			<from-action>#{beanTareas.listarTareasInbox}</from-action>
 			<from-outcome>EXITO</from-outcome>
-			<to-view-id>/user/listadoTareas.xhtml</to-view-id>
+			<to-view-id>/user/listadoTareasInbox.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>	
 		
 		<navigation-case>
 			<from-action>#{beanTareas.listarTareasInbox}</from-action>
+			<from-outcome>ERROR</from-outcome>
+			<to-view-id>/user/principalUsuario.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{beanTareas.listarTareasHoy}</from-action>
+			<from-outcome>EXITO</from-outcome>
+			<to-view-id>/user/listadoTareasHoy.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>	
+		
+		<navigation-case>
+			<from-action>#{beanTareas.listarTareasInbox}</from-action>
+			<from-outcome>ERROR</from-outcome>
+			<to-view-id>/user/principalUsuario.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{beanTareas.listarTareasSemana}</from-action>
+			<from-outcome>EXITO</from-outcome>
+			<to-view-id>/user/listadoTareasSemana.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>	
+		
+		<navigation-case>
+			<from-action>#{beanTareas.listarTareasSemana}</from-action>
 			<from-outcome>ERROR</from-outcome>
 			<to-view-id>/user/principalUsuario.xhtml</to-view-id>
 		</navigation-case>

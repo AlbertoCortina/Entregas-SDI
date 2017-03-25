@@ -269,11 +269,19 @@ public class TestUtils {
 			
 			tasks = Services.getTaskService().findInboxTasksByUserId(id);
 			
+			Collections.sort(tasks, new Comparator<Object>() {
+				@Override
+				public int compare(Object o1, Object o2) {
+					return ((Task) o1).getPlanned().compareTo(((Task)o2).getPlanned());
+				}
+			});
+			
 			for (Task t: tasks){
 				if(t.getTitle().contains(cadena)) {
 					tareasFiltradas.add(t.getTitle());
 				}
 			}
+			
 		} catch (BusinessException e) { }
 		
 		return tareasFiltradas;

@@ -15,7 +15,7 @@
 		<h:form id="form-login">
 			<p:panel header="#{msgs.tituloOperacionLogin}">
 				<p:panelGrid id="Grid" columns="2" cellPadding="5">
-				  #{msgs.tituloUsuario}
+				  <h:outputText id="usuario" value="#{msgs.tituloUsuario}"/>
 				  <h:panelGroup>
 						<p:inputText id="input-usuario" value="#{beanLogin.login}"
 							required="true"
@@ -24,7 +24,7 @@
 						<p:message for="input-usuario" />
 					</h:panelGroup>			  		  
 				  
-				  #{msgs.tituloContraseña}
+				  <h:outputText id="contraseña" value=" #{msgs.tituloContraseña}"/>				 
 				  <h:panelGroup>
 						<p:password id="input-contraseña" value="#{beanLogin.contraseña}"
 							required="true"

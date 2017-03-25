@@ -22,11 +22,10 @@
 	<h:body>
 		<h:form id="form-cabecera">			
 				<center>
-					<h1>#{msgs.tituloAplicacion1}</h1>
-					<!--  <br /> <br /> -->
+					<h1>#{msgs.tituloAplicacion1}</h1>					
 					<h2>#{msgs.tituloAplicacion2}</h2>
 				</center>
-				<!-- <br /> -->
+				
 				<table border="5" align="center">
 					<tr>
 						<th class="title">
@@ -37,12 +36,15 @@
 				<br/>
 			
 				<p:menubar>										
-					<p:menuitem value="#{msgs.tituloInicio}" action="/user/principalUsuario.xhtml?faces-redirect=true" icon="ui-icon-home"></p:menuitem>
+					<p:menuitem value="#{msgs.tituloInicio}" action="/user/principalUsuario.xhtml?faces-redirect=true" icon="ui-icon-home"/>
 										
 					<ui:insert name="barraMenu_Opciones">
 						<p:submenu id="submenuOpciones" label="#{msgs.tituloListas}" icon="ui-icon-gear">							
-							<p:menuitem id="listaInbox" value="#{msgs.tituloListaInbox}" action="#{beanTareas.listarTareasInbox}"/>			
+							<p:menuitem id="listaInbox" value="#{msgs.tituloListaInbox}" action="#{beanTareas.listarTareasInbox}"/>	
+							<p:menuitem id="listaHoy" value="#{msgs.tituloListaHoy}" action="#{beanTareas.listarTareasHoy}"/>	
+							<p:menuitem id="listaSemana" value="#{msgs.tituloListaSemana}" action="#{beanTareas.listarTareasSemana}"/>	
 						</p:submenu>
+						<p:menuitem id="añadirTarea" value="#{msgs.tituloAñadirTarea}" icon="ui-icon-gear"/> 
 					</ui:insert>					
 					
 					<ui:insert name="barraMenu_Usuario">
@@ -59,12 +61,11 @@
 				</p:menubar>					
 		</h:form>		
 
-		<ui:insert name="mensajes">
-			<!--<p:growl id="mensajes" showDetail="true" globalOnly="true" sticky="true"/>-->
+		<ui:insert name="mensajes">			
 			<p:messages id="mensajes" showDetail="true" globalOnly="true"/>
 		</ui:insert>
 		
-		<ui:insert name="cuerpo">#{msgs.tituloDefectoCuerpo}</ui:insert>					
+		<ui:insert name="cuerpo"></ui:insert>					
 
 	</h:body>
 <!--  </f:view>-->

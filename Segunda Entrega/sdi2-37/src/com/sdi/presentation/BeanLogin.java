@@ -59,8 +59,7 @@ public class BeanLogin {
 				resultado = "EXITO_NORMAL";
 			}
 
-		} catch (Exception e) {
-			Log.debug("No se ha encontrado un usuario con el login y la contraseña especificadas");
+		} catch (Exception e) {			
 			resultado = "ERROR";
 			
 			FacesContext.getCurrentInstance().addMessage(
@@ -68,6 +67,8 @@ public class BeanLogin {
 					new FacesMessage(FacesMessage.SEVERITY_WARN, 
 							Internacionalizar.mensajes().getString("tituloError") + " ", 
 							Internacionalizar.mensajes().getString("mensajeError")));
+			
+			Log.debug("No se ha encontrado un usuario con el login y la contraseña especificadas");
 		}
 
 		login = null;

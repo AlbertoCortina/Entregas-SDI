@@ -474,8 +474,8 @@ public class PlantillaSDI2_Tests1617 {
 
 		TestUtils.clicarElemento(driver, "form-registro:enlace");
 
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:j_idt15"), "Escoja"));
-		elementos = driver.findElements(By.id("form-registro:j_idt15"));
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:j_idt11"), "Escoja"));
+		elementos = driver.findElements(By.id("form-registro:j_idt11"));
 		
 		assertEquals("Escoja otro usuario, el que ha seleccionado ya está en uso", elementos.get(0).getText());
     }
@@ -504,8 +504,8 @@ public class PlantillaSDI2_Tests1617 {
 		
 		TestUtils.clicarElemento(driver, "form-registro:enlace");
 		
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:j_idt18"), "EMAIL"));
-		elementos = driver.findElements(By.id("form-registro:j_idt18"));
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:j_idt13"), "EMAIL"));
+		elementos = driver.findElements(By.id("form-registro:j_idt13"));
 		
 		assertEquals("El campo EMAIL no es válido", elementos.get(0).getText());
     }
@@ -534,8 +534,8 @@ public class PlantillaSDI2_Tests1617 {
 		
 		TestUtils.clicarElemento(driver, "form-registro:enlace");		
 		
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:j_idt21"), "CONTRASEÑA"));
-		elementos = driver.findElements(By.id("form-registro:j_idt21"));
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:j_idt15"), "CONTRASEÑA"));
+		elementos = driver.findElements(By.id("form-registro:j_idt15"));
 		
 		assertEquals(elementos.get(0).getText(), "El campo CONTRASEÑA no es válido (debe contener números y letras y tener 8 caracteres mínimo)");
     }
@@ -720,11 +720,40 @@ public class PlantillaSDI2_Tests1617 {
     public void prueba25() {
 		assertTrue(false);
     }
+	
 	//PR26: Confirmar una tarea, inhabilitar el filtro de tareas terminadas, ir a la pagina donde está la tarea terminada y comprobar que se muestra. 
 	@Test
-    public void prueba26() {
-		assertTrue(false);
-    }
+    public void prueba26() throws InterruptedException {
+		String titulo = "";
+		
+		TestUtils.iniciarSesion(driver, "user1", "user1");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:listaInbox");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		titulo = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado:0:title", 10).get(0).getText();
+		
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:0:finalizar");		
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		TestUtils.clicarElemento(driver, "form-listado:finalizadas");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);		
+		
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span[3]")));
+		driver.findElement(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span[3]")).click();
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado:19:title", 20);
+		
+		assertEquals(titulo, elementos.get(0).getText());
+	}
+	
 	//PR27: Crear una tarea sin categoría y comprobar que se muestra en la lista Inbox.
 	@Test
     public void prueba27() {
@@ -789,16 +818,101 @@ public class PlantillaSDI2_Tests1617 {
 		SeleniumUtils.textoPresentePagina(driver, "Usuario");
 		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
     }
+	
 	//PR35: Cambio del idioma por defecto a un segundo idioma. (Probar algunas vistas)
 	@Test
     public void prueba35() {
-		assertTrue(false);
-    }
+		//Login.xhtml		
+		SeleniumUtils.textoPresentePagina(driver, "Usuario");
+		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-cabecera:idiomas", 10);
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas", "form-cabecera:ingles");
+   		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-login:usuario"), "Username"));
+		SeleniumUtils.textoPresentePagina(driver, "Username");
+		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-login:contraseña"), "Password"));
+		SeleniumUtils.textoPresentePagina(driver, "Password");
+	
+		//Registro.xhtml
+		TestUtils.clicarElemento(driver, "enlace");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);
+		
+		SeleniumUtils.textoPresentePagina(driver, "Username");
+		SeleniumUtils.textoPresentePagina(driver, "Email");
+		SeleniumUtils.textoPresentePagina(driver, "Password");
+		SeleniumUtils.textoPresentePagina(driver, "Repeat password");
+	}
+	
 	//PR36: Cambio del idioma por defecto a un segundo idioma y vuelta al idioma por defecto. (Probar algunas vistas)
 	@Test
-    public void prueba36() {
-		assertTrue(false);
+    public void prueba36() throws InterruptedException {
+		//Login.xhtml		
+		SeleniumUtils.textoPresentePagina(driver, "Usuario");
+		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login", 10);
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas", "form-cabecera:ingles");
+   		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-login:usuario"), "Username"));
+		SeleniumUtils.textoPresentePagina(driver, "Username");
+		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-login:contraseña"), "Password"));
+		SeleniumUtils.textoPresentePagina(driver, "Password");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login", 10);
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas", "form-cabecera:español");
+
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-login:usuario"), "Usuario"));
+		SeleniumUtils.textoPresentePagina(driver, "Usuario");
+		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-login:contraseña"), "Contraseña"));
+		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
+		
+		//Registro.xhtml
+		TestUtils.clicarElemento(driver, "enlace");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas", "form-cabecera:español");
+		
+		SeleniumUtils.textoPresentePagina(driver, "Usuario");
+		SeleniumUtils.textoPresentePagina(driver, "Email");
+		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
+		SeleniumUtils.textoPresentePagina(driver, "Repetir contraseña");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas", "form-cabecera:ingles");
+		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:usuario"), "Username"));
+		SeleniumUtils.textoPresentePagina(driver, "Username");
+		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:email"), "Email"));
+		SeleniumUtils.textoPresentePagina(driver, "Email");
+		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:contraseña"), "Password"));
+		SeleniumUtils.textoPresentePagina(driver, "Password");
+		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:Rcontraseña"), "Repeat password"));
+		SeleniumUtils.textoPresentePagina(driver, "Repeat password");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas", "form-cabecera:español");
+		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:usuario"), "Usuario"));
+		SeleniumUtils.textoPresentePagina(driver, "Usuario");
+		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:email"), "Email"));
+		SeleniumUtils.textoPresentePagina(driver, "Email");
+		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:contraseña"), "Contraseña"));
+		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
+		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-registro:Rcontraseña"), "Repetir contraseña"));
+		SeleniumUtils.textoPresentePagina(driver, "Repetir contraseña");
     }
+	
 	//PR37: Intento de acceso a un  URL privado de administrador con un usuario autenticado como usuario normal.
 	@Test
     public void prueba37() {

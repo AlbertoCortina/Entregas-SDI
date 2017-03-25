@@ -27,22 +27,21 @@
 			<br />
 
 			<p:menubar>
-				<p:submenu style="float:right" label="#{msgs.textoIdioma}"
+				<p:submenu id="idiomas" style="float:right" label="#{msgs.textoIdioma}"
 					icon="ui-icon-flag">
-					<p:menuitem value="#{msgs.enlaceIdiomaES}"
+					<p:menuitem id="español" value="#{msgs.enlaceIdiomaES}"
 						actionListener="#{beanSettings.setSpanish}" update="@all" />
-					<p:menuitem value="#{msgs.enlaceIdiomaEN}"
+					<p:menuitem id="ingles" value="#{msgs.enlaceIdiomaEN}"
 						actionListener="#{beanSettings.setEnglish}" update="@all" />
 				</p:submenu>
 			</p:menubar>
 		</h:form>		
 
-		<ui:insert name="mensajes">
-			<!-- <p:growl id="mensajes" showDetail="true" globalOnly="true" sticky="true"/> -->
+		<ui:insert name="mensajes">			
 			<p:messages id="mensajes" showDetail="true" globalOnly="true" />
 		</ui:insert>
-
-		<ui:insert name="cuerpo">#{msgs.tituloDefectoCuerpo}</ui:insert>
+		
+		<ui:insert name="cuerpo"></ui:insert>
 
 		<ui:insert name="pie"></ui:insert>
 
