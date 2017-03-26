@@ -450,21 +450,91 @@ public class PlantillaSDI2_Tests1617 {
 		assertEquals("Usuario: user11", elementos.get(0).getText());	
 	}
 	
-	//PR13: Crear una cuenta de usuario normal con login repetido.
+	// PR13: Crear una cuenta de usuario normal con login repetido.
 	@Test
-    public void prueba13() {
-		assertTrue(false);
-    }
-	//PR14: Crear una cuenta de usuario normal con Email incorrecto.
+	public void prueba13() throws InterruptedException {
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 10);
+
+		TestUtils.clicarElemento(driver, "enlace");
+
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-registro:enlace", 10);
+
+		// Mandamos todos los datos al registro
+		elementos = driver.findElements(By.id("form-registro:input-login"));
+		elementos.get(0).sendKeys("user1");
+		elementos = driver.findElements(By.id("form-registro:input-correo"));
+		elementos.get(0).sendKeys("user1@email.com");
+		elementos = driver.findElements(By.id("form-registro:input-password"));
+		elementos.get(0).sendKeys("user1user");
+		elementos = driver.findElements(By.id("form-registro:input-rPassword"));
+		elementos.get(0).sendKeys("user1user");
+
+		TestUtils.clicarElemento(driver, "form-registro:enlace");
+
+		Thread.sleep(100);
+		elementos = driver.findElements(By.id("form-registro:j_idt15"));
+		assertEquals(elementos.get(0).getText(),
+				"Escoja otro usuario, el que ha seleccionado ya está en uso");
+	}
+
+	// PR14: Crear una cuenta de usuario normal con Email incorrecto.
 	@Test
-    public void prueba14() {
-		assertTrue(false);
-    }
-	//PR15: Crear una cuenta de usuario normal con Password incorrecta.
+	public void prueba14() throws InterruptedException {
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 10);
+
+		TestUtils.clicarElemento(driver, "enlace");
+
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-registro:enlace", 10);
+
+		// Mandamos todos los datos al registro
+		elementos = driver.findElements(By.id("form-registro:input-login"));
+		elementos.get(0).sendKeys("user11");
+		elementos = driver.findElements(By.id("form-registro:input-correo"));
+		elementos.get(0).sendKeys("user11");
+		elementos = driver.findElements(By.id("form-registro:input-password"));
+		elementos.get(0).sendKeys("user11user");
+		elementos = driver.findElements(By.id("form-registro:input-rPassword"));
+		elementos.get(0).sendKeys("user11user");
+
+		TestUtils.clicarElemento(driver, "form-registro:enlace");
+
+		Thread.sleep(100);
+		elementos = driver.findElements(By.id("form-registro:j_idt18"));
+		assertEquals(elementos.get(0).getText(), "El campo EMAIL no es válido");
+	}
+
+	// PR15: Crear una cuenta de usuario normal con Password incorrecta.
 	@Test
-    public void prueba15() {
-		assertTrue(false);
-    }
+	public void prueba15() throws InterruptedException {
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 10);
+
+		TestUtils.clicarElemento(driver, "enlace");
+
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-registro:enlace", 10);
+
+		// Mandamos todos los datos al registro
+		elementos = driver.findElements(By.id("form-registro:input-login"));
+		elementos.get(0).sendKeys("user11");
+		elementos = driver.findElements(By.id("form-registro:input-correo"));
+		elementos.get(0).sendKeys("user11@email.com");
+		elementos = driver.findElements(By.id("form-registro:input-password"));
+		elementos.get(0).sendKeys("user11");
+		elementos = driver.findElements(By.id("form-registro:input-rPassword"));
+		elementos.get(0).sendKeys("user11");
+
+		TestUtils.clicarElemento(driver, "form-registro:enlace");
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By
+				.id("form-registro:j_idt21")));
+
+		elementos = driver.findElements(By.id("form-registro:j_idt21"));
+		assertEquals(
+				elementos.get(0).getText(),
+				"El campo CONTRASEÑA no es válido (debe contener números y letras y tener 8 caracteres mínimo)");
+	}
 	
 	//USUARIO
 	//PR16: Comprobar que en Inbox sólo aparecen listadas las tareas sin categoría y que son las que tienen que. Usar paginación navegando por las tres páginas.
