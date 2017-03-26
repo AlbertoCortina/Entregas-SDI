@@ -81,7 +81,7 @@ public class BeanRegistro {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, 
-							Internacionalizar.mensajes().getString("tituloExitoRegistro") + " ", 
+							Internacionalizar.mensajes().getString("tituloExito") + " ", 
 							Internacionalizar.mensajes().getString("tituloMensajeExitoRegistro")));
 			FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 			
@@ -92,7 +92,7 @@ public class BeanRegistro {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_WARN, 
-							Internacionalizar.mensajes().getString("tituloErrorRegistro") + " ", 
+							Internacionalizar.mensajes().getString("tituloError") + " ", 
 							Internacionalizar.mensajes().getString("tituloMensajeErrorRegistro")));
 			
 			resultado = "ERROR";

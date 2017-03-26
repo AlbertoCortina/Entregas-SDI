@@ -8,7 +8,6 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.behavior.AjaxBehavior;
 import javax.faces.context.FacesContext;
 
 import alb.util.date.DateUtil;
@@ -18,7 +17,7 @@ import com.sdi.business.Services;
 import com.sdi.business.TaskService;
 import com.sdi.business.exception.BusinessException;
 import com.sdi.dto.Task;
-import com.sdi.dto.User;
+import com.sdi.presentation.util.Internacionalizar;
 
 @ManagedBean(name="beanTareas")
 @SessionScoped
@@ -57,8 +56,7 @@ public class BeanTareas {
 		String resultado = "";
 		try {
 			BeanUser u =  (BeanUser) FacesContext.getCurrentInstance().getExternalContext()
-			.getSessionMap().get("userSession");
-			
+			.getSessionMap().get("userSession");			
 			
 			tareas = Services.getTaskService().findInboxTasksByUserId(u.getId());			
 			
@@ -70,13 +68,14 @@ public class BeanTareas {
 			});		
 			filtradas = tareas;
 			
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito: ", "Se ha cargado la lista de tareas Inbox"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, Internacionalizar.mensajes().getString("tituloExito") +" ", Internacionalizar.mensajes().getString("tituloMensajeExitoInbox")));
 			FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 			
 			resultado = "EXITO";
 			Log.debug("Se listan tareas inbox");
 		}
 		catch(BusinessException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, Internacionalizar.mensajes().getString("tituloError") +" ", "No se ha podido cargar la lista de tareas Inbox"));
 			resultado = "ERROR";
 			Log.debug("Error listando tareas inbox");
 		}
@@ -91,16 +90,41 @@ public class BeanTareas {
 	
 	public String listarTareasSemana() {
 		String resultado = "";
-		return null;
+		try {
+			BeanUser u =  (BeanUser) FacesContext.getCurrentInstance().getExternalContext()
+			.getSessionMap().get("userSession");			
+			
+			tareas = Services.getTaskService().findWeekTasksByUserId(u.getId());			
+			
+			Collections.sort(tareas, new Comparator<Object>() {
+				@Override
+				public int compare(Object o1, Object o2) {
+					return ((Task) o1).getPlanned().compareTo(((Task)o2).getPlanned());
+				}
+			});					
+			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito: ", "Se ha cargado la lista de tareas Semana"));
+			FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+			
+			resultado = "EXITO";
+			Log.debug("Se listan tareas semana");
+		}
+		catch(BusinessException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error: ", "No se ha cargar la lista de tareas Semana"));
+			
+			resultado = "ERROR";
+			Log.debug("Error listando tareas semana");
+		}
+		
+		return resultado;
 	}
 	
 	public String nombreCategoria(Long id) {
+		String categoria = "";
 		try {
-			if(id != null) {
-				return Services.getCategoryService().findCategoryById(id).getName();
-			}			
+			categoria = Services.getCategoryService().findCategoryById(id).getName();
 		} catch (BusinessException e) { }
-		return null;
+		return categoria;
 	}
 	
 	public void mostrarFinalizadas(){	
@@ -156,12 +180,11 @@ public class BeanTareas {
 				filtradas = tareas;				
 			}			
 			
-			Log.debug("Tarea actualizada");
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito: ", "Se ha marcado como finalizada la tarea "+tarea.getTitle()));
-			
-		} catch (BusinessException e) {
-			Log.debug("Error actualizando tarea");
+			Log.debug("Tarea actualizada");
+		} catch (BusinessException e) {			
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error: ", "No se ha podido marcar como finalizada la tarea "+tarea.getTitle()));
+			Log.debug("Error actualizando tarea");
 		}
 	}
 }

@@ -10,21 +10,16 @@
 	<!-- TÍTULO -->
 	<ui:define name="titulo">#{msgs.tituloListadoTareas}</ui:define>
 
-	<!-- BARRA DE MENÚ -->
-	<!--  <ui:define name="barraMenu_Opciones"></ui:define>-->
-
-	<!-- MENSAJES -->
-
 	<!-- CUERPO -->
-		
-	<ui:define name="cuerpo">		
-		<h:form id="form-listado">		
-			<p:panel header="#{msgs.tituloListadoTareas}">
-				<h:outputText value="#{msgs.tituloMostrarFinalizadas}"/>			
+	<ui:define name="cuerpo">
+		<h:form id="form-listado">
+			<p:panel header="#{msgs.tituloListadoTareasInbox}">
+				<h:outputText id="mostrar" value="#{msgs.tituloMostrarFinalizadas}" />
 				<p:selectBooleanCheckbox id="finalizadas">
-					<p:ajax update="tablalistado" listener="#{beanTareas.mostrarFinalizadas}"></p:ajax>
+					<p:ajax update="tablalistado"
+						listener="#{beanTareas.mostrarFinalizadas}"></p:ajax>
 				</p:selectBooleanCheckbox>
-				
+
 				<p:dataTable id="tablalistado" var="tarea"
 					value="#{beanTareas.tareas}" border="1" rows="8" paginator="true"
 					filteredValue="#{beanTareas.filtradas}"
@@ -35,7 +30,7 @@
 					<p:column id="tituloH" filterBy="#{tarea.title}"
 						filterMatchMode="contains">
 						<f:facet name="header">#{msgs.tituloTarea}</f:facet>
-						<h:outputText id="title" value="#{tarea.title}"/>
+						<h:outputText id="title" value="#{tarea.title}" />
 					</p:column>
 
 					<p:column>
@@ -66,12 +61,18 @@
 
 					<p:column>
 						<f:facet name="header">#{msgs.tituloCategoria}</f:facet>
-						<h:outputText id="categoria" value="#{beanTareas.nombreCategoria(tarea.categoryId)}" />
+						<h:outputText id="categoria"
+							value="#{beanTareas.nombreCategoria(tarea.categoryId)}" />
 					</p:column>
-					
+
 					<p:column>
-						<p:commandButton id="finalizar" rendered="#{tarea.finished eq null}" value="#{msgs.tituloFinalizarTarea}" actionListener="#{beanTareas.finalizarTarea(tarea)}" update="tablalistado mensajes"/>
-						<p:commandButton id="editar" rendered="#{tarea.finished eq null}" value="#{msgs.tituloEditarTarea}" update="tablalistado mensajes"/>
+						<p:commandButton id="finalizar"
+							rendered="#{tarea.finished eq null}"
+							value="#{msgs.tituloFinalizarTarea}"
+							actionListener="#{beanTareas.finalizarTarea(tarea)}"
+							update="tablalistado mensajes" />
+						<p:commandButton id="editar" rendered="#{tarea.finished eq null}"
+							value="#{msgs.tituloEditarTarea}" update="tablalistado mensajes" />
 					</p:column>
 
 				</p:dataTable>

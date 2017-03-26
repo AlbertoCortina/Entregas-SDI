@@ -31,7 +31,7 @@ public class TestUtils {
 	 * @param password
 	 */
 	public static void iniciarSesion(WebDriver driver, String login, String password) {
-		//Pone el lgoin
+		//Pone el login
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login:input-usuario", 10);
 		elementos.get(0).sendKeys(login);
 		
@@ -198,7 +198,7 @@ public class TestUtils {
 	}
 	
 	/**
-	 * Método que nos ordena los usuarios (quitando el admin) por status
+	 * Método que nos ordena las tareas Inbox (quitando el admin) por fecha planeada
 	 * @param ascendentemente
 	 * @return
 	 */
@@ -247,6 +247,98 @@ public class TestUtils {
 	}
 	
 	/**
+	 * Método que nos ordena las tareas Inbox (quitando el admin) por fecha planeada
+	 * @param ascendentemente
+	 * @return
+	 */
+	public static List<String> ordenarTareasSemanaFechaPlaneada(boolean ascendentemente) {
+		List<String> tareasOrdenados = new ArrayList<String>();
+		List<Task> tasks = null;
+		List<User> usuarios = null;
+		Long id = 0L;
+		DateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+		
+		try {
+			usuarios = Services.getUserService().findAll();
+			
+			for(User u: usuarios) {
+				if(u.getLogin().equals("user1")){
+					id = u.getId();
+				}
+			}
+			
+			tasks = Services.getTaskService().findWeekTasksByUserId(id);
+			
+			if(ascendentemente) {
+				Collections.sort(tasks, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						return ((Task) o1).getPlanned().compareTo(((Task)o2).getPlanned());
+					}
+				});
+			}
+			else {
+				Collections.sort(tasks, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						return ((Task) o2).getPlanned().compareTo(((Task)o1).getPlanned());
+					}
+				});
+			}		
+			
+			for (Task t: tasks) {
+				tareasOrdenados.add(formateador.format(t.getPlanned()));
+			}
+			
+		} catch (BusinessException e) { }	
+		
+		return tareasOrdenados;
+	}
+	
+	public static List<String> ordenarTareasSemanaTitulo(boolean ascendentemente) {
+		List<String> tareasOrdenados = new ArrayList<String>();
+		List<Task> tasks = null;
+		List<User> usuarios = null;
+		Long id = 0L;
+		
+		try {
+			usuarios = Services.getUserService().findAll();
+			
+			for(User u: usuarios) {
+				if(u.getLogin().equals("user1")){
+					id = u.getId();
+				}
+			}
+			
+			tasks = Services.getTaskService().findWeekTasksByUserId(id);
+			
+			if(ascendentemente) {
+				Collections.sort(tasks, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						return ((Task) o1).getTitle().compareTo(((Task)o2).getTitle());
+					}
+				});
+			}
+			else {
+				Collections.sort(tasks, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						return ((Task) o2).getTitle().compareTo(((Task)o1).getTitle());
+					}
+				});
+			}		
+			
+			for (Task t: tasks) {
+				tareasOrdenados.add(t.getTitle());
+			}
+			
+		} catch (BusinessException e) { }	
+		
+		return tareasOrdenados;
+	}
+	
+	/**
 	 * Método que filtrar las tareas por el nombre según una cadena que indica el usuario
 	 * @param driver
 	 * @param cadena
@@ -286,4 +378,6 @@ public class TestUtils {
 		
 		return tareasFiltradas;
 	}
+
+	
 }

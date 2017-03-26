@@ -6,67 +6,84 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	
-<!--  <f:view locale="#{settings.locale}">-->
+
+<f:view locale="#{beanSettings.locale}">
 	<h:head>
 		<title>#{msgs.tituloHead}</title>
 		<style type="text/css">
-            .retrasada {
-                background-color: #f7b4a5  
-            }
-            .finalizada {
-             	background-color: #beffdb
-            }
-        </style>
+			.retrasada {
+				background-color: #f7b4a5;
+				color:red;
+			}
+			
+			.finalizada {
+				background-color: #beffdb;
+				color:green;
+			}
+	</style>
 	</h:head>
 	<h:body>
-		<h:form id="form-cabecera">			
-				<center>
-					<h1>#{msgs.tituloAplicacion1}</h1>					
-					<h2>#{msgs.tituloAplicacion2}</h2>
-				</center>
-				
-				<table border="5" align="center">
-					<tr>
-						<th class="title">
-							<ui:insert name="titulo">#{msgs.tituloDefectoCabecera}</ui:insert>
-						</th>
-					</tr>
-				</table>
-				<br/>
-			
-				<p:menubar>										
-					<p:menuitem value="#{msgs.tituloInicio}" action="/user/principalUsuario.xhtml?faces-redirect=true" icon="ui-icon-home"/>
-										
-					<ui:insert name="barraMenu_Opciones">
-						<p:submenu id="submenuOpciones" label="#{msgs.tituloListas}" icon="ui-icon-gear">							
-							<p:menuitem id="listaInbox" value="#{msgs.tituloListaInbox}" action="#{beanTareas.listarTareasInbox}"/>	
-							<p:menuitem id="listaHoy" value="#{msgs.tituloListaHoy}" action="#{beanTareas.listarTareasHoy}"/>	
-							<p:menuitem id="listaSemana" value="#{msgs.tituloListaSemana}" action="#{beanTareas.listarTareasSemana}"/>	
-						</p:submenu>
-						<p:menuitem id="añadirTarea" value="#{msgs.tituloAñadirTarea}" icon="ui-icon-gear"/> 
-					</ui:insert>					
-					
-					<ui:insert name="barraMenu_Usuario">
-						<f:facet name="options">
-							<div id="nombreUsuario" style="display:inline; padding-right: 0.7em;">#{msgs.tituloUsuario}: #{userSession.login}</div>
-							<div style="display:inline; padding-right: 0.7em;"><p:commandButton id="botonCerrarSesion"  action="#{beanLogin.cerrarSesion}" icon="ui-icon-power"/></div>
-						</f:facet>
-					</ui:insert>
-					
-					<p:submenu style="float:right" label="#{msgs.textoIdioma}" icon="ui-icon-flag">
-						<p:menuitem value="#{msgs.enlaceIdiomaES}" actionListener="#{settings.setSpanish}" update="@all" />
-						<p:menuitem value="#{msgs.enlaceIdiomaEN}" actionListener="#{settings.setEnglish}" update="@all" />
-					</p:submenu>
-				</p:menubar>					
-		</h:form>		
+		<h:form id="form-cabecera">
+			<center>
+				<h1>#{msgs.tituloAplicacion1}</h1>
+				<h2>#{msgs.tituloAplicacion2}</h2>
+			</center>
 
-		<ui:insert name="mensajes">			
-			<p:messages id="mensajes" showDetail="true" globalOnly="true"/>
+			<table border="5" align="center">
+				<tr>
+					<th class="title"><ui:insert name="titulo">#{msgs.tituloDefectoCabecera}</ui:insert>
+					</th>
+				</tr>
+			</table>
+			<br />
+
+			<p:menubar>
+				<p:menuitem value="#{msgs.tituloInicio}"
+					action="/user/principalUsuario.xhtml?faces-redirect=true"
+					icon="ui-icon-home" />
+
+				<ui:insert name="barraMenu_Opciones">
+					<p:submenu id="submenuOpciones" label="#{msgs.tituloListas}"
+						icon="ui-icon-gear">
+						<p:menuitem id="listaInbox" value="#{msgs.tituloListaInbox}"
+							action="#{beanTareas.listarTareasInbox}" />
+						<p:menuitem id="listaHoy" value="#{msgs.tituloListaHoy}"
+							action="#{beanTareas.listarTareasHoy}" />
+						<p:menuitem id="listaSemana" value="#{msgs.tituloListaSemana}"
+							action="#{beanTareas.listarTareasSemana}" />
+					</p:submenu>
+					<p:menuitem id="añadirTarea" value="#{msgs.tituloAñadirTarea}"
+						icon="ui-icon-gear" />
+				</ui:insert>
+
+				<ui:insert name="barraMenu_Usuario">
+					<f:facet name="options">
+						<div id="nombreUsuario"
+							style="display: inline; padding-right: 0.7em;">#{msgs.tituloUsuario}:
+							#{userSession.login}</div>
+						<div style="display: inline; padding-right: 0.7em;">
+							<p:commandButton id="botonCerrarSesion"
+								action="#{beanLogin.cerrarSesion}" icon="ui-icon-power" />
+						</div>
+					</f:facet>
+				</ui:insert>
+
+				<p:submenu style="float:right" label="#{msgs.textoIdioma}"
+					icon="ui-icon-flag">
+					<p:menuitem value="#{msgs.enlaceIdiomaES}"
+						actionListener="#{beanSettings.setSpanish}" update="@all" />
+					<p:menuitem value="#{msgs.enlaceIdiomaEN}"
+						actionListener="#{beanSettings.setEnglish}" update="@all" />
+				</p:submenu>
+			</p:menubar>
+		</h:form>
+
+		<ui:insert name="mensajes">
+			<p:messages id="mensajes" showDetail="true" globalOnly="true" />
 		</ui:insert>
-		
-		<ui:insert name="cuerpo"></ui:insert>					
+
+		<ui:insert name="cuerpo"></ui:insert>
 
 	</h:body>
-<!--  </f:view>-->
+</f:view>
 </html>

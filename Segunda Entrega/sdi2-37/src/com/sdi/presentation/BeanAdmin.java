@@ -64,7 +64,7 @@ public class BeanAdmin {
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO,
 							Internacionalizar.mensajes().getString(
-									"tituloExitoBase")
+									"tituloExito")
 									+ " ", Internacionalizar.mensajes()
 									.getString("tituloMensajeExitoBase")));
 			FacesContext.getCurrentInstance().getExternalContext().getFlash()
@@ -76,7 +76,7 @@ public class BeanAdmin {
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,
 							Internacionalizar.mensajes().getString(
-									"tituloErrorBase")
+									"tituloError")
 									+ " ", Internacionalizar.mensajes()
 									.getString("tituloMensajeErrorBase")));
 			FacesContext.getCurrentInstance().getExternalContext().getFlash()
@@ -104,7 +104,7 @@ public class BeanAdmin {
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO,
 							Internacionalizar.mensajes().getString(
-									"tituloExitoListar")
+									"tituloExito")
 									+ " ", Internacionalizar.mensajes()
 									.getString("tituloMensajeExitoListar")));
 			FacesContext.getCurrentInstance().getExternalContext().getFlash()
@@ -170,7 +170,14 @@ public class BeanAdmin {
 			if (!u.getIsAdmin()) {
 				for (int i = 1; i <= NUMERO_TAREAS_HOY; i++) {
 					Task t = new Task();
-					t.setTitle("tarea" + i);
+					
+					if(String.valueOf(i).length() == 1) {
+						t.setTitle("tarea0" + i);
+					}
+					else {
+						t.setTitle("tarea" + i);
+					}
+					
 					t.setComments("comentario: " + t.getTitle() + "_"
 							+ u.getLogin());
 					t.setCreated(new Date());
@@ -198,7 +205,13 @@ public class BeanAdmin {
 					c.add(Calendar.DAY_OF_MONTH,
 							(int) Math.floor(Math.random() * (6 - 1 + 1) + 1));
 					Task t = new Task();
-					t.setTitle("tarea" + i);
+					
+					if(String.valueOf(i).length() == 1) {
+						t.setTitle("tarea0" + i);
+					}
+					else {
+						t.setTitle("tarea" + i);
+					}
 					t.setComments("comentario: " + t.getTitle() + "_"
 							+ u.getLogin());
 					t.setCreated(new Date());
@@ -228,7 +241,14 @@ public class BeanAdmin {
 					c.add(Calendar.DAY_OF_MONTH,
 							-(int) Math.floor(Math.random() * (6 - 1 + 1) + 1));
 					Task t = new Task();
-					t.setTitle("tarea" + i);
+					
+					if(String.valueOf(i).length() == 1) {
+						t.setTitle("tarea0" + i);
+					}
+					else {
+						t.setTitle("tarea" + i);
+					}
+					
 					t.setComments("comentario: " + t.getTitle() + "_"
 							+ u.getLogin());
 					t.setCreated(new Date());
@@ -280,7 +300,7 @@ public class BeanAdmin {
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO,
 							Internacionalizar.mensajes().getString(
-									"tituloExitoEstado"), Internacionalizar
+									"tituloExito") + " ", Internacionalizar
 									.mensajes().getString(
 											"tituloMensajeExitoEstado")
 									+ " "
@@ -297,7 +317,7 @@ public class BeanAdmin {
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,
 							Internacionalizar.mensajes().getString(
-									"tituloErrorEstado"), Internacionalizar
+									"tituloError") +" ", Internacionalizar
 									.mensajes().getString(
 											"tituloMensajeErrorEstado")
 									+ " " + user.getLogin().toUpperCase()));
@@ -327,7 +347,7 @@ public class BeanAdmin {
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO,
 							Internacionalizar.mensajes().getString(
-									"tituloExitoEliminar")
+									"tituloExito")
 									+ " ", Internacionalizar.mensajes()
 									.getString("tituloMensajeExitoEliminar")
 									+ " " + user.getLogin().toUpperCase()));
@@ -339,7 +359,7 @@ public class BeanAdmin {
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,
 							Internacionalizar.mensajes().getString(
-									"tituloErrorEliminar")
+									"tituloError")
 									+ " ", Internacionalizar.mensajes()
 									.getString("tituloMensajeErrorEliminar")
 									+ " " + user.getLogin().toUpperCase()));
