@@ -16,6 +16,13 @@ import com.sdi.business.exception.BusinessException;
 import com.sdi.dto.User;
 import com.sdi.presentation.util.Internacionalizar;
 
+/**
+ * Se encarga de:
+ * 	- Registrar nuevos usuarios
+ * 
+ * @author Alberto Cortina
+ *
+ */
 @ManagedBean(name="beanRegistro")
 @SessionScoped
 public class BeanRegistro {
@@ -70,22 +77,26 @@ public class BeanRegistro {
 			u.setPassword(password);
 			System.out.println(u);
 			uService.registerUser(u);
-			resultado = "EXITO";
-			Log.debug("Registro correcto");
+			
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, 
-							Internacionalizar.mensajes().getString("tituloExitoRegistro") + " ", 
+							Internacionalizar.mensajes().getString("tituloExito") + " ", 
 							Internacionalizar.mensajes().getString("tituloMensajeExitoRegistro")));
 			FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+			
+			resultado = "EXITO";
+			Log.debug("Registro correcto");
 		} catch (BusinessException e) {
-			resultado = "ERROR";
-			Log.debug("Hubo algún problema en el registro");
+			
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_WARN, 
-							Internacionalizar.mensajes().getString("tituloErrorRegistro") + " ", 
+							Internacionalizar.mensajes().getString("tituloError") + " ", 
 							Internacionalizar.mensajes().getString("tituloMensajeErrorRegistro")));
+			
+			resultado = "ERROR";
+			Log.debug("Hubo algún problema en el registro");
 		}
 		
 		login = null;
@@ -122,6 +133,7 @@ public class BeanRegistro {
 			
 		if (pass == null) {
 			Log.debug("Fallo en la validación de contraseña");
+			return;
 		}
 		
 		if(!pass.equals((String) o)){ 
@@ -129,7 +141,6 @@ public class BeanRegistro {
 				throw new ValidatorException(new FacesMessage("Contraseñas no coinciden")); 
 		} 
 		
-		Log.debug("Contraseñas coinciden"); 
-		 
+		Log.debug("Contraseñas coinciden"); 		 
 	} 
 }

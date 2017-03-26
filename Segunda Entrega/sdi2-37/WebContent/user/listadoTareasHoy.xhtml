@@ -16,20 +16,18 @@
 	<!-- MENSAJES -->
 
 	<!-- CUERPO -->
-	<ui:define name="cuerpo">
-		<h:form id="form-listado">
-			<p:panel header="#{msgs.tituloListadoTareas}">
+		
+	<ui:define name="cuerpo">		
+		<h:form id="form-listado">		
+			<p:panel header="#{msgs.tituloListadoTareas}">				
 				<p:dataTable id="tablalistado" var="tarea"
-					value="#{beanTareas.tareas}" border="1" rows="8" paginator="true"
-					filteredValue="#{beanTareas.filtradas}"
+					value="#{beanTareas.tareas}" border="1" rows="8" paginator="true"					
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowStyleClass="#{tarea.planned lt beanTareas.fechaHoy ? 'retrasada' : 
-									 (tarea.finished != null ? 'finalizada' : null)}">
+					rowStyleClass="#{tarea.planned lt beanTareas.fechaHoy ? 'retrasada' : null}">									
 
-					<p:column id="tituloH" filterBy="#{tarea.title}"
-						filterMatchMode="contains">
+					<p:column id="tituloH">
 						<f:facet name="header">#{msgs.tituloTarea}</f:facet>
-						<h:outputText id="title" value="#{tarea.title}" />
+						<h:outputText id="title" value="#{tarea.title}"/>
 					</p:column>
 
 					<p:column>
@@ -58,9 +56,14 @@
 						</h:outputText>
 					</p:column>
 
-					<p:column>
+					<p:column id="categoriaH" sortBy="#{tarea.categoryId}">
 						<f:facet name="header">#{msgs.tituloCategoria}</f:facet>
 						<h:outputText id="categoria" value="#{tarea.categoryId}" />
+					</p:column>
+					
+					<p:column>
+						<p:commandButton id="finalizar" rendered="#{tarea.finished eq null}" value="#{msgs.tituloFinalizarTarea}" actionListener="#{beanTareas.finalizarTarea(tarea)}" update="tablalistado mensajes"/>
+						<p:commandButton id="editar" rendered="#{tarea.finished eq null}" value="#{msgs.tituloEditarTarea}" update="tablalistado mensajes"/>
 					</p:column>
 
 				</p:dataTable>

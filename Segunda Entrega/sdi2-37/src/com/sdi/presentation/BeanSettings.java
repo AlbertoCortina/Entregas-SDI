@@ -7,6 +7,13 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Se encarga de:
+ * 	- Internacionalizar
+ * 
+ * @author Alberto Cortina
+ *
+ */
 @ManagedBean(name="beanSettings")
 @SessionScoped
 public class BeanSettings {

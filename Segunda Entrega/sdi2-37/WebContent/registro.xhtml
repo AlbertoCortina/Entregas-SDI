@@ -14,8 +14,8 @@
 	<ui:define name="cuerpo">
 		<h:form id="form-registro">
 			<p:panel header="#{msgs.tituloOperacionRegistro}">
-				<p:panelGrid id="Grid" columns="2" cellPadding="5">
-				  #{msgs.tituloUsuario}
+				<p:panelGrid id="Grid" columns="2" cellPadding="5">				  
+				  <h:outputText id="usuario" value="#{msgs.tituloUsuario}"/>
 				  <h:panelGroup>
 						<p:inputText id="input-login" value="#{beanRegistro.login}"
 							required="true" requiredMessage="#{msgs.tituloUsuarioRequerido}"
@@ -23,9 +23,9 @@
 							validator="#{beanRegistro.validarLogin}">
 						</p:inputText>
 						<p:message for="input-login" />
-					</h:panelGroup>
+					</h:panelGroup>				  
 				  
-				  #{msgs.tituloEmail}
+				  <h:outputText id="email" value="#{msgs.tituloEmail}"/>
 				  <h:panelGroup>
 						<p:inputText id="input-correo" value="#{beanRegistro.email}"
 							required="true" requiredMessage="#{msgs.tituloEmailRequerido}"
@@ -36,7 +36,8 @@
 						<p:message for="input-correo" />
 					</h:panelGroup>		  
 				  
-				  #{msgs.tituloContraseña}
+				  
+				  <h:outputText id="contraseña" value="#{msgs.tituloContraseña}"/>
 				  <h:panelGroup>
 						<p:password id="input-password" value="#{beanRegistro.password}"
 							required="true"
@@ -47,9 +48,9 @@
 								pattern="(.*[0-9][a-zA-Z].*)|(.*[a-zA-Z][0-9].*)" />
 						</p:password>
 						<p:message for="input-password" />
-					</h:panelGroup>		  
-				  
-				  #{msgs.tituloRContraseña}
+					</h:panelGroup>					  
+				 
+				  <h:outputText id="Rcontraseña" value="#{msgs.tituloRContraseña}"/>
 				  <h:panelGroup>
 						<p:password id="input-rPassword" value="#{beanRegistro.password2}"
 							required="true"
