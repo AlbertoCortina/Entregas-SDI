@@ -122,6 +122,9 @@ public class BeanTareas {
 	public String nombreCategoria(Long id) {
 		String categoria = "";
 		try {
+			if(id == null) {
+				return null;
+			}
 			categoria = Services.getCategoryService().findCategoryById(id).getName();
 		} catch (BusinessException e) { }
 		return categoria;
@@ -180,10 +183,10 @@ public class BeanTareas {
 				filtradas = tareas;				
 			}			
 			
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito: ", "Se ha marcado como finalizada la tarea "+tarea.getTitle()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito: ", "Se ha marcado como finalizada la tarea "+tarea.getTitle().toUpperCase()));
 			Log.debug("Tarea actualizada");
 		} catch (BusinessException e) {			
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error: ", "No se ha podido marcar como finalizada la tarea "+tarea.getTitle()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error: ", "No se ha podido marcar como finalizada la tarea "+tarea.getTitle().toUpperCase()));
 			Log.debug("Error actualizando tarea");
 		}
 	}

@@ -693,8 +693,73 @@ public class PlantillaSDI2_Tests1617 {
 	//PR19: Funcionamiento correcto de la ordenación por categoría.
 	@Test
     public void prueba19() {
-		assertTrue(false);
+		TestUtils.iniciarSesion(driver, "user1", "user1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: user1", elementos.get(0).getText());
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:listaHoy");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+				
+		//Clicamos el header de fecha planeada para ordenar ascendentemente
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:categoriaH")));
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:categoriaH");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		List<String> hoyTasks = null;			
+		hoyTasks = TestUtils.ordenarTareasHoyCategoria(true);		
+		
+		int numTarea = 0;
+		int j = 2;
+		for(int i = 1; i <= hoyTasks.size(); i++) {	
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:"+(i - 1)+":categoria")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+(i - 1)+":categoria"));
+			assertEquals(elementos.get(0).getText(), hoyTasks.get(i - 1));			
+			
+			numTarea++;
+			
+			if(numTarea % 8 == 0) {				
+				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")));
+				driver.findElement(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+			}
+		}	
+		
+		//Volvemos al principio
+		driver.findElement(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[2]")).click();
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		//Clicamos el header de fecha planeada para ordenar descendentemente	
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:categoriaH")));
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:categoriaH");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		hoyTasks = TestUtils.ordenarTareasHoyCategoria(false);
+				
+		numTarea = 0;
+		j = 2;
+		for(int i = 1; i <= hoyTasks.size(); i++) {	
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:"+(i - 1)+":categoria")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+(i - 1)+":categoria"));
+			assertEquals(elementos.get(0).getText(), hoyTasks.get(i - 1));
+			
+			numTarea++;
+			
+			if(numTarea % 8 == 0) {				
+				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")));
+				driver.findElement(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+			}
+		}	
     }
+	
 	//PR20: Funcionamiento correcto de la ordenación por fecha planeada.
 	@Test
     public void prueba20() {
@@ -1065,30 +1130,55 @@ public class PlantillaSDI2_Tests1617 {
 	//PR35: Cambio del idioma por defecto a un segundo idioma. (Probar algunas vistas)
 	@Test
     public void prueba35() {
-		//Login.xhtml		
+		//login.xhtml		
 		SeleniumUtils.textoPresentePagina(driver, "Usuario");
 		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
 		
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-cabecera:idiomas", 10);
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas", "form-cabecera:ingles");
    		
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-login:usuario"), "Username"));
-		SeleniumUtils.textoPresentePagina(driver, "Username");
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login", 20);		
 		
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-login:contraseña"), "Password"));
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("form-login:usuario"), "Username"));
+		SeleniumUtils.textoPresentePagina(driver, "Autentification");
+		SeleniumUtils.textoPresentePagina(driver, "Username");
 		SeleniumUtils.textoPresentePagina(driver, "Password");
-	
-		//Registro.xhtml
+		
+		//registro.xhtml
 		TestUtils.clicarElemento(driver, "enlace");
 		
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);
 		
+		SeleniumUtils.textoPresentePagina(driver, "Sign up");
 		SeleniumUtils.textoPresentePagina(driver, "Username");
 		SeleniumUtils.textoPresentePagina(driver, "Email");
 		SeleniumUtils.textoPresentePagina(driver, "Password");
 		SeleniumUtils.textoPresentePagina(driver, "Repeat password");
 		
-		//FALTA PROBAR MASSS
+		//principalAdministrador.xhtml
+		TestUtils.clicarElemento(driver, "enlace");
+		
+		TestUtils.iniciarSesion(driver, "admin1", "admin1");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 20);
+		
+		SeleniumUtils.textoPresentePagina(driver, "Home");
+		SeleniumUtils.textoPresentePagina(driver, "Options");
+		SeleniumUtils.textoPresentePagina(driver, "Username");
+		
+		//listadoUsuarios.xhtml
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:opcion2");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 10);		
+		
+		SeleniumUtils.textoPresentePagina(driver, "Users list");
+		SeleniumUtils.textoPresentePagina(driver, "Delete user");
+		SeleniumUtils.textoPresentePagina(driver, "Username");
+		
+		//principalUsuario
+		TestUtils.cerrarSesion(driver);
+		
+		TestUtils.iniciarSesion(driver, "user1", "user1");
 	}
 	
 	//PR36: Cambio del idioma por defecto a un segundo idioma y vuelta al idioma por defecto. (Probar algunas vistas)

@@ -22,57 +22,55 @@
 
 				<p:dataTable id="tablalistado" var="tarea"
 					value="#{beanTareas.tareas}" border="1" rows="8" paginator="true"
-					filteredValue="#{beanTareas.filtradas}"
+					filteredValue="#{beanTareas.filtradas}"					
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					styleClass="centrar"
 					rowStyleClass="#{tarea.planned lt beanTareas.fechaHoy ? 'retrasada' : 
 									 (tarea.finished != null ? 'finalizada' : null)}">
 
-					<p:column id="tituloH" filterBy="#{tarea.title}"
+					<p:column id="tituloH" headerText="#{msgs.tituloTarea}" filterBy="#{tarea.title}"
 						filterMatchMode="contains">
-						<f:facet name="header">#{msgs.tituloTarea}</f:facet>
 						<h:outputText id="title" value="#{tarea.title}" />
 					</p:column>
 
-					<p:column>
-						<f:facet name="header">#{msgs.tituloComentario}</f:facet>
+					<p:column headerText="#{msgs.tituloComentario}">
 						<h:outputText id="comentario" value="#{tarea.comments}" />
 					</p:column>
 
-					<p:column>
-						<f:facet name="header">#{msgs.tituloFechaCreacion}</f:facet>
+					<p:column headerText="#{msgs.tituloFechaCreacion}">
 						<h:outputText id="fCreacion" value="#{tarea.created}">
 							<f:convertDateTime dateStyle="short" timeZone="CET" />
 						</h:outputText>
 					</p:column>
 
-					<p:column>
-						<f:facet name="header">#{msgs.tituloFechaFinalizada}</f:facet>
+					<p:column headerText="#{msgs.tituloFechaFinalizada}">
 						<h:outputText id="fFinalizada" value="#{tarea.finished}">
 							<f:convertDateTime dateStyle="short" timeZone="CET" />
 						</h:outputText>
 					</p:column>
 
-					<p:column id="planeadaH" sortBy="#{tarea.planned}">
-						<f:facet name="header">#{msgs.tituloFechaPlaneada}</f:facet>
+					<p:column id="planeadaH" headerText="#{msgs.tituloFechaPlaneada}" sortBy="#{tarea.planned}">
 						<h:outputText id="fPlaneada" value="#{tarea.planned}">
 							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET" />
 						</h:outputText>
 					</p:column>
 
-					<p:column>
-						<f:facet name="header">#{msgs.tituloCategoria}</f:facet>
+					<p:column headerText="#{msgs.tituloCategoria}">
 						<h:outputText id="categoria"
 							value="#{beanTareas.nombreCategoria(tarea.categoryId)}" />
 					</p:column>
 
-					<p:column>
-						<p:commandButton id="finalizar"
-							rendered="#{tarea.finished eq null}"
-							value="#{msgs.tituloFinalizarTarea}"
-							actionListener="#{beanTareas.finalizarTarea(tarea)}"
-							update="tablalistado mensajes" />
+					<p:column>						
 						<p:commandButton id="editar" rendered="#{tarea.finished eq null}"
 							value="#{msgs.tituloEditarTarea}" update="tablalistado mensajes" />
+					</p:column>
+					
+					<p:column>
+						<p:commandButton id="finalizar"
+								rendered="#{tarea.finished eq null}"
+								value="#{msgs.tituloFinalizarTarea}"
+								actionListener="#{beanTareas.finalizarTarea(tarea)}"
+								update="tablalistado mensajes" />
 					</p:column>
 
 				</p:dataTable>
