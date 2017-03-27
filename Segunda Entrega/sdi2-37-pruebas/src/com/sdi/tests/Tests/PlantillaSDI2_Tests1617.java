@@ -29,6 +29,7 @@ import com.sdi.business.Services;
 import com.sdi.business.TaskService;
 import com.sdi.business.UserService;
 import com.sdi.business.exception.BusinessException;
+import com.sdi.dto.Task;
 import com.sdi.dto.User;
 import com.sdi.tests.utils.SeleniumUtils;
 import com.sdi.tests.utils.TestUtils;
@@ -691,23 +692,192 @@ public class PlantillaSDI2_Tests1617 {
 	
 	//PR19: Funcionamiento correcto de la ordenación por categoría.
 	@Test
-    public void prueba19() {
-		assertTrue(false);
+    public void prueba19() throws InterruptedException {
+		TestUtils.iniciarSesion(driver, "user1", "user1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: user1", elementos.get(0).getText());
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:listaHoy");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+				
+		//Clicamos el header de fecha planeada para ordenar ascendentemente
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:planeadaH")));
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:planeadaH");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		List<String> fechasOrdenadas = TestUtils.ordenarTareasHoyFechaPlaneada(true, "user1");
+		int numTareas = fechasOrdenadas.size();
+		
+		int j = 2;
+		for(int i = 0; i < numTareas; i++){
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:"+i+":fPlaneada")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+i+":fPlaneada"));
+			assertEquals(elementos.get(0).getText(), fechasOrdenadas.get(i));
+			
+			if((i+1) % 8 == 0) {
+				driver.findElement(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+			}
+		}
+		
+		//Volvemos a clicar el elemento ordenar para ordenar descendientemente
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:planeadaH");
+		
+		fechasOrdenadas = TestUtils.ordenarTareasHoyFechaPlaneada(false, "user1");
+		numTareas = fechasOrdenadas.size();
+		
+		j =2;
+		for(int i = 0; i < numTareas; i++){
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:"+i+":fPlaneada")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+i+":fPlaneada"));
+			assertEquals(elementos.get(0).getText(), fechasOrdenadas.get(i));
+			
+			if((i+1) % 8 == 0) {
+				driver.findElement(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+			}
+			
+		}
     }
+	
 	//PR20: Funcionamiento correcto de la ordenación por fecha planeada.
 	@Test
     public void prueba20() {
-		assertTrue(false);
+		TestUtils.iniciarSesion(driver, "user1", "user1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: user1", elementos.get(0).getText());
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:listaHoy");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+				
+		//Clicamos el header de fecha planeada para ordenar ascendentemente
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form-listado:tablalistado:categoriaH")));
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:categoriaH");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		List<String> categoriasOrdenadas = TestUtils.ordenarTareasHoyCategoria(true, "user1");
+		int numTareas = categoriasOrdenadas.size();
+		
+		int j = 2;
+		for(int i = 0; i < numTareas; i++){
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:"+i+":categoria")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+i+":categoria"));
+			assertEquals(elementos.get(0).getText(), categoriasOrdenadas.get(i));
+			
+			if((i+1) % 8 == 0) {
+				driver.findElement(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+			}
+		}
+		
+		//Volvemos a clicar el elemento ordenar para ordenar descendientemente
+		TestUtils.clicarElemento(driver, "form-listado:tablalistado:categoriaH");
+		
+		categoriasOrdenadas = TestUtils.ordenarTareasHoyCategoria(false, "user1");
+		numTareas = categoriasOrdenadas.size();
+		
+		j =2;
+		for(int i = 0; i < numTareas; i++){
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:"+i+":categoria")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"+i+":categoria"));
+			assertEquals(elementos.get(0).getText(), categoriasOrdenadas.get(i));
+			
+			if((i+1) % 8 == 0) {
+				driver.findElement(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+			}
+			
+		}
     }
+	
 	//PR21: Comprobar que las tareas que no están en rojo son las de hoy y además las que deben ser.
 	@Test
     public void prueba21() {
-		assertTrue(false);
+		TestUtils.iniciarSesion(driver, "user1", "user1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: user1", elementos.get(0).getText());
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:listaHoy");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		List<String> categoriasOrdenadas = TestUtils.ordenarTareasHoyCategoria(true, "user1");
+		int numTareas = categoriasOrdenadas.size();
+		
+		List<String> tareas = TestUtils.getNoDelayedTodayTasksByUser("user1");
+		
+		int j = 2;
+		String rowStyle = "";
+		for(int i = 0; i < numTareas; i++){
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:"+i+":fPlaneada")));
+			rowStyle = driver.findElement(By.id("form-listado:tablalistado:"+i+":fPlaneada"))
+					.getCssValue("color");
+			int contador = 0;
+			if(!rowStyle.equals("rgba(255, 0, 0, 1)")){
+				elementos = driver.findElements(By.id("form-listado:tablalistado:"+i+":fPlaneada"));
+				assertEquals(elementos.get(0).getText(), tareas.get(contador));
+			}
+			
+			if((i+1) % 8 == 0) {
+				driver.findElement(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+			}
+		}
+		
+		
     }
 	//PR22: Comprobar que las tareas retrasadas están en rojo y son las que deben ser.
 	@Test
     public void prueba22() {
-		assertTrue(false);
+		TestUtils.iniciarSesion(driver, "user1", "user1");
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		assertEquals("Usuario: user1", elementos.get(0).getText());
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:submenuOpciones", "form-cabecera:listaHoy");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+		
+		List<String> categoriasOrdenadas = TestUtils.ordenarTareasHoyCategoria(true, "user1");
+		int numTareas = categoriasOrdenadas.size();
+		
+		List<String> tareas = TestUtils.getDelayedTodayTasksByUser("user1");
+		
+		int j = 2;
+		String rowStyle = "";
+		for(int i = 0; i < numTareas; i++){
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("form-listado:tablalistado:"+i+":fPlaneada")));
+			rowStyle = driver.findElement(By.id("form-listado:tablalistado:"+i+":fPlaneada"))
+					.getCssValue("color");
+			int contador = 0;
+			if(rowStyle.equals("rgba(255, 0, 0, 1)")){
+				System.out.println(i+"  "+contador);
+				elementos = driver.findElements(By.id("form-listado:tablalistado:"+i+":fPlaneada"));
+				assertEquals(elementos.get(0).getText(), tareas.get(contador));
+			}
+			
+			if((i+1) % 8 == 0) {
+				driver.findElement(By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["+j+"]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id", "form-listado:tablalistado", 20);
+			}
+		}
     }
 	
 	//PR23: Comprobar que las tareas de hoy y futuras no están en rojo y que son las que deben ser.

@@ -85,7 +85,32 @@ public class BeanTareas {
 	
 	public String listarTareasHoy() {
 		String resultado = "";
-		return null;
+		try {
+			BeanUser u =  (BeanUser) FacesContext.getCurrentInstance().getExternalContext()
+			.getSessionMap().get("userSession");			
+			
+			tareas = Services.getTaskService().findTodayTasksByUserId(u.getId());	
+			
+			Collections.sort(tareas, new Comparator<Object>() {
+				@Override
+				public int compare(Object o1, Object o2) {
+					return ((Task) o1).getPlanned().compareTo(((Task)o2).getPlanned());
+				}
+			});	
+			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito: ", "Se ha cargado la lista de tareas Hoy"));
+			FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+			
+			resultado = "EXITO";
+			Log.debug("Se listan tareas hoy");
+		}
+		catch(BusinessException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error: ", "No se ha cargado la lista de tareas Hoy"));
+			
+			resultado = "ERROR";
+			Log.debug("Error listando tareas hoy");
+		}
+			return resultado;
 	}
 	
 	public String listarTareasSemana() {
@@ -110,7 +135,7 @@ public class BeanTareas {
 			Log.debug("Se listan tareas semana");
 		}
 		catch(BusinessException e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error: ", "No se ha cargar la lista de tareas Semana"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error: ", "No se ha cargado la lista de tareas Semana"));
 			
 			resultado = "ERROR";
 			Log.debug("Error listando tareas semana");

@@ -14,6 +14,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import alb.util.date.DateUtil;
+
 import com.sdi.business.Services;
 import com.sdi.business.exception.BusinessException;
 import com.sdi.dto.Task;
@@ -244,6 +246,185 @@ public class TestUtils {
 		} catch (BusinessException e) { }	
 		
 		return tareasOrdenados;
+	}
+	
+	/**
+	 * Método que ordena las tareas de la lista Hoy por su fecha planeada
+	 * @param boolean ascendete	- true para ordenarlo de forma ascendete, false de forma descendente
+	 * @return List<String> - El toString de las fechas ordenadas
+	 */
+	public static List<String> ordenarTareasHoyFechaPlaneada(boolean ascendentemente, String user){
+		List<String> tareasOrdenados = new ArrayList<String>();
+		List<Task> tasks = null;
+		List<User> usuarios = null;
+		Long id = 0L;
+		DateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+		
+		try {
+			usuarios = Services.getUserService().findAll();
+			
+			for(User u: usuarios) {
+				if(u.getLogin().equals(user)){
+					id = u.getId();
+				}
+			}
+			
+			tasks = Services.getTaskService().findTodayTasksByUserId(id);
+			
+			if(ascendentemente) {
+				Collections.sort(tasks, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						return ((Task) o1).getPlanned().compareTo(((Task)o2).getPlanned());
+					}
+				});
+			}
+			else {
+				Collections.sort(tasks, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						return ((Task) o2).getPlanned().compareTo(((Task)o1).getPlanned());
+					}
+				});
+			}		
+			
+			for (Task t: tasks) {
+				tareasOrdenados.add(formateador.format(t.getPlanned()));
+			}
+			
+		} catch (BusinessException e) { }	
+		
+		return tareasOrdenados;
+	}
+	
+	/**
+	 * Método que ordena las tareas de la lista Hoy por su categoría
+	 * @param boolean ascendetemente - true para ordenarlo de forma ascendete, false de forma descendente
+	 * @return List<String> - El toString de las fechas ordenadas
+	 */
+	public static List<String> ordenarTareasHoyCategoria(boolean ascendentemente, String user){
+		List<String> tareasOrdenados = new ArrayList<String>();
+		List<Task> tasks = null;
+		List<User> usuarios = null;
+		Long id = 0L;
+		
+		try {
+			usuarios = Services.getUserService().findAll();
+			
+			for(User u: usuarios) {
+				if(u.getLogin().equals(user)){
+					id = u.getId();
+				}
+			}
+			
+			tasks = Services.getTaskService().findTodayTasksByUserId(id);
+			
+			if(ascendentemente) {
+				Collections.sort(tasks, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						if(((Task) o1).getCategoryId() == null){
+							return 1;
+						}
+						else{
+							if(((Task) o2).getCategoryId() == null)
+								return -1;
+							return ((Task) o1).getCategoryId().compareTo(((Task)o2).getCategoryId());
+						}
+					}
+				});
+			}
+			else {
+				Collections.sort(tasks, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						if(((Task) o2).getCategoryId() == null){
+							return 1;
+						}
+						else{
+							if(((Task) o1).getCategoryId() == null)
+								return -1;
+							return ((Task) o2).getCategoryId().compareTo(((Task)o1).getCategoryId());
+						}
+					}
+				});
+			}		
+			
+			for (Task t: tasks) {
+				tareasOrdenados.add(t.getCategoryId()!=null? String.valueOf(t.getCategoryId()) : "");
+			}
+			
+		} catch (BusinessException e) { }	
+		
+		return tareasOrdenados;
+	}
+	
+	/**
+	 * Método que consigue las tareas de Hoy no retrasdas para un usuario
+	 * @param String user	-	Usuario del cual se sacarán sus tareas
+	 * @return List<Task> 	- 	Lista con las tareas
+	 */
+	public static List<String> getNoDelayedTodayTasksByUser(String user){
+		List<String> tareas = new ArrayList<>();
+		List<Task> tasks = null;
+		List<User> usuarios = null;
+		Long id = 0L;
+		DateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+		
+		try {
+			usuarios = Services.getUserService().findAll();
+			
+			for(User u: usuarios) {
+				if(u.getLogin().equals(user)){
+					id = u.getId();
+				}
+			}
+			
+			tasks = Services.getTaskService().findTodayTasksByUserId(id);
+			
+			for(Task task: tasks){
+				if( task.getPlanned().compareTo(DateUtil.today()) >= 0)
+					tareas.add(formateador.format(task.getPlanned()));
+			}	
+			
+			
+		} catch (BusinessException e) { }	
+		
+		return tareas;
+	}
+	
+	/**
+	 * Método que consigue las tareas de Hoy no retrasdas para un usuario
+	 * @param String user	-	Usuario del cual se sacarán sus tareas
+	 * @return List<Task> 	- 	Lista con las tareas
+	 */
+	public static List<String> getDelayedTodayTasksByUser(String user){
+		List<String> tareas = new ArrayList<>();
+		List<Task> tasks = null;
+		List<User> usuarios = null;
+		Long id = 0L;
+		DateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+		
+		try {
+			usuarios = Services.getUserService().findAll();
+			
+			for(User u: usuarios) {
+				if(u.getLogin().equals(user)){
+					id = u.getId();
+				}
+			}
+			
+			tasks = Services.getTaskService().findTodayTasksByUserId(id);
+			
+			for(Task task: tasks){
+				if( task.getPlanned().compareTo(DateUtil.today()) < 0)
+					tareas.add(formateador.format(task.getPlanned()));
+			}	
+			
+			
+		} catch (BusinessException e) { }	
+		
+		return tareas;
 	}
 	
 	/**
