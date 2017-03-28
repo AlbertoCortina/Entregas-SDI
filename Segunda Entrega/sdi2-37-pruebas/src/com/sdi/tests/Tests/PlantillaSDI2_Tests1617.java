@@ -23,6 +23,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -1731,6 +1732,15 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.cerrarSesion(driver);
 
 		TestUtils.iniciarSesion(driver, "user1", "user1");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"nombreUsuario", 10);
+		
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("nombreUsuario"), "Username: user1"));
+		
+		SeleniumUtils.textoPresentePagina(driver, "Home");
+		SeleniumUtils.textoPresentePagina(driver, "Lists");
+		SeleniumUtils.textoPresentePagina(driver, "Username");
 	}
 
 	// PR36: Cambio del idioma por defecto a un segundo idioma y vuelta al
@@ -1748,25 +1758,20 @@ public class PlantillaSDI2_Tests1617 {
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login", 10);
 
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(
-				By.id("form-login:usuario"), "Username"));
+				By.id("enlace"), "Sign up"));
+		
 		SeleniumUtils.textoPresentePagina(driver, "Username");
-
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(
-				By.id("form-login:contraseña"), "Password"));
 		SeleniumUtils.textoPresentePagina(driver, "Password");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login", 10);
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas",
 				"form-cabecera:español");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login", 10);
 
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(
-				By.id("form-login:usuario"), "Usuario"));
+				By.id("enlace"), "Registrarse"));
+		
 		SeleniumUtils.textoPresentePagina(driver, "Usuario");
-
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(
-				By.id("form-login:contraseña"), "Contraseña"));
 		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
 
 		// Registro.xhtml
@@ -1783,26 +1788,17 @@ public class PlantillaSDI2_Tests1617 {
 		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
 		SeleniumUtils.textoPresentePagina(driver, "Repetir contraseña");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas",
 				"form-cabecera:ingles");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);
 
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(
-				By.id("form-registro:usuario"), "Username"));
-		SeleniumUtils.textoPresentePagina(driver, "Username");
-
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(
-				By.id("form-registro:email"), "Email"));
-		SeleniumUtils.textoPresentePagina(driver, "Email");
-
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(
-				By.id("form-registro:contraseña"), "Password"));
-		SeleniumUtils.textoPresentePagina(driver, "Password");
-
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(
 				By.id("form-registro:Rcontraseña"), "Repeat password"));
+		
+		SeleniumUtils.textoPresentePagina(driver, "Username");
+		SeleniumUtils.textoPresentePagina(driver, "Email");
+		SeleniumUtils.textoPresentePagina(driver, "Password");
 		SeleniumUtils.textoPresentePagina(driver, "Repeat password");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);
@@ -1812,22 +1808,110 @@ public class PlantillaSDI2_Tests1617 {
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);
 
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(
-				By.id("form-registro:usuario"), "Usuario"));
-		SeleniumUtils.textoPresentePagina(driver, "Usuario");
-
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(
-				By.id("form-registro:email"), "Email"));
-		SeleniumUtils.textoPresentePagina(driver, "Email");
-
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(
-				By.id("form-registro:contraseña"), "Contraseña"));
-		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
-
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(
 				By.id("form-registro:Rcontraseña"), "Repetir contraseña"));
+		
+		SeleniumUtils.textoPresentePagina(driver, "Usuario");
+		SeleniumUtils.textoPresentePagina(driver, "Email");
+		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
 		SeleniumUtils.textoPresentePagina(driver, "Repetir contraseña");
 
-		// FALTA PROBAR MASSS
+		// principalAdministrador.xhtml
+		TestUtils.clicarElemento(driver, "enlace");
+
+		TestUtils.iniciarSesion(driver, "admin1", "admin1");
+
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 20);
+	
+		SeleniumUtils.textoPresentePagina(driver, "Inicio");
+		SeleniumUtils.textoPresentePagina(driver, "Opciones");
+		SeleniumUtils.textoPresentePagina(driver, "Usuario");
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas",
+				"form-cabecera:ingles");
+
+
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(
+				By.id("nombreUsuario"), "Username: admin1"));
+		
+		SeleniumUtils.textoPresentePagina(driver, "Home");
+		SeleniumUtils.textoPresentePagina(driver, "Option");
+		SeleniumUtils.textoPresentePagina(driver, "Username");
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas",
+				"form-cabecera:español");
+
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(
+				By.id("nombreUsuario"), "Usuario: admin1"));
+		
+		SeleniumUtils.textoPresentePagina(driver, "Inicio");
+		SeleniumUtils.textoPresentePagina(driver, "Opciones");
+		SeleniumUtils.textoPresentePagina(driver, "Usuario");
+		
+		// listadoUsuarios.xhtml
+		SeleniumUtils.ClickSubopcionMenuHover(driver,
+				"form-cabecera:submenuOpciones", "form-cabecera:opcion2");
+
+		SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-listado:tablalistado", 10);
+		
+		SeleniumUtils.textoPresentePagina(driver, "Listado de usuarios");
+		SeleniumUtils.textoPresentePagina(driver, "Eliminar usuario");
+		SeleniumUtils.textoPresentePagina(driver, "Usuario");
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas",
+				"form-cabecera:ingles");
+
+
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(
+				By.id("nombreUsuario"), "Username: admin1"));
+		
+		SeleniumUtils.textoPresentePagina(driver, "Users list");
+		SeleniumUtils.textoPresentePagina(driver, "Delete user");
+		SeleniumUtils.textoPresentePagina(driver, "Username");
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas",
+				"form-cabecera:español");
+
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(
+				By.id("nombreUsuario"), "Usuario: admin1"));
+		
+		SeleniumUtils.textoPresentePagina(driver, "Listado de usuarios");
+		SeleniumUtils.textoPresentePagina(driver, "Eliminar usuario");
+		SeleniumUtils.textoPresentePagina(driver, "Usuario");
+		
+		// principalUsuario
+		TestUtils.cerrarSesion(driver);
+
+		TestUtils.iniciarSesion(driver, "user1", "user1");
+
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		
+		SeleniumUtils.textoPresentePagina(driver, "Inicio");
+		SeleniumUtils.textoPresentePagina(driver, "Listas");
+		SeleniumUtils.textoPresentePagina(driver, "Añadir tarea");
+		SeleniumUtils.textoPresentePagina(driver, "Usuario");
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas",
+				"form-cabecera:ingles");
+
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(
+				By.id("nombreUsuario"), "Username: user1"));
+		
+		SeleniumUtils.textoPresentePagina(driver, "Home");
+		SeleniumUtils.textoPresentePagina(driver, "Lists");
+		SeleniumUtils.textoPresentePagina(driver, "Add task");
+		SeleniumUtils.textoPresentePagina(driver, "Username");
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas",
+				"form-cabecera:español");
+
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(
+				By.id("nombreUsuario"), "Usuario: user1"));
+		
+		SeleniumUtils.textoPresentePagina(driver, "Inicio");
+		SeleniumUtils.textoPresentePagina(driver, "Listas");
+		SeleniumUtils.textoPresentePagina(driver, "Añadir tarea");
+		SeleniumUtils.textoPresentePagina(driver, "Usuario");
 	}
 
 	// PR37: Intento de acceso a un URL privado de administrador con un usuario
