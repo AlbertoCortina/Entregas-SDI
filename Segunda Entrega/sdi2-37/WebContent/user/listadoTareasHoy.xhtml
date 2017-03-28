@@ -6,57 +6,46 @@
 	template="/templates/template-general-usuario.xhtml">
 	
 	<!-- TÍTULO -->
-	<ui:define name="titulo">#{msgs.tituloListadoTareas}</ui:define>
-
-	<!-- BARRA DE MENÚ -->
-	<!--  <ui:define name="barraMenu_Opciones"></ui:define>-->
-
-	<!-- MENSAJES -->
-
-	<!-- CUERPO -->
-		
+	<ui:define name="titulo">#{msgs.tituloListadoTareasHoy}</ui:define>
+	
+	<!-- CUERPO -->		
 	<ui:define name="cuerpo">		
 		<h:form id="form-listado">		
-			<p:panel header="#{msgs.tituloListadoTareas}">				
+			<p:panel header="#{msgs.tituloListadoTareasHoy}">				
 				<p:dataTable id="tablalistado" var="tarea"
 					value="#{beanTareas.tareas}" border="1" rows="8" paginator="true"					
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					styleClass="centrar"
 					rowStyleClass="#{tarea.planned lt beanTareas.fechaHoy ? 'retrasada' : null}">									
 
-					<p:column id="tituloH">
-						<f:facet name="header">#{msgs.tituloTarea}</f:facet>
+					<p:column id="tituloH" headerText="#{msgs.tituloTarea}">
 						<h:outputText id="title" value="#{tarea.title}"/>
 					</p:column>
 
-					<p:column>
-						<f:facet name="header">#{msgs.tituloComentario}</f:facet>
+					<p:column headerText="#{msgs.tituloComentario}">
 						<h:outputText id="comentario" value="#{tarea.comments}" />
 					</p:column>
 
-					<p:column>
-						<f:facet name="header">#{msgs.tituloFechaCreacion}</f:facet>
+					<p:column headerText="#{msgs.tituloFechaCreacion}">
 						<h:outputText id="fCreacion" value="#{tarea.created}">
-							<f:convertDateTime dateStyle="short" timeZone="CET" />
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET" />
 						</h:outputText>
 					</p:column>
 
-					<p:column>
-						<f:facet name="header">#{msgs.tituloFechaFinalizada}</f:facet>
+					<p:column headerText="#{msgs.tituloFechaFinalizada}">
 						<h:outputText id="fFinalizada" value="#{tarea.finished}">
-							<f:convertDateTime dateStyle="short" timeZone="CET" />
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET" />
 						</h:outputText>
 					</p:column>
 
-					<p:column id="planeadaH" sortBy="#{tarea.planned}">
-						<f:facet name="header">#{msgs.tituloFechaPlaneada}</f:facet>
+					<p:column id="planeadaH" headerText="#{msgs.tituloFechaPlaneada}" sortBy="#{tarea.planned}">
 						<h:outputText id="fPlaneada" value="#{tarea.planned}">
 							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET" />
 						</h:outputText>
 					</p:column>
 
-					<p:column id="categoriaH" sortBy="#{tarea.categoryId}">
-						<f:facet name="header">#{msgs.tituloCategoria}</f:facet>
-						<h:outputText id="categoria" value="#{tarea.categoryId}" />
+					<p:column id="categoriaH" headerText="#{msgs.tituloCategoria}" sortBy="#{tarea.categoryId}">
+						<h:outputText id="categoria" value="#{beanTareas.nombreCategoria(tarea.categoryId)}" />
 					</p:column>
 					
 					<p:column>						

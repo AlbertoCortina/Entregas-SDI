@@ -6,7 +6,7 @@
 	template="/templates/template-general-usuario.xhtml">
 
 	<!-- TÍTULO -->
-	<ui:define name="titulo">#{msgs.tituloListadoTareas}</ui:define>
+	<ui:define name="titulo">#{msgs.tituloListadoTareasSemana}</ui:define>
 
 	<!-- CUERPO -->
 	<ui:define name="cuerpo">
@@ -30,13 +30,13 @@
 
 					<p:column headerText="#{msgs.tituloFechaCreacion}">
 						<h:outputText id="fCreacion" value="#{tarea.created}">
-							<f:convertDateTime dateStyle="short" timeZone="CET" />
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="#{msgs.tituloFechaFinalizada}">
 						<h:outputText id="fFinalizada" value="#{tarea.finished}">
-							<f:convertDateTime dateStyle="short" timeZone="CET" />
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET" />
 						</h:outputText>
 					</p:column>
 
