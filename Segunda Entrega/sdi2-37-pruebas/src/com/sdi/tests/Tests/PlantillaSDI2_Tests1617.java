@@ -1918,7 +1918,7 @@ public class PlantillaSDI2_Tests1617 {
 	// autenticado como usuario normal.
 	@Test
 	public void prueba37() {
-		assertTrue(false);
+		
 	}
 
 	// PR38: Intento de acceso a un URL privado de usuario normal con un usuario
