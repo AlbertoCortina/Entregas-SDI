@@ -5,10 +5,12 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import alb.util.date.DateUtil;
 import alb.util.log.Log;
@@ -16,18 +18,36 @@ import alb.util.log.Log;
 import com.sdi.business.Services;
 import com.sdi.business.TaskService;
 import com.sdi.business.exception.BusinessException;
+import com.sdi.dto.Category;
 import com.sdi.dto.Task;
 import com.sdi.presentation.util.Internacionalizar;
 
 @ManagedBean(name="beanTareas")
 @SessionScoped
-public class BeanTareas {
-
+public class BeanTareas {	
+	
 	private List<Task> tareas = null;
 	private List<Task> filtradas = null;
-	private Date fechaHoy = DateUtil.today();
+	private Date fechaHoy;
 	private boolean finalizadas;
+	
+	//Para añadir tarea
+	private String nombre;
+	private String comentario;
+	private Date fechaPlaneada;
+	private Long idCategoria;
+	private List<Category> categorias = null;
 
+	@PostConstruct
+	public void init() throws BusinessException {
+		fechaHoy = DateUtil.today();
+		
+		BeanUser u =  (BeanUser) FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get("userSession");
+		
+		categorias = Services.getCategoryService().findCategoriesByUserId(u.getId());
+	}
+	
 	public List<Task> getTareas() {
 		return tareas;
 	}
@@ -50,6 +70,46 @@ public class BeanTareas {
 
 	public void setFechaHoy(Date fechaHoy) {
 		this.fechaHoy = fechaHoy;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+	public Date getFechaPlaneada() {
+		return fechaPlaneada;
+	}
+
+	public void setFechaPlaneada(Date fechaPlaneada) {
+		this.fechaPlaneada = fechaPlaneada;
+	}
+
+	public Long getIdCategoria() {
+		return idCategoria;
+	}
+
+	public void setIdCategoria(Long idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+
+	public List<Category> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Category> categorias) {
+		this.categorias = categorias;
 	}
 	
 	public String listarTareasInbox() {
@@ -216,5 +276,59 @@ public class BeanTareas {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, Internacionalizar.mensajes().getString("tituloError") +" ", "No se ha podido marcar como finalizada la tarea "+tarea.getTitle().toUpperCase()));
 			Log.debug("Error actualizando tarea");
 		}
+	}
+	
+	public String añadirTarea() {
+		String resultado = "";
+		BeanUser u = (BeanUser)FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get("userSession");
+		Task t = new Task();
+		
+		t.setTitle(nombre);
+		t.setComments(comentario);
+		t.setCreated(new Date());
+		t.setFinished(null);
+		t.setPlanned(fechaPlaneada);
+		t.setUserId(u.getId());
+		
+		if(idCategoria != null) {
+			t.setCategoryId(idCategoria);
+		}
+		
+		try {
+			Services.getTaskService().createTask(t);
+			
+			if (t.getCategoryId() == null) {
+				listarTareasInbox();
+				resultado = "EXITO_INBOX";
+			}			
+			else if (t.getCategoryId() != null && t.getPlanned().compareTo(fechaHoy) == 0) {
+				listarTareasHoy();
+				resultado = "EXITO_HOY";
+			}
+			else if(t.getCategoryId() != null && t.getPlanned().compareTo(new Date()) > 0) {
+				listarTareasSemana();
+				resultado = "EXITO_SEMANA";
+			}
+			
+			Log.debug("Todo bien añadiendo tarea");
+		} catch (BusinessException e) {
+			resultado = "ERROR";
+			Log.debug("Error añadiendo tarea");
+		}
+		
+		nombre = null;
+		fechaPlaneada = null;
+		comentario = null;
+		idCategoria = null;
+		
+		return resultado;
+	}
+	
+	public void editarTarea(Task t) {
+		nombre = t.getTitle();
+		comentario = t.getComments();
+		fechaPlaneada = t.getPlanned();
+		idCategoria = t.getCategoryId(); 
 	}
 }

@@ -3,8 +3,8 @@
 }
 
 .boton-centrar {
-	margin: 0 auto;
-	valign: middle;
+	left: 5px;
+	bottom: 10px;
 }
 
 .retrasada {

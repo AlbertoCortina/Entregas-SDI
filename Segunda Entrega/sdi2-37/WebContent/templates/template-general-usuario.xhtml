@@ -9,13 +9,13 @@
 
 <f:view locale="#{beanSettings.locale}">
 	<h:head>
-		<title>#{msgs.tituloHead}</title>		
+		<title>#{msgs.tituloHead}</title>
 	</h:head>
-	
+
 	<f:facet name="css">
-			<h:outputStylesheet name="css/style.css" />
+		<h:outputStylesheet name="css/style.css" />
 	</f:facet>
-	
+
 	<h:body>
 		<h:form id="form-cabecera">
 			<center>
@@ -47,7 +47,7 @@
 							action="#{beanTareas.listarTareasSemana}" />
 					</p:submenu>
 					<p:menuitem id="añadirTarea" value="#{msgs.tituloAñadirTarea}"
-						icon="ui-icon-gear" />
+						icon="ui-icon-gear" onclick="PF('dlg').show();" />
 				</ui:insert>
 
 				<ui:insert name="barraMenu_Usuario">
@@ -77,6 +77,45 @@
 		</ui:insert>
 
 		<ui:insert name="cuerpo"></ui:insert>
+		
+		<!-- DIALOGO AÑADIR TAREA -->
+		<h:form id="form-añadir">
+			<p:dialog header="#{msgs.tituloAñadirTarea}" widgetVar="dlg" resizable="false">			
+		        <h:panelGrid columns="2" cellpadding="5">				
+					<h:outputText id="nombreTarea" value="#{msgs.tituloNombre}" />
+					<h:panelGroup>
+						<p:inputText id="input-nombreTarea" value="#{beanTareas.nombre}" required="true"
+							requiredMessage="#{msgs.tituloNombreObligatorio}" />
+						<p:message for="input-nombreTarea" />
+					</h:panelGroup>
+					
+					<h:outputText value="#{msgs.tituloComentario}"/>
+					<h:panelGroup>
+						<p:inputText id="input-comentario" value="#{beanTareas.comentario}"/>
+					</h:panelGroup>
+	
+					<h:outputText value="#{msgs.tituloFechaPlaneada}"/>
+					<h:panelGroup>				
+						<p:calendar id="btCalendario" 
+							value="#{beanTareas.fechaPlaneada}" showOn="button" 
+							mindate="#{beanTareas.fechaHoy}"/>
+					</h:panelGroup>
+					
+					<h:outputText value="#{msgs.tituloCategoria}"/>
+					<h:panelGroup>
+						<p:selectOneMenu id="categoria" value="#{beanTareas.idCategoria}">
+				            <f:selectItem itemLabel="#{msgs.tituloSeleccionarCategoria}" itemValue="" />
+				            <f:selectItems value="#{beanTareas.categorias}" var="tarea" itemLabel="#{tarea.name}" itemValue="#{tarea.id}"/>
+				        </p:selectOneMenu>	
+			        </h:panelGroup>
+	
+					<f:facet name="footer">
+						<p:commandButton id="btAñadir" style="float:right" value="#{msgs.tituloAñadirTarea}"
+							action="#{beanTareas.añadirTarea}" update="mensajes"/>
+					</f:facet>                       
+	        	</h:panelGrid>
+	    	</p:dialog>
+		</h:form>
 
 	</h:body>
 </f:view>

@@ -67,10 +67,7 @@ public class BeanRegistro {
 	public String registrar() {		
 		String resultado = "";
 		try {
-			UserService uService = Services.getUserService();
-			System.out.println(login);
-			System.out.println(email);
-			System.out.println(password);
+			UserService uService = Services.getUserService();			
 			User u = new User();
 			u.setLogin(login);
 			u.setEmail(email);

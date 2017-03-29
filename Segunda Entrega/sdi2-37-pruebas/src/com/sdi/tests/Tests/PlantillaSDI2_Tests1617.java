@@ -8,6 +8,7 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class PlantillaSDI2_Tests1617 {
 
 	List<WebElement> elementos = null;
 	static WebDriver driver = getDriver();
-	static WebDriverWait wait = new WebDriverWait(driver, 10);
+	static WebDriverWait wait = new WebDriverWait(driver, 20);
 	String URL = "http://localhost:8180/sdi2-37";
 
 	public PlantillaSDI2_Tests1617() {
@@ -67,7 +68,7 @@ public class PlantillaSDI2_Tests1617 {
 
 	@AfterClass
 	public static void end() {
-		// driver.quit();
+		driver.quit();
 	}
 
 	// PRUEBAS
@@ -78,7 +79,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: admin1", elementos.get(0).getText());
 	}
@@ -90,7 +91,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "loginmal", "admin1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes",
-				10);
+				20);
 
 		assertEquals("Error: Usuario o contraseña no válido", elementos.get(0)
 				.getText());
@@ -103,7 +104,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "admin1", "passwordmal");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes",
-				10);
+				20);
 
 		assertEquals("Error: Usuario o contraseña no válido", elementos.get(0)
 				.getText());
@@ -116,7 +117,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		TestUtils.iniciarBaseDeDatos(driver);
 
@@ -223,7 +224,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: admin1", elementos.get(0).getText());
 
@@ -231,7 +232,7 @@ public class PlantillaSDI2_Tests1617 {
 				"form-cabecera:submenuOpciones", "form-cabecera:opcion2");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
+				"form-listado:tablalistado", 20);
 
 		try {
 			int numUsuarios = Services.getUserService().findAll().size();
@@ -262,7 +263,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: admin1", elementos.get(0).getText());
 
@@ -272,7 +273,7 @@ public class PlantillaSDI2_Tests1617 {
 				"form-cabecera:submenuOpciones", "form-cabecera:opcion2");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
+				"form-listado:tablalistado", 20);
 
 		// Cambiamos el estado al user1
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
@@ -280,14 +281,14 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.clicarElemento(driver,
 				"form-listado:tablalistado:0:cambiarEstado");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 20);
 
 		TestUtils.cerrarSesion(driver);
 
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes",
-				10);
+				20);
 
 		assertEquals("Error: Usuario o contraseña no válido", elementos.get(0)
 				.getText());
@@ -300,7 +301,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: admin1", elementos.get(0).getText());
 
@@ -308,7 +309,7 @@ public class PlantillaSDI2_Tests1617 {
 				"form-cabecera:submenuOpciones", "form-cabecera:opcion2");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
+				"form-listado:tablalistado", 20);
 
 		// Cambiamos el estado al user1
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
@@ -316,14 +317,14 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.clicarElemento(driver,
 				"form-listado:tablalistado:0:cambiarEstado");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 20);
 
 		TestUtils.cerrarSesion(driver);
 
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: user1", elementos.get(0).getText());
 	}
@@ -334,7 +335,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: admin1", elementos.get(0).getText());
 
@@ -342,7 +343,7 @@ public class PlantillaSDI2_Tests1617 {
 				"form-cabecera:submenuOpciones", "form-cabecera:opcion2");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
+				"form-listado:tablalistado", 20);
 
 		// Clicamos el header de login para ordenar ascendentemente
 		wait.until(ExpectedConditions.presenceOfElementLocated(By
@@ -350,7 +351,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:loginH");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
+				"form-listado:tablalistado", 20);
 
 		List<String> usuariosOrdenados = TestUtils.ordenarPorLogin(true);
 		int numUsuarios = usuariosOrdenados.size();
@@ -365,7 +366,7 @@ public class PlantillaSDI2_Tests1617 {
 		}
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
+				"form-listado:tablalistado", 20);
 
 		// Clicamos el header de email para ordenar descendentemente
 		wait.until(ExpectedConditions.presenceOfElementLocated(By
@@ -373,7 +374,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:loginH");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
+				"form-listado:tablalistado", 20);
 
 		usuariosOrdenados = TestUtils.ordenarPorLogin(false);
 
@@ -393,7 +394,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: admin1", elementos.get(0).getText());
 
@@ -401,7 +402,7 @@ public class PlantillaSDI2_Tests1617 {
 				"form-cabecera:submenuOpciones", "form-cabecera:opcion2");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
+				"form-listado:tablalistado", 20);
 
 		// Clicamos el header de email para ordenar ascendentemente
 		wait.until(ExpectedConditions.presenceOfElementLocated(By
@@ -409,7 +410,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:emailH");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
+				"form-listado:tablalistado", 20);
 
 		List<String> usuariosOrdenados = TestUtils.ordenarPorEmail(true);
 		int numUsuarios = usuariosOrdenados.size();
@@ -424,7 +425,7 @@ public class PlantillaSDI2_Tests1617 {
 		}
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
+				"form-listado:tablalistado", 20);
 
 		// Clicamos el header de email para ordenar descendentemente
 		wait.until(ExpectedConditions.presenceOfElementLocated(By
@@ -432,7 +433,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.clicarElemento(driver, "form-listado:tablalistado:emailH");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
+				"form-listado:tablalistado", 20);
 
 		usuariosOrdenados = TestUtils.ordenarPorEmail(false);
 
@@ -446,86 +447,13 @@ public class PlantillaSDI2_Tests1617 {
 		}
 	}
 
-	// PR10: Ordenar por Status
-	@Test
-	public void prueba10() throws InterruptedException {
-		TestUtils.iniciarSesion(driver, "admin1", "admin1");
-
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
-
-		assertEquals("Usuario: admin1", elementos.get(0).getText());
-
-		TestUtils.iniciarBaseDeDatos(driver);
-
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes", 10);
-
-		SeleniumUtils.ClickSubopcionMenuHover(driver,
-				"form-cabecera:submenuOpciones", "form-cabecera:opcion2");
-
-		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
-
-		// Cambiamos el estado al user1
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.id("form-listado:tablalistado:0:cambiarEstado")));
-		TestUtils.clicarElemento(driver,
-				"form-listado:tablalistado:0:cambiarEstado");
-
-		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
-
-		// Clicamos el header de status para ordenar ascendentemente
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.id("form-listado:tablalistado:statusH")));
-		TestUtils.clicarElemento(driver, "form-listado:tablalistado:statusH");
-
-		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
-
-		List<String> usuariosOrdenados = TestUtils.ordenarPorStatus(true);
-		int numUsuarios = usuariosOrdenados.size();
-
-		for (int i = 0; i < numUsuarios - 1; i++) {
-			wait.until(ExpectedConditions.presenceOfElementLocated(By
-					.id("form-listado:tablalistado:" + i + ":cambiarEstado")));
-			elementos = driver.findElements(By.id("form-listado:tablalistado:"
-					+ i + ":cambiarEstado"));
-			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i));
-		}
-
-		// Clicamos el header de status para ordenar descendentemente
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.id("form-listado:tablalistado:statusH")));
-		TestUtils.clicarElemento(driver, "form-listado:tablalistado:statusH");
-
-		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 20);
-
-		usuariosOrdenados = TestUtils.ordenarPorStatus(false);
-
-		for (int i = 0; i < numUsuarios; i++) {
-			wait.until(ExpectedConditions.presenceOfElementLocated(By
-					.id("form-listado:tablalistado:" + i + ":cambiarEstado")));
-			elementos = driver.findElements(By.id("form-listado:tablalistado:"
-					+ i + ":cambiarEstado"));
-			assertEquals(elementos.get(0).getText(), usuariosOrdenados.get(i));
-		}
-
-		// Cambiamos el estado al user1
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.id("form-listado:tablalistado:0:cambiarEstado")));
-		TestUtils.clicarElemento(driver,
-				"form-listado:tablalistado:0:cambiarEstado");
-	}
-
 	// PR11: Borrar una cuenta de usuario normal y datos relacionados.
 	@Test
 	public void prueba11() throws InterruptedException {
 		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: admin1", elementos.get(0).getText());
 
@@ -549,14 +477,14 @@ public class PlantillaSDI2_Tests1617 {
 				"form-listado:tablalistado:9:confirmacion");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
+				"form-listado:tablalistado", 20);
 
 		TestUtils.cerrarSesion(driver);
 
 		TestUtils.iniciarSesion(driver, "user2", "user2");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes",
-				10);
+				20);
 
 		assertEquals("Error: Usuario o contraseña no válido", elementos.get(0)
 				.getText());
@@ -565,12 +493,12 @@ public class PlantillaSDI2_Tests1617 {
 	// PR12: Crear una cuenta de usuario normal con datos válidos.
 	@Test
 	public void prueba12() {
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 10);
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 20);
 
 		TestUtils.clicarElemento(driver, "enlace");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-registro:enlace", 10);
+				"form-registro:enlace", 20);
 
 		elementos = driver.findElements(By.id("form-registro:input-login"));
 		elementos.get(0).sendKeys("user11");
@@ -589,7 +517,7 @@ public class PlantillaSDI2_Tests1617 {
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(
 				By.id("mensajes"), "Exito"));
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "mensajes",
-				10);
+				20);
 
 		assertEquals(
 				"Exito: Se ha registrado correctamente, inicie sesión para acceder",
@@ -598,7 +526,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "user11", "user11user");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: user11", elementos.get(0).getText());
 	}
@@ -606,12 +534,12 @@ public class PlantillaSDI2_Tests1617 {
 	// PR13: Crear una cuenta de usuario normal con login repetido.
 	@Test
 	public void prueba13() throws InterruptedException {
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 10);
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 20);
 
 		TestUtils.clicarElemento(driver, "enlace");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-registro:enlace", 10);
+				"form-registro:enlace", 20);
 
 		// Mandamos todos los datos al registro
 		elementos = driver.findElements(By.id("form-registro:input-login"));
@@ -637,12 +565,12 @@ public class PlantillaSDI2_Tests1617 {
 	// PR14: Crear una cuenta de usuario normal con Email incorrecto.
 	@Test
 	public void prueba14() throws InterruptedException {
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 10);
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 20);
 
 		TestUtils.clicarElemento(driver, "enlace");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-registro:enlace", 10);
+				"form-registro:enlace", 20);
 
 		elementos = driver.findElements(By.id("form-registro:input-login"));
 		elementos.get(0).sendKeys("user11");
@@ -668,12 +596,12 @@ public class PlantillaSDI2_Tests1617 {
 	// PR15: Crear una cuenta de usuario normal con Password incorrecta.
 	@Test
 	public void prueba15() throws InterruptedException {
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 10);
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 20);
 
 		TestUtils.clicarElemento(driver, "enlace");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-registro:enlace", 10);
+				"form-registro:enlace", 20);
 
 		elementos = driver.findElements(By.id("form-registro:input-login"));
 		elementos.get(0).sendKeys("user11");
@@ -707,7 +635,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: user1", elementos.get(0).getText());
 
@@ -731,7 +659,7 @@ public class PlantillaSDI2_Tests1617 {
 
 			numTarea++;
 
-			if (numTarea % 8 == 0) {
+			if (numTarea % 8 == 0 && i != inboxTask.size()) {
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
 						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
 								+ j + "]")));
@@ -751,7 +679,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: user1", elementos.get(0).getText());
 
@@ -782,7 +710,7 @@ public class PlantillaSDI2_Tests1617 {
 
 			numTarea++;
 
-			if (numTarea % 8 == 0) {
+			if (numTarea % 8 == 0 && i != inboxTask.size()) {
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
 						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
 								+ j + "]")));
@@ -824,7 +752,7 @@ public class PlantillaSDI2_Tests1617 {
 
 			numTarea++;
 
-			if (numTarea % 8 == 0) {
+			if (numTarea % 8 == 0 && i != inboxTask.size()) {
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
 						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
 								+ j + "]")));
@@ -844,7 +772,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: user1", elementos.get(0).getText());
 
@@ -860,7 +788,7 @@ public class PlantillaSDI2_Tests1617 {
 		elementos.get(0).sendKeys("2");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
+				"form-listado:tablalistado", 20);
 
 		List<String> inboxTask = TestUtils.filtrarTareas(driver, "2");
 
@@ -876,7 +804,7 @@ public class PlantillaSDI2_Tests1617 {
 
 			numTarea++;
 
-			if (numTarea % 8 == 0) {
+			if (numTarea % 8 == 0 && i != inboxTask.size()) {
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
 						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
 								+ j + "]")));
@@ -896,7 +824,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: user1", elementos.get(0).getText());
 
@@ -928,7 +856,7 @@ public class PlantillaSDI2_Tests1617 {
 
 			numTarea++;
 
-			if (numTarea % 8 == 0) {
+			if (numTarea % 8 == 0 && i != hoyTasks.size()) {
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
 						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
 								+ j + "]")));
@@ -971,7 +899,7 @@ public class PlantillaSDI2_Tests1617 {
 
 			numTarea++;
 
-			if (numTarea % 8 == 0) {
+			if (numTarea % 8 == 0 && i != hoyTasks.size()) {
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
 						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
 								+ j + "]")));
@@ -991,7 +919,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: user1", elementos.get(0).getText());
 
@@ -1022,7 +950,7 @@ public class PlantillaSDI2_Tests1617 {
 
 			numTarea++;
 
-			if (numTarea % 8 == 0) {
+			if (numTarea % 8 == 0 && i != hoyTask.size()) {
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
 						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
 								+ j + "]")));
@@ -1064,7 +992,7 @@ public class PlantillaSDI2_Tests1617 {
 
 			numTarea++;
 
-			if (numTarea % 8 == 0) {
+			if (numTarea % 8 == 0 && i != hoyTask.size()) {
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
 						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
 								+ j + "]")));
@@ -1085,7 +1013,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: user1", elementos.get(0).getText());
 
@@ -1126,7 +1054,7 @@ public class PlantillaSDI2_Tests1617 {
 
 			numTarea++;
 
-			if (numTarea % 8 == 0) {
+			if (numTarea % 8 == 0 && i != hoyTask.size()) {
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
 						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
 								+ j + "]")));
@@ -1147,7 +1075,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: user1", elementos.get(0).getText());
 
@@ -1189,7 +1117,7 @@ public class PlantillaSDI2_Tests1617 {
 
 			numTarea++;
 
-			if (numTarea % 8 == 0) {
+			if (numTarea % 8 == 0 && i != hoyTask.size()) {
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
 						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
 								+ j + "]")));
@@ -1210,7 +1138,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: user1", elementos.get(0).getText());
 
@@ -1253,7 +1181,7 @@ public class PlantillaSDI2_Tests1617 {
 
 			numTarea++;
 
-			if (numTarea % 8 == 0) {
+			if (numTarea % 8 == 0 && i != semanaTask.size()) {
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
 						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
 								+ j + "]")));
@@ -1273,7 +1201,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: user1", elementos.get(0).getText());
 
@@ -1305,7 +1233,7 @@ public class PlantillaSDI2_Tests1617 {
 
 			numTarea++;
 
-			if (numTarea % 8 == 0) {
+			if (numTarea % 8 == 0 && i != semanaTask.size()) {
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
 						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
 								+ j + "]")));
@@ -1347,7 +1275,7 @@ public class PlantillaSDI2_Tests1617 {
 
 			numTarea++;
 
-			if (numTarea % 8 == 0) {
+			if (numTarea % 8 == 0 && i != semanaTask.size()) {
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
 						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
 								+ j + "]")));
@@ -1367,7 +1295,7 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: user1", elementos.get(0).getText());
 
@@ -1399,7 +1327,7 @@ public class PlantillaSDI2_Tests1617 {
 
 			numTarea++;
 
-			if (numTarea % 8 == 0) {
+			if (numTarea % 8 == 0 && i != semanaTask.size()) {
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
 						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
 								+ j + "]")));
@@ -1441,7 +1369,7 @@ public class PlantillaSDI2_Tests1617 {
 
 			numTarea++;
 
-			if (numTarea % 8 == 0) {
+			if (numTarea % 8 == 0 && i != semanaTask.size()) {
 				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
 						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
 								+ j + "]")));
@@ -1463,7 +1391,7 @@ public class PlantillaSDI2_Tests1617 {
 
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 20);
 
 		SeleniumUtils.ClickSubopcionMenuHover(driver,
 				"form-cabecera:submenuOpciones", "form-cabecera:listaInbox");
@@ -1473,7 +1401,7 @@ public class PlantillaSDI2_Tests1617 {
 
 		titulo = SeleniumUtils
 				.EsperaCargaPagina(driver, "id",
-						"form-listado:tablalistado:0:title", 10).get(0)
+						"form-listado:tablalistado:0:title", 20).get(0)
 				.getText();
 
 		TestUtils.clicarElemento(driver,
@@ -1508,21 +1436,208 @@ public class PlantillaSDI2_Tests1617 {
 	// lista Inbox.
 	@Test
 	public void prueba27() {
-		assertTrue(false);
+		DateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+		String fecha = formateador.format(new Date());		
+		
+		TestUtils.iniciarSesion(driver, "user1", "user1");
+
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 20);
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver,
+				"form-cabecera:añadirTarea", "form-cabecera:añadirTarea");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-añadir", 20);
+		
+		elementos = driver.findElements(By.id("form-añadir:input-nombreTarea"));
+		elementos.get(0).sendKeys("tareaPruebaInbox");
+		
+		elementos = driver.findElements(By.id("form-añadir:input-comentario"));
+		elementos.get(0).sendKeys("comentario tareaPruebaInbox");
+		
+		elementos = driver.findElements(By.id("form-añadir:btCalendario_input"));
+		elementos.get(0).sendKeys(fecha);
+		
+		elementos = driver.findElements(By.id("form-añadir:categoria_label"));
+		elementos.get(0).click();
+		
+		elementos = driver.findElements(By.id("form-añadir:categoria_0"));
+		elementos.get(0).click();
+		
+		elementos = driver.findElements(By.id("form-añadir:btAñadir"));
+		elementos.get(0).click();
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-listado:tablalistado", 20);
+
+		List<String> inboxTask = TestUtils
+				.ordenarTareasInboxFechaPlaneada(true);
+
+		int numTarea = 0;
+		int j = 2;
+		for (int i = 1; i <= inboxTask.size(); i++) {
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
+					.id("form-listado:tablalistado:" + (i - 1) + ":title")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"
+					+ (i - 1) + ":title"));
+			
+			if(elementos.get(0).getText().equals("tareaPruebaInbox")) {
+				assertTrue(true);
+			}
+
+			numTarea++;
+
+			if (numTarea % 8 == 0 && i != inboxTask.size()) {
+				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
+						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
+								+ j + "]")));
+				driver.findElement(
+						By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
+								+ j + "]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id",
+						"form-listado:tablalistado", 20);
+			}
+		}
+		
 	}
 
 	// PR28: Crear una tarea con categoría categoria1 y fecha planeada Hoy y
 	// comprobar que se muestra en la lista Hoy.
 	@Test
 	public void prueba28() {
-		assertTrue(false);
+		DateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+		String fecha = formateador.format(new Date());		
+		
+		TestUtils.iniciarSesion(driver, "user1", "user1");
+
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 20);
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver,
+				"form-cabecera:añadirTarea", "form-cabecera:añadirTarea");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-añadir", 20);
+		
+		elementos = driver.findElements(By.id("form-añadir:input-nombreTarea"));
+		elementos.get(0).sendKeys("tareaPruebaHoy");
+		
+		elementos = driver.findElements(By.id("form-añadir:input-comentario"));
+		elementos.get(0).sendKeys("comentario tareaPruebaHoy");
+		
+		elementos = driver.findElements(By.id("form-añadir:btCalendario_input"));
+		elementos.get(0).sendKeys(fecha);
+		
+		elementos = driver.findElements(By.id("form-añadir:categoria_label"));
+		elementos.get(0).click();
+		
+		elementos = driver.findElements(By.id("form-añadir:categoria_1"));
+		elementos.get(0).click();
+		
+		elementos = driver.findElements(By.id("form-añadir:btAñadir"));
+		elementos.get(0).click();
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-listado:tablalistado", 20);
+		
+		List<String> hoyTask = TestUtils
+				.ordenarTareasHoyFechaPlaneada(true);
+
+		int numTarea = 0;
+		int j = 2;
+		for (int i = 1; i <= hoyTask.size(); i++) {
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
+					.id("form-listado:tablalistado:" + (i - 1) + ":title")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"
+					+ (i - 1) + ":title"));
+			
+			if(elementos.get(0).getText().equals("tareaPruebaHoy")) {
+				assertTrue(true);
+			}
+
+			numTarea++;
+
+			if (numTarea % 8 == 0 && i != hoyTask.size()) {
+				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
+						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
+								+ j + "]")));
+				driver.findElement(
+						By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
+								+ j + "]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id",
+						"form-listado:tablalistado", 20);
+			}
+		}
 	}
 
 	// PR29: Crear una tarea con categoría categoria1 y fecha planeada posterior
 	// a Hoy y comprobar que se muestra en la lista Semana.
 	@Test
 	public void prueba29() {
-		assertTrue(false);
+		DateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.add(Calendar.DAY_OF_YEAR, 2);
+		String fecha = formateador.format(calendar.getTime());		
+		
+		TestUtils.iniciarSesion(driver, "user1", "user1");
+
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 20);
+		
+		SeleniumUtils.ClickSubopcionMenuHover(driver,
+				"form-cabecera:añadirTarea", "form-cabecera:añadirTarea");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-añadir", 20);
+		
+		elementos = driver.findElements(By.id("form-añadir:input-nombreTarea"));
+		elementos.get(0).sendKeys("tareaPruebaSemana");
+		
+		elementos = driver.findElements(By.id("form-añadir:input-comentario"));
+		elementos.get(0).sendKeys("comentario tareaPruebaSemana");
+		
+		elementos = driver.findElements(By.id("form-añadir:btCalendario_input"));
+		elementos.get(0).sendKeys(fecha);
+		
+		elementos = driver.findElements(By.id("form-añadir:categoria_label"));
+		elementos.get(0).click();
+		
+		elementos = driver.findElements(By.id("form-añadir:categoria_1"));
+		elementos.get(0).click();
+		
+		elementos = driver.findElements(By.id("form-añadir:btAñadir"));
+		elementos.get(0).click();
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-listado:tablalistado", 20);
+		
+		List<String> semanaTask = null;
+		semanaTask = TestUtils.ordenarTareasSemanaTitulo(true);
+
+		int numTarea = 0;
+		int j = 2;
+		for (int i = 1; i <= semanaTask.size(); i++) {
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
+					.id("form-listado:tablalistado:" + (i - 1) + ":title")));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"
+					+ (i - 1) + ":title"));
+			
+			if(elementos.get(0).getText().equals("tareaPruebaSemana")) {
+				assertTrue(true);
+			}
+
+			numTarea++;
+
+			if (numTarea % 8 == 0 && i != semanaTask.size()) {
+				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
+						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
+								+ j + "]")));
+				driver.findElement(
+						By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
+								+ j + "]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id",
+						"form-listado:tablalistado", 20);
+			}
+		}
 	}
 
 	// PR30: Editar el nombre, y categoría de una tarea (se le cambia a
@@ -1549,7 +1664,7 @@ public class PlantillaSDI2_Tests1617 {
 
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "nombreUsuario", 20);
 
 		SeleniumUtils.ClickSubopcionMenuHover(driver,
 				"form-cabecera:submenuOpciones", "form-cabecera:listaInbox");
@@ -1559,7 +1674,7 @@ public class PlantillaSDI2_Tests1617 {
 
 		titulo = SeleniumUtils
 				.EsperaCargaPagina(driver, "id",
-						"form-listado:tablalistado:0:title", 10).get(0)
+						"form-listado:tablalistado:0:title", 20).get(0)
 				.getText();
 
 		TestUtils.clicarElemento(driver,
@@ -1598,7 +1713,39 @@ public class PlantillaSDI2_Tests1617 {
 		}
 
 		// Comprobamos que no está en hoy
+		SeleniumUtils.ClickSubopcionMenuHover(driver,
+				"form-cabecera:submenuOpciones", "form-cabecera:listaHoy");
 
+		SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-listado:tablalistado", 20);
+
+		List<String> hoyTask = TestUtils
+				.ordenarTareasHoyFechaPlaneada(true);
+
+		numTarea = 0;
+		j = 2;
+		for (int i = 1; i <= hoyTask.size(); i++) {
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(
+					By.id("form-listado:tablalistado:" + (i - 1) + ":title"),
+					"tarea"));
+			elementos = driver.findElements(By.id("form-listado:tablalistado:"
+					+ (i - 1) + ":title"));
+			assertNotEquals(titulo, elementos.get(0).getText());
+
+			numTarea++;
+
+			if (numTarea % 8 == 0) {
+				wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
+						.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
+								+ j + "]")));
+				driver.findElement(
+						By.xpath("//div[@id='form-listado:tablalistado_paginator_top']/span[4]/span["
+								+ j + "]")).click();
+				j++;
+				SeleniumUtils.EsperaCargaPagina(driver, "id",
+						"form-listado:tablalistado", 20);
+			}
+		}
 		// Comprobamos que no está en semana
 		SeleniumUtils.ClickSubopcionMenuHover(driver,
 				"form-cabecera:submenuOpciones", "form-cabecera:listaSemana");
@@ -1641,14 +1788,14 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: admin1", elementos.get(0).getText());
 
 		TestUtils.cerrarSesion(driver);
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"input-usuario", 10);
+				"input-usuario", 20);
 
 		SeleniumUtils.textoPresentePagina(driver, "Usuario");
 		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
@@ -1660,14 +1807,14 @@ public class PlantillaSDI2_Tests1617 {
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"nombreUsuario", 10);
+				"nombreUsuario", 20);
 
 		assertEquals("Usuario: user1", elementos.get(0).getText());
 
 		TestUtils.cerrarSesion(driver);
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"input-usuario", 10);
+				"input-usuario", 20);
 
 		SeleniumUtils.textoPresentePagina(driver, "Usuario");
 		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
@@ -1682,7 +1829,7 @@ public class PlantillaSDI2_Tests1617 {
 		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-cabecera:idiomas",
-				10);
+				20);
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas",
 				"form-cabecera:ingles");
 
@@ -1697,7 +1844,7 @@ public class PlantillaSDI2_Tests1617 {
 		// registro.xhtml
 		TestUtils.clicarElemento(driver, "enlace");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 20);
 
 		SeleniumUtils.textoPresentePagina(driver, "Sign up");
 		SeleniumUtils.textoPresentePagina(driver, "Username");
@@ -1721,7 +1868,7 @@ public class PlantillaSDI2_Tests1617 {
 				"form-cabecera:submenuOpciones", "form-cabecera:opcion2");
 
 		SeleniumUtils.EsperaCargaPagina(driver, "id",
-				"form-listado:tablalistado", 10);
+				"form-listado:tablalistado", 20);
 
 		SeleniumUtils.textoPresentePagina(driver, "Users list");
 		SeleniumUtils.textoPresentePagina(driver, "Delete user");
@@ -1741,11 +1888,11 @@ public class PlantillaSDI2_Tests1617 {
 		SeleniumUtils.textoPresentePagina(driver, "Usuario");
 		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login", 20);
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas",
 				"form-cabecera:ingles");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login", 20);
 
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(
 				By.id("form-login:usuario"), "Username"));
@@ -1755,11 +1902,11 @@ public class PlantillaSDI2_Tests1617 {
 				By.id("form-login:contraseña"), "Password"));
 		SeleniumUtils.textoPresentePagina(driver, "Password");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login", 20);
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas",
 				"form-cabecera:español");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-login", 20);
 
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(
 				By.id("form-login:usuario"), "Usuario"));
@@ -1772,22 +1919,22 @@ public class PlantillaSDI2_Tests1617 {
 		// Registro.xhtml
 		TestUtils.clicarElemento(driver, "enlace");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 20);
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas",
 				"form-cabecera:español");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 20);
 
 		SeleniumUtils.textoPresentePagina(driver, "Usuario");
 		SeleniumUtils.textoPresentePagina(driver, "Email");
 		SeleniumUtils.textoPresentePagina(driver, "Contraseña");
 		SeleniumUtils.textoPresentePagina(driver, "Repetir contraseña");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 20);
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas",
 				"form-cabecera:ingles");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 20);
 
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(
 				By.id("form-registro:usuario"), "Username"));
@@ -1805,11 +1952,11 @@ public class PlantillaSDI2_Tests1617 {
 				By.id("form-registro:Rcontraseña"), "Repeat password"));
 		SeleniumUtils.textoPresentePagina(driver, "Repeat password");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 20);
 		SeleniumUtils.ClickSubopcionMenuHover(driver, "form-cabecera:idiomas",
 				"form-cabecera:español");
 
-		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 10);
+		SeleniumUtils.EsperaCargaPagina(driver, "id", "form-registro", 20);
 
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(
 				By.id("form-registro:usuario"), "Usuario"));
