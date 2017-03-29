@@ -24,7 +24,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -260,7 +259,7 @@ public class PlantillaSDI2_Tests1617 {
 	// PR06: Cambiar el estado de un usuario de ENABLED a DISABLED. Y tratar de
 	// entrar con el usuario que se desactivado.
 	@Test
-	public void prueba06() throws InterruptedException {
+	public void prueba06() {
 		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
@@ -298,7 +297,7 @@ public class PlantillaSDI2_Tests1617 {
 	// PR07: Cambiar el estado de un usuario a DISABLED a ENABLED. Y Y tratar de
 	// entrar con el usuario que se ha activado.
 	@Test
-	public void prueba07() throws InterruptedException {
+	public void prueba07() {
 		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
@@ -332,7 +331,7 @@ public class PlantillaSDI2_Tests1617 {
 
 	// PR08: Ordenar por Login
 	@Test
-	public void prueba08() throws InterruptedException {
+	public void prueba08() {
 		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
@@ -394,7 +393,7 @@ public class PlantillaSDI2_Tests1617 {
 
 	// PR09: Ordenar por Email
 	@Test
-	public void prueba09() throws InterruptedException {
+	public void prueba09() {
 		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
@@ -457,7 +456,7 @@ public class PlantillaSDI2_Tests1617 {
 
 	// PR11: Borrar una cuenta de usuario normal y datos relacionados.
 	@Test
-	public void prueba11() throws InterruptedException {
+	public void prueba11() {
 		TestUtils.iniciarSesion(driver, "admin1", "admin1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
@@ -541,7 +540,7 @@ public class PlantillaSDI2_Tests1617 {
 
 	// PR13: Crear una cuenta de usuario normal con login repetido.
 	@Test
-	public void prueba13() throws InterruptedException {
+	public void prueba13() {
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 20);
 
 		TestUtils.clicarElemento(driver, "enlace");
@@ -572,7 +571,7 @@ public class PlantillaSDI2_Tests1617 {
 
 	// PR14: Crear una cuenta de usuario normal con Email incorrecto.
 	@Test
-	public void prueba14() throws InterruptedException {
+	public void prueba14() {
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 20);
 
 		TestUtils.clicarElemento(driver, "enlace");
@@ -603,7 +602,7 @@ public class PlantillaSDI2_Tests1617 {
 
 	// PR15: Crear una cuenta de usuario normal con Password incorrecta.
 	@Test
-	public void prueba15() throws InterruptedException {
+	public void prueba15() {
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "enlace", 20);
 
 		TestUtils.clicarElemento(driver, "enlace");
@@ -834,7 +833,7 @@ public class PlantillaSDI2_Tests1617 {
 
 	// PR19: Funcionamiento correcto de la ordenación por categoría.
 	@Test
-	public void prueba19() throws InterruptedException {
+	public void prueba19() {
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
@@ -1324,7 +1323,7 @@ public class PlantillaSDI2_Tests1617 {
 
 	// PR25: Funcionamiento correcto de la ordenación por nombre.
 	@Test
-	public void prueba25() throws InterruptedException {
+	public void prueba25() {
 		TestUtils.iniciarSesion(driver, "user1", "user1");
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
@@ -1972,7 +1971,7 @@ public class PlantillaSDI2_Tests1617 {
 	// PR32: Marcar una tarea como finalizada. Comprobar que desaparece de las
 	// tres pseudolistas.
 	@Test
-	public void prueba32() throws InterruptedException {
+	public void prueba32() {
 		String titulo = "";
 
 		TestUtils.iniciarSesion(driver, "user1", "user1");
@@ -2205,7 +2204,7 @@ public class PlantillaSDI2_Tests1617 {
 	// PR36: Cambio del idioma por defecto a un segundo idioma y vuelta al
 	// idioma por defecto. (Probar algunas vistas)
 	@Test
-	public void prueba36() throws InterruptedException {
+	public void prueba36() {
 		// Login.xhtml
 		SeleniumUtils.textoPresentePagina(driver, "Usuario");
 		SeleniumUtils.textoPresentePagina(driver, "Contraseña");

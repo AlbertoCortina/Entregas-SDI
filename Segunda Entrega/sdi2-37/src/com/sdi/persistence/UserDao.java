@@ -1,7 +1,6 @@
 package com.sdi.persistence;
 
 import com.sdi.dto.User;
-import com.sdi.dto.types.UserStatus;
 import com.sdi.persistence.util.GenericDao;
 
 public interface UserDao extends GenericDao<User, Long>{
