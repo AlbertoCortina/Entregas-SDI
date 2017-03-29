@@ -20,72 +20,64 @@ public class Task {
 		return id;
 	}
 	
-	public Task setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
-		return this;
 	}
 	
 	public String getTitle() {
 		return title;
 	}
 	
-	public Task setTitle(String title) {
-		this.title = title;
-		return this;
+	public void setTitle(String title) {
+		this.title = title;		
 	}
 	
 	public String getComments() {
 		return comments;
 	}
 	
-	public Task setComments(String comments) {
-		this.comments = comments;
-		return this;
+	public void setComments(String comments) {
+		this.comments = comments;		
 	}
 	
 	public Date getCreated() {
 		return created;
 	}
 	
-	public Task setCreated(Date created) {
-		this.created = created;
-		return this;
+	public void setCreated(Date created) {
+		this.created = created;		
 	}
 	
 	public Date getPlanned() {
 		return planned;
 	}
 	
-	public Task setPlanned(Date planned) {
+	public void setPlanned(Date planned) {
 		this.planned = planned;
-		return this;
 	}
 	
 	public Date getFinished() {
 		return finished;
 	}
 	
-	public Task setFinished(Date finished) {
+	public void setFinished(Date finished) {
 		this.finished = finished;
-		return this;
 	}
 	
 	public Long getCategoryId() {
 		return categoryId;
 	}
 	
-	public Task setCategoryId(Long category_id) {
+	public void setCategoryId(Long category_id) {
 		this.categoryId = category_id;
-		return this;
 	}
 	
 	public Long getUserId() {
 		return userId;
 	}
 	
-	public Task setUserId(Long user_id) {
+	public void setUserId(Long user_id) {
 		this.userId = user_id;
-		return this;
 	}
 	
 	@Override

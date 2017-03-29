@@ -1,17 +1,11 @@
 package com.sdi.presentation;
 
-import javax.faces.application.FacesMessage;
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-
-import alb.util.log.Log;
-
-import com.sdi.business.Services;
-import com.sdi.business.exception.BusinessException;
 import com.sdi.dto.User;
 import com.sdi.dto.types.UserStatus;
-import com.sdi.persistence.UserDao;
 
 /**
  * Se encarga de:
@@ -21,7 +15,10 @@ import com.sdi.persistence.UserDao;
  */
 @ManagedBean(name="beanUser")
 @SessionScoped
-public class BeanUser {		
+public class BeanUser implements Serializable {		
+	
+	private static final long serialVersionUID = 1L;
+
 	private Long id;
 
 	private String login;

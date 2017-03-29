@@ -1,5 +1,6 @@
 package com.sdi.presentation;
 
+import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -19,10 +20,14 @@ import com.sdi.presentation.util.Internacionalizar;
  */
 @ManagedBean(name = "beanLogin")
 @SessionScoped
-public class BeanLogin {
+public class BeanLogin implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String login;
 	private String contraseña;
+	
+	private String result = "login_form_result_valid";
 
 	public String getLogin() {
 		return login;
@@ -40,6 +45,14 @@ public class BeanLogin {
 		this.contraseña = contraseña;
 	}
 	
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
 	public String loguearse() {
 		String resultado = "";
 		try {
@@ -56,11 +69,13 @@ public class BeanLogin {
 				resultado = "EXITO_ADMIN";
 			} else if (!u.getIsAdmin()) {
 				Log.debug("Encontró un usuario, y no es un admin");
-				resultado = "EXITO_NORMAL";
+				resultado = "EXITO_NORMAL";				
 			}
 
 		} catch (Exception e) {			
 			resultado = "ERROR";
+			
+			setResult("login_form_result_error");
 			
 			FacesContext.getCurrentInstance().addMessage(
 					null,

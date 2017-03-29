@@ -1,5 +1,6 @@
 package com.sdi.presentation;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -33,8 +34,10 @@ import com.sdi.presentation.util.Internacionalizar;
  */
 @ManagedBean(name = "beanAdmin")
 @SessionScoped
-public class BeanAdmin {
-
+public class BeanAdmin implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private final static int NUMERO_USUARIOS = 10;
 	private final static int NUMERO_CATEGORIAS_POR_USUARIO = 3;
 	private final static int NUMERO_TAREAS_HOY = 10;

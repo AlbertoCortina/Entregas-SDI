@@ -62,11 +62,11 @@
 					</f:facet>
 				</ui:insert>
 
-				<p:submenu style="float:right" label="#{msgs.textoIdioma}"
+				<p:submenu id="idiomas" style="float:right" label="#{msgs.textoIdioma}"
 					icon="ui-icon-flag">
-					<p:menuitem value="#{msgs.enlaceIdiomaES}"
+					<p:menuitem id="español" value="#{msgs.enlaceIdiomaES}"
 						actionListener="#{beanSettings.setSpanish}" update="@all" />
-					<p:menuitem value="#{msgs.enlaceIdiomaEN}"
+					<p:menuitem id="ingles" value="#{msgs.enlaceIdiomaEN}"
 						actionListener="#{beanSettings.setEnglish}" update="@all" />
 				</p:submenu>
 			</p:menubar>
@@ -89,12 +89,12 @@
 						<p:message for="input-nombreTarea" />
 					</h:panelGroup>
 					
-					<h:outputText value="#{msgs.tituloComentario}"/>
+					<h:outputText value="#{msgs.tituloComentarioAñadir}"/>
 					<h:panelGroup>
 						<p:inputText id="input-comentario" value="#{beanTareas.comentario}"/>
 					</h:panelGroup>
 	
-					<h:outputText value="#{msgs.tituloFechaPlaneada}"/>
+					<h:outputText value="#{msgs.tituloFechaPlaneadaAñadir}"/>
 					<h:panelGroup>				
 						<p:calendar id="btCalendario" 
 							value="#{beanTareas.fechaPlaneada}" showOn="button" 
@@ -105,7 +105,7 @@
 					<h:panelGroup>
 						<p:selectOneMenu id="categoria" value="#{beanTareas.idCategoria}">
 				            <f:selectItem itemLabel="#{msgs.tituloSeleccionarCategoria}" itemValue="" />
-				            <f:selectItems value="#{beanTareas.categorias}" var="tarea" itemLabel="#{tarea.name}" itemValue="#{tarea.id}"/>
+				            <f:selectItems value="#{beanTareas.categorias}" var="categoria" itemLabel="#{categoria.name}" itemValue="#{categoria.id}"/>
 				        </p:selectOneMenu>	
 			        </h:panelGroup>
 	
@@ -115,7 +115,7 @@
 					</f:facet>                       
 	        	</h:panelGrid>
 	    	</p:dialog>
-		</h:form>
+		</h:form>		
 
 	</h:body>
 </f:view>

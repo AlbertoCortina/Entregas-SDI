@@ -13,23 +13,20 @@ public class Category {
 		return id;
 	}
 
-	public Category setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
-		return this;
 	}
 
-	public Category setName(String name) {
+	public void setName(String name) {
 		this.name = name;
-		return this;
 	}
 
 	public Long getUserId() {
 		return userId;
 	}
 
-	public Category setUserId(Long userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
-		return this;
 	}
 
 	@Override

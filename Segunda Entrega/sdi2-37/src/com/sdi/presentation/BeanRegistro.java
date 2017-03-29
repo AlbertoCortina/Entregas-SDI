@@ -1,5 +1,7 @@
 package com.sdi.presentation;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -25,8 +27,10 @@ import com.sdi.presentation.util.Internacionalizar;
  */
 @ManagedBean(name="beanRegistro")
 @SessionScoped
-public class BeanRegistro {
+public class BeanRegistro implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String login;
 	private String email;
 	private String password;
@@ -72,7 +76,7 @@ public class BeanRegistro {
 			u.setLogin(login);
 			u.setEmail(email);
 			u.setPassword(password);
-			System.out.println(u);
+			
 			uService.registerUser(u);
 			
 			FacesContext.getCurrentInstance().addMessage(

@@ -1,5 +1,6 @@
 package com.sdi.presentation;
 
+import java.io.Serializable;
 import java.util.Locale;
 
 import javax.faces.bean.ManagedBean;
@@ -16,8 +17,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 @ManagedBean(name="beanSettings")
 @SessionScoped
-public class BeanSettings {
+public class BeanSettings implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private static final Locale ENGLISH = new Locale("en");
 	private static final Locale SPANISH = new Locale("es");
 	private Locale locale = null;
