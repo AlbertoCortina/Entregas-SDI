@@ -1,0 +1,107 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-general-usuario.xhtml">
+
+
+
+	<!-- TÍTULO -->
+	<ui:define name="titulo">#{msgs.tituloListadoTareasInbox}</ui:define>
+
+	<!-- CUERPO -->
+	<ui:define name="cuerpo">
+		<h:form id="form-listado">
+			<p:panel header="#{msgs.tituloListadoTareasInbox}">
+				<h:outputText id="mostrar" value="#{msgs.tituloMostrarFinalizadas}" />
+				<p:selectBooleanCheckbox id="finalizadas">
+					<p:ajax update="tablalistado"
+						listener="#{beanTareas.mostrarFinalizadas}"></p:ajax>
+				</p:selectBooleanCheckbox>
+	
+				<p:remoteCommand name="onTaskEdit" action="#{beanTareas.listarTareasInbox}" update="tablalistado" />
+				
+				<p:dataTable id="tablalistado" var="tarea"
+					value="#{beanTareas.tareas}" border="1" rows="8" paginator="true"
+					filteredValue="#{beanTareas.filtradas}"
+					editable="true"					
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					styleClass="centrar"
+					rowStyleClass="#{tarea.finished != null ? 'finalizada' : 
+									 (tarea.planned lt beanTareas.fechaHoy  ? 'retrasada' : null)}">
+
+					<p:ajax event="rowEdit" listener="#{beanTareas.editarTarea(tarea)}" oncomplete="onTaskEdit()" />
+
+					<p:column id="tituloH" headerText="#{msgs.tituloTarea}" filterBy="#{tarea.title}"
+						filterMatchMode="contains">
+						<p:cellEditor>
+							<f:facet name="output"><h:outputText id="title" value="#{tarea.title}" /></f:facet>
+							<f:facet name="input"><h:inputText id="input-title" value="#{tarea.title}" /></f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="#{msgs.tituloComentario}">
+						<p:cellEditor>
+							<f:facet name="output"><h:outputText id="comentario" value="#{tarea.comments}" /></f:facet>
+							<f:facet name="input"><h:outputText id="input-comentario" value="#{tarea.comments}" /></f:facet>						
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="#{msgs.tituloFechaCreacion}">
+						<h:outputText id="fCreacion" value="#{tarea.created}">
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="#{msgs.tituloFechaFinalizada}">
+						<h:outputText id="fFinalizada" value="#{tarea.finished}">
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET" />
+						</h:outputText>
+					</p:column>
+
+					<p:column id="planeadaH" headerText="#{msgs.tituloFechaPlaneada}" sortBy="#{tarea.planned}">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText id="fPlaneada" value="#{tarea.planned}">
+									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET" />
+								</h:outputText>
+							</f:facet>
+							<f:facet name="input">
+								<p:calendar id="btCalendario" 
+									value="#{tarea.planned}" showOn="button" 
+									mindate="#{beanTareas.fechaHoy}"/>
+							</f:facet>
+						</p:cellEditor>		
+					</p:column>
+
+					<p:column headerText="#{msgs.tituloCategoria}">
+						<p:cellEditor>
+							<f:facet name="output"><h:outputText id="categoria" value="#{beanTareas.nombreCategoria(tarea.categoryId)}" /></f:facet>
+							<f:facet name="input">
+								<p:selectOneMenu id="categoriaCombo" value="#{tarea.categoryId}">
+						            <f:selectItem itemLabel="#{msgs.tituloSeleccionarCategoria}" itemValue="" />
+						            <f:selectItems value="#{beanTareas.categorias}" var="categoria" itemLabel="#{categoria.name}" itemValue="#{categoria.id}"/>
+				        		</p:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>						
+					</p:column>
+
+					<p:column style="margin:0 auto; width: 32px;">	
+						<p:rowEditor id="editar" rendered="#{tarea.finished eq null}"/>
+					</p:column>
+					
+					<p:column>
+						<p:commandButton id="finalizar"
+								rendered="#{tarea.finished eq null}"
+								value="#{msgs.tituloFinalizarTarea}"
+								actionListener="#{beanTareas.finalizarTarea(tarea)}"
+								update="tablalistado mensajes" />
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+	
+</ui:composition>
