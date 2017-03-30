@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view locale="#{beanSettings.locale}">
+	<h:head>
+		<title>#{msgs.tituloHead}</title>
+	</h:head>
+
+	<f:facet name="css">
+		<h:outputStylesheet name="css/style.css" />
+	</f:facet>
+
+	<h:body>
+		<h:form id="form-cabecera">
+			<center>
+				<h1>#{msgs.tituloAplicacion1}</h1>
+				<h2>#{msgs.tituloAplicacion2}</h2>
+			</center>
+
+			<table border="5" align="center">
+				<tr>
+					<th class="title"><ui:insert name="titulo">#{msgs.tituloDefectoCabecera}</ui:insert>
+					</th>
+				</tr>
+			</table>
+			<br />
+
+			<p:menubar>
+				<p:menuitem value="#{msgs.tituloInicio}"
+					action="/user/principalUsuario.xhtml?faces-redirect=true"
+					icon="ui-icon-home" />
+
+				<ui:insert name="barraMenu_Opciones">
+					<p:submenu id="submenuOpciones" label="#{msgs.tituloListas}"
+						icon="ui-icon-gear">
+						<p:menuitem id="listaInbox" value="#{msgs.tituloListaInbox}"
+							action="#{beanTareas.listarTareasInbox}" />
+						<p:menuitem id="listaHoy" value="#{msgs.tituloListaHoy}"
+							action="#{beanTareas.listarTareasHoy}" />
+						<p:menuitem id="listaSemana" value="#{msgs.tituloListaSemana}"
+							action="#{beanTareas.listarTareasSemana}" />
+					</p:submenu>
+					<p:menuitem id="añadirTarea" value="#{msgs.tituloAñadirTarea}"
+						icon="ui-icon-gear" onclick="PF('dlg').show();" />
+				</ui:insert>
+
+				<ui:insert name="barraMenu_Usuario">
+					<f:facet name="options">
+						<div id="nombreUsuario"
+							style="display: inline; padding-right: 0.7em;">#{msgs.tituloUsuario}:
+							#{userSession.login}</div>
+						<div style="display: inline; padding-right: 0.7em;">
+							<p:commandButton id="botonCerrarSesion"
+								action="#{beanLogin.cerrarSesion}" icon="ui-icon-power" />
+						</div>
+					</f:facet>
+				</ui:insert>
+
+				<p:submenu id="idiomas" style="float:right" label="#{msgs.textoIdioma}"
+					icon="ui-icon-flag">
+					<p:menuitem id="español" value="#{msgs.enlaceIdiomaES}"
+						actionListener="#{beanSettings.setSpanish}" update="@all" />
+					<p:menuitem id="ingles" value="#{msgs.enlaceIdiomaEN}"
+						actionListener="#{beanSettings.setEnglish}" update="@all" />
+				</p:submenu>
+			</p:menubar>
+		</h:form>
+
+		<ui:insert name="mensajes">
+			<p:messages id="mensajes" showDetail="true" globalOnly="true" />
+		</ui:insert>
+
+		<ui:insert name="cuerpo"></ui:insert>
+		
+		<!-- DIALOGO AÑADIR TAREA -->
+		<h:form id="form-añadir">
+			<p:dialog header="#{msgs.tituloAñadirTarea}" widgetVar="dlg" resizable="false">			
+		        <h:panelGrid columns="2" cellpadding="5">				
+					<h:outputText id="nombreTarea" value="#{msgs.tituloNombre}" />
+					<h:panelGroup>
+						<p:inputText id="input-nombreTarea" value="#{beanTareas.nombre}" required="true"
+							requiredMessage="#{msgs.tituloNombreObligatorio}" />
+						<p:message for="input-nombreTarea" />
+					</h:panelGroup>
+					
+					<h:outputText value="#{msgs.tituloComentarioAñadir}"/>
+					<h:panelGroup>
+						<p:inputText id="input-comentario" value="#{beanTareas.comentario}"/>
+					</h:panelGroup>
+	
+					<h:outputText value="#{msgs.tituloFechaPlaneadaAñadir}"/>
+					<h:panelGroup>				
+						<p:calendar id="btCalendario" 
+							value="#{beanTareas.fechaPlaneada}" showOn="button" 
+							mindate="#{beanTareas.fechaHoy}"/>
+					</h:panelGroup>
+					
+					<h:outputText value="#{msgs.tituloCategoria}"/>
+					<h:panelGroup>
+						<p:selectOneMenu id="categoria" value="#{beanTareas.idCategoria}">
+				            <f:selectItem itemLabel="#{msgs.tituloSeleccionarCategoria}" itemValue="" />
+				            <f:selectItems value="#{beanTareas.categorias}" var="categoria" itemLabel="#{categoria.name}" itemValue="#{categoria.id}"/>
+				        </p:selectOneMenu>	
+			        </h:panelGroup>
+	
+					<f:facet name="footer">
+						<p:commandButton id="btAñadir" style="float:right" value="#{msgs.tituloAñadirTarea}"
+							action="#{beanTareas.añadirTarea}" update="mensajes"/>
+					</f:facet>                       
+	        	</h:panelGrid>
+	    	</p:dialog>
+		</h:form>		
+
+	</h:body>
+</f:view>
+</html>

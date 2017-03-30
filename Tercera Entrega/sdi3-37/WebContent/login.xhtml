@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-general.xhtml">
+
+	<!-- TITULO -->
+	<ui:define name="titulo">#{msgs.tituloLogin}</ui:define>
+
+	<!-- MENSAJES -->
+
+	<!-- CUERPO -->
+	<ui:define name="cuerpo">
+		<h:form id="form-login">
+			<p:panel header="#{msgs.tituloOperacionLogin}">
+				<p:panelGrid id="Grid" columns="2" cellPadding="5">
+				  <h:outputText id="usuario" value="#{msgs.tituloUsuario}"/>
+				  <h:panelGroup>
+						<p:inputText id="input-usuario" value="#{beanLogin.login}"
+							required="true"
+							requiredMessage="#{msgs.tituloFormLoginRequerido}">
+						</p:inputText>
+						<p:message for="input-usuario" />
+					</h:panelGroup>			  		  
+				  
+				  <h:outputText id="contraseña" value=" #{msgs.tituloContraseña}"/>				 
+				  <h:panelGroup>
+						<p:password id="input-contraseña" value="#{beanLogin.contraseña}"
+							required="true"
+							requiredMessage="#{msgs.tituloFormContraseñaRequerida}">
+						</p:password>
+						<p:message for="input-contraseña" />
+					</h:panelGroup>
+
+					<h:inputHidden />
+
+					<p:commandButton id="botonIniciarSesion"
+						value="#{msgs.tituloIniciarSesion}"
+						action="#{beanLogin.loguearse}" update="Grid mensajes"
+						process="@form" />
+
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+	<!-- PIE -->
+	<ui:define name="pie">
+		<p:separator />
+		<p:commandLink id="enlace" value="#{msgs.tituloEnlaceLogin}"
+			action="/registro.xhtml?faces-redirect=true"></p:commandLink>
+		<p:separator />
+	</ui:define>
+
+</ui:composition>
