@@ -1,6 +1,5 @@
 package com.sdi.persistence.util;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -12,41 +11,22 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
-
-import com.sdi.persistence.PersistenceException;
+import com.sdi.persistence.exception.PersistenceException;
 
 public class Jdbc {
-	private static final String DATABASE_PROPERTIES_FILE = "database.properties";
+	private static String CONFIG_FILE = "/persistence.properties";
 	private static final String QUERIES_PROPERTIES_FILE = "sql_queries.properties";
-	
-	private static final String DATABASE_URL;
-	private static final String DATABASE_USER;
-	private static final String DATABASE_PASSWORD;
-	private static final String DATABASE_DRIVER;
-	
+			
 	private static Properties sqlQueries;
 	private static DataSource dataSource;
 	
-	static {
-		Properties dbConfig = loadProperties( DATABASE_PROPERTIES_FILE );
-		sqlQueries = loadProperties( QUERIES_PROPERTIES_FILE );
-		
-		DATABASE_URL = dbConfig.getProperty( "DATABASE_URL" );
-		DATABASE_USER = dbConfig.getProperty( "DATABASE_USER" );
-		DATABASE_PASSWORD = dbConfig.getProperty( "DATABASE_PASSWORD" );
-		DATABASE_DRIVER = dbConfig.getProperty( "DATABASE_DRIVER" ); 
-	
-		dataSource = configureDataSource(dbConfig);
-	}
+	private static JdbcHelper jdbcHelper = new JdbcHelper(CONFIG_FILE);
 
-	private static DataSource configureDataSource(Properties dbConfig) {
-		BasicDataSource ds = new BasicDataSource();
-		ds.setDriverClassName( DATABASE_DRIVER );
-		ds.setUsername( DATABASE_USER );
-		ds.setPassword( DATABASE_PASSWORD );
-		ds.setUrl( DATABASE_URL );
-		return ds;
+	static {
+		
+		sqlQueries = loadProperties( QUERIES_PROPERTIES_FILE );		
+	
+		dataSource = jdbcHelper.createDataSource();
 	}
 
 	private static ThreadLocal<Connection> threadLocal = new ThreadLocal<>();

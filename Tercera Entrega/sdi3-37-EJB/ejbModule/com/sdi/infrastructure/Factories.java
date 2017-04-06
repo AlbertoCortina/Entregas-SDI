@@ -1,15 +1,13 @@
 package com.sdi.infrastructure;
 
-import com.sdi.business.LocalEjbServicesLocator;
 import com.sdi.business.ServicesFactory;
-import com.sdi.persistence.Persistence;
 import com.sdi.persistence.PersistenceFactory;
 
 public class Factories {
-	
-//	public static ServicesFactory services = new Services();
-	public static ServicesFactory services = new LocalEjbServicesLocator();
-	
-	public static PersistenceFactory persistence = new Persistence();
-	
+	private static String CONFIG_FILE = "/factories.properties";	
+
+	public static ServicesFactory services = (ServicesFactory) FactoriesHelper
+			.createFactory(CONFIG_FILE, "SERVICES_FACTORY");
+	public static PersistenceFactory persistence = (PersistenceFactory) FactoriesHelper
+			.createFactory(CONFIG_FILE, "PERSISTENCE_FACTORY");
 }

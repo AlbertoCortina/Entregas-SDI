@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/application_7.xsd" id="Application_ID" version="7">
-  <display-name>sdi3-37-EAR</display-name>
-  
+  <display-name>sdi3-37</display-name>
   <module>
-    <ejb>sdi3-37-EJB.jar</ejb>
+    <ejb>sdi3-37.EJB.jar</ejb>
   </module>
-  
   <module>
     <web>
-      <web-uri>sdi3-37-WEB.war</web-uri>
+      <web-uri>sdi3-37.Web.war</web-uri>
       <context-root>sdi2-37-WEB</context-root>
     </web>
   </module>

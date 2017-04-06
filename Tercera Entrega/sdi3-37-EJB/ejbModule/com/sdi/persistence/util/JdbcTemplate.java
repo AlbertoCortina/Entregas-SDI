@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.sdi.persistence.PersistenceException;
+import com.sdi.persistence.exception.PersistenceException;
 
 /**
  * Provides template methods to execute DML statements and queries with one

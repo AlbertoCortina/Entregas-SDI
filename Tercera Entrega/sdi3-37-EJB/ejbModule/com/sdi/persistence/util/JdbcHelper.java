@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Properties;
 
 import javax.naming.Context;
@@ -24,27 +23,18 @@ public class JdbcHelper {
 					+ configFile);
 		}
 	}
-
-	public Connection createConnection() {
-
-		/* Obtenemos la conexi�n a la base de datos con un Datasource
-		 * El Datasource es una factoria de conexiones. 
-		 * Las conexiones as� obtenidas son gestionadas por el contenedor
-		 * y ello hace que todo el SQL que se ejecute quede dentro de una 
-		 * transacci�n
-		 */
+	
+	public DataSource createDataSource() {		
 		try {
 			String jndiKey = getProperty("JNDI_DATASOURCE");
 
 			Context ctx = new InitialContext();
 			DataSource ds = (DataSource) ctx.lookup(jndiKey);
-			return ds.getConnection();
+			return ds;
 			
 		} catch (NamingException e) {
 			throw new RuntimeException("Can't open JDBC conection from JNDI", e);
-		} catch (SQLException e) {
-			throw new RuntimeException("Can't open JDBC conection", e);
-		}
+		} 
 	}
 
 	private String getProperty(String property) {

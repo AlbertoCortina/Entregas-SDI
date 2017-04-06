@@ -13,6 +13,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/sdi3-37-EJB"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/sdi3-37.EJB"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -4,10 +4,10 @@ import javax.naming.*;
 
 public class LocalEjbServicesLocator implements ServicesFactory {
 
-	private static final String ADMIN_SERVICE_JNDI_KEY = "java:global/sdi3-37-EAR/sdi3-37-EJB/EjbAdminService!com.sdi.business.remoteServices.RemoteAdminService";
-	private static final String CATEGORY_SERVICE_JNDI_KEY = "java:global/sdi3-37-EAR/sdi3-37-EJB/EjbCategoryService!com.sdi.business.remoteServices.RemoteCategoryService";
-	private static final String TASK_SERVICE_JNDI_KEY = "java:global/sdi3-37-EAR/sdi3-37-EJB/EjbTaskService!com.sdi.business.localServices.LocalTaskService";
-	private static final String USER_SERVICE_JNDI_KEY = "java:global/sdi3-37-EAR/sdi3-37-EJB/EjbUserService!com.sdi.business.localServices.LocalUserService";
+	private static final String ADMIN_SERVICE_JNDI_KEY = "java:global/sdi3-37/sdi3-37.EJB/EjbAdminService!com.sdi.business.impl.admin.RemoteAdminService";
+	private static final String CATEGORY_SERVICE_JNDI_KEY = "java:global/sdi3-37/sdi3-37.EJB/EjbCategoryService!com.sdi.business.impl.category.RemoteCategoryService";
+	private static final String TASK_SERVICE_JNDI_KEY = "java:global/sdi3-37/sdi3-37.EJB/EjbTaskService!com.sdi.business.impl.task.LocalTaskService";
+	private static final String USER_SERVICE_JNDI_KEY = "java:global/sdi3-37/sdi3-37.EJB/EjbUserService!com.sdi.business.impl.user.LocalUserService";
 	
 	@Override
 	public AdminService getAdminService() {

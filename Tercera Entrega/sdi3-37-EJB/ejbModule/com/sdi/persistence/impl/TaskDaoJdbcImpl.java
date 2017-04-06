@@ -167,8 +167,6 @@ public class TaskDaoJdbcImpl implements TaskDao {
 				"TASK_FIND_FINISHED_INBOX_BY_USER_ID", 
 				new TaskDtoMapper(),
 				userId
-			);
-		
+			);		
 	}
-
 }
