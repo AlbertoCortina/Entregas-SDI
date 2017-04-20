@@ -17,22 +17,16 @@ public class ListUsersCommand implements Command<List<UserInfo>> {
 				
 		List<UserInfo> info = new ArrayList<UserInfo>();
 		
-		int completadas = 0;
-		int completadasRetrasadas = 0;
-		int planificadas = 0;
-		int noPlanificadas = 0;
+		
 		
 		for(User u: usuarios) {
-			completadas = Factories.persistence.getTaskDao().tasksCompleted(u);
-			completadasRetrasadas =  Factories.persistence.getTaskDao().tasksCompletedDelayed(u);
-			planificadas =  Factories.persistence.getTaskDao().tasksPlanned(u);
-			noPlanificadas =  Factories.persistence.getTaskDao().tasksNotPlanned(u);
+			List<Integer> numeros = Factories.persistence.getTaskDao().numberOfTasks(u);
 			
 			UserInfo userInfo = new UserInfo();
-			userInfo.setTareasCompletadas(completadas);
-			userInfo.setTareasCompletadasRetrasadas(completadasRetrasadas);
-			userInfo.setTareasPlanificadas(planificadas);
-			userInfo.setTareasSinPlanificar(noPlanificadas);
+			userInfo.setTareasCompletadas(numeros.get(0));
+			userInfo.setTareasCompletadasRetrasadas(numeros.get(1));
+			userInfo.setTareasPlanificadas(numeros.get(2));
+			userInfo.setTareasSinPlanificar(numeros.get(3));
 			userInfo.setUser(u);
 			
 			info.add(userInfo);			

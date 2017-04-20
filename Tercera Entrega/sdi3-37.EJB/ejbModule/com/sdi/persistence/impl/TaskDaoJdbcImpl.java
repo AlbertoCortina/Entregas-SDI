@@ -2,6 +2,7 @@ package com.sdi.persistence.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,10 +41,16 @@ public class TaskDaoJdbcImpl implements TaskDao {
 
 	}
 	
-	public class CountMapper implements RowMapper<Integer> {
+	public class CountMapper implements RowMapper<List<Integer>> {
 		@Override
-		public Integer toObject(ResultSet rs) throws SQLException {
-			return rs.getInt(1);
+		public List<Integer> toObject(ResultSet rs) throws SQLException {
+			List<Integer> numeros = new ArrayList<>();
+			numeros.add(rs.getInt(1));
+			numeros.add(rs.getInt(2));
+			numeros.add(rs.getInt(3));
+			numeros.add(rs.getInt(4));
+			
+			return numeros;
 		}		
 	}
 
@@ -177,24 +184,9 @@ public class TaskDaoJdbcImpl implements TaskDao {
 				userId
 			);		
 	}
-	
-	@Override
-	public int tasksCompleted(User user) {
-		return jdbcTemplate.queryForObject("USER_TASKS_COMPLETED", new CountMapper(), user.getId());
-	}
 
 	@Override
-	public int tasksCompletedDelayed(User user) {
-		return jdbcTemplate.queryForObject("USER_TASKS_COMPLETED_DELAYED", new CountMapper(), user.getId());
-	}
-
-	@Override
-	public int tasksPlanned(User user) {
-		return jdbcTemplate.queryForObject("USER_TASKS_PLANNED", new CountMapper(), user.getId());
-	}
-
-	@Override
-	public int tasksNotPlanned(User user) {
-		return jdbcTemplate.queryForObject("USER_TASKS_NOT_PLANNED", new CountMapper(), user.getId());
+	public List<Integer> numberOfTasks(User user) {
+		return jdbcTemplate.queryForObject("TASKS_COUNT", new CountMapper(), user.getId());
 	}
 }
