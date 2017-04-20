@@ -28,5 +28,4 @@ public class EnableUserCommand implements Command<Void> {
 
 		return null;
 	}
-
 }

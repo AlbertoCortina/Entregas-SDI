@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.sdi.dto.Task;
+import com.sdi.dto.User;
 import com.sdi.persistence.TaskDao;
 import com.sdi.persistence.util.JdbcTemplate;
 import com.sdi.persistence.util.RowMapper;
@@ -37,6 +38,13 @@ public class TaskDaoJdbcImpl implements TaskDao {
 				: null;
 		}
 
+	}
+	
+	public class CountMapper implements RowMapper<Integer> {
+		@Override
+		public Integer toObject(ResultSet rs) throws SQLException {
+			return rs.getInt(1);
+		}		
 	}
 
 	private JdbcTemplate jdbcTemplate = new JdbcTemplate();
@@ -168,5 +176,25 @@ public class TaskDaoJdbcImpl implements TaskDao {
 				new TaskDtoMapper(),
 				userId
 			);		
+	}
+	
+	@Override
+	public int tasksCompleted(User user) {
+		return jdbcTemplate.queryForObject("USER_TASKS_COMPLETED", new CountMapper(), user.getId());
+	}
+
+	@Override
+	public int tasksCompletedDelayed(User user) {
+		return jdbcTemplate.queryForObject("USER_TASKS_COMPLETED_DELAYED", new CountMapper(), user.getId());
+	}
+
+	@Override
+	public int tasksPlanned(User user) {
+		return jdbcTemplate.queryForObject("USER_TASKS_PLANNED", new CountMapper(), user.getId());
+	}
+
+	@Override
+	public int tasksNotPlanned(User user) {
+		return jdbcTemplate.queryForObject("USER_TASKS_NOT_PLANNED", new CountMapper(), user.getId());
 	}
 }

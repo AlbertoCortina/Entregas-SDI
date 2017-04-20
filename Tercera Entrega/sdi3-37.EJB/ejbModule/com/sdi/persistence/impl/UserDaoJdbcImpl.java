@@ -98,5 +98,4 @@ public class UserDaoJdbcImpl implements UserDao {
 				login, password
 			);
 	}
-
 }

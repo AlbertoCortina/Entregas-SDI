@@ -8,7 +8,9 @@ import com.sdi.business.exception.BusinessException;
 import com.sdi.business.impl.admin.command.DeepDeleteUserCommand;
 import com.sdi.business.impl.admin.command.DisableUserCommand;
 import com.sdi.business.impl.admin.command.EnableUserCommand;
+import com.sdi.business.impl.admin.command.ListUsersCommand;
 import com.sdi.dto.User;
+import com.sdi.dto.UserInfo;
 import com.sdi.infrastructure.Factories;
 
 @Stateless
@@ -37,5 +39,10 @@ public class EjbAdminService implements LocalAdminService, RemoteAdminService {
 	@Override
 	public User findUserById(final Long id) throws BusinessException {
 		return Factories.persistence.getUserDao().findById(id);		
+	}
+
+	@Override
+	public List<UserInfo> listAllUsers() throws BusinessException {
+		return new ListUsersCommand().execute();
 	}
 }

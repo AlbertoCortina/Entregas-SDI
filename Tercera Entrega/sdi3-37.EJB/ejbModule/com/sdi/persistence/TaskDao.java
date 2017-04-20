@@ -3,6 +3,7 @@ package com.sdi.persistence;
 import java.util.List;
 
 import com.sdi.dto.Task;
+import com.sdi.dto.User;
 import com.sdi.persistence.util.GenericDao;
 
 public interface TaskDao extends GenericDao<Task, Long> {
@@ -68,5 +69,10 @@ public interface TaskDao extends GenericDao<Task, Long> {
 	 * @return All already finished tasks in a user's inbox
 	 */
 	List<Task> findFinishedTasksInboxByUserId(Long userId);
+	
+	int tasksCompleted(User user);
+	int tasksCompletedDelayed(User user);
+	int tasksPlanned(User user);
+	int tasksNotPlanned(User user);
 
 }

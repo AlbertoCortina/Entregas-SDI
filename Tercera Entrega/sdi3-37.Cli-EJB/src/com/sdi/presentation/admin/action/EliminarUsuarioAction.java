@@ -23,10 +23,10 @@ public class EliminarUsuarioAction implements Action {
 		//Pedir datos
 		Long userID = Console.readLong("Id del usuario que desea eliminar");
 		
-		//Comprobamos que exista
+		//Comprobamos que exista y borramos
 		try {
 			User u = aService.findUserById(userID);
-			aService.deepDeleteUser(u.getId());
+			aService.deepDeleteUser(u.getId());			
 			
 			Console.print("\tUsuario borrado correctamente");
 		} catch(NullPointerException e) {

@@ -27,5 +27,4 @@ public class DeepDeleteUserCommand implements Command<Void> {
 		
 		return null;
 	}
-
 }
