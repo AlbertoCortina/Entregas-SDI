@@ -3,7 +3,6 @@ package com.sdi.business.impl.task;
 import java.util.List;
 
 import javax.ejb.Stateless;
-
 import com.sdi.business.exception.BusinessException;
 import com.sdi.business.impl.task.command.CreateTaskCommand;
 import com.sdi.business.impl.task.command.MarkTaskAsFinishedCommand;

@@ -3,7 +3,6 @@ package com.sdi.business.impl.user;
 import java.util.List;
 
 import javax.ejb.Stateless;
-
 import com.sdi.business.exception.BusinessException;
 import com.sdi.business.impl.user.command.FindLoggableUSerCommand;
 import com.sdi.business.impl.user.command.RegisterUserCommand;

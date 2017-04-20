@@ -3,7 +3,6 @@ package com.sdi.business.impl.category;
 import java.util.List;
 
 import javax.ejb.Stateless;
-
 import com.sdi.business.exception.BusinessException;
 import com.sdi.business.impl.category.command.CreateCategoryCommand;
 import com.sdi.business.impl.category.command.DeleteCategoryCommand;
