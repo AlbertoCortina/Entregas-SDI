@@ -3,11 +3,8 @@ package com.sdi.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import alb.util.date.DateUtil;
-@XmlRootElement(name = "task")
+
 public class Task implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -28,7 +25,7 @@ public class Task implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	@XmlElement
+	
 	public String getTitle() {
 		return title;
 	}
@@ -36,7 +33,7 @@ public class Task implements Serializable {
 	public void setTitle(String title) {
 		this.title = title;		
 	}
-	@XmlElement
+	
 	public String getComments() {
 		return comments;
 	}
@@ -44,7 +41,7 @@ public class Task implements Serializable {
 	public void setComments(String comments) {
 		this.comments = comments;		
 	}
-	@XmlElement
+	
 	public Date getCreated() {
 		return created;
 	}
@@ -52,7 +49,7 @@ public class Task implements Serializable {
 	public void setCreated(Date created) {
 		this.created = created;		
 	}
-	@XmlElement
+	
 	public Date getPlanned() {
 		return planned;
 	}
@@ -60,7 +57,7 @@ public class Task implements Serializable {
 	public void setPlanned(Date planned) {
 		this.planned = planned;
 	}
-	@XmlElement
+	
 	public Date getFinished() {
 		return finished;
 	}
@@ -68,7 +65,7 @@ public class Task implements Serializable {
 	public void setFinished(Date finished) {
 		this.finished = finished;
 	}
-	@XmlElement
+	
 	public Long getCategoryId() {
 		return categoryId;
 	}
@@ -76,7 +73,7 @@ public class Task implements Serializable {
 	public void setCategoryId(Long category_id) {
 		this.categoryId = category_id;
 	}
-	@XmlElement
+	
 	public Long getUserId() {
 		return userId;
 	}

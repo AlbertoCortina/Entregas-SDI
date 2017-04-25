@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://admin.impl.business.sdi.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="EjbAdminServiceService" targetNamespace="http://admin.impl.business.sdi.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://admin.impl.business.sdi.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="deepDeleteUser" type="tns:deepDeleteUser" />
+      <xs:element name="deepDeleteUserResponse" type="tns:deepDeleteUserResponse" />
+      <xs:element name="disableUser" type="tns:disableUser" />
+      <xs:element name="disableUserResponse" type="tns:disableUserResponse" />
+      <xs:element name="enableUser" type="tns:enableUser" />
+      <xs:element name="enableUserResponse" type="tns:enableUserResponse" />
+      <xs:element name="findAllUsers" type="tns:findAllUsers" />
+      <xs:element name="findAllUsersResponse" type="tns:findAllUsersResponse" />
+      <xs:element name="findUserById" type="tns:findUserById" />
+      <xs:element name="findUserByIdResponse" type="tns:findUserByIdResponse" />
+      <xs:element name="listAllUsers" type="tns:listAllUsers" />
+      <xs:element name="listAllUsersResponse" type="tns:listAllUsersResponse" />
+      <xs:complexType name="disableUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="disableUserResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="listAllUsers">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="listAllUsersResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:userInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="userInfo">
+        <xs:sequence>
+          <xs:element name="tareasCompletadas" type="xs:int" />
+          <xs:element name="tareasCompletadasRetrasadas" type="xs:int" />
+          <xs:element name="tareasPlanificadas" type="xs:int" />
+          <xs:element name="tareasSinPlanificar" type="xs:int" />
+          <xs:element minOccurs="0" name="user" type="tns:user" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="user">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="email" type="xs:string" />
+          <xs:element minOccurs="0" name="id" type="xs:long" />
+          <xs:element minOccurs="0" name="isAdmin" type="xs:boolean" />
+          <xs:element minOccurs="0" name="login" type="xs:string" />
+          <xs:element minOccurs="0" name="password" type="xs:string" />
+          <xs:element minOccurs="0" name="status" type="tns:userStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="enableUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="enableUserResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="findAllUsers">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="findAllUsersResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:user" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findUserById">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findUserByIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:user" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deepDeleteUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deepDeleteUserResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:simpleType name="userStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="ENABLED" />
+          <xs:enumeration value="DISABLED" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="BusinessException" type="tns:BusinessException" />
+      <xs:complexType name="BusinessException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="disableUser">
+    <wsdl:part name="parameters" element="tns:disableUser" />
+  </wsdl:message>
+  <wsdl:message name="enableUser">
+    <wsdl:part name="parameters" element="tns:enableUser" />
+  </wsdl:message>
+  <wsdl:message name="findAllUsersResponse">
+    <wsdl:part name="parameters" element="tns:findAllUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="disableUserResponse">
+    <wsdl:part name="parameters" element="tns:disableUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="deepDeleteUserResponse">
+    <wsdl:part name="parameters" element="tns:deepDeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="BusinessException">
+    <wsdl:part name="BusinessException" element="tns:BusinessException" />
+  </wsdl:message>
+  <wsdl:message name="findUserById">
+    <wsdl:part name="parameters" element="tns:findUserById" />
+  </wsdl:message>
+  <wsdl:message name="deepDeleteUser">
+    <wsdl:part name="parameters" element="tns:deepDeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="listAllUsers">
+    <wsdl:part name="parameters" element="tns:listAllUsers" />
+  </wsdl:message>
+  <wsdl:message name="listAllUsersResponse">
+    <wsdl:part name="parameters" element="tns:listAllUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="findUserByIdResponse">
+    <wsdl:part name="parameters" element="tns:findUserByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="findAllUsers">
+    <wsdl:part name="parameters" element="tns:findAllUsers" />
+  </wsdl:message>
+  <wsdl:message name="enableUserResponse">
+    <wsdl:part name="parameters" element="tns:enableUserResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AdminService">
+    <wsdl:operation name="disableUser">
+      <wsdl:input name="disableUser" message="tns:disableUser" />
+      <wsdl:output name="disableUserResponse" message="tns:disableUserResponse" />
+      <wsdl:fault name="BusinessException" message="tns:BusinessException" />
+    </wsdl:operation>
+    <wsdl:operation name="listAllUsers">
+      <wsdl:input name="listAllUsers" message="tns:listAllUsers" />
+      <wsdl:output name="listAllUsersResponse" message="tns:listAllUsersResponse" />
+      <wsdl:fault name="BusinessException" message="tns:BusinessException" />
+    </wsdl:operation>
+    <wsdl:operation name="enableUser">
+      <wsdl:input name="enableUser" message="tns:enableUser" />
+      <wsdl:output name="enableUserResponse" message="tns:enableUserResponse" />
+      <wsdl:fault name="BusinessException" message="tns:BusinessException" />
+    </wsdl:operation>
+    <wsdl:operation name="findAllUsers">
+      <wsdl:input name="findAllUsers" message="tns:findAllUsers" />
+      <wsdl:output name="findAllUsersResponse" message="tns:findAllUsersResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="findUserById">
+      <wsdl:input name="findUserById" message="tns:findUserById" />
+      <wsdl:output name="findUserByIdResponse" message="tns:findUserByIdResponse" />
+      <wsdl:fault name="BusinessException" message="tns:BusinessException" />
+    </wsdl:operation>
+    <wsdl:operation name="deepDeleteUser">
+      <wsdl:input name="deepDeleteUser" message="tns:deepDeleteUser" />
+      <wsdl:output name="deepDeleteUserResponse" message="tns:deepDeleteUserResponse" />
+      <wsdl:fault name="BusinessException" message="tns:BusinessException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EjbAdminServiceServiceSoapBinding" type="tns:AdminService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="disableUser">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="disableUser">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="disableUserResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="BusinessException">
+        <soap:fault use="literal" name="BusinessException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="listAllUsers">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="listAllUsers">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="listAllUsersResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="BusinessException">
+        <soap:fault use="literal" name="BusinessException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="enableUser">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="enableUser">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="enableUserResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="BusinessException">
+        <soap:fault use="literal" name="BusinessException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllUsers">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="findAllUsers">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="findAllUsersResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findUserById">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="findUserById">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="findUserByIdResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="BusinessException">
+        <soap:fault use="literal" name="BusinessException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deepDeleteUser">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="deepDeleteUser">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deepDeleteUserResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="BusinessException">
+        <soap:fault use="literal" name="BusinessException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EjbAdminServiceService">
+    <wsdl:port name="AdminServicePort" binding="tns:EjbAdminServiceServiceSoapBinding">
+      <soap:address location="http://AlbertoPC:8280/sdi3-37.EJB/AdminService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

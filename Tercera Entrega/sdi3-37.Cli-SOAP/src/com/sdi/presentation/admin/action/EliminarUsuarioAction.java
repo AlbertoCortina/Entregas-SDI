@@ -21,9 +21,15 @@ public class EliminarUsuarioAction implements Action {
 		//Comprobamos que exista y borramos
 		try {
 			User u = aService.findUserById(userID);
-			aService.deepDeleteUser(u.getId());			
 			
-			Console.print("\tUsuario borrado correctamente");
+			if(u == null) {
+				Console.print("\tNo existe el usuario");
+			}
+			else {
+				aService.deepDeleteUser(u.getId());					
+				Console.print("\tUsuario borrado correctamente");
+			}
+			
 		} catch(NullPointerException e) {
 			Console.print("\tNo existe el usuario");
 		}		
