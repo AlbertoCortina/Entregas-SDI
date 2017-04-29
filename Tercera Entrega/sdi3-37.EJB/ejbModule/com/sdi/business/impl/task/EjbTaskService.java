@@ -3,6 +3,7 @@ package com.sdi.business.impl.task;
 import java.util.List;
 
 import javax.ejb.Stateless;
+
 import com.sdi.business.exception.BusinessException;
 import com.sdi.business.impl.task.command.CreateTaskCommand;
 import com.sdi.business.impl.task.command.MarkTaskAsFinishedCommand;
@@ -86,5 +87,10 @@ public class EjbTaskService implements LocalTaskService, RemoteTaskService {
 	@Override
 	public List<Task> findByUserId(final Long id) throws BusinessException {
 		return Factories.persistence.getTaskDao().findByUserId(id);
+	}
+
+	@Override
+	public List<Task> findPendingAndDelayed(Long userId, String categoryName) throws BusinessException {
+		return Factories.persistence.getTaskDao().findPendingAndDelayed(userId, categoryName);
 	}
 }

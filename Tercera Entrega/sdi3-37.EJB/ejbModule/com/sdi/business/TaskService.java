@@ -23,4 +23,5 @@ public interface TaskService {
 	public List<Task> findFinishedInboxTasksByUserId(Long userId) throws BusinessException;
 	public List<Task> findAll() throws BusinessException;
 	public List<Task> findByUserId(Long id) throws BusinessException;
+	public List<Task> findPendingAndDelayed(Long userId, String categoryName) throws BusinessException;
 }

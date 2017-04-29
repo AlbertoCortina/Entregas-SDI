@@ -189,4 +189,9 @@ public class TaskDaoJdbcImpl implements TaskDao {
 	public List<Integer> numberOfTasks(User user) {
 		return jdbcTemplate.queryForObject("TASKS_COUNT", new CountMapper(), user.getId());
 	}
+
+	@Override
+	public List<Task> findPendingAndDelayed(Long userId, String categoryName) {
+		return jdbcTemplate.queryForList("TASKS_PENDIENTES_RETRASADAS", new TaskDtoMapper(), userId, categoryName, userId, categoryName);
+	}
 }

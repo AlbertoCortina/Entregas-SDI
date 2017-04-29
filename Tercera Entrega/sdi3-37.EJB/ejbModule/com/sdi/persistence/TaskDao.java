@@ -71,5 +71,7 @@ public interface TaskDao extends GenericDao<Task, Long> {
 	List<Task> findFinishedTasksInboxByUserId(Long userId);
 	
 	List<Integer> numberOfTasks(User user);
+	
+	List<Task> findPendingAndDelayed(Long userId, String categoryName);
 
 }
