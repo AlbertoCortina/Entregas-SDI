@@ -22,7 +22,7 @@ public class Task implements Serializable {
 	private Long categoryId;
 	private Long userId;
 	
-	Task() {}
+	public Task() {}
 	
 	public Task(Long id) {
 		this.id = id;
