@@ -1,11 +1,11 @@
 package com.sdi.presentation.user;
 
+import alb.util.menu.BaseMenu;
+
 import com.sdi.presentation.user.action.CrearTareaAction;
 import com.sdi.presentation.user.action.ListarCategoriasAction;
 import com.sdi.presentation.user.action.MarcarTareaFinalizadaAction;
 import com.sdi.presentation.user.action.TareasCategoriaAction;
-
-import alb.util.menu.BaseMenu;
 
 public class MainMenu extends BaseMenu {
 	

@@ -19,9 +19,6 @@ public class Login {
 		if(Sesion.getInstance().getUser() != null) {
 			new MainMenu().execute();
 		}
-		else{
-			Console.print("\tNo existe el usuario");
-		}
 	}
 	
 	private static void login(String login, String password) {
@@ -37,7 +34,13 @@ public class Login {
 		User user = null;
 		if(response.getStatus() == 200) {
 			user = response.readEntity(modelo);
-		}		
-		Sesion.getInstance().setUser(user);	
+			Sesion.getInstance().setUser(user);
+		}
+		else if(response.getStatus() == 204 || response.getStatus() == 404) {
+			Console.println("\tUsuario o contraseña incorrecto");
+		}
+		else {
+			Console.println("\tError petición login");
+		}			
 	}	
-}
+} 

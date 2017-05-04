@@ -29,9 +29,9 @@ namespace sdi3_37.Cli_REST_C_Sharp
             }
             else
             {
-                Console.Write("\tNo existe el usuario");
+                Console.WriteLine("\tUsuario o contraseña incorrecto");
                 Console.ReadKey();
-            }
+            }                      
         }
 
         static async Task login(String username, String password)
@@ -47,6 +47,14 @@ namespace sdi3_37.Cli_REST_C_Sharp
                 {
                     User user = await response.Content.ReadAsAsync<User>();
                     Sesion.Instance.User = user;
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    Console.WriteLine("\tUsuario o contraseña incorrecto");
+                }
+                else
+                {
+                    Console.WriteLine("\tError peticion login");
                 }
             }
         }
