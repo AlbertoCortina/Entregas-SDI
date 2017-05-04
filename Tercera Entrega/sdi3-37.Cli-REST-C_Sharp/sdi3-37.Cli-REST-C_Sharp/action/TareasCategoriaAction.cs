@@ -49,12 +49,18 @@ namespace sdi3_37.Cli_REST_C_Sharp.action
                 cliente.BaseAddress = new Uri(Sesion.Instance.URL);
                 cliente.DefaultRequestHeaders.Accept.Clear();
                 cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                String auth = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(Sesion.Instance.User.login + ":" + Sesion.Instance.User.password));
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
 
                 HttpResponseMessage response = await cliente.GetAsync("buscarCategoria/id="+Sesion.Instance.User.id+"&&categoria="+categoryName);
                 if (response.IsSuccessStatusCode)
                 {
                     Category categoria = await response.Content.ReadAsAsync<Category>();
                     category = categoria;
+                }
+                else
+                {
+                    Console.WriteLine("\tError en la peticion de comprobar categoria");
                 }
             }
         }
@@ -66,11 +72,17 @@ namespace sdi3_37.Cli_REST_C_Sharp.action
                 cliente.BaseAddress = new Uri(Sesion.Instance.URL);
                 cliente.DefaultRequestHeaders.Accept.Clear();
                 cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                String auth = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(Sesion.Instance.User.login + ":" + Sesion.Instance.User.password));
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
 
                 HttpResponseMessage response = await cliente.GetAsync("tareas/id=" + Sesion.Instance.User.id + "&&categoria=" + categoryName);
                 if (response.IsSuccessStatusCode)
                 {
                     json = await response.Content.ReadAsStringAsync();                 
+                }
+                else
+                {
+                    Console.WriteLine("\tError en la peticion de listar tareas");
                 }
             }
         }

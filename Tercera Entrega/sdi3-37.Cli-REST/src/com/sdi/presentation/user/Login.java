@@ -24,7 +24,8 @@ public class Login {
 	private static void login(String login, String password) {
 		GenericType<User> modelo = new GenericType<User>() {};
 		
-		 Response response = ClientBuilder.newClient()			
+		Response response = ClientBuilder.newClient()
+			.register(new Authenticator(login, password))	 
 			.target(Sesion.getInstance().getRestServiceUrl())
 			.path("login")
 			.path("username="+login+"&&password="+password)

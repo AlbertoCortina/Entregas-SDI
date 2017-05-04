@@ -40,7 +40,10 @@ namespace sdi3_37.Cli_REST_C_Sharp
             {
                 cliente.BaseAddress = new Uri(Sesion.Instance.URL);
                 cliente.DefaultRequestHeaders.Accept.Clear();
-                cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));                
+                String auth = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(username + ":" + password));               
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
+               
 
                 HttpResponseMessage response = await cliente.GetAsync("login/username=" + username + "&&password=" + password);
                 if (response.IsSuccessStatusCode)

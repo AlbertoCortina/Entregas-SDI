@@ -63,12 +63,19 @@ namespace sdi3_37.Cli_REST_C_Sharp.action
                 cliente.BaseAddress = new Uri(Sesion.Instance.URL);
                 cliente.DefaultRequestHeaders.Accept.Clear();
                 cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                String auth = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(Sesion.Instance.User.login + ":" + Sesion.Instance.User.password));
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
 
                 HttpResponseMessage response = await cliente.GetAsync("buscarTarea/id="+tareaId);
                 if (response.IsSuccessStatusCode)
                 {
                     json = await response.Content.ReadAsStringAsync();                    
                 }
+                else
+                {
+                    Console.WriteLine("Error en la peticion de buscar tarea");
+                }
+                
             }
         } 
 
@@ -79,6 +86,8 @@ namespace sdi3_37.Cli_REST_C_Sharp.action
                 cliente.BaseAddress = new Uri(Sesion.Instance.URL);
                 cliente.DefaultRequestHeaders.Accept.Clear();
                 cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                String auth = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(Sesion.Instance.User.login + ":" + Sesion.Instance.User.password));
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
 
                 var json = Util.parsearJson(tarea); 
                 var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
@@ -89,7 +98,7 @@ namespace sdi3_37.Cli_REST_C_Sharp.action
                 }
                 else
                 {
-                    Console.WriteLine("\tHubo algún problema al marcar como finalizada la tarea con id " + tarea.id);
+                    Console.WriteLine("\tError en la peticion de marcar como finalizada la tarea con id " + tarea.id);
                 }
             }
         }

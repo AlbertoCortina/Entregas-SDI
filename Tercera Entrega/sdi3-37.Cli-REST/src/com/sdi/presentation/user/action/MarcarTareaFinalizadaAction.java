@@ -7,6 +7,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.sdi.dto.Task;
+import com.sdi.presentation.user.Authenticator;
 import com.sdi.presentation.user.Sesion;
 
 import alb.util.console.Console;
@@ -28,29 +29,38 @@ public class MarcarTareaFinalizadaAction implements Action {
 			//Buscamos la tarea por el id
 			GenericType<Task> modelo = new GenericType<Task>() {};
 			
-			Task task = ClientBuilder.newClient()				
+			Response response = ClientBuilder.newClient()	
+					.register(new Authenticator(Sesion.getInstance().getUser().getLogin(), Sesion.getInstance().getUser().getPassword()))
 					.target(Sesion.getInstance().getRestServiceUrl())
 					.path("buscarTarea")				
 					.path("id="+tareaId)
 					.request()
-					.get()
-					.readEntity(modelo);
+					.get();					
+			
+			Task task = null;
+			if(response.getStatus() == 200) {
+				task = response.readEntity(modelo);
+			}
+			else {
+				Console.println("\tError en la peticion de buscar tarea");
+			}
 			
 			//Comprobamos que exista la tarea
 			if(task != null && (long) task.getUserId() == Sesion.getInstance().getUser().getId()) {
 				//Comprobamos que no este finalizada
 				if(task.getFinished() == null) {
-					Response response = ClientBuilder.newClient()				
+					Response response2 = ClientBuilder.newClient()	
+							.register(new Authenticator(Sesion.getInstance().getUser().getLogin(), Sesion.getInstance().getUser().getPassword()))
 							.target(Sesion.getInstance().getRestServiceUrl())
 							.path("finalizarTarea")	
 							.request()
 							.put(Entity.entity(new Task(task.getId()), MediaType.APPLICATION_JSON));
 								
-					if(response.getStatus() == 204) {
+					if(response2.getStatus() == 204) {
 						Console.println("\tTarea con id "+tareaId+" marcada como finalizada correctamente");
 					} 
 					else {
-						Console.println("\tHubo algún problema al marcar como finalizada la tarea con id "+tareaId);
+						Console.println("\tError en la peticion de marcar como finalizada la tarea con id "+tareaId);
 					}
 				}
 				else {

@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.Response;
 
 import com.sdi.dto.Category;
 import com.sdi.dto.Task;
+import com.sdi.presentation.user.Authenticator;
 import com.sdi.presentation.user.Sesion;
 
 import alb.util.console.Console;
@@ -27,26 +29,41 @@ public class TareasCategoriaAction implements Action {
 		//Comprobamos que exista la categoria para nuestro usuario
 		GenericType<Category> modelo = new GenericType<Category>() {};
 		
-		Category categoria = ClientBuilder.newClient()				
+		Response response = ClientBuilder.newClient()				
+				.register(new Authenticator(Sesion.getInstance().getUser().getLogin(), Sesion.getInstance().getUser().getPassword()))
 				.target(Sesion.getInstance().getRestServiceUrl())
 				.path("buscarCategoria")
 				.path("id="+String.valueOf(Sesion.getInstance().getUser().getId())+"&&categoria="+categoryName)
 				.request()
-				.get()
-				.readEntity(modelo);
+				.get();
+		
+		Category categoria = null;
+		if(response.getStatus() == 200) {
+			categoria = response.readEntity(modelo);
+		}
+		else {
+			Console.println("\tError en la peticion de comprobar categoria");
+		}
 		
 		//Si existe mostramos las tareas
 		if(categoria != null) {
 			GenericType<List<Task>> modelo2 = new GenericType<List<Task>>() {};
 			
-			List<Task> tareas = ClientBuilder.newClient()				
+			Response response2 = ClientBuilder.newClient()				
+					.register(new Authenticator(Sesion.getInstance().getUser().getLogin(), Sesion.getInstance().getUser().getPassword()))
 					.target(Sesion.getInstance().getRestServiceUrl())
 					.path("tareas")
 					.path("id="+String.valueOf(Sesion.getInstance().getUser().getId())+"&&categoria="+categoryName)
 					.request()
-					.get()
-					.readEntity(modelo2);
+					.get();					
 			
+			List<Task> tareas = null;
+			if(response2.getStatus() == 200) {
+				tareas = response2.readEntity(modelo2);
+			}
+			else {
+				Console.println("\tError en la peticion de obtener tareas de una categoria");
+			}
 			print(tareas);
 		} 
 		else {

@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.sdi.dto.Task;
+import com.sdi.presentation.user.Authenticator;
 import com.sdi.presentation.user.Sesion;
 
 import alb.util.console.Console;
@@ -42,7 +43,8 @@ public class CrearTareaAction implements Action {
 			
 			//Comprobamos si la fecha planeada esta bien
 			if(t.getPlanned().compareTo(t.getCreated()) >= 0) {
-				Response response = ClientBuilder.newClient()				
+				Response response = ClientBuilder.newClient()
+						.register(new Authenticator(Sesion.getInstance().getUser().getLogin(), Sesion.getInstance().getUser().getPassword()))
 						.target(Sesion.getInstance().getRestServiceUrl())
 						.path("crearTarea")	
 						.request()
@@ -52,7 +54,7 @@ public class CrearTareaAction implements Action {
 					Console.println("\tSe ha creada la tarea correctamente");
 				} 
 				else {
-					Console.println("\tHubo algún problema creando la tarea");
+					Console.println("\tError en la petición de crear tarea");
 				}
 			}
 			else {

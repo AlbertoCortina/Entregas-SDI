@@ -17,7 +17,7 @@ namespace sdi3_37.Cli_REST_C_Sharp.action
 
         public void execute()
         {
-            Console.WriteLine("------LISTA DE CATEGORIAS PARA EL USUARIO " + Sesion.Instance.User.login + "------");
+            Console.WriteLine("------LISTA DE CATEGORIAS PARA EL USUARIO " + Sesion.Instance.User.login + "------");            
             listar().Wait();
             Console.WriteLine("-----------------------------------------------------");
         }
@@ -29,12 +29,18 @@ namespace sdi3_37.Cli_REST_C_Sharp.action
                 cliente.BaseAddress = new Uri(Sesion.Instance.URL);
                 cliente.DefaultRequestHeaders.Accept.Clear();
                 cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                String auth = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(Sesion.Instance.User.login + ":" + Sesion.Instance.User.password));
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
 
                 HttpResponseMessage response = await cliente.GetAsync("categorias/"+Sesion.Instance.User.id);
                 if (response.IsSuccessStatusCode)
                 {
                     List<Category> categorias = await response.Content.ReadAsAsync<List<Category>>();
                     print(categorias);                
+                }
+                else
+                {
+                    Console.WriteLine("\tError en la petición de listar categorias");
                 }
             }
         }

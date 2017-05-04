@@ -65,6 +65,8 @@ namespace sdi3_37.Cli_REST_C_Sharp.action
                 cliente.BaseAddress = new Uri(Sesion.Instance.URL);
                 cliente.DefaultRequestHeaders.Accept.Clear();
                 cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                String auth = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(Sesion.Instance.User.login + ":" + Sesion.Instance.User.password));
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
 
                 var json = Util.parsearJson(tarea);
                 var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
@@ -75,7 +77,7 @@ namespace sdi3_37.Cli_REST_C_Sharp.action
                 }
                 else
                 {
-                    Console.WriteLine("\tHubo algún problema creando la tarea");
+                    Console.WriteLine("\tError en la peticion de crear tarea");
                 }
             }
         }

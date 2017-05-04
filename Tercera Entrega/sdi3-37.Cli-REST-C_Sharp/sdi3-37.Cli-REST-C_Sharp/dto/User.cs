@@ -35,6 +35,19 @@ namespace sdi3_37.Cli_REST_C_Sharp.dto
             }
         }
 
+        private String Password;
+        public String password
+        {
+            get
+            {
+                return Password;
+            }
+            set
+            {
+                Password = value;
+            }
+        }
+
         private String Email;
         public String email
         {

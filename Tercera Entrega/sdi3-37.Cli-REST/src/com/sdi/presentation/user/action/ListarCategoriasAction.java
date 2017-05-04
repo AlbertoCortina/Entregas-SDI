@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.Response;
 
 import com.sdi.dto.Category;
+import com.sdi.presentation.user.Authenticator;
 import com.sdi.presentation.user.Sesion;
 
 import alb.util.console.Console;
@@ -21,15 +23,22 @@ public class ListarCategoriasAction implements Action {
 		
 		GenericType<List<Category>> modelo = new GenericType<List<Category>>() {};
 		
-		List<Category> categorias = ClientBuilder.newClient()				
+		Response response = ClientBuilder.newClient()				
+				.register(new Authenticator(Sesion.getInstance().getUser().getLogin(), Sesion.getInstance().getUser().getPassword()))
 				.target(Sesion.getInstance().getRestServiceUrl())
 				.path("categorias")
 				.path(String.valueOf(Sesion.getInstance().getUser().getId()))
 				.request()
-				.get()
-				.readEntity(modelo);
+				.get();				
 		
-		print(categorias);
+		List<Category> categorias = null;
+		if(response.getStatus() == 200) {
+			categorias = response.readEntity(modelo);
+			print(categorias);
+		}
+		else{
+			Console.println("\tError en la petición de listar categorias");
+		}
 		
 		Console.println("-----------------------------------------------------");
 	}
