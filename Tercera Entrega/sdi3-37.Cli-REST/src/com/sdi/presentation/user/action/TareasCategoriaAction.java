@@ -8,20 +8,18 @@ import javax.ws.rs.core.GenericType;
 
 import com.sdi.dto.Category;
 import com.sdi.dto.Task;
-import com.sdi.presentation.user.MainMenu;
+import com.sdi.presentation.user.Sesion;
 
 import alb.util.console.Console;
 import alb.util.menu.Action;
 
 public class TareasCategoriaAction implements Action {
 
-	private static final String REST_SERVICE_URL = "http://localhost:8280/sdi3-37.Web/rest/UsersServiceRS";
-	
 	public TareasCategoriaAction() {}
 	
 	@Override
 	public void execute() throws Exception {
-		Console.println("------TAREAS PENDIENTE Y RETRASADAS DE UNA CATEGORIA------");
+		Console.println("------TAREAS PENDIENTES Y RETRASADAS DE UNA CATEGORIA------");
 		
 		//Pedir datos
 		String categoryName = Console.readString("Nombre de la categoría");
@@ -30,9 +28,9 @@ public class TareasCategoriaAction implements Action {
 		GenericType<Category> modelo = new GenericType<Category>() {};
 		
 		Category categoria = ClientBuilder.newClient()				
-				.target(REST_SERVICE_URL)
+				.target(Sesion.getInstance().getRestServiceUrl())
 				.path("buscarCategoria")
-				.path("id="+String.valueOf(MainMenu.getUser().getId())+"&&categoria="+categoryName)
+				.path("id="+String.valueOf(Sesion.getInstance().getUser().getId())+"&&categoria="+categoryName)
 				.request()
 				.get()
 				.readEntity(modelo);
@@ -42,9 +40,9 @@ public class TareasCategoriaAction implements Action {
 			GenericType<List<Task>> modelo2 = new GenericType<List<Task>>() {};
 			
 			List<Task> tareas = ClientBuilder.newClient()				
-					.target(REST_SERVICE_URL)
+					.target(Sesion.getInstance().getRestServiceUrl())
 					.path("tareas")
-					.path("id="+String.valueOf(MainMenu.getUser().getId())+"&&categoria="+categoryName)
+					.path("id="+String.valueOf(Sesion.getInstance().getUser().getId())+"&&categoria="+categoryName)
 					.request()
 					.get()
 					.readEntity(modelo2);
@@ -55,7 +53,7 @@ public class TareasCategoriaAction implements Action {
 			Console.println("\tNo existe la categoría introducida");
 		}
 		
-		Console.println("----------------------------------------------------------");
+		Console.println("-----------------------------------------------------------");
 		
 	}
 

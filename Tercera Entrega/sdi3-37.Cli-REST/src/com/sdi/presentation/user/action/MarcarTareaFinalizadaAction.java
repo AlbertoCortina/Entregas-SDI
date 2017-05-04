@@ -7,15 +7,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.sdi.dto.Task;
-import com.sdi.presentation.user.MainMenu;
+import com.sdi.presentation.user.Sesion;
 
 import alb.util.console.Console;
 import alb.util.menu.Action;
 
 public class MarcarTareaFinalizadaAction implements Action {
 
-	private static final String REST_SERVICE_URL = "http://localhost:8280/sdi3-37.Web/rest/UsersServiceRS";
-	
 	public MarcarTareaFinalizadaAction() {}
 	
 	@Override
@@ -31,19 +29,19 @@ public class MarcarTareaFinalizadaAction implements Action {
 			GenericType<Task> modelo = new GenericType<Task>() {};
 			
 			Task task = ClientBuilder.newClient()				
-					.target(REST_SERVICE_URL)
+					.target(Sesion.getInstance().getRestServiceUrl())
 					.path("buscarTarea")				
 					.path("id="+tareaId)
 					.request()
 					.get()
 					.readEntity(modelo);
 			
-			//Comprobamos que no este finalizada
-			if(task.getFinished() == null) {
-				//Si existe la tarea la marcamos como finalizada
-				if(task != null && (long) task.getUserId() == MainMenu.getUser().getId()) {
+			//Comprobamos que exista la tarea
+			if(task != null && (long) task.getUserId() == Sesion.getInstance().getUser().getId()) {
+				//Comprobamos que no este finalizada
+				if(task.getFinished() == null) {
 					Response response = ClientBuilder.newClient()				
-							.target(REST_SERVICE_URL)
+							.target(Sesion.getInstance().getRestServiceUrl())
 							.path("finalizarTarea")	
 							.request()
 							.put(Entity.entity(new Task(task.getId()), MediaType.APPLICATION_JSON));
@@ -56,11 +54,11 @@ public class MarcarTareaFinalizadaAction implements Action {
 					}
 				}
 				else {
-					Console.println("\tNo existe la tarea con id "+tareaId);
+					Console.println("\tLa tarea con id "+tareaId+ " ya estaba finalizada");
 				}
 			}
-			else {
-				Console.println("\tLa tarea con id "+tareaId+ " ya estaba finalizada");
+			else {				
+				Console.println("\tNo existe la tarea con id "+tareaId);
 			}
 		}
 		else {

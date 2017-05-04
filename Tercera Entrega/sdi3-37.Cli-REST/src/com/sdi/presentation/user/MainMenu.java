@@ -12,21 +12,13 @@ import alb.util.console.Console;
 import alb.util.menu.BaseMenu;
 
 public class MainMenu extends BaseMenu {
-
-	private static final String REST_SERVICE_URL = "http://localhost:8280/sdi3-37.Web/rest/UsersServiceRS";
-	
-	private static User user;	
-	
-	public static User getUser() {
-		return user;
-	}
 	
 	public MainMenu() {			
 		menuOptions = new Object[][] { 	
-			{"USUARIO "+ user.getLogin(), null},
+			{"USUARIO "+ Sesion.getInstance().getUser().getLogin(), null},
 			{ "Listar categorías", 				ListarCategoriasAction.class}, 
 			{ "Ver tareas de una categoría", 	TareasCategoriaAction.class},
-			{ "Marcar como finalizada", 		MarcarTareaFinalizadaAction.class },
+			{ "Marcar tarea como finalizada", 	MarcarTareaFinalizadaAction.class },
 			{ "Crear tarea",					CrearTareaAction.class}
 		};
 	}
@@ -35,29 +27,29 @@ public class MainMenu extends BaseMenu {
 		String login = Console.readString("Usuario");
 		String password = Console.readString("Contraseña");
 		
-		user = login(login, password);
+		login(login, password);
 		
-		if(user != null) {
+		if(Sesion.getInstance().getUser() != null) {
 			Console.println();
 			Console.print("LOGIN CORRECTO, INICIANDO SESIÓN------>");
 			new MainMenu().execute();
 		}
 		else{
-			Console.print("No existe el usuario");
+			Console.print("\tNo existe el usuario");
 		}
 	}
 	
-	private static User login(String login, String password) {
+	private static void login(String login, String password) {
 		GenericType<User> modelo = new GenericType<User>() {};
 		
 		User user = ClientBuilder.newClient()			
-			.target(REST_SERVICE_URL)
+			.target(Sesion.getInstance().getRestServiceUrl())
 			.path("login")
 			.path("username="+login+"&&password="+password)
 			.request()
 			.get()
 			.readEntity(modelo);
 		
-		return user;	
+		Sesion.getInstance().setUser(user);			
 	}
 }

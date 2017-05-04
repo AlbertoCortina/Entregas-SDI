@@ -1,0 +1,10 @@
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-SOAP-C_Sharp\sdi3-37.Cli-C_Sharp\bin\Debug\sdi3-37.Cli-C_Sharp.exe.config
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-SOAP-C_Sharp\sdi3-37.Cli-C_Sharp\obj\Debug\sdi3-37.Cli-C_Sharp.exe
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-SOAP-C_Sharp\sdi3-37.Cli-C_Sharp\obj\Debug\sdi3-37.Cli-C_Sharp.pdb
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-SOAP-C_Sharp\sdi3-37.Cli-C_Sharp\bin\Debug\sdi3-37.Cli-SOAP-C_Sharp.exe.config
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-SOAP-C_Sharp\sdi3-37.Cli-SOAP-C_Sharp\bin\Debug\sdi3-37.Cli-SOAP-C_Sharp.exe.config
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-SOAP-C_Sharp\sdi3-37.Cli-SOAP-C_Sharp\bin\Debug\sdi3-37.Cli-SOAP-C_Sharp.exe
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-SOAP-C_Sharp\sdi3-37.Cli-SOAP-C_Sharp\bin\Debug\sdi3-37.Cli-SOAP-C_Sharp.pdb
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-SOAP-C_Sharp\sdi3-37.Cli-SOAP-C_Sharp\obj\Debug\sdi3-37.Cli-SOAP-C_Sharp.exe
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-SOAP-C_Sharp\sdi3-37.Cli-SOAP-C_Sharp\obj\Debug\sdi3-37.Cli-SOAP-C_Sharp.pdb
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-SOAP-C_Sharp\sdi3-37.Cli-SOAP-C_Sharp\obj\Debug\sdi3-37.Cli-SOAP-C_Sharp.csprojResolveAssemblyReference.cache

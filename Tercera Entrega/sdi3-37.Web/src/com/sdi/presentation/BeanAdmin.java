@@ -181,7 +181,7 @@ public class BeanAdmin implements Serializable {
 						t.setTitle("tarea" + i);
 					}
 					
-					t.setComments("comentario: " + t.getTitle() + "_"
+					t.setComments("comentario_ " + t.getTitle() + "_"
 							+ u.getLogin());
 					t.setCreated(new Date());
 					t.setPlanned(new Date());
@@ -215,7 +215,7 @@ public class BeanAdmin implements Serializable {
 					else {
 						t.setTitle("tarea" + i);
 					}
-					t.setComments("comentario: " + t.getTitle() + "_"
+					t.setComments("comentario_ " + t.getTitle() + "_"
 							+ u.getLogin());
 					t.setCreated(new Date());
 					t.setPlanned(c.getTime());
@@ -252,7 +252,7 @@ public class BeanAdmin implements Serializable {
 						t.setTitle("tarea" + i);
 					}
 					
-					t.setComments("comentario: " + t.getTitle() + "_"
+					t.setComments("comentario_ " + t.getTitle() + "_"
 							+ u.getLogin());
 					t.setCreated(new Date());
 					t.setPlanned(c.getTime());

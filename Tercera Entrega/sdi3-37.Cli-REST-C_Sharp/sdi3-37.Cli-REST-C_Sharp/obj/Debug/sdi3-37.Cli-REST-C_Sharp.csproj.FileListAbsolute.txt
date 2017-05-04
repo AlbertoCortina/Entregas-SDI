@@ -1,0 +1,10 @@
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-REST-C_Sharp\sdi3-37.Cli-REST-C_Sharp\bin\Debug\sdi3-37.Cli-REST-C_Sharp.exe.config
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-REST-C_Sharp\sdi3-37.Cli-REST-C_Sharp\bin\Debug\sdi3-37.Cli-REST-C_Sharp.exe
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-REST-C_Sharp\sdi3-37.Cli-REST-C_Sharp\bin\Debug\sdi3-37.Cli-REST-C_Sharp.pdb
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-REST-C_Sharp\sdi3-37.Cli-REST-C_Sharp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-REST-C_Sharp\sdi3-37.Cli-REST-C_Sharp\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-REST-C_Sharp\sdi3-37.Cli-REST-C_Sharp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-REST-C_Sharp\sdi3-37.Cli-REST-C_Sharp\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-REST-C_Sharp\sdi3-37.Cli-REST-C_Sharp\obj\Debug\sdi3-37.Cli-REST-C_Sharp.csprojResolveAssemblyReference.cache
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-REST-C_Sharp\sdi3-37.Cli-REST-C_Sharp\obj\Debug\sdi3-37.Cli-REST-C_Sharp.exe
+C:\Users\Alberto Cortina\Documents\GitHub\Trabajo-SDI\Tercera Entrega\sdi3-37.Cli-REST-C_Sharp\sdi3-37.Cli-REST-C_Sharp\obj\Debug\sdi3-37.Cli-REST-C_Sharp.pdb

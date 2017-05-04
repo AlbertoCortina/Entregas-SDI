@@ -6,27 +6,25 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.GenericType;
 
 import com.sdi.dto.Category;
-import com.sdi.presentation.user.MainMenu;
+import com.sdi.presentation.user.Sesion;
 
 import alb.util.console.Console;
 import alb.util.menu.Action;
 
 public class ListarCategoriasAction implements Action {
-
-	private static final String REST_SERVICE_URL = "http://localhost:8280/sdi3-37.Web/rest/UsersServiceRS";
-		
+	
 	public ListarCategoriasAction() {}
 	
 	@Override
 	public void execute() throws Exception {
-		Console.println("------LISTA DE CATEGORIAS PARA EL USUARIO "+MainMenu.getUser().getLogin()+"------");
+		Console.println("------LISTA DE CATEGORIAS PARA EL USUARIO "+Sesion.getInstance().getUser().getLogin()+"------");
 		
 		GenericType<List<Category>> modelo = new GenericType<List<Category>>() {};
 		
 		List<Category> categorias = ClientBuilder.newClient()				
-				.target(REST_SERVICE_URL)
+				.target(Sesion.getInstance().getRestServiceUrl())
 				.path("categorias")
-				.path(String.valueOf(MainMenu.getUser().getId()))
+				.path(String.valueOf(Sesion.getInstance().getUser().getId()))
 				.request()
 				.get()
 				.readEntity(modelo);
