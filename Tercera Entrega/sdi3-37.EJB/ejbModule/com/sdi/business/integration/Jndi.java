@@ -1,4 +1,4 @@
-package com.sdi.util;
+package com.sdi.business.integration;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;

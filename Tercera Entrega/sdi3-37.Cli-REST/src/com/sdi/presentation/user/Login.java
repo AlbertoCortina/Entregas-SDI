@@ -11,24 +11,24 @@ import alb.util.console.Console;
 public class Login {
 
 	public static void main(String[] args) {
-		String login = Console.readString("Usuario");
+		String username = Console.readString("Usuario");
 		String password = Console.readString("Contraseña");
 		
-		login(login, password);
+		login(username, password);
 		
 		if(Sesion.getInstance().getUser() != null) {
 			new MainMenu().execute();
 		}
 	}
 	
-	private static void login(String login, String password) {
+	private static void login(String username, String password) {
 		GenericType<User> modelo = new GenericType<User>() {};
 		
 		Response response = ClientBuilder.newClient()
-			.register(new Authenticator(login, password))	 
+			.register(new Authenticator(username, password))	 
 			.target(Sesion.getInstance().getRestServiceUrl())
 			.path("login")
-			.path("username="+login+"&&password="+password)
+			.path("username="+username+"&&password="+password)
 			.request()
 			.get();
 		

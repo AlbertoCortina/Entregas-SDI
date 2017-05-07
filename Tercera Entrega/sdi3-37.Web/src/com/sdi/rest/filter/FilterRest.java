@@ -1,4 +1,4 @@
-package com.sdi.presentation.filter;
+package com.sdi.rest.filter;
 
 import java.io.IOException;
 
